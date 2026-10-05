@@ -271,6 +271,7 @@ def solve(roster, max_nodes=100000):
     base = {
         'authority_status': 'UNINITIALIZED_NO_EXECUTION', 'execution_enabled': False,
         'simulation_only': True, 'case_id': roster['case_id'],
+        'authority': 'NONE', 'controller_closure': 'SUPPLIED_UNVERIFIED',
         'search_method': 'deterministic_lexicographic_joint_case_and_appeal_DFS_not_role_lottery',
         'scope': 'declared_synthetic_finite_constraint_model_only',
         'candidate_counts': {r: len(v) for r, v in candidates.items()},
@@ -291,7 +292,7 @@ def solve(roster, max_nodes=100000):
     if len({records[x]['domain'] for role in APPEAL_ROLES for x in candidates[role]}) < 3:
         necessary.append('FEWER_THAN_THREE_ELIGIBLE_APPEAL_DOMAINS')
     if necessary:
-        return {**base, 'status': 'INFEASIBLE', 'evidence_kind': 'NECESSARY_CONDITION_FAILURE',
+        return {**base, 'status': 'SYNTHETICALLY_INFEASIBLE', 'evidence_kind': 'NECESSARY_CONDITION_FAILURE',
                 'nodes': 0, 'search_exhausted': False, 'diagnostics': necessary,
                 'assignment': None, 'dynamic_rejections': {}}
     nodes, incomplete, dynamic = 0, False, Counter()
@@ -328,11 +329,11 @@ def solve(roster, max_nodes=100000):
         errors = verify_assignment(roster, assignment)
         if errors:
             raise RuntimeError('internal witness verification failed: ' + repr(errors))
-        status, evidence, diagnostics = 'FEASIBLE', 'FEASIBLE_ASSIGNMENT', []
+        status, evidence, diagnostics = 'SYNTHETICALLY_SATISFIED', 'SYNTHETIC_ASSIGNMENT', []
     elif incomplete:
-        status, evidence, diagnostics = 'SEARCH_INCOMPLETE', 'BOUND_REACHED_NO_PROOF', ['NODE_BUDGET_EXHAUSTED']
+        status, evidence, diagnostics = 'SYNTHETIC_SEARCH_INCOMPLETE', 'BOUND_REACHED_NO_PROOF', ['NODE_BUDGET_EXHAUSTED']
     else:
-        status, evidence, diagnostics = 'INFEASIBLE', 'EXHAUSTIVE_FINITE_SEARCH', ['NO_ASSIGNMENT_IN_DECLARED_FINITE_MODEL']
+        status, evidence, diagnostics = 'SYNTHETICALLY_INFEASIBLE', 'EXHAUSTIVE_FINITE_SEARCH', ['NO_ASSIGNMENT_IN_DECLARED_FINITE_MODEL']
     return {**base, 'status': status, 'evidence_kind': evidence, 'nodes': nodes,
             'search_exhausted': assignment is None and not incomplete,
             'assignment': assignment, 'diagnostics': diagnostics,

@@ -1,87 +1,71 @@
-# CORTAC
+# CORTAC: synthetic governance constraint tools
 
-Offline reference tools for **Warranted Agent Commonwealth design 0.2**. CORTAC checks synthetic role assignments and governance arithmetic, and prepares an evaluation scaffold for comparing agent teams.
+CORTAC currently implements an **offline reference model**, with two constraint encodings, exact governance arithmetic, and a reproducible domain-first lottery simulator. It does not implement a confederation of agents. “Confederation of Recursive Teleological Agentic Constructs” names the proposed project, not an existing capability.
 
-**Current state: offline research software. No agents, credentials, grants, signing, live execution, or scored society study.** The included profile remains unratified with execution disabled. Software version `0.1.0` is separate from constitutional design version `0.2`.
+**Software 0.2.0; Warranted Agent Commonwealth design 0.2.** All controller declarations are supplied and unverified. Every assignment status says `SYNTHETIC`; the profile remains unratified and execution-disabled. No agents, credentials, grants, signatures, appointments, or scored governance study are produced.
 
-## Start here
+## Run the checks
 
-Python 3.10 or newer is required. The tools and tests use the Python standard library; installation and API keys are unnecessary.
-
-From the repository root:
+Python 3.10 or newer; runtime and tests use the standard library. Installation and API keys are unnecessary.
 
 ```sh
 python scripts/verify.py
-python scripts/wac.py validate-profile package/inputs/profile.extracted.json
 python scripts/wac.py assemble --profile package/inputs/profile.extracted.json --roster package/fixtures/feasible.json
-python scripts/wac.py verify --profile package/inputs/profile.extracted.json --roster package/fixtures/feasible.json --certificate package/results/feasible.json
-python evaluation/readiness.py
+python scripts/wac.py verify --profile package/inputs/profile.extracted.json --roster package/fixtures/feasible.json --certificate package/results_v2/assignment.json
+python scripts/wac.py lottery --profile package/inputs/profile.extracted.json --roster package/fixtures/feasible.json --roll package/results_v2/lottery_roll.json --seed 0000000000000000000000000000000000000000000000000000000000000000
 ```
 
-On Windows, use `py -3` instead of `python`; on systems where Python 3 is named `python3`, use that name. Commands use repository-relative paths. The verification script also works when invoked by absolute path from another directory.
+On Windows use `py -3` instead of `python` if necessary. `scripts/verify.py` also works by absolute path from outside the checkout. `--report .local/verification.json` saves a dated local verification receipt.
 
-`verify.py` checks the delivered file inventories, runs all four test suites (121 tests at import), verifies the assignment witness, and confirms that both scored-study gates refuse with exit code 2. It exits nonzero on an unexpected result. It does not regenerate committed fixtures or result files. To retain a current machine-readable report:
+## Results and exit codes
 
-```sh
-python scripts/verify.py --report .local/verification.json
-```
-
-The captured repository-preparation results are in [docs/verification.json](docs/verification.json). They are a dated local observation, not a GitHub Actions run.
-
-## Components
-
-| Path | Purpose |
+| Exit | Meaning |
 | --- | --- |
-| [`package/wac_offline/`](package/wac_offline/) | Profile checking, joint case-and-appeal assignment search, witness verification, exact rational votes and splits |
-| [`package/fixtures/`](package/fixtures/) | Declared synthetic rosters and governance inputs |
-| [`evaluation/`](evaluation/) | Exposed scenarios, proposed arms and budgets, metrics, fabricated analysis smoke data, and readiness gates |
-| [`verification/`](verification/) | Additional adversarial checks and preserved incoming verification records |
-| [`scripts/`](scripts/) | Root-level CLI and complete verification entry points |
-| [`provenance/import.json`](provenance/import.json) | Input ZIP identity and scope of repository preparation |
-| [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | Automated checks and installed-package smoke test |
+| 0 | Supported profile, doubly checked synthetic assignment, complete simulated draw, or passing arithmetic |
+| 2 | Invalid/unsupported input, invalid witness, or unknown result status |
+| 3 | Synthetic infeasibility concluded by both searches, or failing governance arithmetic |
+| 4 | Search incomplete, or lottery dead end; neither establishes infeasibility |
+| 5 | Constraint implementations disagree or a complete draw fails a checker |
 
-Read the [offline-tool contract](package/README.md) and [evaluation contract](evaluation/README.md) for supported fields, assumptions, status semantics, and regeneration commands. The original `START_HERE.txt` and component reports are retained as import records.
+Assignment statuses are `SYNTHETICALLY_SATISFIED`, `SYNTHETICALLY_INFEASIBLE`, and `SYNTHETIC_SEARCH_INCOMPLETE`. Successful reports bind `controller_closure: SUPPLIED_UNVERIFIED`, synthetic scope, and `authority: NONE`. Verification rejects removed or promoted scope fields even after the body hash is recomputed. These are checks on supported files, not protection against edited screenshots or a modified verifier.
 
-## What a successful check means
+`assemble` runs lexical DFS and a separately encoded unary/binary constraint search with minimum-remaining-values ordering and forward checking. Either search's witness must pass both checkers. A negative report requires both searches to conclude infeasibility; an unresolved search cannot supply that conclusion. The encodings share the roster-shape parser and the written specification. This is implementation diversity, not an external audit or authenticated proof of independence.
 
-The assignment search finds a witness or reports `INFEASIBLE` or `SEARCH_INCOMPLETE` within its supplied finite model. Controllers, capacity, competence, and independence are declared synthetic inputs. A witness does not authenticate those declarations, perform the charter's uniform domain-first lottery, or appoint anyone.
+The lottery draws uniformly over each current eligible **domain** under its frozen nominee map. Each domain supplies one nominee per role; copies do not add lottery entries. Draws preserve the domain exclusions for council and appeal seats. The simulator records the first dead end and never retries it automatically. Its user-chosen seed, frozen file, and nominations have no authenticated real-world chronology. A complete draw does not appoint anyone. See the [selection contract](docs/LOTTERY.md).
 
-CLI semantic reports can have exit code 0 even when their status is `INFEASIBLE`, `SEARCH_INCOMPLETE`, or `INVALID_WITNESS`. Consumers must inspect the JSON status. The root verification command checks the expected status as well as the process exit code.
+## What remains research plumbing
 
-The evaluation scaffold contains **216 exposed examples** and proposes **540 main arm slots plus 80 matched ablation slots**. None has been executed as an agent trial. Its 62 fabricated equal-arm rows only exercise analysis plumbing. Public fixtures and evaluator keys are development material, not sealed holdouts.
+The evaluation directory contains **exposed development fixtures and fabricated smoke rows**. Its example counts, proposed arm slots, and bootstrap iterations measure the size of that plumbing, not empirical evidence. Most examples vary one structural template. Its intervals are marginal, without multiplicity control; they cannot support a governance-advantage claim. There is no real scored runner, sealed holdout, validated judge, or independently controlled participant trial.
 
-These commands deliberately exit 2:
+Both commands deliberately refuse with exit 2:
 
 ```sh
 python evaluation/readiness.py --require-scored-ready
 python evaluation/analyze.py --mode scored
 ```
 
-A normal readiness check can exit 0 while reporting `SOURCE_GATED_NO_SCORED_RUN`: file integrity is not study readiness. This repository implements no real scored runner or trust verifier.
+An ordinary readiness check can exit 0 while reporting `SOURCE_GATED_NO_SCORED_RUN`: it has checked offline file integrity only.
 
-## Optional installation
+## Components and boundaries
 
-To install only the `wac_offline` CLI package into a virtual environment:
+| Path | Purpose |
+| --- | --- |
+| `package/wac_offline/solver.py` | Original lexical joint case-and-appeal search |
+| `package/wac_offline/reference.py` | Separate constraint encoding, checker, and MRV search |
+| `package/wac_offline/lottery.py` | Frozen nominations, domain draws, trace, explicit dead ends |
+| `package/tests/test_revision.py` | Differential cases, injected faults, lottery and CLI contracts |
+| `package/results_v2/` | Current synthetic examples |
+| `evaluation/` | Preserved, blocked study scaffold |
+| `provenance/` | Initial import identity and revision record |
 
-```sh
-python -m pip install .
-wac-offline --help
-```
+The [tool contract](package/README.md) describes the declared model. [Revision notes](docs/REVISION_0_2_0.md) explain compatibility and evidence. The initial `START_HERE.txt`, `package/results/`, `verification/*results*`, and `docs/verification.json` are historical 0.1.0 records. New code intentionally changes some imported files; current inventories reflect that development. The original inventory is retained at `provenance/initial_BUNDLE_SHA256SUMS`.
 
-The wheel includes the frozen profile baseline. Evaluation scripts, fixtures, and reports are used from the full repository checkout rather than installed by the wheel. Runtime dependencies are empty; building or installing may fetch the declared setuptools build dependency.
+Original JSON/DOCX identity fields remain null in the inherited provenance. Their labeled text exports have not been reclassified as authenticated originals. The profile validator still accepts one exact frozen baseline; profile evolution needs a separately versioned contract. Neither constraint encoding discovers missing controlling interests, verifies declarations, or infers cognitive independence.
 
-## Source and authority boundaries
+[Metanoia](https://github.com/LadyElinor/Metanoia) and [Adiona](https://github.com/LadyElinor/Adiona) inform the design; this repository has no adapters or compatibility claim for them. All tools remain offline. Optional `python -m pip install .` installs the `wac-offline` CLI and profile data; installation may fetch the setuptools build dependency.
 
-This repository preserves the uploaded offline bundle's files byte-for-byte. The bundle contains labeled text exports of the charter/profile, not authenticated original source artifacts. Its original-artifact digest fields remain null. Repository preparation has not reclassified those exports, supplied signatures, or cleared adoption/readiness gates.
+## Development
 
-The five-function architecture comes from the WAC proposal associated with [Metanoia](https://github.com/LadyElinor/Metanoia) and [Adiona](https://github.com/LadyElinor/Adiona). CORTAC does not connect to either repository or claim compatibility with their live enforcement. No network or model API calls are made by the offline tools.
+Run `python scripts/verify.py` before proposing changes. CI is configured for Linux Python 3.10, 3.12, 3.14 and Windows Python 3.12. Configured jobs are not evidence that this revision has run remotely. See [contributing](CONTRIBUTING.md) and [updating GitHub](docs/UPLOAD.md).
 
-## Development and upload
-
-- [Contributing and validation](CONTRIBUTING.md)
-- [Upload to LadyElinor/CORTAC](docs/UPLOAD.md), including Windows PowerShell commands
-- [Repository preparation record](docs/REPOSITORY_PREPARATION.md)
-
-CI is supplied for Linux Python 3.10, 3.12 and 3.14, and Windows Python 3.12. Its workflow has read-only repository permissions and no publishing step. Remote CI results and branch protection are not established by this package.
-
-No license was supplied in the input bundle or selected during preparation. No license grant is added here.
+Licensed under the [MIT License](LICENSE). See the [licensing record](docs/LICENSE_DECISION.md) for scope and the owner's selection.

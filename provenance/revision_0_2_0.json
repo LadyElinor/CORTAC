@@ -1,0 +1,96 @@
+{
+  "schema": "cortac.revision.v1",
+  "software_version": "0.2.0",
+  "design_version": "0.2",
+  "base_commit": "b710938c303d6365e31245d22843cd5a9014b4ec",
+  "base_tree": "60df58e40d27f1e25a791a871cf2df68403973e0",
+  "base_files_verified_against_remote_blobs": 93,
+  "date_utc": "2026-10-05",
+  "changed_base_files": [
+    {
+      "path": "CONTRIBUTING.md",
+      "base_git_blob": "4143eb9e2f83b69da43f2830b6d56a7dc44a926e",
+      "current_sha256": "576835eb9ad6fde87af65785ba8b353e6fafa5dd3c55981557ee07b52290f1cf"
+    },
+    {
+      "path": "README.md",
+      "base_git_blob": "101c517eb9268c4f51caad6bc3afa23d09e2fc26",
+      "current_sha256": "4fc1288a77fbbd92caed8609a795d7a32513c6b5717d8719a1e4a9dc640ea72a"
+    },
+    {
+      "path": "docs/REPOSITORY_PREPARATION.md",
+      "base_git_blob": "c37ee42f72a14d52d90c05941e922cbd9536da70",
+      "current_sha256": "2b46be5e22675c807dc2c0ba685cb122dd774c847ee9732c7d3f853dbcd8743d"
+    },
+    {
+      "path": "docs/UPLOAD.md",
+      "base_git_blob": "303a4a219a023889e211dd6323ece9f4ef230b8f",
+      "current_sha256": "fdeb078028a85004d4c598a185b25c19db5c0ed9f01a5e75689f4a20572b4755"
+    },
+    {
+      "path": "package/README.md",
+      "base_git_blob": "ea04c7956e62e5a9ddbd263c58ec8635316f97a4",
+      "current_sha256": "b8acde24138365c42dbd786a72089c45572e2b6abd0bbaa8c2aba56c96afc7fe"
+    },
+    {
+      "path": "package/tests/test_offline.py",
+      "base_git_blob": "77bb74d00180cd2e8cd83bd1a1c9319ac2cb2293",
+      "current_sha256": "f5c09315748d2af22f035b43d4e4dd275b97dd3abe71337849d48b53c4cf119c"
+    },
+    {
+      "path": "package/wac_offline/__init__.py",
+      "base_git_blob": "ce59e308f64aa8d030fc42bd5525ea621a797e71",
+      "current_sha256": "31d335775acf66695f7544c9c1fee3bd7f918765f0909ebbde8851efed7e819c"
+    },
+    {
+      "path": "package/wac_offline/__main__.py",
+      "base_git_blob": "1f07315b5652becc925f96dd0d4934f4f7a097b5",
+      "current_sha256": "b4c285ec9b741ff7c689ec7f784c59e74de39b266b59417795bd3c4db26aafcf"
+    },
+    {
+      "path": "package/wac_offline/solver.py",
+      "base_git_blob": "e358fd8154c47c4ced4ca198f24a0dede2351417",
+      "current_sha256": "4ff5dc6b0eb192d129b64182ad3e211cc5d2ce0b7e227efe3849a0a7fe114403"
+    },
+    {
+      "path": "pyproject.toml",
+      "base_git_blob": "5ec7139916fea03f19c05c770f5a72789f17d279",
+      "current_sha256": "c8dbe6502486b49fd3bc058beed4a64c6d669194abb35cd5fb8625801e5a196a"
+    },
+    {
+      "path": "scripts/verify.py",
+      "base_git_blob": "6f348a3edb00574d4b65722b2d0af6bf5394587e",
+      "current_sha256": "9d0fd0e9c74b4d488a290eaf1cbf70edc7966bc8fda40912d2213813772227bb"
+    },
+    {
+      "path": "verification/assignment_adversarial.py",
+      "base_git_blob": "59cb6bb4362c99057cd1713840a17a9fdd551dc4",
+      "current_sha256": "1cc9e8dda0b53b17c0c8d5c21f619c74e06491f8e5be997b98f7b7e9c45d8ce4"
+    }
+  ],
+  "new_files": [
+    "LICENSE",
+    "docs/LICENSE_DECISION.md",
+    "docs/LOTTERY.md",
+    "docs/REVISION_0_2_0.md",
+    "docs/verification_0_2_0.json",
+    "package/fixtures/lottery_nominations.json",
+    "package/results_v2/assignment.json",
+    "package/results_v2/lottery.json",
+    "package/results_v2/lottery_roll.json",
+    "package/tests/test_revision.py",
+    "package/wac_offline/lottery.py",
+    "package/wac_offline/reference.py",
+    "provenance/initial_BUNDLE_SHA256SUMS"
+  ],
+  "initial_inventory_preserved_at": "provenance/initial_BUNDLE_SHA256SUMS",
+  "inventory_changes": "BUNDLE_SHA256SUMS and REPOSITORY_SHA256SUMS regenerated for intentional revision",
+  "unchanged_source_exports": true,
+  "original_artifact_digests_resolved": false,
+  "evaluation_files_changed": false,
+  "license_selected": "MIT",
+  "publication_authorized": true,
+  "record_scope": "prepared_source_tree_before_publication",
+  "agent_trials": 0,
+  "claim": "Software revision, not an authenticated authority or study result"
+}

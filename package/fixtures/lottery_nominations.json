@@ -1,0 +1,56 @@
+{
+  "appeal_1": {
+    "d5": "r1",
+    "d6": "r2",
+    "d7": "r3"
+  },
+  "appeal_2": {
+    "d5": "r1",
+    "d6": "r2",
+    "d7": "r3"
+  },
+  "appeal_3": {
+    "d5": "r1",
+    "d6": "r2",
+    "d7": "r3"
+  },
+  "authorizer": {
+    "d3": "a"
+  },
+  "council_1": {
+    "d1": "c1",
+    "d2": "c2",
+    "d3": "c3",
+    "d4": "c4"
+  },
+  "council_2": {
+    "d1": "c1",
+    "d2": "c2",
+    "d3": "c3",
+    "d4": "c4"
+  },
+  "council_3": {
+    "d1": "c1",
+    "d2": "c2",
+    "d3": "c3",
+    "d4": "c4"
+  },
+  "council_4": {
+    "d1": "c1",
+    "d2": "c2",
+    "d3": "c3",
+    "d4": "c4"
+  },
+  "epistemic_assessor": {
+    "d1": "e"
+  },
+  "executor": {
+    "d4": "x"
+  },
+  "normative_assessor": {
+    "d2": "n"
+  },
+  "outcome_auditor": {
+    "d1": "u"
+  }
+}

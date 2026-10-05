@@ -1,4 +1,6 @@
-# Repository preparation
+# Initial repository preparation (historical software 0.1.0)
+
+This file records the initial import. See `REVISION_0_2_0.md` for subsequent intentional changes.
 
 Prepared for `LadyElinor/CORTAC` on 4 October 2026 UTC from the uploaded `WAC_v02_Offline_Tranches(1).zip`.
 

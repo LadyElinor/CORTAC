@@ -1,60 +1,54 @@
-# Upload CORTAC to GitHub
+# Apply software 0.2.0 to the existing CORTAC repository
 
 Destination: https://github.com/LadyElinor/CORTAC
 
-The destination was confirmed empty during preparation. The archive contains the contents of the repository in one `CORTAC` folder, including `.github`, `.gitignore`, and `.gitattributes`. It excludes Git history, credentials, caches, and virtual environments. Nothing is pushed by extracting or testing it.
+These are the original patch-delivery instructions. If software 0.2.0 is already present on `main`, use that Git history and create a new branch for further work; do not reapply the initial patch.
 
-## Windows PowerShell
+This revision is based on `b710938c303d6365e31245d22843cd5a9014b4ec`. The review archive includes a complete `CORTAC` source directory and `cortac-0.2.0.patch`. It contains no Git history or credentials. Nothing is pushed by extracting or checking it.
 
-Install Git and Python 3.10 or newer if needed. Extract `CORTAC_GitHub_Ready.zip`, open PowerShell inside its `CORTAC` folder, and run:
+## PowerShell: apply the patch on a new branch
+
+Open PowerShell inside your existing CORTAC Git checkout. Replace the patch path below with the extracted patch's location. Run one section at a time and stop on any error. These checks require the expected clean base, so they will stop if later work would need merging.
 
 ```powershell
-py -3 scripts/verify.py
-if ($LASTEXITCODE -ne 0) { throw 'Verification failed; stop before upload.' }
+$patch = 'C:\Users\arren\Downloads\CORTAC_0_2_0_Review\cortac-0.2.0.patch'
 
-git init -b main
-if ($LASTEXITCODE -ne 0) { throw 'Git initialization failed.' }
+$pending = git status --porcelain
+if ($LASTEXITCODE -ne 0) { throw 'Open PowerShell inside the existing Git checkout.' }
+if ($pending) { throw 'Commit or set aside existing changes before applying this revision.' }
+
+$base = git rev-parse HEAD
+if ($LASTEXITCODE -ne 0 -or $base -ne 'b710938c303d6365e31245d22843cd5a9014b4ec') {
+    throw 'Base differs. Review and merge the patch into current history; do not reset or force-push.'
+}
+
+git switch -c revision/synthetic-verification-0.2.0
+if ($LASTEXITCODE -ne 0) { throw 'Could not create the review branch.' }
+git apply --check $patch
+if ($LASTEXITCODE -ne 0) { throw 'Patch does not apply cleanly.' }
+git apply $patch
+if ($LASTEXITCODE -ne 0) { throw 'Patch failed.' }
+
+py -3 scripts/verify.py
+if ($LASTEXITCODE -ne 0) { throw 'Verification failed.' }
 git add .
 if ($LASTEXITCODE -ne 0) { throw 'Staging failed.' }
 git diff --cached --stat
+git diff --cached --check
+if ($LASTEXITCODE -ne 0) { throw 'Review whitespace errors before committing.' }
 ```
 
-Review the file list, then commit and upload:
+Review the changes and the MIT license in `LICENSE`. To publish the reviewed branch:
 
 ```powershell
-git commit -m "Initialize CORTAC offline WAC reference tools"
-if ($LASTEXITCODE -ne 0) { throw 'Commit failed. Check your Git author identity.' }
-git remote add origin https://github.com/LadyElinor/CORTAC.git
-if ($LASTEXITCODE -ne 0) { throw 'Remote already exists or could not be added; inspect git remote -v.' }
-git push -u origin main
-if ($LASTEXITCODE -ne 0) { throw 'Push failed. Check authentication and remote history; do not force-push.' }
+git commit -m 'Scope synthetic reports and add dual constraints and domain lottery'
+if ($LASTEXITCODE -ne 0) { throw 'Commit failed; check your Git author identity.' }
+git push -u origin revision/synthetic-verification-0.2.0
+if ($LASTEXITCODE -ne 0) { throw 'Push failed; check authentication and remote history.' }
 ```
 
-Git may ask you to authenticate to GitHub. If Git requires an author name/email, configure your own identity before committing. No identity is supplied in this package.
+Then open a pull request against `main`. This package does not claim a remote CI run, branch protection, or merge approval.
 
-## macOS or Linux
+## Complete source directory
 
-From the extracted `CORTAC` folder:
-
-```sh
-python3 scripts/verify.py &&
-git init -b main &&
-git add . &&
-git diff --cached --stat
-```
-
-After reviewing the staged files:
-
-```sh
-git commit -m "Initialize CORTAC offline WAC reference tools" &&
-git remote add origin https://github.com/LadyElinor/CORTAC.git &&
-git push -u origin main
-```
-
-If the repository has gained commits since preparation, clone that history and import the files on a new branch, then open a pull request. Do not replace history or force-push this initial tree.
-
-## GitHub browser upload
-
-Upload the contents inside `CORTAC`, not the ZIP itself and not an extra enclosing directory. Include `.github/workflows/ci.yml`, `.gitignore`, and `.gitattributes`. A Git push is preferable because it preserves those files and the intended root layout.
-
-After upload, check the **Offline checks** workflow. Its configuration is included; remote runs and required-check settings were not verified during local preparation.
+The included `CORTAC` folder can also be tested without Git using `py -3 scripts/verify.py`. To import it into an existing checkout, use a review branch and compare the diff against the current source. Preserve the checkout's Git metadata and existing history. The patch route above is preferable for the verified base.

@@ -1,0 +1,91 @@
+{
+  "authority": "NONE",
+  "chronology_verified": false,
+  "controller_closure": "SUPPLIED_UNVERIFIED",
+  "delegate_rule": "each_domain_supplies_one_nominee_per_role_before_simulated_draw",
+  "execution_enabled": false,
+  "format": "CORTAC_SYNTHETIC_LOTTERY_ROLL_V1",
+  "input_byte_hashes": {
+    "profile_local_bytes_sha256": "56c4bc76286a78d32541528c5ab85e0470cec84b627f8ce6f152867a9246031a",
+    "roster_local_bytes_sha256": "8105a91d3d4433b4389683f88a5bb15a9fe6144831c54f29c3d50b7dd6ea629b"
+  },
+  "nominations": {
+    "appeal_1": {
+      "d5": "r1",
+      "d6": "r2",
+      "d7": "r3"
+    },
+    "appeal_2": {
+      "d5": "r1",
+      "d6": "r2",
+      "d7": "r3"
+    },
+    "appeal_3": {
+      "d5": "r1",
+      "d6": "r2",
+      "d7": "r3"
+    },
+    "authorizer": {
+      "d3": "a"
+    },
+    "council_1": {
+      "d1": "c1",
+      "d2": "c2",
+      "d3": "c3",
+      "d4": "c4"
+    },
+    "council_2": {
+      "d1": "c1",
+      "d2": "c2",
+      "d3": "c3",
+      "d4": "c4"
+    },
+    "council_3": {
+      "d1": "c1",
+      "d2": "c2",
+      "d3": "c3",
+      "d4": "c4"
+    },
+    "council_4": {
+      "d1": "c1",
+      "d2": "c2",
+      "d3": "c3",
+      "d4": "c4"
+    },
+    "epistemic_assessor": {
+      "d1": "e"
+    },
+    "executor": {
+      "d4": "x"
+    },
+    "normative_assessor": {
+      "d2": "n"
+    },
+    "outcome_auditor": {
+      "d1": "u"
+    }
+  },
+  "policy": "fixed_role_order_domain_first_frozen_nominee_no_redraw_v1",
+  "restart_rule": "none_report_first_dead_end_no_automatic_redraw",
+  "role_order": [
+    "epistemic_assessor",
+    "normative_assessor",
+    "council_1",
+    "council_2",
+    "council_3",
+    "council_4",
+    "authorizer",
+    "executor",
+    "outcome_auditor",
+    "appeal_1",
+    "appeal_2",
+    "appeal_3"
+  ],
+  "roll_body_sha256": "6dd04a6b97376dc0415cf05fb86832e23daf07639970536946df58e888856d13",
+  "scope": "declared_synthetic_domain_draw_only_no_appointment",
+  "seed_procedure": "user_supplied_256_bit_seed_SHA256_counter_rejection_sampling",
+  "seed_unpredictability_verified": false,
+  "serialization": "Python_ASCII_sorted_indented_JSON_v1_NOT_RFC8785",
+  "simulation_only": true,
+  "status": "SYNTHETIC_LOTTERY_ROLL_FROZEN"
+}

@@ -109,13 +109,17 @@ def main():
     # Do not run code after a failed delivered-integrity gate.
     if all(item["passed"] for item in checks):
         cases = [
-            ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 55}),
+            ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 80}),
             ("evaluation", ["-m", "unittest", "discover", "-s", "tests", "-v"], "evaluation", {"minimum_tests": 49}),
             ("assignment_adversarial", ["verification/assignment_adversarial.py"], "", {"minimum_tests": 11}),
             ("evaluation_adversarial", ["verification/evaluation_adversarial.py"], "", {"minimum_tests": 6}),
             ("witness", ["scripts/wac.py", "verify", "--profile", "package/inputs/profile.extracted.json",
-                         "--roster", "package/fixtures/feasible.json", "--certificate", "package/results/feasible.json"], "",
-             {"json_checks": {"status": "VALID_SYNTHETIC_ASSIGNMENT_WITNESS", "authority": "NONE", "execution_enabled": False}}),
+                         "--roster", "package/fixtures/feasible.json", "--certificate", "package/results_v2/assignment.json"], "",
+             {"json_checks": {"status": "SYNTHETIC_WITNESS_VALID", "authority": "NONE", "execution_enabled": False}}),
+            ("lottery", ["scripts/wac.py", "lottery", "--profile", "package/inputs/profile.extracted.json",
+                         "--roster", "package/fixtures/feasible.json", "--roll", "package/results_v2/lottery_roll.json",
+                         "--seed", "0" * 64], "",
+             {"json_checks": {"status": "SYNTHETIC_LOTTERY_COMPLETE", "authority": "NONE", "execution_enabled": False}}),
             ("readiness", ["evaluation/readiness.py"], "",
              {"json_checks": {"verdict": "SOURCE_GATED_NO_SCORED_RUN", "offline_integrity_passed": True, "scored_run_ready": False}}),
             ("scored_readiness_refusal", ["evaluation/readiness.py", "--require-scored-ready"], "",

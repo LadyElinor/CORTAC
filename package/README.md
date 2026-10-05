@@ -1,4 +1,4 @@
-# WAC v0.2 offline reference tools
+# WAC design 0.2 offline reference tools (software 0.2.0)
 
 **Unsigned design experiments. Authority: NONE. Runtime status: UNINITIALIZED_NO_EXECUTION.**
 
@@ -11,27 +11,30 @@ Requires Python 3.10+; development verification used Python 3.12.14. No installa
 ```sh
 python3 -m unittest discover -s tests -v
 python3 -m wac_offline validate-profile inputs/profile.extracted.json
-python3 -m wac_offline assemble --profile inputs/profile.extracted.json --roster fixtures/feasible.json > results/feasible.json
-python3 -m wac_offline verify --profile inputs/profile.extracted.json --roster fixtures/feasible.json --certificate results/feasible.json
-python3 -m wac_offline founding-proposal --profile inputs/profile.extracted.json --roster fixtures/feasible.json
+python3 -m wac_offline assemble --profile inputs/profile.extracted.json --roster fixtures/feasible.json > current-assignment.json
+python3 -m wac_offline verify --profile inputs/profile.extracted.json --roster fixtures/feasible.json --certificate current-assignment.json
+python3 -m wac_offline draft-founding --profile inputs/profile.extracted.json --roster fixtures/feasible.json
 python3 -m wac_offline assemble --profile inputs/profile.extracted.json --roster fixtures/bounded_search.json --max-nodes 0
 python3 -m wac_offline split fixtures/split_exact.json
 python3 -m wac_offline vote fixtures/frozen_vote.json
 python3 -m wac_offline ballot fixtures/ballot.json
 ```
 
-All commands print JSON. Semantic results (including INFEASIBLE and SEARCH_INCOMPLETE) have exit code 0 because the report was generated successfully; malformed/unsupported input has exit code 2. Callers must inspect the result status. Shell output redirection writes only the requested local report file.
+All commands print JSON. Exit 0 means a positive supported synthetic result; 2 means invalid or unsupported input/witness, 3 means a negative arithmetic result or dual synthetic infeasibility, 4 means incomplete search or a lottery dead end, and 5 means implementation disagreement. Check both the exit code and the JSON status. Windows PowerShell 5 redirection can produce UTF-16; use `Set-Content -Encoding Ascii` to save the ASCII JSON for later input.
 
 ## What the statuses mean
 
-- **FEASIBLE:** the emitted assignment satisfies the supported finite synthetic model. `evidence_kind` is `FEASIBLE_ASSIGNMENT`. The witness checker independently replays the assignment constraints without running the search, but shares the same constraint implementation. It is not a second independently implemented verifier.
-- **INFEASIBLE:** a sound necessary-condition failure or exhaustive finite search demonstrates no assignment within this supplied model. This is not a claim about all possible real-world rosters. Rejection counters explain rejected candidates but are not minimal unsatisfiable cores.
-- **SEARCH_INCOMPLETE:** the deterministic candidate-expansion budget was exhausted. No infeasibility claim is made. A zero-node budget may still produce INFEASIBLE if a necessary-condition proof is already available without search.
-- **INVALID_INPUT / INVALID_OR_UNSUPPORTED_PROFILE:** the input cannot safely be interpreted by the supported contract.
+- **SYNTHETICALLY_SATISFIED:** a concrete assignment satisfies both implemented encodings of the finite declared model. Controller closure remains supplied and unverified.
+- **SYNTHETICALLY_INFEASIBLE:** both bounded search implementations conclude no assignment in this supplied model. Necessary-condition rejection and completed finite search remain distinct evidence types. This is not a conclusion about all possible real-world rosters.
+- **SYNTHETIC_SEARCH_INCOMPLETE:** no accepted witness exists and at least one search did not conclude infeasibility. No infeasibility claim is made.
+- **SYNTHETIC_IMPLEMENTATIONS_DISAGREE:** the engines reach conflicting decisive conclusions or a candidate witness fails an encoding. No assignment is accepted.
+- **SYNTHETIC_WITNESS_VALID / SYNTHETIC_WITNESS_INVALID:** V2 local byte bindings, mandatory scope fields, and the assignment were rechecked by both encodings. This does not authenticate a report or the inputs.
 
-Search is deterministic lexicographic depth-first search. Ordinary roles and appeal roles are in the **same search**, so a case assignment that strands appeals causes backtracking. Interchangeable panel permutations are skipped only where concrete-seat dependency rules do not distinguish them. A node is one attempted candidate expansion, including rejected candidates. No clock timeout or stochastic search is used. Very large rosters can therefore be expensive even before the node limit; use bounded synthetic inputs.
+The primary engine uses lexical DFS with joint case and appeal assignment and conditional panel symmetry reduction. The second engine uses independently written unary/binary constraints, minimum-remaining-values ordering, and forward checking without that symmetry reduction. They share input-shape validation, not eligibility/conflict code. Each gets the requested node budget. A checked witness can settle satisfiability even when the other search ran out of nodes. Both must conclude infeasibility for a negative CLI report. The program is still a bounded reference tool; neither input preprocessing nor wall time is bounded by candidate-expansion counts.
 
-**This search is not the v0.2 uniform domain-first role lottery.** Neither its lexical choice nor a successful witness counts as an appointment, founder consent, independent attestation, ratification, or ACTIVE readiness.
+The direct `solver.solve` and `reference.solve_reference` APIs report their own conclusions. The CLI `assemble` combines them. Standalone search results are not V2 certificates. See [revision notes](../docs/REVISION_0_2_0.md).
+
+Search choices do not count as a charter lottery or an appointment. The separate [lottery simulator](../docs/LOTTERY.md) draws domains under a frozen nominee policy, uses recorded test randomness, and reports the first dead end without retries. It establishes no real principal consent, seed chronology, or authority.
 
 ## Supported profile validation
 
@@ -73,9 +76,9 @@ The fixture's eight distinct domain labels are a conditional model witness under
 
 ## Not implemented or established
 
-No real enrollment/qualification verification; evidence-source resolution; duty or classification policy; model/API integration; uniform role lottery; mission contract; independent external appeal provider; review-continuity funding; signature/JCS implementation; adoption or genesis; grant/capability issuance; actuator enforcement; revocation/commit races; budgets shared across transactions; network dispatch; reconciliation; distributed consensus; production adapter; human approvals; or ACTIVE/SANDBOX readiness. Internal appeal capacity does not satisfy the separately required external route and funded continuity.
+No real enrollment/qualification verification; evidence-source resolution; duty or classification policy; model/API integration; authenticated appointment lottery; mission contract; independent external appeal provider; review-continuity funding; signature/JCS implementation; adoption or genesis; grant/capability issuance; actuator enforcement; revocation/commit races; budgets shared across transactions; network dispatch; reconciliation; distributed consensus; production adapter; human approvals; or ACTIVE/SANDBOX readiness. Internal appeal capacity does not satisfy the separately required external route and funded continuity.
 
-All fixture labels are simulated. All report/founding outputs retain `authority: NONE`, `UNINITIALIZED_NO_EXECUTION`, disabled execution, no signatures, no grants, and no adoption digest. The founding proposal is only a checklist and assignment pointer; it is deliberately **not** an adoption payload or signing request.
+All fixture labels are simulated. All report/founding outputs retain `authority: NONE`, `UNINITIALIZED_NO_EXECUTION`, disabled execution, no signatures, no grants, and no adoption digest. The synthetic founding draft is only a checklist and assignment pointer; it is deliberately **not** an adoption payload or signing request.
 
 ## Hashes and source provenance
 

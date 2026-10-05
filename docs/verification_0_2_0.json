@@ -1,0 +1,210 @@
+{
+  "schema": "cortac.repository_verification.v1",
+  "timestamp_utc": "2026-10-05T02:58:18.293541+00:00",
+  "python_version": "3.12.14",
+  "platform": "Linux",
+  "git": {
+    "revision": null,
+    "dirty": null
+  },
+  "passed": true,
+  "tests_run": 146,
+  "checks": [
+    {
+      "name": "BUNDLE_SHA256SUMS",
+      "passed": true,
+      "files_checked": 79,
+      "errors": []
+    },
+    {
+      "name": "evaluation/SHA256SUMS",
+      "passed": true,
+      "files_checked": 27,
+      "errors": []
+    },
+    {
+      "name": "REPOSITORY_SHA256SUMS",
+      "passed": true,
+      "files_checked": 106,
+      "errors": []
+    },
+    {
+      "name": "offline",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "package",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "tests_run": 80,
+      "passed": true,
+      "errors": [],
+      "stdout": "",
+      "stderr": "test_body_hash_and_renamed_authority (test_offline.CertificateTests.test_body_hash_and_renamed_authority) ... ok\ntest_cli_invalid_json_is_structured (test_offline.CertificateTests.test_cli_invalid_json_is_structured) ... ok\ntest_cli_limit_is_structured (test_offline.CertificateTests.test_cli_limit_is_structured) ... ok\ntest_cli_unsupported_profile_exits_two (test_offline.CertificateTests.test_cli_unsupported_profile_exits_two) ... ok\ntest_local_input_hash_change (test_offline.CertificateTests.test_local_input_hash_change) ... ok\ntest_valid_and_inert (test_offline.CertificateTests.test_valid_and_inert) ... ok\ntest_abstention_preserves_denominator (test_offline.GovernanceTests.test_abstention_preserves_denominator) ... ok\ntest_bool_protected_flag (test_offline.GovernanceTests.test_bool_protected_flag) ... ok\ntest_duplicate_unknown_votes_rejected (test_offline.GovernanceTests.test_duplicate_unknown_votes_rejected) ... ok\ntest_empty_ledger_rejected (test_offline.GovernanceTests.test_empty_ledger_rejected) ... ok\ntest_invalid_identifier_types_rejected (test_offline.GovernanceTests.test_invalid_identifier_types_rejected) ... ok\ntest_split_exact_thirds (test_offline.GovernanceTests.test_split_exact_thirds) ... ok\ntest_split_preserves_four_fifths (test_offline.GovernanceTests.test_split_preserves_four_fifths) ... ok\ntest_three_approvals_and_all_four_seats (test_offline.GovernanceTests.test_three_approvals_and_all_four_seats) ... ok\ntest_weight_invalid (test_offline.GovernanceTests.test_weight_invalid) ... ok\ntest_baseline (test_offline.ProfileTests.test_baseline) ... ok\ntest_bool_not_integer (test_offline.ProfileTests.test_bool_not_integer) ... ok\ntest_duplicate_key_nested (test_offline.ProfileTests.test_duplicate_key_nested) ... ok\ntest_float_not_integer (test_offline.ProfileTests.test_float_not_integer) ... ok\ntest_key_order_irrelevant (test_offline.ProfileTests.test_key_order_irrelevant) ... ok\ntest_nonfinite_rejected (test_offline.ProfileTests.test_nonfinite_rejected) ... ok\ntest_template_cannot_activate (test_offline.ProfileTests.test_template_cannot_activate) ... ok\ntest_unknown_and_missing_field (test_offline.ProfileTests.test_unknown_and_missing_field) ... ok\ntest_version_and_threshold_changes_fail_closed (test_offline.ProfileTests.test_version_and_threshold_changes_fail_closed) ... ok\ntest_appeal_excludes_all_prior_controller_interests (test_offline.SolverTests.test_appeal_excludes_all_prior_controller_interests) ... ok\ntest_appeal_excludes_appellant_opposition_beneficiary (test_offline.SolverTests.test_appeal_excludes_appellant_opposition_beneficiary) ... ok\ntest_appeal_pairwise_control_overlap (test_offline.SolverTests.test_appeal_pairwise_control_overlap) ... ok\ntest_assessor_identity_credential_control (test_offline.SolverTests.test_assessor_identity_credential_control) ... ok\ntest_auditor_cannot_be_prior_participant (test_offline.SolverTests.test_auditor_cannot_be_prior_participant) ... ok\ntest_bad_search_bounds (test_offline.SolverTests.test_bad_search_bounds) ... ok\ntest_bounded_search_not_infeasible (test_offline.SolverTests.test_bounded_search_not_infeasible) ... ok\ntest_clone_insufficiency (test_offline.SolverTests.test_clone_insufficiency) ... ok\ntest_credential_process_separation (test_offline.SolverTests.test_credential_process_separation) ... ok\ntest_deterministic_against_record_order (test_offline.SolverTests.test_deterministic_against_record_order) ... ok\ntest_exhaustion_at_exact_success_node_count (test_offline.SolverTests.test_exhaustion_at_exact_success_node_count) ... ok\ntest_expiry_and_capacity (test_offline.SolverTests.test_expiry_and_capacity) ... ok\ntest_explicit_conflict_symmetric (test_offline.SolverTests.test_explicit_conflict_symmetric) ... ok\ntest_feasible_eight_domain_model (test_offline.SolverTests.test_feasible_eight_domain_model) ... ok\ntest_fixed_proposer_required_dimensions_and_qualification (test_offline.SolverTests.test_fixed_proposer_required_dimensions_and_qualification) ... ok\ntest_four_council_domains_required (test_offline.SolverTests.test_four_council_domains_required) ... ok\ntest_joint_backtracking (test_offline.SolverTests.test_joint_backtracking) ... ok\ntest_no_duplicate_case_identity (test_offline.SolverTests.test_no_duplicate_case_identity) ... ok\ntest_nonuniform_concrete_seat_rule_disables_invalid_symmetry (test_offline.SolverTests.test_nonuniform_concrete_seat_rule_disables_invalid_symmetry) ... ok\ntest_purpose_specific_dependency_conflict (test_offline.SolverTests.test_purpose_specific_dependency_conflict) ... ok\ntest_required_dimensions_cannot_be_silently_removed (test_offline.SolverTests.test_required_dimensions_cannot_be_silently_removed) ... ok\ntest_same_controller_fresh_domains_fail (test_offline.SolverTests.test_same_controller_fresh_domains_fail) ... ok\ntest_seat_specific_required_dimension_does_not_create_false_domain_bound (test_offline.SolverTests.test_seat_specific_required_dimension_does_not_create_false_domain_bound) ... ok\ntest_separate_authorizer_entity (test_offline.SolverTests.test_separate_authorizer_entity) ... ok\ntest_unknown_dimension_and_shortage (test_offline.SolverTests.test_unknown_dimension_and_shortage) ... ok\ntest_unknown_domain (test_offline.SolverTests.test_unknown_domain) ... ok\ntest_unknown_excluded_party_domain (test_offline.SolverTests.test_unknown_excluded_party_domain) ... ok\ntest_unknown_material_control (test_offline.SolverTests.test_unknown_material_control) ... ok\ntest_unknown_schema_and_bool_capacity (test_offline.SolverTests.test_unknown_schema_and_bool_capacity) ... ok\ntest_unregistered_executor (test_offline.SolverTests.test_unregistered_executor) ... ok\ntest_witness_tamper_detected_without_search (test_offline.SolverTests.test_witness_tamper_detected_without_search) ... ok\ntest_changed_roll_or_bytes_rejected_even_after_rehash (test_revision.LotteryTests.test_changed_roll_or_bytes_rejected_even_after_rehash) ... ok\ntest_dead_end_is_not_infeasible_and_has_no_retry (test_revision.LotteryTests.test_dead_end_is_not_infeasible_and_has_no_retry) ... ok\ntest_draws_council_and_appeal_without_replacement (test_revision.LotteryTests.test_draws_council_and_appeal_without_replacement) ... ok\ntest_dual_verification_failure_cannot_complete (test_revision.LotteryTests.test_dual_verification_failure_cannot_complete) ... ok\ntest_exact_rejection_sampler_counts (test_revision.LotteryTests.test_exact_rejection_sampler_counts) ... ok\ntest_fifty_copies_do_not_change_domain_draws (test_revision.LotteryTests.test_fifty_copies_do_not_change_domain_draws) ... ok\ntest_invalid_nomination_missing_extra_unqualified (test_revision.LotteryTests.test_invalid_nomination_missing_extra_unqualified) ... ok\ntest_seed_validation (test_revision.LotteryTests.test_seed_validation) ... ok\ntest_seeded_replay_and_complete_trace (test_revision.LotteryTests.test_seeded_replay_and_complete_trace) ... ok\ntest_200_seeded_structural_mutations (test_revision.ReferenceTests.test_200_seeded_structural_mutations) ... ok\ntest_all_144_panel_permutations (test_revision.ReferenceTests.test_all_144_panel_permutations) ... ok\ntest_all_imported_assignment_fixtures (test_revision.ReferenceTests.test_all_imported_assignment_fixtures) ... ok\ntest_every_role_identity_substitution (test_revision.ReferenceTests.test_every_role_identity_substitution) ... ok\ntest_independent_check_catches_shared_relation_fault (test_revision.ReferenceTests.test_independent_check_catches_shared_relation_fault) ... ok\ntest_reference_budget_boundary (test_revision.ReferenceTests.test_reference_budget_boundary) ... ok\ntest_reference_does_not_call_primary_constraints_or_search (test_revision.ReferenceTests.test_reference_does_not_call_primary_constraints_or_search) ... ok\ntest_report_rejects_implementation_disagreement (test_revision.ReferenceTests.test_report_rejects_implementation_disagreement) ... ok\ntest_unknown_fixed_controller_and_seat_specific_dimension (test_revision.ReferenceTests.test_unknown_fixed_controller_and_seat_specific_dimension) ... ok\ntest_cli_lottery_roundtrip (test_revision.ReportAndExitTests.test_cli_lottery_roundtrip) ... ok\ntest_exit_mapping_unknown_fails_closed (test_revision.ReportAndExitTests.test_exit_mapping_unknown_fails_closed) ... ok\ntest_failed_assignment_cannot_become_successful_draft (test_revision.ReportAndExitTests.test_failed_assignment_cannot_become_successful_draft) ... ok\ntest_infeasible_and_incomplete_cli_nonzero (test_revision.ReportAndExitTests.test_infeasible_and_incomplete_cli_nonzero) ... ok\ntest_invalid_and_legacy_witness_exit_two (test_revision.ReportAndExitTests.test_invalid_and_legacy_witness_exit_two) ... ok\ntest_negative_governance_exit_three (test_revision.ReportAndExitTests.test_negative_governance_exit_three) ... ok\ntest_scope_fields_cannot_be_stripped_or_promoted (test_revision.ReportAndExitTests.test_scope_fields_cannot_be_stripped_or_promoted) ... ok\n\n----------------------------------------------------------------------\nRan 80 tests in 1.666s\n\nOK\n"
+    },
+    {
+      "name": "evaluation",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "evaluation",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "tests_run": 49,
+      "passed": true,
+      "errors": [],
+      "stdout": "",
+      "stderr": "test_boolean_metric_rejected (test_evaluation.Analysis.test_boolean_metric_rejected) ... ok\ntest_censored_latency_not_zero (test_evaluation.Analysis.test_censored_latency_not_zero) ... ok\ntest_changed_pair_seed_rejected (test_evaluation.Analysis.test_changed_pair_seed_rejected) ... ok\ntest_cost_consistency (test_evaluation.Analysis.test_cost_consistency) ... ok\ntest_custom_empty_schedule_rejected (test_evaluation.Analysis.test_custom_empty_schedule_rejected) ... ok\ntest_duplicate_json_keys_rejected (test_evaluation.Analysis.test_duplicate_json_keys_rejected) ... ok\ntest_duplicate_row_rejected (test_evaluation.Analysis.test_duplicate_row_rejected) ... ok\ntest_duplicate_schedule_rejected (test_evaluation.Analysis.test_duplicate_schedule_rejected) ... ok\ntest_empty_conditional_metric (test_evaluation.Analysis.test_empty_conditional_metric) ... ok\ntest_empty_schedule_rejected (test_evaluation.Analysis.test_empty_schedule_rejected) ... ok\ntest_fabrication_label_required (test_evaluation.Analysis.test_fabrication_label_required) ... ok\ntest_missing_row_rejected (test_evaluation.Analysis.test_missing_row_rejected) ... ok\ntest_missingness_must_be_explicit (test_evaluation.Analysis.test_missingness_must_be_explicit) ... ok\ntest_no_null_primary (test_evaluation.Analysis.test_no_null_primary) ... ok\ntest_nonfinite_json_rejected (test_evaluation.Analysis.test_nonfinite_json_rejected) ... ok\ntest_null_control (test_evaluation.Analysis.test_null_control) ... ok\ntest_planted_constant_difference (test_evaluation.Analysis.test_planted_constant_difference) ... ok\ntest_planted_mixed_difference (test_evaluation.Analysis.test_planted_mixed_difference) ... ok\ntest_quantile_interpolates (test_evaluation.Analysis.test_quantile_interpolates) ... ok\ntest_refusal_cannot_be_success (test_evaluation.Analysis.test_refusal_cannot_be_success) ... ok\ntest_report_is_explicitly_synthetic (test_evaluation.Analysis.test_report_is_explicitly_synthetic) ... ok\ntest_resource_overrun_rejected (test_evaluation.Analysis.test_resource_overrun_rejected) ... ok\ntest_scored_mode_always_blocked (test_evaluation.Analysis.test_scored_mode_always_blocked) ... ok\ntest_seed_reproducible (test_evaluation.Analysis.test_seed_reproducible) ... ok\ntest_smoke_validation (test_evaluation.Analysis.test_smoke_validation) ... ok\ntest_unknown_effect_must_be_flagged (test_evaluation.Analysis.test_unknown_effect_must_be_flagged) ... ok\ntest_ablations_only_targeted (test_evaluation.Fixtures.test_ablations_only_targeted) ... ok\ntest_appeal_distinct_from_prior_case_domains (test_evaluation.Fixtures.test_appeal_distinct_from_prior_case_domains) ... ok\ntest_authorizer_outside_roster (test_evaluation.Fixtures.test_authorizer_outside_roster) ... ok\ntest_event_barriers_precede_actions (test_evaluation.Fixtures.test_event_barriers_precede_actions) ... ok\ntest_inherited_weights (test_evaluation.Fixtures.test_inherited_weights) ... ok\ntest_integrity (test_evaluation.Fixtures.test_integrity) ... ok\ntest_nine_families (test_evaluation.Fixtures.test_nine_families) ... ok\ntest_no_oracle_fields_in_public (test_evaluation.Fixtures.test_no_oracle_fields_in_public) ... ok\ntest_paired_model_seeds (test_evaluation.Fixtures.test_paired_model_seeds) ... ok\ntest_reproducibility (test_evaluation.Fixtures.test_reproducibility) ... ok\ntest_seed_streams_disjoint (test_evaluation.Fixtures.test_seed_streams_disjoint) ... ok\ntest_shared_provenance_is_not_independence (test_evaluation.Fixtures.test_shared_provenance_is_not_independence) ... ok\ntest_slot_counts (test_evaluation.Fixtures.test_slot_counts) ... ok\ntest_unknown_control_not_verified_by_roster (test_evaluation.Fixtures.test_unknown_control_not_verified_by_roster) ... ok\ntest_boolean_edit_cannot_activate (test_evaluation.Gate.test_boolean_edit_cannot_activate) ... ok\ntest_budget_pair_tamper (test_evaluation.Gate.test_budget_pair_tamper) ... ok\ntest_family_tamper (test_evaluation.Gate.test_family_tamper) ... ok\ntest_fixture_digest_tamper (test_evaluation.Gate.test_fixture_digest_tamper) ... ok\ntest_nested_placeholder_remains_blocked (test_evaluation.Gate.test_nested_placeholder_remains_blocked) ... ok\ntest_order_tamper (test_evaluation.Gate.test_order_tamper) ... ok\ntest_original_hash_never_reconstructed (test_evaluation.Gate.test_original_hash_never_reconstructed) ... ok\ntest_pair_index_tamper (test_evaluation.Gate.test_pair_index_tamper) ... ok\ntest_proposal_is_blocked (test_evaluation.Gate.test_proposal_is_blocked) ... ok\n\n----------------------------------------------------------------------\nRan 49 tests in 1.091s\n\nOK\n"
+    },
+    {
+      "name": "assignment_adversarial",
+      "command": [
+        "python",
+        "verification/assignment_adversarial.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "tests_run": 11,
+      "passed": true,
+      "errors": [],
+      "stdout": "",
+      "stderr": "test_ballot_malformed (__main__.Adversarial.test_ballot_malformed) ... ok\ntest_control_ancestors_supplied (__main__.Adversarial.test_control_ancestors_supplied) ... ok\ntest_cutoff_boundary (__main__.Adversarial.test_cutoff_boundary) ... ok\ntest_duplicate_nested_rejected (__main__.Adversarial.test_duplicate_nested_rejected) ... ok\ntest_executor_registration (__main__.Adversarial.test_executor_registration) ... ok\ntest_joint_search (__main__.Adversarial.test_joint_search) ... ok\ntest_proposer_availability (__main__.Adversarial.test_proposer_availability) ... ok\ntest_rational_large_exact (__main__.Adversarial.test_rational_large_exact) ... ok\ntest_required_proposer_dimension (__main__.Adversarial.test_required_proposer_dimension) ... ok\ntest_seat_specific_domain_bound (__main__.Adversarial.test_seat_specific_domain_bound) ... ok\ntest_unknown_party_domain (__main__.Adversarial.test_unknown_party_domain) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.009s\n\nOK\n"
+    },
+    {
+      "name": "evaluation_adversarial",
+      "command": [
+        "python",
+        "verification/evaluation_adversarial.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "tests_run": 6,
+      "passed": true,
+      "errors": [],
+      "stdout": "",
+      "stderr": "test_bootstrap_exact_and_paired (__main__.IndependentEvaluation.test_bootstrap_exact_and_paired) ... ok\ntest_budget_mismatch_after_rehash (__main__.IndependentEvaluation.test_budget_mismatch_after_rehash) ... ok\ntest_empty_custom_schedule_blocked (__main__.IndependentEvaluation.test_empty_custom_schedule_blocked) ... ok\ntest_missing_timeout_still_required (__main__.IndependentEvaluation.test_missing_timeout_still_required) ... ok\ntest_placeholder_and_booleans_cannot_freeze (__main__.IndependentEvaluation.test_placeholder_and_booleans_cannot_freeze) ... ok\ntest_timeout_cannot_be_success (__main__.IndependentEvaluation.test_timeout_cannot_be_success) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.312s\n\nOK\n"
+    },
+    {
+      "name": "witness",
+      "command": [
+        "python",
+        "scripts/wac.py",
+        "verify",
+        "--profile",
+        "package/inputs/profile.extracted.json",
+        "--roster",
+        "package/fixtures/feasible.json",
+        "--certificate",
+        "package/results_v2/assignment.json"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "passed": true,
+      "errors": [],
+      "stdout": "{\n  \"authority\": \"NONE\",\n  \"authority_status\": \"UNINITIALIZED_NO_EXECUTION\",\n  \"controller_closure\": \"SUPPLIED_UNVERIFIED\",\n  \"errors\": [],\n  \"execution_enabled\": false,\n  \"external_independent_audit\": false,\n  \"scope\": \"declared_synthetic_finite_constraint_model_only\",\n  \"simulation_only\": true,\n  \"status\": \"SYNTHETIC_WITNESS_VALID\",\n  \"verification_scope\": \"two_constraint_encodings_shared_shape_parser_unverified_input_truth\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "lottery",
+      "command": [
+        "python",
+        "scripts/wac.py",
+        "lottery",
+        "--profile",
+        "package/inputs/profile.extracted.json",
+        "--roster",
+        "package/fixtures/feasible.json",
+        "--roll",
+        "package/results_v2/lottery_roll.json",
+        "--seed",
+        "0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "passed": true,
+      "errors": [],
+      "stdout": "{\n  \"assignment\": {\n    \"appeal_1\": \"r2\",\n    \"appeal_2\": \"r1\",\n    \"appeal_3\": \"r3\",\n    \"authorizer\": \"a\",\n    \"council_1\": \"c3\",\n    \"council_2\": \"c4\",\n    \"council_3\": \"c1\",\n    \"council_4\": \"c2\",\n    \"epistemic_assessor\": \"e\",\n    \"executor\": \"x\",\n    \"normative_assessor\": \"n\",\n    \"outcome_auditor\": \"u\"\n  },\n  \"authority\": \"NONE\",\n  \"controller_closure\": \"SUPPLIED_UNVERIFIED\",\n  \"errors\": [],\n  \"execution_enabled\": false,\n  \"format\": \"CORTAC_SYNTHETIC_LOTTERY_REPORT_V1\",\n  \"input_byte_hashes\": {\n    \"profile_local_bytes_sha256\": \"56c4bc76286a78d32541528c5ab85e0470cec84b627f8ce6f152867a9246031a\",\n    \"roster_local_bytes_sha256\": \"8105a91d3d4433b4389683f88a5bb15a9fe6144831c54f29c3d50b7dd6ea629b\"\n  },\n  \"no_inference_of_infeasibility_from_dead_end\": true,\n  \"not_established\": [\n    \"uniform_distribution_over_complete_assignments\",\n    \"real_controller_closure\",\n    \"authenticated_domain_nominations\",\n    \"freeze_before_unpredictable_seed\",\n    \"public_randomness\",\n    \"appointment_authority\"\n  ],\n  \"partial_assignment\": {\n    \"appeal_1\": \"r2\",\n    \"appeal_2\": \"r1\",\n    \"appeal_3\": \"r3\",\n    \"authorizer\": \"a\",\n    \"council_1\": \"c3\",\n    \"council_2\": \"c4\",\n    \"council_3\": \"c1\",\n    \"council_4\": \"c2\",\n    \"epistemic_assessor\": \"e\",\n    \"executor\": \"x\",\n    \"normative_assessor\": \"n\",\n    \"outcome_auditor\": \"u\"\n  },\n  \"policy\": \"fixed_role_order_domain_first_frozen_nominee_no_redraw_v1\",\n  \"random_words_used\": 12,\n  \"redraws\": 0,\n  \"report_body_sha256\": \"69952bc96078265995f6dd0670896e34d67af024ede7abe5e01be54edf644178\",\n  \"roll_body_sha256\": \"6dd04a6b97376dc0415cf05fb86832e23daf07639970536946df58e888856d13\",\n  \"scope\": \"declared_synthetic_domain_draw_only_no_appointment\",\n  \"seed\": \"0000000000000000000000000000000000000000000000000000000000000000\",\n  \"simulation_only\": true,\n  \"status\": \"SYNTHETIC_LOTTERY_COMPLETE\",\n  \"trace\": [\n    {\n      \"domain_probability\": [\n        1,\n        1\n      ],\n      \"eligible_domains\": [\n        \"d1\"\n      ],\n      \"nominee\": \"e\",\n      \"random_words_used\": 1,\n      \"role\": \"epistemic_assessor\",\n      \"selected_domain\": \"d1\"\n    },\n    {\n      \"domain_probability\": [\n        1,\n        1\n      ],\n      \"eligible_domains\": [\n        \"d2\"\n      ],\n      \"nominee\": \"n\",\n      \"random_words_used\": 1,\n      \"role\": \"normative_assessor\",\n      \"selected_domain\": \"d2\"\n    },\n    {\n      \"domain_probability\": [\n        1,\n        4\n      ],\n      \"eligible_domains\": [\n        \"d1\",\n        \"d2\",\n        \"d3\",\n        \"d4\"\n      ],\n      \"nominee\": \"c3\",\n      \"random_words_used\": 1,\n      \"role\": \"council_1\",\n      \"selected_domain\": \"d3\"\n    },\n    {\n      \"domain_probability\": [\n        1,\n        3\n      ],\n      \"eligible_domains\": [\n        \"d1\",\n        \"d2\",\n        \"d4\"\n      ],\n      \"nominee\": \"c4\",\n      \"random_words_used\": 1,\n      \"role\": \"council_2\",\n      \"selected_domain\": \"d4\"\n    },\n    {\n      \"domain_probability\": [\n        1,\n        2\n      ],\n      \"eligible_domains\": [\n        \"d1\",\n        \"d2\"\n      ],\n      \"nominee\": \"c1\",\n      \"random_words_used\": 1,\n      \"role\": \"council_3\",\n      \"selected_domain\": \"d1\"\n    },\n    {\n      \"domain_probability\": [\n        1,\n        1\n      ],\n      \"eligible_domains\": [\n        \"d2\"\n      ],\n      \"nominee\": \"c2\",\n      \"random_words_used\": 1,\n      \"role\": \"council_4\",\n      \"selected_domain\": \"d2\"\n    },\n    {\n      \"domain_probability\": [\n        1,\n        1\n      ],\n      \"eligible_domains\": [\n        \"d3\"\n      ],\n      \"nominee\": \"a\",\n      \"random_words_used\": 1,\n      \"role\": \"authorizer\",\n      \"selected_domain\": \"d3\"\n    },\n    {\n      \"domain_probability\": [\n        1,\n        1\n      ],\n      \"eligible_domains\": [\n        \"d4\"\n      ],\n      \"nominee\": \"x\",\n      \"random_words_used\": 1,\n      \"role\": \"executor\",\n      \"selected_domain\": \"d4\"\n    },\n    {\n      \"domain_probability\": [\n        1,\n        1\n      ],\n      \"eligible_domains\": [\n        \"d1\"\n      ],\n      \"nominee\": \"u\",\n      \"random_words_used\": 1,\n      \"role\": \"outcome_auditor\",\n      \"selected_domain\": \"d1\"\n    },\n    {\n      \"domain_probability\": [\n        1,\n        3\n      ],\n      \"eligible_domains\": [\n        \"d5\",\n        \"d6\",\n        \"d7\"\n      ],\n      \"nominee\": \"r2\",\n      \"random_words_used\": 1,\n      \"role\": \"appeal_1\",\n      \"selected_domain\": \"d6\"\n    },\n    {\n      \"domain_probability\": [\n        1,\n        2\n      ],\n      \"eligible_domains\": [\n        \"d5\",\n        \"d7\"\n      ],\n      \"nominee\": \"r1\",\n      \"random_words_used\": 1,\n      \"role\": \"appeal_2\",\n      \"selected_domain\": \"d5\"\n    },\n    {\n      \"domain_probability\": [\n        1,\n        1\n      ],\n      \"eligible_domains\": [\n        \"d7\"\n      ],\n      \"nominee\": \"r3\",\n      \"random_words_used\": 1,\n      \"role\": \"appeal_3\",\n      \"selected_domain\": \"d7\"\n    }\n  ],\n  \"uniformity_scope\": \"one_entry_per_currently_eligible_domain_at_each_draw_only\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "readiness",
+      "command": [
+        "python",
+        "evaluation/readiness.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "passed": true,
+      "errors": [],
+      "stdout": "{\n  \"verdict\": \"SOURCE_GATED_NO_SCORED_RUN\",\n  \"offline_integrity_passed\": true,\n  \"integrity_failures\": [],\n  \"scored_run_ready\": false,\n  \"preregistered\": false,\n  \"blockers\": [\n    \"SCORED_RUNNER_AND_TRUST_VERIFIER_NOT_IMPLEMENTED_IN_THIS_SCAFFOLD\",\n    \"EXPOSED_FIXTURES_ARE_NOT_SEALED_HOLDOUTS\",\n    \"AUTHOR_PROPOSALS_NOT_INDEPENDENTLY_APPROVED\",\n    \"ORIGINAL_ARTIFACT_BYTES_UNVERIFIED:design_profile\",\n    \"ORIGINAL_ARTIFACT_BYTES_UNVERIFIED:charter\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:ablation_implementation_digests\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:acceptance_threshold_approval\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:approved_resource_grants\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:arm_implementation_digests\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:arm_prompt_digests\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:budget_meter_implementation_sha256\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:freeze_record\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:immutable_model_version\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:independent_holdout_commitment\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:independent_run_manifest_signatures\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:mission_rubric_approval\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:model_and_price_snapshot_sha256\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:model_configuration\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:model_provider\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:sandbox_owner_mandate\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:signature_verifier_and_external_trust_root\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:tool_adapter_digests\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:trace_judge_implementation_sha256\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:verified_enrollment_and_dependencies\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:verified_feasible_assignment_and_appeal_capacity\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:verified_sandbox_isolation_record\",\n    \"UNSIGNED_MANIFEST\",\n    \"MANIFEST_NOT_FROZEN\",\n    \"DEPLOYMENT_ACCEPTANCE_THRESHOLDS_UNSET\"\n  ],\n  \"warning\": \"Editing proposal booleans or filling strings never grants authority. This tool does not verify signatures, actual control independence, live isolation, model execution or deployment readiness.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "scored_readiness_refusal",
+      "command": [
+        "python",
+        "evaluation/readiness.py",
+        "--require-scored-ready"
+      ],
+      "cwd": ".",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "tests_run": null,
+      "passed": true,
+      "errors": [],
+      "stdout": "{\n  \"verdict\": \"SOURCE_GATED_NO_SCORED_RUN\",\n  \"offline_integrity_passed\": true,\n  \"integrity_failures\": [],\n  \"scored_run_ready\": false,\n  \"preregistered\": false,\n  \"blockers\": [\n    \"SCORED_RUNNER_AND_TRUST_VERIFIER_NOT_IMPLEMENTED_IN_THIS_SCAFFOLD\",\n    \"EXPOSED_FIXTURES_ARE_NOT_SEALED_HOLDOUTS\",\n    \"AUTHOR_PROPOSALS_NOT_INDEPENDENTLY_APPROVED\",\n    \"ORIGINAL_ARTIFACT_BYTES_UNVERIFIED:design_profile\",\n    \"ORIGINAL_ARTIFACT_BYTES_UNVERIFIED:charter\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:ablation_implementation_digests\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:acceptance_threshold_approval\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:approved_resource_grants\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:arm_implementation_digests\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:arm_prompt_digests\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:budget_meter_implementation_sha256\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:freeze_record\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:immutable_model_version\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:independent_holdout_commitment\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:independent_run_manifest_signatures\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:mission_rubric_approval\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:model_and_price_snapshot_sha256\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:model_configuration\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:model_provider\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:sandbox_owner_mandate\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:signature_verifier_and_external_trust_root\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:tool_adapter_digests\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:trace_judge_implementation_sha256\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:verified_enrollment_and_dependencies\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:verified_feasible_assignment_and_appeal_capacity\",\n    \"MISSING_OR_INVALID_REAL_RUN_REQUIREMENT:verified_sandbox_isolation_record\",\n    \"UNSIGNED_MANIFEST\",\n    \"MANIFEST_NOT_FROZEN\",\n    \"DEPLOYMENT_ACCEPTANCE_THRESHOLDS_UNSET\"\n  ],\n  \"warning\": \"Editing proposal booleans or filling strings never grants authority. This tool does not verify signatures, actual control independence, live isolation, model execution or deployment readiness.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "scored_analysis_refusal",
+      "command": [
+        "python",
+        "evaluation/analyze.py",
+        "--mode",
+        "scored"
+      ],
+      "cwd": ".",
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "tests_run": null,
+      "passed": true,
+      "errors": [],
+      "stdout": "",
+      "stderr": "SOURCE_GATED_NO_SCORED_RUN: scored study runner and verifier are not implemented\n"
+    }
+  ],
+  "real_model_calls": 0,
+  "agent_trials": 0,
+  "github_actions_run_verified": false,
+  "scope": "Local repository software checks only; no authority or study-readiness claim",
+  "verified_base_commit": "b710938c303d6365e31245d22843cd5a9014b4ec",
+  "revision_software_version": "0.2.0",
+  "packaging": {
+    "wheel": "cortac_wac_offline-0.2.0-py3-none-any.whl",
+    "wheel_sha256": "fadd0f1c483ce9be1f7c34a368b6b356c2f43d9c00d96e390a246a9f189f0a40",
+    "license": "MIT",
+    "license_in_wheel_matches_repository": true,
+    "license_metadata_checked": true
+  },
+  "receipt_note": "Pre-publication verification; remote workflow results are checked after publication. Final inventories bind this receipt without a self-hash cycle."
+}

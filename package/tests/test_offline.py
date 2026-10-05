@@ -56,35 +56,35 @@ class ProfileTests(unittest.TestCase):
 class SolverTests(unittest.TestCase):
     def test_feasible_eight_domain_model(self):
         r = fixture(); result = solve(r)
-        self.assertEqual(result['status'], 'FEASIBLE')
+        self.assertEqual(result['status'], 'SYNTHETICALLY_SATISFIED')
         self.assertEqual(set(result['assignment']), set(ALL_ROLES))
         self.assertEqual(verify_assignment(r,result['assignment']), [])
         self.assertFalse(result['execution_enabled'])
         self.assertEqual(len({x['domain'] for x in r['records']}), 8)
     def test_clone_insufficiency(self):
         result = solve(fixture('clone_insufficiency'))
-        self.assertEqual(result['status'],'INFEASIBLE')
+        self.assertEqual(result['status'],'SYNTHETICALLY_INFEASIBLE')
         self.assertIn('FEWER_THAN_FOUR_ELIGIBLE_COUNCIL_DOMAINS',result['diagnostics'])
     def test_same_controller_fresh_domains_fail(self):
         result = solve(fixture('same_controller_appeals'))
-        self.assertEqual(result['status'],'INFEASIBLE')
+        self.assertEqual(result['status'],'SYNTHETICALLY_INFEASIBLE')
         self.assertEqual(result['evidence_kind'],'EXHAUSTIVE_FINITE_SEARCH')
         self.assertTrue(any('APPEAL_EXCLUDED_INTEREST' in x for x in result['dynamic_rejections']))
     def test_unknown_dimension_and_shortage(self):
         for name in ('unknown_dimensions','reviewer_shortage'):
-            self.assertEqual(solve(fixture(name))['status'],'INFEASIBLE')
+            self.assertEqual(solve(fixture(name))['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_bounded_search_not_infeasible(self):
         for limit in (0,1,5):
             result = solve(fixture(), limit)
-            self.assertEqual(result['status'],'SEARCH_INCOMPLETE')
+            self.assertEqual(result['status'],'SYNTHETIC_SEARCH_INCOMPLETE')
             self.assertFalse(result['search_exhausted'])
     def test_exhaustion_at_exact_success_node_count(self):
         result = solve(fixture())
-        self.assertEqual(solve(fixture(),result['nodes'])['status'],'FEASIBLE')
-        self.assertEqual(solve(fixture(),result['nodes']-1)['status'],'SEARCH_INCOMPLETE')
+        self.assertEqual(solve(fixture(),result['nodes'])['status'],'SYNTHETICALLY_SATISFIED')
+        self.assertEqual(solve(fixture(),result['nodes']-1)['status'],'SYNTHETIC_SEARCH_INCOMPLETE')
     def test_joint_backtracking(self):
         result = solve(fixture('joint_backtracking'))
-        self.assertEqual(result['status'],'FEASIBLE')
+        self.assertEqual(result['status'],'SYNTHETICALLY_SATISFIED')
         self.assertEqual(result['assignment']['epistemic_assessor'],'e')
         self.assertTrue(any('APPEAL_EXCLUDED_INTEREST' in x for x in result['dynamic_rejections']))
     def test_deterministic_against_record_order(self):
@@ -93,58 +93,58 @@ class SolverTests(unittest.TestCase):
     def test_unregistered_executor(self):
         for ids in ([], ['p']):
             r = fixture(); r['registered_executor_ids'] = ids
-            self.assertEqual(solve(r)['status'],'INFEASIBLE')
+            self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_no_duplicate_case_identity(self):
         r = fixture(); a = solve(r)['assignment']; a['normative_assessor'] = a['epistemic_assessor']
         self.assertTrue(any('CASE_IDENTITY_REUSE' in x for x in verify_assignment(r,a)))
     def test_four_council_domains_required(self):
         r = fixture(); byid(r,'c4')['domain'] = 'd3'
-        self.assertEqual(solve(r)['status'],'INFEASIBLE')
+        self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_credential_process_separation(self):
         for target, field, other in [('a','credential','e'),('a','process','u'),('x','credential','c1')]:
             r = fixture(); byid(r,target)[field] = byid(r,other)[field]
-            self.assertEqual(solve(r)['status'],'INFEASIBLE')
+            self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_separate_authorizer_entity(self):
         r=fixture(); byid(r,'a')['kind']='agent'
-        self.assertEqual(solve(r)['status'],'INFEASIBLE')
+        self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_assessor_identity_credential_control(self):
         for field in ('credential','domain'):
             r=fixture(); byid(r,'e')[field]=byid(r,'p')[field]
-            self.assertEqual(solve(r)['status'],'INFEASIBLE')
+            self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_auditor_cannot_be_prior_participant(self):
         r=fixture(); r['prior_participant_ids']=['u']
-        self.assertEqual(solve(r)['status'],'INFEASIBLE')
+        self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_appeal_excludes_all_prior_controller_interests(self):
         for prior in ('p','e','n','c1','c4','a','x','u'):
             r=fixture(); byid(r,'r1')['material_controllers'].extend(byid(r,prior)['material_controllers'])
-            self.assertEqual(solve(r)['status'],'INFEASIBLE')
+            self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_appeal_excludes_appellant_opposition_beneficiary(self):
         for key in ('appellant_ids','opposing_party_ids','beneficiary_ids'):
             r=fixture(); r[key]=['r1']
-            self.assertEqual(solve(r)['status'],'INFEASIBLE')
+            self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_appeal_pairwise_control_overlap(self):
         r=fixture(); byid(r,'r2')['material_controllers']+=byid(r,'r1')['material_controllers']
-        self.assertEqual(solve(r)['status'],'INFEASIBLE')
+        self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_unknown_material_control(self):
         for ident in ('r1','p','c1'):
             r=fixture(); byid(r,ident)['material_control_known']=False
-            self.assertEqual(solve(r)['status'],'INFEASIBLE')
+            self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_unknown_domain(self):
         r=fixture(); byid(r,'c1')['domain_verified']=False
-        self.assertEqual(solve(r)['status'],'INFEASIBLE')
+        self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_expiry_and_capacity(self):
         for ident,key,val in [('e','valid_until',1000),('r1','valid_until',2000),('u','capacity',0),('p','capacity',0)]:
             r=fixture(); byid(r,ident)[key]=val
-            self.assertEqual(solve(r)['status'],'INFEASIBLE')
+            self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_explicit_conflict_symmetric(self):
         for a,b in [('e','n'),('n','e'),('r1','p'),('p','r1')]:
             r=fixture(); byid(r,a)['conflicts']=[b]
-            self.assertEqual(solve(r)['status'],'INFEASIBLE')
+            self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_purpose_specific_dependency_conflict(self):
         r=fixture(); r['distinct_dependencies']=[{'roles':['epistemic_assessor','normative_assessor'], 'dimensions':['runtime']}]
-        self.assertEqual(solve(r)['status'],'FEASIBLE')
+        self.assertEqual(solve(r)['status'],'SYNTHETICALLY_SATISFIED')
         byid(r,'n')['dependencies']['runtime']=byid(r,'e')['dependencies']['runtime']
-        self.assertEqual(solve(r)['status'],'INFEASIBLE')
+        self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
     def test_required_dimensions_cannot_be_silently_removed(self):
         r=fixture(); r['required_dependencies']={}
         with self.assertRaises(InputError): solve(r)
@@ -164,7 +164,7 @@ class SolverTests(unittest.TestCase):
         r=fixture(); r['distinct_dependencies']=[{'roles':['council_1','proposer'], 'dimensions':['runtime']}]
         byid(r,'c1')['dependencies']['runtime']=byid(r,'p')['dependencies']['runtime']
         result=solve(r)
-        self.assertEqual(result['status'],'FEASIBLE')
+        self.assertEqual(result['status'],'SYNTHETICALLY_SATISFIED')
         self.assertNotEqual(result['assignment']['council_1'],'c1')
     def test_unknown_excluded_party_domain(self):
         for ident in ('p','r1'):
@@ -172,7 +172,7 @@ class SolverTests(unittest.TestCase):
             if ident=='r1': r['opposing_party_ids']=['r1']
             for field,value in [('domain',None),('domain_verified',False)]:
                 modified=deepcopy(r); byid(modified,ident)[field]=value
-                self.assertEqual(solve(modified)['status'],'INFEASIBLE')
+                self.assertEqual(solve(modified)['status'],'SYNTHETICALLY_INFEASIBLE')
                 a=solve(fixture())['assignment']
                 self.assertTrue(verify_assignment(modified,a))
     def test_seat_specific_required_dimension_does_not_create_false_domain_bound(self):
@@ -181,7 +181,7 @@ class SolverTests(unittest.TestCase):
             r['distinct_dependencies']=[{'roles':[role,'proposer'],'dimensions':['runtime']}]
             for ident in unknown_ids: byid(r,ident)['dependencies']['runtime']=None
             self.assertEqual(verify_assignment(r,a),[])
-            self.assertEqual(solve(r)['status'],'FEASIBLE')
+            self.assertEqual(solve(r)['status'],'SYNTHETICALLY_SATISFIED')
     def test_fixed_proposer_required_dimensions_and_qualification(self):
         for variant in ('dimension','qualification'):
             r=fixture(); a=solve(r)['assignment']
@@ -189,7 +189,7 @@ class SolverTests(unittest.TestCase):
                 r['required_dependencies']['proposer']=['runtime']
                 byid(r,'p')['dependencies']['runtime']=None
             else: byid(r,'p')['qualified_roles']=[]
-            self.assertEqual(solve(r)['status'],'INFEASIBLE')
+            self.assertEqual(solve(r)['status'],'SYNTHETICALLY_INFEASIBLE')
             self.assertTrue(verify_assignment(r,a))
     def test_bad_search_bounds(self):
         for v in (-1, True, 1.5):
@@ -234,7 +234,7 @@ class CertificateTests(unittest.TestCase):
     def make(self): return certificate(PROFILE,ROOT/'fixtures'/'feasible.json',100000)
     def test_valid_and_inert(self):
         c=self.make(); r=verify_certificate(PROFILE,ROOT/'fixtures'/'feasible.json',c)
-        self.assertEqual(r['status'],'VALID_SYNTHETIC_ASSIGNMENT_WITNESS')
+        self.assertEqual(r['status'],'SYNTHETIC_WITNESS_VALID')
         p=founding_proposal(c)
         self.assertIsNone(p['adoption_digest']); self.assertFalse(p['ratified']); self.assertEqual(p['grants'],[])
     def test_body_hash_and_renamed_authority(self):
@@ -260,6 +260,6 @@ class CertificateTests(unittest.TestCase):
             self.assertEqual(r.returncode,2); self.assertEqual(json.loads(r.stdout)['status'],'INVALID_OR_UNSUPPORTED_PROFILE')
     def test_cli_limit_is_structured(self):
         r=subprocess.run([sys.executable,'-m','wac_offline','assemble','--profile',str(PROFILE),'--roster',str(ROOT/'fixtures'/'feasible.json'),'--max-nodes','0'],cwd=ROOT,capture_output=True,text=True)
-        self.assertEqual(r.returncode,0); self.assertEqual(json.loads(r.stdout)['status'],'SEARCH_INCOMPLETE')
+        self.assertEqual(r.returncode,4); self.assertEqual(json.loads(r.stdout)['status'],'SYNTHETIC_SEARCH_INCOMPLETE')
 
 if __name__=='__main__': unittest.main()
