@@ -118,7 +118,7 @@ def build(output):
         write_jsonl(output / 'evaluator_only' / (split + '_schedule.jsonl'), schedule)
     write(output / 'evaluator_only' / 'seed_lists.json', {'root_label': SEED_ROOT, 'derivation': 'first_12_SHA256_hex_of_pipe_delimited_UTF8; fixture and model streams are distinct', 'splits': seed_lists, 'holdout_status': 'NO_SEALED_HOLDOUT; all seeds and generators are exposed design examples; independent custodian must create and commit fresh holdouts after candidate freeze'})
     paths = sorted(output.rglob('*.json*'))
-    write(output / 'fixture_inventory.json', {'status': 'EXPOSED_SYNTHETIC_FIXTURES_NOT_EXPERIMENTS', 'files': {str(p.relative_to(output)): file_digest(p) for p in paths if p.name != 'fixture_inventory.json'}, 'main_task_count': 180, 'main_arm_slots': 540, 'targeted_ablation_slots': 80, 'executed_model_trials': 0, 'all_actors_are_fictional': True, 'model_input_allowlist': ['model_inputs/development.jsonl', 'model_inputs/analysis_smoke.jsonl', 'model_inputs/proposed_main.jsonl']})
+    write(output / 'fixture_inventory.json', {'status': 'EXPOSED_SYNTHETIC_FIXTURES_NOT_EXPERIMENTS', 'files': {p.relative_to(output).as_posix(): file_digest(p) for p in paths if p.name != 'fixture_inventory.json'}, 'main_task_count': 180, 'main_arm_slots': 540, 'targeted_ablation_slots': 80, 'executed_model_trials': 0, 'all_actors_are_fictional': True, 'model_input_allowlist': ['model_inputs/development.jsonl', 'model_inputs/analysis_smoke.jsonl', 'model_inputs/proposed_main.jsonl']})
 
 
 if __name__ == '__main__':

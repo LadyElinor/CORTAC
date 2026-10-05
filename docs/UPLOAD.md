@@ -1,54 +1,41 @@
-# Apply software 0.2.0 to the existing CORTAC repository
+# Upload software 0.2.1 to GitHub
 
 Destination: https://github.com/LadyElinor/CORTAC
 
-These are the original patch-delivery instructions. If software 0.2.0 is already present on `main`, use that Git history and create a new branch for further work; do not reapply the initial patch.
+The `CORTAC_0_2_1_MIT.zip` delivery contains the complete `CORTAC/` source directory, `cortac-0.2.1.bundle`, and `PUSH_TO_GITHUB.txt`. The bundle includes complete Git history through the prepared 0.2.1 commit. There is no patch file. These instructions replace the obsolete 0.2.0 patch instructions.
 
-This revision is based on `b710938c303d6365e31245d22843cd5a9014b4ec`. The review archive includes a complete `CORTAC` source directory and `cortac-0.2.0.patch`. It contains no Git history or credentials. Nothing is pushed by extracting or checking it.
+## PowerShell: import the prepared commit into the existing checkout
 
-## PowerShell: apply the patch on a new branch
-
-Open PowerShell inside your existing CORTAC Git checkout. Replace the patch path below with the extracted patch's location. Run one section at a time and stop on any error. These checks require the expected clean base, so they will stop if later work would need merging.
+Extract the ZIP first. Adjust the two paths below if needed. The checkout path is the existing Git repository, not the newly extracted source folder. Run this block and stop if it reports any error. A clean checkout whose `main` is an ancestor of the bundle can be advanced without rewriting history; divergent work needs a separate reviewed merge.
 
 ```powershell
-$patch = 'C:\Users\arren\Downloads\CORTAC_0_2_0_Review\cortac-0.2.0.patch'
+$bundle = 'C:\Users\arren\Downloads\CORTAC_0_2_1_MIT\cortac-0.2.1.bundle'
+Set-Location 'C:\Users\arren\Downloads\CORTAC_GitHub_Ready\CORTAC' -ErrorAction Stop
 
 $pending = git status --porcelain
-if ($LASTEXITCODE -ne 0) { throw 'Open PowerShell inside the existing Git checkout.' }
-if ($pending) { throw 'Commit or set aside existing changes before applying this revision.' }
+if ($LASTEXITCODE -ne 0) { throw 'This directory must be the existing Git checkout.' }
+if ($pending) { throw 'Commit or set aside existing changes before importing the bundle.' }
 
-$base = git rev-parse HEAD
-if ($LASTEXITCODE -ne 0 -or $base -ne 'b710938c303d6365e31245d22843cd5a9014b4ec') {
-    throw 'Base differs. Review and merge the patch into current history; do not reset or force-push.'
+git switch main
+if ($LASTEXITCODE -ne 0) { throw 'Could not switch to main.' }
+$origin = git remote get-url origin
+if ($LASTEXITCODE -ne 0 -or $origin -notmatch '^(https://github\.com/|git@github\.com:)LadyElinor/CORTAC(\.git)?/?$') {
+    throw 'The origin must be LadyElinor/CORTAC. Inspect git remote -v before proceeding.'
 }
-
-git switch -c revision/synthetic-verification-0.2.0
-if ($LASTEXITCODE -ne 0) { throw 'Could not create the review branch.' }
-git apply --check $patch
-if ($LASTEXITCODE -ne 0) { throw 'Patch does not apply cleanly.' }
-git apply $patch
-if ($LASTEXITCODE -ne 0) { throw 'Patch failed.' }
+git bundle verify $bundle
+if ($LASTEXITCODE -ne 0) { throw 'Bundle verification failed.' }
+git fetch $bundle refs/heads/main
+if ($LASTEXITCODE -ne 0) { throw 'Bundle import failed.' }
+git merge --ff-only FETCH_HEAD
+if ($LASTEXITCODE -ne 0) { throw 'History diverged. Review a merge; do not reset or force-push.' }
 
 py -3 scripts/verify.py
-if ($LASTEXITCODE -ne 0) { throw 'Verification failed.' }
-git add .
-if ($LASTEXITCODE -ne 0) { throw 'Staging failed.' }
-git diff --cached --stat
-git diff --cached --check
-if ($LASTEXITCODE -ne 0) { throw 'Review whitespace errors before committing.' }
+if ($LASTEXITCODE -ne 0) { throw 'Verification failed. Do not publish yet.' }
+git log -1 --oneline
+git push origin main
+if ($LASTEXITCODE -ne 0) { throw 'Push failed. Check GitHub authentication and remote history.' }
 ```
 
-Review the changes and the MIT license in `LICENSE`. To publish the reviewed branch:
+The bundle already contains the commit; no additional `git add` or `git commit` is needed. Publishing requires your GitHub credentials and repository write access. A remote branch that has advanced incompatibly will cause an ordinary push to refuse; do not force it.
 
-```powershell
-git commit -m 'Scope synthetic reports and add dual constraints and domain lottery'
-if ($LASTEXITCODE -ne 0) { throw 'Commit failed; check your Git author identity.' }
-git push -u origin revision/synthetic-verification-0.2.0
-if ($LASTEXITCODE -ne 0) { throw 'Push failed; check authentication and remote history.' }
-```
-
-Then open a pull request against `main`. This package does not claim a remote CI run, branch protection, or merge approval.
-
-## Complete source directory
-
-The included `CORTAC` folder can also be tested without Git using `py -3 scripts/verify.py`. To import it into an existing checkout, use a review branch and compare the diff against the current source. Preserve the checkout's Git metadata and existing history. The patch route above is preferable for the verified base.
+After pushing, inspect the **Offline checks** workflow in GitHub Actions, including **Windows Python 3.12**. Configured jobs and local newline emulation do not establish native Windows success. The source directory can be checked without Git using `py -3 scripts/verify.py`.

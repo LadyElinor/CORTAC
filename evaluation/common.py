@@ -53,7 +53,9 @@ def seed_for(*parts):
 def write(path, value):
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False, allow_nan=False) + '\n', encoding='utf-8')
+    # Byte-bound fixtures must not pass through Windows text newline translation.
+    data = json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False, allow_nan=False) + '\n'
+    path.write_bytes(data.encode('utf-8'))
 
 
 def write_jsonl(path, values):

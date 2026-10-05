@@ -109,8 +109,8 @@ def main():
     # Do not run code after a failed delivered-integrity gate.
     if all(item["passed"] for item in checks):
         cases = [
-            ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 80}),
-            ("evaluation", ["-m", "unittest", "discover", "-s", "tests", "-v"], "evaluation", {"minimum_tests": 49}),
+            ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 89}),
+            ("evaluation", ["-m", "unittest", "discover", "-s", "tests", "-v"], "evaluation", {"minimum_tests": 52}),
             ("assignment_adversarial", ["verification/assignment_adversarial.py"], "", {"minimum_tests": 11}),
             ("evaluation_adversarial", ["verification/evaluation_adversarial.py"], "", {"minimum_tests": 6}),
             ("witness", ["scripts/wac.py", "verify", "--profile", "package/inputs/profile.extracted.json",

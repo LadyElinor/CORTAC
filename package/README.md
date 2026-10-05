@@ -1,4 +1,4 @@
-# WAC design 0.2 offline reference tools (software 0.2.0)
+# WAC design 0.2 offline reference tools (software 0.2.1)
 
 **Unsigned design experiments. Authority: NONE. Runtime status: UNINITIALIZED_NO_EXECUTION.**
 
@@ -32,7 +32,9 @@ All commands print JSON. Exit 0 means a positive supported synthetic result; 2 m
 
 The primary engine uses lexical DFS with joint case and appeal assignment and conditional panel symmetry reduction. The second engine uses independently written unary/binary constraints, minimum-remaining-values ordering, and forward checking without that symmetry reduction. They share input-shape validation, not eligibility/conflict code. Each gets the requested node budget. A checked witness can settle satisfiability even when the other search ran out of nodes. Both must conclude infeasibility for a negative CLI report. The program is still a bounded reference tool; neither input preprocessing nor wall time is bounded by candidate-expansion counts.
 
-The direct `solver.solve` and `reference.solve_reference` APIs report their own conclusions. The CLI `assemble` combines them. Standalone search results are not V2 certificates. See [revision notes](../docs/REVISION_0_2_0.md).
+The direct `solver.solve` and `reference.solve_reference` APIs report their own conclusions. The CLI `assemble` combines them. Standalone search results are not V2 certificates. See [0.2.0 revision notes](../docs/REVISION_0_2_0.md) and [0.2.1 repair notes](../docs/REVISION_0_2_1.md).
+
+Certificate verification accepts the closed V2 field contract emitted by software 0.2.0 and 0.2.1. It checks exact types and values for all scope-bearing fields, including nested audit, ballot, appeal-capacity and profile-validation claims. Missing or unknown fields are rejected. Search counters are type-checked and checked for internal consistency; they are unauthenticated diagnostic telemetry, not proof that a search was performed. Verification rechecks the assignment, but does not replay the searches or authenticate the claimed software version.
 
 Search choices do not count as a charter lottery or an appointment. The separate [lottery simulator](../docs/LOTTERY.md) draws domains under a frozen nominee policy, uses recorded test randomness, and reports the first dead end without retries. It establishes no real principal consent, seed chronology, or authority.
 

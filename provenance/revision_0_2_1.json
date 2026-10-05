@@ -1,0 +1,29 @@
+{
+  "schema": "cortac.revision.v1",
+  "software_version": "0.2.1",
+  "design_version": "0.2",
+  "base_commit": "f2c9c29ef09d199e55f76c3f6c5a7b7d0b2cd882",
+  "date_utc": "2026-10-05",
+  "changes": [
+    "portable UTF-8/LF fixture JSON and POSIX inventory paths",
+    "closed V2 certificate scope metadata and strict JSON types",
+    "complete Git bundle upload instructions"
+  ],
+  "protected_paths_unchanged_from_base": [
+    "evaluation/fixtures",
+    "package/fixtures",
+    "package/inputs",
+    "package/wac_offline/data",
+    "package/results_v2",
+    "LICENSE"
+  ],
+  "fixture_hashes_changed": false,
+  "seed_lists_sha256": "5c1c4a92160e866f89a29d7a378596131ef9cb8fa63966898bbadb3714ff775c",
+  "original_artifact_digests_resolved": false,
+  "license_selected": "MIT",
+  "native_windows_execution_verified": false,
+  "github_actions_run_verified": false,
+  "agent_trials": 0,
+  "scope": "Local software repair; no authority or study-result claim",
+  "previous_revision_records": "Historical snapshots retained without rewriting"
+}

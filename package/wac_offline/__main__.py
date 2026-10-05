@@ -5,7 +5,7 @@ import sys
 from . import __version__
 from .io import InputError, read, report_bytes, report_hash, sha256_file
 from .profile import validate_profile
-from .solver import solve, verify_assignment
+from .solver import ALL_ROLES, solve, verify_assignment
 from .reference import solve_reference, verify_reference
 from .governance import frozen_vote, split_check, consequential_ballot
 from .lottery import freeze_roll, simulate
@@ -80,6 +80,91 @@ def certificate(profile_path, roster_path, max_nodes):
     return result
 
 
+def _same_json(actual, expected):
+    """Compare the closed JSON contract without Python's bool/int equivalence."""
+    if type(actual) is not type(expected):
+        return False
+    if isinstance(expected, dict):
+        return actual.keys() == expected.keys() and all(_same_json(actual[k], v) for k, v in expected.items())
+    if isinstance(expected, list):
+        return len(actual) == len(expected) and all(_same_json(a, b) for a, b in zip(actual, expected))
+    return actual == expected
+
+
+def _metadata_errors(cert, validation, roster):
+    # A valid assignment does not make every other claim in its envelope true.
+    # Scope-bearing fields have exact supported values, including nested flags.
+    expected = {**BOUNDARY, 'status': SAT, 'evidence_kind': 'SYNTHETIC_ASSIGNMENT',
+        'signed': False, 'ratified': False, 'format': 'WAC_OFFLINE_ASSIGNMENT_REPORT_V2',
+        'not_established': LIMITATIONS, 'case_id': roster['case_id'],
+        'hash_scope': 'exact_local_input_bytes_only_no_original_upload_or_adoption_identity_claim',
+        'profile_validation': validation,
+        'search_method': 'two_bounded_encodings_lexical_DFS_and_MRV_forward_checking_not_role_lottery',
+        'report_serialization': 'Python_ASCII_sorted_indented_JSON_v1_NOT_RFC8785_NOT_FOR_ADOPTION',
+        'decision_structure': {'seats': 4, 'distinct_domains_required': 4,
+                               'approvals_required': 3, 'actual_ballots_verified': False},
+        'appeal_structure': {'seats': 3, 'distinct_domains_required': 3,
+                            'approvals_required': 2, 'capacity_is_declared_only': True},
+        'supported_additions': ['conservative_material_overlap_exclusion_for_assessors',
+                               'pairwise_material_control_disjoint_appeal_panel'],
+        'diagnostics': [], 'search_exhausted': False}
+    dynamic = {'software_version', 'assignment', 'crosscheck', 'candidate_counts',
+               'static_rejections', 'dynamic_rejections', 'nodes', 'max_nodes',
+               'input_byte_hashes', 'report_body_sha256'}
+    errors = []
+    if set(cert) != set(expected) | dynamic:
+        errors.append('REPORT_FIELD_SET_MISMATCH')
+    for key, value in expected.items():
+        if not _same_json(cert.get(key), value):
+            errors.append('INVALID_REPORT_BOUNDARY:' + key)
+    if type(cert.get('software_version')) is not str or cert['software_version'] not in ('0.2.0', '0.2.1'):
+        errors.append('UNSUPPORTED_REPORT_SOFTWARE_VERSION')
+
+    def nonnegative_integer(value):
+        return type(value) is int and value >= 0
+
+    for key in ('nodes', 'max_nodes'):
+        if not nonnegative_integer(cert.get(key)):
+            errors.append('INVALID_SEARCH_COUNTER:' + key)
+    counts = cert.get('candidate_counts')
+    if (type(counts) is not dict or set(counts) != set(ALL_ROLES) or
+            any(not nonnegative_integer(v) or v > len(roster['records']) for v in counts.values())):
+        errors.append('INVALID_CANDIDATE_COUNTS')
+    # Counts are diagnostic telemetry, not authenticated evidence of search work.
+    for key in ('static_rejections', 'dynamic_rejections'):
+        counts = cert.get(key)
+        if (type(counts) is not dict or any(type(k) is not str or not k or
+                not nonnegative_integer(v) for k, v in counts.items())):
+            errors.append('INVALID_REJECTION_COUNTERS:' + key)
+
+    cross = cert.get('crosscheck')
+    fixed_cross = {'witness_checked_by_both': True, 'shared_component': 'roster_shape_validator',
+                   'external_independent_audit': False}
+    variable_cross = {'primary_status', 'reference_status', 'primary_nodes',
+                      'reference_nodes', 'budget_per_engine'}
+    if type(cross) is not dict:
+        return errors + ['INVALID_REPORT_BOUNDARY:crosscheck']
+    if set(cross) != set(fixed_cross) | variable_cross:
+        errors.append('INVALID_REPORT_BOUNDARY:crosscheck_fields')
+    for key, value in fixed_cross.items():
+        if not _same_json(cross.get(key), value):
+            errors.append('INVALID_REPORT_BOUNDARY:crosscheck.' + key)
+    statuses = [cross.get(k) for k in ('primary_status', 'reference_status')]
+    if any(type(s) is not str or s not in (SAT, INCOMPLETE) for s in statuses) or SAT not in statuses:
+        errors.append('CONTRADICTORY_CROSSCHECK_STATUSES')
+    for key in ('primary_nodes', 'reference_nodes', 'budget_per_engine'):
+        if not nonnegative_integer(cross.get(key)):
+            errors.append('INVALID_SEARCH_COUNTER:crosscheck.' + key)
+    if not _same_json(cross.get('primary_nodes'), cert.get('nodes')):
+        errors.append('CONTRADICTORY_PRIMARY_NODE_COUNT')
+    if not _same_json(cross.get('budget_per_engine'), cert.get('max_nodes')):
+        errors.append('CONTRADICTORY_SEARCH_BUDGET')
+    if all(nonnegative_integer(cross.get(k)) for k in ('primary_nodes', 'reference_nodes', 'budget_per_engine')):
+        if max(cross['primary_nodes'], cross['reference_nodes']) > cross['budget_per_engine']:
+            errors.append('SEARCH_COUNTER_EXCEEDS_BUDGET')
+    return errors
+
+
 def verify_certificate(profile_path, roster_path, cert):
     errors = []
     if not isinstance(cert, dict):
@@ -89,17 +174,13 @@ def verify_certificate(profile_path, roster_path, cert):
         errors.append('REPORT_BODY_HASH_MISMATCH')
     if cert.get('input_byte_hashes') != hashes(profile_path, roster_path):
         errors.append('LOCAL_INPUT_BYTE_HASH_MISMATCH')
-    if validate_profile(read(profile_path))['errors']:
+    validation = validate_profile(read(profile_path))
+    if validation['errors']:
         errors.append('PROFILE_UNSUPPORTED')
-    expected = {**BOUNDARY, 'status': SAT, 'evidence_kind': 'SYNTHETIC_ASSIGNMENT',
-                'signed': False, 'ratified': False, 'format': 'WAC_OFFLINE_ASSIGNMENT_REPORT_V2',
-                'not_established': LIMITATIONS}
-    for key, value in expected.items():
-        if type(cert.get(key)) is not type(value) or cert.get(key) != value:
-            errors.append('INVALID_REPORT_BOUNDARY:' + key)
     roster = read(roster_path)
     errors.extend('PRIMARY:' + e for e in verify_assignment(roster, cert.get('assignment')))
     errors.extend('REFERENCE:' + e for e in verify_reference(roster, cert.get('assignment')))
+    errors.extend(_metadata_errors(cert, validation, roster))
     return {**BOUNDARY, 'status': 'SYNTHETIC_WITNESS_INVALID' if errors else 'SYNTHETIC_WITNESS_VALID',
             'errors': sorted(set(errors)),
             'verification_scope': 'two_constraint_encodings_shared_shape_parser_unverified_input_truth',
