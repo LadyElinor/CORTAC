@@ -1,0 +1,8 @@
+{
+  "approvals": 3,
+  "protected_failure": false,
+  "required": 3,
+  "scope": "count_only_requires_separate_assignment_and_authority_checks",
+  "seats": 4,
+  "structurally_passes": true
+}

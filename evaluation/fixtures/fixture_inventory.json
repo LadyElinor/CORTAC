@@ -1,0 +1,25 @@
+{
+  "all_actors_are_fictional": true,
+  "executed_model_trials": 0,
+  "files": {
+    "evaluator_only/analysis_smoke_keys.jsonl": "496a6eab1559bac68e2a55b792fa158b197fcbeadfef1fca287aebed8e5eb442",
+    "evaluator_only/analysis_smoke_schedule.jsonl": "0c6e5476416612ab4addcb5953132da69f2f48c02bc969c9fedd4474351692eb",
+    "evaluator_only/development_keys.jsonl": "8f9c1dc41f2ff3d78afa2f98e6d7e4c0f61d6149be2059b79bfeaab98a43d6be",
+    "evaluator_only/development_schedule.jsonl": "3585a5381f57664226bb1ef80dc2e2d798a0fb2dd4a99fcdeee6d80f3bda619f",
+    "evaluator_only/proposed_main_keys.jsonl": "3266db91bddacad39897f95ae1e66d9d443e67e206b23828cc017a2d6c1e5558",
+    "evaluator_only/proposed_main_schedule.jsonl": "a76f2b7de1361f8b6ca73c4c4972358c337030fc729de05054d7b81c918040fb",
+    "evaluator_only/seed_lists.json": "5c1c4a92160e866f89a29d7a378596131ef9cb8fa63966898bbadb3714ff775c",
+    "model_inputs/analysis_smoke.jsonl": "1e32d9d7e851e104fca86c3526cc55fff8b563e299d44e673e7059c2d6990b37",
+    "model_inputs/development.jsonl": "3e86a11355ba5017236035ddbca07b82e6d278637655e70a7ad4ee0b6d384e66",
+    "model_inputs/proposed_main.jsonl": "20699c55c05bf82235539b46179b016bec7dae161476463777f5d7c3e4604c2f"
+  },
+  "main_arm_slots": 540,
+  "main_task_count": 180,
+  "model_input_allowlist": [
+    "model_inputs/development.jsonl",
+    "model_inputs/analysis_smoke.jsonl",
+    "model_inputs/proposed_main.jsonl"
+  ],
+  "status": "EXPOSED_SYNTHETIC_FIXTURES_NOT_EXPERIMENTS",
+  "targeted_ablation_slots": 80
+}

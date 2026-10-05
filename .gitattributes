@@ -1,0 +1,7 @@
+# Hash-bound fixture bytes must survive Windows Git checkout unchanged.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.pdf binary
+*.docx binary
+*.zip binary

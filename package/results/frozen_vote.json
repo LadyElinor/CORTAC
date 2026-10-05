@@ -1,0 +1,17 @@
+{
+  "both_chambers_pass": true,
+  "cell_denominator": [
+    5,
+    1
+  ],
+  "cell_pass": true,
+  "cell_yes": [
+    4,
+    1
+  ],
+  "domain_denominator": 5,
+  "domain_pass": true,
+  "domain_yes": 4,
+  "required_domain_yes": 4,
+  "scope": "arithmetic_only_no_vote_authorization_or_roll_verification"
+}

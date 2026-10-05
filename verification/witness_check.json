@@ -1,0 +1,8 @@
+{
+  "authority": "NONE",
+  "authority_status": "UNINITIALIZED_NO_EXECUTION",
+  "errors": [],
+  "execution_enabled": false,
+  "status": "VALID_SYNTHETIC_ASSIGNMENT_WITNESS",
+  "verification_scope": "search_independent_recheck_using_same_declared_constraint_model"
+}

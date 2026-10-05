@@ -1,0 +1,14 @@
+{
+  "protected_failure": false,
+  "seat_ids": [
+    "c1",
+    "c2",
+    "c3",
+    "c4"
+  ],
+  "yes_ids": [
+    "c1",
+    "c2",
+    "c3"
+  ]
+}

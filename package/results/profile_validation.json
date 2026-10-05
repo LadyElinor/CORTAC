@@ -1,0 +1,14 @@
+{
+  "authority_status": "UNINITIALIZED_NO_EXECUTION",
+  "errors": [],
+  "execution_enabled": false,
+  "not_checked": [
+    "original_artifact_byte_identity",
+    "DOCX_JSON_full_correspondence",
+    "RFC8785_or_signatures",
+    "runtime_authority",
+    "mission_readiness"
+  ],
+  "scope": "exact_v0.2_baseline_structure_and_values_object_order_agnostic",
+  "status": "VALID_SUPPORTED_PROFILE"
+}

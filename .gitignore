@@ -1,0 +1,21 @@
+# Interpreter and development environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+# Local outputs; committed fixtures and historical reports remain tracked
+.local/
+.pytest_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

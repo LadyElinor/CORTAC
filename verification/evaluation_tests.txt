@@ -1,0 +1,54 @@
+test_boolean_metric_rejected (test_evaluation.Analysis.test_boolean_metric_rejected) ... ok
+test_censored_latency_not_zero (test_evaluation.Analysis.test_censored_latency_not_zero) ... ok
+test_changed_pair_seed_rejected (test_evaluation.Analysis.test_changed_pair_seed_rejected) ... ok
+test_cost_consistency (test_evaluation.Analysis.test_cost_consistency) ... ok
+test_custom_empty_schedule_rejected (test_evaluation.Analysis.test_custom_empty_schedule_rejected) ... ok
+test_duplicate_json_keys_rejected (test_evaluation.Analysis.test_duplicate_json_keys_rejected) ... ok
+test_duplicate_row_rejected (test_evaluation.Analysis.test_duplicate_row_rejected) ... ok
+test_duplicate_schedule_rejected (test_evaluation.Analysis.test_duplicate_schedule_rejected) ... ok
+test_empty_conditional_metric (test_evaluation.Analysis.test_empty_conditional_metric) ... ok
+test_empty_schedule_rejected (test_evaluation.Analysis.test_empty_schedule_rejected) ... ok
+test_fabrication_label_required (test_evaluation.Analysis.test_fabrication_label_required) ... ok
+test_missing_row_rejected (test_evaluation.Analysis.test_missing_row_rejected) ... ok
+test_missingness_must_be_explicit (test_evaluation.Analysis.test_missingness_must_be_explicit) ... ok
+test_no_null_primary (test_evaluation.Analysis.test_no_null_primary) ... ok
+test_nonfinite_json_rejected (test_evaluation.Analysis.test_nonfinite_json_rejected) ... ok
+test_null_control (test_evaluation.Analysis.test_null_control) ... ok
+test_planted_constant_difference (test_evaluation.Analysis.test_planted_constant_difference) ... ok
+test_planted_mixed_difference (test_evaluation.Analysis.test_planted_mixed_difference) ... ok
+test_quantile_interpolates (test_evaluation.Analysis.test_quantile_interpolates) ... ok
+test_refusal_cannot_be_success (test_evaluation.Analysis.test_refusal_cannot_be_success) ... ok
+test_report_is_explicitly_synthetic (test_evaluation.Analysis.test_report_is_explicitly_synthetic) ... ok
+test_resource_overrun_rejected (test_evaluation.Analysis.test_resource_overrun_rejected) ... ok
+test_scored_mode_always_blocked (test_evaluation.Analysis.test_scored_mode_always_blocked) ... ok
+test_seed_reproducible (test_evaluation.Analysis.test_seed_reproducible) ... ok
+test_smoke_validation (test_evaluation.Analysis.test_smoke_validation) ... ok
+test_unknown_effect_must_be_flagged (test_evaluation.Analysis.test_unknown_effect_must_be_flagged) ... ok
+test_ablations_only_targeted (test_evaluation.Fixtures.test_ablations_only_targeted) ... ok
+test_appeal_distinct_from_prior_case_domains (test_evaluation.Fixtures.test_appeal_distinct_from_prior_case_domains) ... ok
+test_authorizer_outside_roster (test_evaluation.Fixtures.test_authorizer_outside_roster) ... ok
+test_event_barriers_precede_actions (test_evaluation.Fixtures.test_event_barriers_precede_actions) ... ok
+test_inherited_weights (test_evaluation.Fixtures.test_inherited_weights) ... ok
+test_integrity (test_evaluation.Fixtures.test_integrity) ... ok
+test_nine_families (test_evaluation.Fixtures.test_nine_families) ... ok
+test_no_oracle_fields_in_public (test_evaluation.Fixtures.test_no_oracle_fields_in_public) ... ok
+test_paired_model_seeds (test_evaluation.Fixtures.test_paired_model_seeds) ... ok
+test_reproducibility (test_evaluation.Fixtures.test_reproducibility) ... ok
+test_seed_streams_disjoint (test_evaluation.Fixtures.test_seed_streams_disjoint) ... ok
+test_shared_provenance_is_not_independence (test_evaluation.Fixtures.test_shared_provenance_is_not_independence) ... ok
+test_slot_counts (test_evaluation.Fixtures.test_slot_counts) ... ok
+test_unknown_control_not_verified_by_roster (test_evaluation.Fixtures.test_unknown_control_not_verified_by_roster) ... ok
+test_boolean_edit_cannot_activate (test_evaluation.Gate.test_boolean_edit_cannot_activate) ... ok
+test_budget_pair_tamper (test_evaluation.Gate.test_budget_pair_tamper) ... ok
+test_family_tamper (test_evaluation.Gate.test_family_tamper) ... ok
+test_fixture_digest_tamper (test_evaluation.Gate.test_fixture_digest_tamper) ... ok
+test_nested_placeholder_remains_blocked (test_evaluation.Gate.test_nested_placeholder_remains_blocked) ... ok
+test_order_tamper (test_evaluation.Gate.test_order_tamper) ... ok
+test_original_hash_never_reconstructed (test_evaluation.Gate.test_original_hash_never_reconstructed) ... ok
+test_pair_index_tamper (test_evaluation.Gate.test_pair_index_tamper) ... ok
+test_proposal_is_blocked (test_evaluation.Gate.test_proposal_is_blocked) ... ok
+
+----------------------------------------------------------------------
+Ran 49 tests in 1.061s
+
+OK

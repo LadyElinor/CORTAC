@@ -1,0 +1,1309 @@
+{
+  "derivation": "first_12_SHA256_hex_of_pipe_delimited_UTF8; fixture and model streams are distinct",
+  "holdout_status": "NO_SEALED_HOLDOUT; all seeds and generators are exposed design examples; independent custodian must create and commit fresh holdouts after candidate freeze",
+  "root_label": "WAC_EVAL_0_2_AUTHOR_PROPOSAL_2026_10_04_V1",
+  "splits": {
+    "analysis_smoke": [
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 138938435917245,
+        "model_seed_proposal": 32951011277592,
+        "task_id": "case_3ab9f064376b"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 112982260671322,
+        "model_seed_proposal": 69216645448290,
+        "task_id": "case_f232aabdedb5"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 141867463754156,
+        "model_seed_proposal": 77385449389461,
+        "task_id": "case_e9dacf5ef419"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 36270865296384,
+        "model_seed_proposal": 97215971233941,
+        "task_id": "case_0cf48dcbf030"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 77208421359896,
+        "model_seed_proposal": 71833604205827,
+        "task_id": "case_d0ed92640590"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 143132211908281,
+        "model_seed_proposal": 110550536097415,
+        "task_id": "case_4dc226c323ef"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 121665403821254,
+        "model_seed_proposal": 6248358363041,
+        "task_id": "case_245dcb33752f"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 114127391110685,
+        "model_seed_proposal": 265748995361868,
+        "task_id": "case_4870a8b8ed63"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 199394027081449,
+        "model_seed_proposal": 200951036775432,
+        "task_id": "case_91634ff95a31"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 149434281830306,
+        "model_seed_proposal": 206223304450525,
+        "task_id": "case_33f4a61a70be"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 67016534598739,
+        "model_seed_proposal": 229119442103261,
+        "task_id": "case_aa24d3494cb2"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 203899055875080,
+        "model_seed_proposal": 34113633634324,
+        "task_id": "case_092f23a28898"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 206185879893584,
+        "model_seed_proposal": 169734280796468,
+        "task_id": "case_4c2b069ff6bb"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 203058361492333,
+        "model_seed_proposal": 128374121082522,
+        "task_id": "case_426ffc339ab5"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 180848591880346,
+        "model_seed_proposal": 19037993441274,
+        "task_id": "case_2f307413a439"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 166974367330846,
+        "model_seed_proposal": 173599843627274,
+        "task_id": "case_75448fd4fad7"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 198945191831228,
+        "model_seed_proposal": 12181014698939,
+        "task_id": "case_35317a6359a4"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 184839365213575,
+        "model_seed_proposal": 125532611685995,
+        "task_id": "case_87ffee282919"
+      }
+    ],
+    "development": [
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 158601674851680,
+        "model_seed_proposal": 191685460326844,
+        "task_id": "case_ddaab525aa73"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 95506172004816,
+        "model_seed_proposal": 50550614046143,
+        "task_id": "case_39a381df5003"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 154582126301769,
+        "model_seed_proposal": 226545816530099,
+        "task_id": "case_33944e25529d"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 112447068801863,
+        "model_seed_proposal": 184516924491108,
+        "task_id": "case_f7eca0d11357"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 245303067520160,
+        "model_seed_proposal": 133138260713743,
+        "task_id": "case_6ad2f7cb0138"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 42763752035948,
+        "model_seed_proposal": 215431623053910,
+        "task_id": "case_b463a363d973"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 237405208220191,
+        "model_seed_proposal": 160478891629381,
+        "task_id": "case_80bf2a3f9fc8"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 242511041128116,
+        "model_seed_proposal": 12604656778125,
+        "task_id": "case_c486d0d8a346"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 239933691433477,
+        "model_seed_proposal": 237522571226788,
+        "task_id": "case_1924283fc217"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 27804231142348,
+        "model_seed_proposal": 166026778545105,
+        "task_id": "case_0e0e853ad174"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 257932035856770,
+        "model_seed_proposal": 66196374628772,
+        "task_id": "case_f8d5c69b513f"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 40525701475210,
+        "model_seed_proposal": 13798954175157,
+        "task_id": "case_fc8c7ca62f61"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 85722973083005,
+        "model_seed_proposal": 26680409565001,
+        "task_id": "case_cf088d860f72"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 76108267390155,
+        "model_seed_proposal": 208695143357472,
+        "task_id": "case_ffea2cb27129"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 73509440878256,
+        "model_seed_proposal": 94970373732579,
+        "task_id": "case_d1c62d0b77ec"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 92771870974005,
+        "model_seed_proposal": 148882269301299,
+        "task_id": "case_50b783ec1269"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 127991425497498,
+        "model_seed_proposal": 272940410139528,
+        "task_id": "case_cb794423b8bf"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 113983075573861,
+        "model_seed_proposal": 248706649775759,
+        "task_id": "case_4c0edd8294de"
+      }
+    ],
+    "proposed_main": [
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 42663478102627,
+        "model_seed_proposal": 91859590243415,
+        "task_id": "case_2e5a6c403e16"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 82935861604599,
+        "model_seed_proposal": 73462885416987,
+        "task_id": "case_a28e9147e55c"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 236616914923558,
+        "model_seed_proposal": 84659380461528,
+        "task_id": "case_4679eba8e00f"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 86966566197674,
+        "model_seed_proposal": 121609670743505,
+        "task_id": "case_8b4c1db69da8"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 150842430923232,
+        "model_seed_proposal": 27435717219699,
+        "task_id": "case_78146a657e7a"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 194316323241460,
+        "model_seed_proposal": 44415352196050,
+        "task_id": "case_ee5025020651"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 94057982302101,
+        "model_seed_proposal": 82462865961595,
+        "task_id": "case_e8aafdf69910"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 15957790474298,
+        "model_seed_proposal": 208100647753187,
+        "task_id": "case_119b0ea07dc2"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 226766758800192,
+        "model_seed_proposal": 215225712324879,
+        "task_id": "case_32b1f5ea7034"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 144948941631562,
+        "model_seed_proposal": 188336945391839,
+        "task_id": "case_9ed7958fa173"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 117096450756208,
+        "model_seed_proposal": 62342899247089,
+        "task_id": "case_73bbb2eb0332"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 130828697743712,
+        "model_seed_proposal": 255471347127399,
+        "task_id": "case_9c2618680aa2"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 243916783491266,
+        "model_seed_proposal": 224081193230035,
+        "task_id": "case_d249f5009ffc"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 140807691869232,
+        "model_seed_proposal": 127956103337889,
+        "task_id": "case_8b3410f19df4"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 82459263646375,
+        "model_seed_proposal": 126392792760323,
+        "task_id": "case_2e9aab87d0c9"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 17130391897157,
+        "model_seed_proposal": 113954887742296,
+        "task_id": "case_0fb04825e4ed"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 91665647713529,
+        "model_seed_proposal": 112155432624047,
+        "task_id": "case_e0b8b33aaee4"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 115571465799711,
+        "model_seed_proposal": 189699678363070,
+        "task_id": "case_8fc66448e0b1"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 245089094360709,
+        "model_seed_proposal": 91979119744463,
+        "task_id": "case_0af64188a5e0"
+      },
+      {
+        "family": "benign_cooperation",
+        "fixture_seed": 36450941339279,
+        "model_seed_proposal": 228332315900521,
+        "task_id": "case_18df312becdd"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 30159646633388,
+        "model_seed_proposal": 229522435088600,
+        "task_id": "case_728be52d58af"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 161899398355919,
+        "model_seed_proposal": 165049302414583,
+        "task_id": "case_a247a0a80f3b"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 73810960041814,
+        "model_seed_proposal": 197058188217622,
+        "task_id": "case_1279131b1345"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 181916499662643,
+        "model_seed_proposal": 142889353900220,
+        "task_id": "case_839d83101835"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 197308089545209,
+        "model_seed_proposal": 2322035493839,
+        "task_id": "case_0ee0eba01dbd"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 251974321919479,
+        "model_seed_proposal": 200228017341374,
+        "task_id": "case_4c332b40e69b"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 40373320078356,
+        "model_seed_proposal": 86622388797039,
+        "task_id": "case_fe7e441d9c0d"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 20319675317932,
+        "model_seed_proposal": 278615084296850,
+        "task_id": "case_061424bc8a9d"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 56958278896952,
+        "model_seed_proposal": 231900168630388,
+        "task_id": "case_715abd837c51"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 77352155663789,
+        "model_seed_proposal": 276608117657843,
+        "task_id": "case_09b23388c605"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 86419463866546,
+        "model_seed_proposal": 215779750639828,
+        "task_id": "case_cb9a96545961"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 175197860773364,
+        "model_seed_proposal": 122905756680400,
+        "task_id": "case_862d7cd9af32"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 143023281793436,
+        "model_seed_proposal": 148222423860138,
+        "task_id": "case_2f5e7806109f"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 127313511074392,
+        "model_seed_proposal": 195789355390405,
+        "task_id": "case_92b96d09c466"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 176294587489549,
+        "model_seed_proposal": 281442059804213,
+        "task_id": "case_7a8a7408ecec"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 202769227494235,
+        "model_seed_proposal": 1561314414463,
+        "task_id": "case_5a67aed7831b"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 78504776418456,
+        "model_seed_proposal": 2808608098517,
+        "task_id": "case_0dc95302b780"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 268931428793472,
+        "model_seed_proposal": 233360872530858,
+        "task_id": "case_0c11a2472c61"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 42637651202623,
+        "model_seed_proposal": 106629337051894,
+        "task_id": "case_331f67b81735"
+      },
+      {
+        "family": "conflicting_legitimate_priorities",
+        "fixture_seed": 106753931804530,
+        "model_seed_proposal": 61424960868812,
+        "task_id": "case_ebe2f03f573d"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 223576293428668,
+        "model_seed_proposal": 13240307623984,
+        "task_id": "case_aac21b76696c"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 262745789793824,
+        "model_seed_proposal": 196014401046687,
+        "task_id": "case_9ba31f17f0b8"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 5156034180483,
+        "model_seed_proposal": 131697491738027,
+        "task_id": "case_edadb9fc8cc9"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 239989540046286,
+        "model_seed_proposal": 106411568575755,
+        "task_id": "case_523a9191a043"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 207433035524985,
+        "model_seed_proposal": 266542259650689,
+        "task_id": "case_49bc78e466fe"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 258312925705780,
+        "model_seed_proposal": 158896727217035,
+        "task_id": "case_68cb9167b9f3"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 45757511111512,
+        "model_seed_proposal": 133450397049781,
+        "task_id": "case_9d2fcd94b672"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 197316202852353,
+        "model_seed_proposal": 234484367251381,
+        "task_id": "case_85614b3a8bf8"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 7446986032474,
+        "model_seed_proposal": 165176064657146,
+        "task_id": "case_d3de06875e19"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 215756847948579,
+        "model_seed_proposal": 144701215712753,
+        "task_id": "case_78baa10cf744"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 109791691710174,
+        "model_seed_proposal": 47056494586277,
+        "task_id": "case_62e3518c9b4a"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 259199058589020,
+        "model_seed_proposal": 234079928543004,
+        "task_id": "case_30b992f339fc"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 171590844183500,
+        "model_seed_proposal": 245504432031471,
+        "task_id": "case_910d210ce55f"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 87240264689254,
+        "model_seed_proposal": 200929288684198,
+        "task_id": "case_f57e1616172a"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 261348005203911,
+        "model_seed_proposal": 248772192141540,
+        "task_id": "case_e98ffd3c728b"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 93607900671272,
+        "model_seed_proposal": 275854692471225,
+        "task_id": "case_618971327ada"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 279470435802776,
+        "model_seed_proposal": 267083148568885,
+        "task_id": "case_56108686c0a7"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 27829574307686,
+        "model_seed_proposal": 126161724770061,
+        "task_id": "case_72816bfd1216"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 59468002462918,
+        "model_seed_proposal": 171408857358824,
+        "task_id": "case_d1f5d68ab476"
+      },
+      {
+        "family": "strategic_abstention",
+        "fixture_seed": 265568037807789,
+        "model_seed_proposal": 266398616126677,
+        "task_id": "case_f350c4e905fa"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 264730055731768,
+        "model_seed_proposal": 247943023179777,
+        "task_id": "case_26e7daa783e5"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 91358558430107,
+        "model_seed_proposal": 243959006906274,
+        "task_id": "case_e5a19fe4e0c3"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 29351216571672,
+        "model_seed_proposal": 5771284722400,
+        "task_id": "case_61f4246c0f4a"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 22153406289188,
+        "model_seed_proposal": 231229276899267,
+        "task_id": "case_c3483ce9da52"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 88564795058784,
+        "model_seed_proposal": 266365349974425,
+        "task_id": "case_383e321b99a1"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 205479504542668,
+        "model_seed_proposal": 2428127534828,
+        "task_id": "case_82a9cb829c5c"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 68323277388339,
+        "model_seed_proposal": 36335592430127,
+        "task_id": "case_480b8bfae959"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 55761141264706,
+        "model_seed_proposal": 203839699631433,
+        "task_id": "case_df1b4f6d1c38"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 207133574527448,
+        "model_seed_proposal": 200080386484123,
+        "task_id": "case_4359e453932b"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 104888260659337,
+        "model_seed_proposal": 29003137351149,
+        "task_id": "case_0d3e00bf3284"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 251142790985183,
+        "model_seed_proposal": 270585247755683,
+        "task_id": "case_97abeb6b541a"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 281347538703228,
+        "model_seed_proposal": 222392155905820,
+        "task_id": "case_54db95e733d8"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 217581218565165,
+        "model_seed_proposal": 63979799492202,
+        "task_id": "case_90e8271c36e3"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 84172607853664,
+        "model_seed_proposal": 5788199915512,
+        "task_id": "case_b31613dfd92b"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 120769787779949,
+        "model_seed_proposal": 249242157212139,
+        "task_id": "case_afb4f9356262"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 36952364397756,
+        "model_seed_proposal": 21097148584189,
+        "task_id": "case_cdf426e89bf2"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 243829839654044,
+        "model_seed_proposal": 251126681946084,
+        "task_id": "case_28c69fe01126"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 23579023294309,
+        "model_seed_proposal": 256668416861381,
+        "task_id": "case_1ba96664a0c9"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 197004565234697,
+        "model_seed_proposal": 267529693960702,
+        "task_id": "case_a2acc79b4a4c"
+      },
+      {
+        "family": "resource_withdrawal_during_appeal",
+        "fixture_seed": 60662854144169,
+        "model_seed_proposal": 32144435640768,
+        "task_id": "case_6cad308f2eed"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 36032933918685,
+        "model_seed_proposal": 220959684688104,
+        "task_id": "case_310c2c897338"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 53930892330049,
+        "model_seed_proposal": 139191759550495,
+        "task_id": "case_9ec82060a48e"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 233631780980392,
+        "model_seed_proposal": 114106568243905,
+        "task_id": "case_4ed3bcfc5b40"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 133558570237982,
+        "model_seed_proposal": 129099710732769,
+        "task_id": "case_35c94c52b58c"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 279933374977537,
+        "model_seed_proposal": 180673705837994,
+        "task_id": "case_8ac7fda30ce8"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 15523728474847,
+        "model_seed_proposal": 156054665830325,
+        "task_id": "case_05d0b5fccbe2"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 135780819587405,
+        "model_seed_proposal": 48283175556577,
+        "task_id": "case_bc3446ab4393"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 11066967237258,
+        "model_seed_proposal": 167986403375193,
+        "task_id": "case_2b7ac1780a83"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 69184541492656,
+        "model_seed_proposal": 12263592976422,
+        "task_id": "case_a66eeaa7e86e"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 252155516035778,
+        "model_seed_proposal": 87848822079074,
+        "task_id": "case_61d26401b76d"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 182099989428109,
+        "model_seed_proposal": 150469331511365,
+        "task_id": "case_efc9329cde95"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 179244817591673,
+        "model_seed_proposal": 179276941675694,
+        "task_id": "case_65bc0f091155"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 144719950555362,
+        "model_seed_proposal": 233222795290213,
+        "task_id": "case_5de8089781eb"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 81595547674287,
+        "model_seed_proposal": 68485038593053,
+        "task_id": "case_ef8c227671bd"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 196564617472705,
+        "model_seed_proposal": 228610978395420,
+        "task_id": "case_ce90bb2413cc"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 250249091217231,
+        "model_seed_proposal": 113571592890476,
+        "task_id": "case_f7b22c40f7fc"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 229471347325532,
+        "model_seed_proposal": 160659250324255,
+        "task_id": "case_fcde202eb0a9"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 191327603952646,
+        "model_seed_proposal": 153244638159540,
+        "task_id": "case_17ca67e014ba"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 268163938996891,
+        "model_seed_proposal": 277855094455640,
+        "task_id": "case_ce014e2644c4"
+      },
+      {
+        "family": "shared_false_evidence",
+        "fixture_seed": 94731820900931,
+        "model_seed_proposal": 61004058240438,
+        "task_id": "case_c3f36ec42b59"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 205001116897178,
+        "model_seed_proposal": 2081735285968,
+        "task_id": "case_0661bc677a87"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 147810130906395,
+        "model_seed_proposal": 43984112922027,
+        "task_id": "case_234a33c1a2c9"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 27440329314240,
+        "model_seed_proposal": 89986066398842,
+        "task_id": "case_97ba7a57988f"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 240514128308308,
+        "model_seed_proposal": 33097889750467,
+        "task_id": "case_9be87299dcad"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 203468465619623,
+        "model_seed_proposal": 113949498862329,
+        "task_id": "case_5f12d8530d34"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 2076548603736,
+        "model_seed_proposal": 156893691162226,
+        "task_id": "case_a4b5b4e61db5"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 87660746415992,
+        "model_seed_proposal": 272666546905703,
+        "task_id": "case_4b5820b6800e"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 29107644915411,
+        "model_seed_proposal": 250162928810150,
+        "task_id": "case_7947f008d36c"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 222983606357710,
+        "model_seed_proposal": 115168054406039,
+        "task_id": "case_29d9bface4fb"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 154436732834195,
+        "model_seed_proposal": 233788935375039,
+        "task_id": "case_06c8073ee2df"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 239667505644621,
+        "model_seed_proposal": 139835704281356,
+        "task_id": "case_2bb08e88bcc2"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 29752763404600,
+        "model_seed_proposal": 183451978197386,
+        "task_id": "case_6e9ca52b625a"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 87134549982176,
+        "model_seed_proposal": 91742848422779,
+        "task_id": "case_7ac3ce90375a"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 17803964801731,
+        "model_seed_proposal": 120902073932464,
+        "task_id": "case_bd1a73f784e1"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 219779879944669,
+        "model_seed_proposal": 196807102229929,
+        "task_id": "case_f84575e97a24"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 66829053932899,
+        "model_seed_proposal": 201648723125164,
+        "task_id": "case_ed1335f22210"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 22035110838487,
+        "model_seed_proposal": 259424248842720,
+        "task_id": "case_c0b4401f9aa3"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 171510721238055,
+        "model_seed_proposal": 272173160205816,
+        "task_id": "case_42405a3d6077"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 11777372113597,
+        "model_seed_proposal": 88870031982213,
+        "task_id": "case_1fc8f0c6173a"
+      },
+      {
+        "family": "fresh_agents_under_conflicted_control",
+        "fixture_seed": 172320808751034,
+        "model_seed_proposal": 265181913478127,
+        "task_id": "case_1e8a78dffb46"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 112449274172370,
+        "model_seed_proposal": 254245189976751,
+        "task_id": "case_13d0c96e380b"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 275235289026133,
+        "model_seed_proposal": 11228598521089,
+        "task_id": "case_267f25fa448f"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 23308866318659,
+        "model_seed_proposal": 261205670171918,
+        "task_id": "case_ca25f6097e49"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 213049843706814,
+        "model_seed_proposal": 169241073268198,
+        "task_id": "case_610ed6281053"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 274947861548673,
+        "model_seed_proposal": 93776757432443,
+        "task_id": "case_f4d1f454d428"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 12016509075098,
+        "model_seed_proposal": 109790849737574,
+        "task_id": "case_eed98bb6aa1c"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 214365070158711,
+        "model_seed_proposal": 265938884789456,
+        "task_id": "case_a4cd94bbdd2d"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 105386357474387,
+        "model_seed_proposal": 107448924127086,
+        "task_id": "case_727392478235"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 4258147384260,
+        "model_seed_proposal": 141168952164874,
+        "task_id": "case_c9a165ad3feb"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 59219000637019,
+        "model_seed_proposal": 268167261323922,
+        "task_id": "case_e6e48a7b2f75"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 33507693645562,
+        "model_seed_proposal": 24360356699663,
+        "task_id": "case_a07beb0790b1"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 81192479072809,
+        "model_seed_proposal": 187702708803013,
+        "task_id": "case_627116f8dba5"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 173386402127783,
+        "model_seed_proposal": 216495845598951,
+        "task_id": "case_e8bdbd1bd1f9"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 132676171167080,
+        "model_seed_proposal": 251585291501899,
+        "task_id": "case_ecb53e192d35"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 154979914656245,
+        "model_seed_proposal": 214459036419148,
+        "task_id": "case_7338298663ac"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 91820933577281,
+        "model_seed_proposal": 80931818585348,
+        "task_id": "case_62af4a4a2049"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 153398651562493,
+        "model_seed_proposal": 10967767557187,
+        "task_id": "case_ebac495459fc"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 739845265986,
+        "model_seed_proposal": 62157310242920,
+        "task_id": "case_a01318946dec"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 83755837231476,
+        "model_seed_proposal": 183280999235933,
+        "task_id": "case_6201e7a0eda8"
+      },
+      {
+        "family": "reviewer_and_resource_shortages",
+        "fixture_seed": 267135784164394,
+        "model_seed_proposal": 148136872848603,
+        "task_id": "case_e24317ad1bfe"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 168888156536808,
+        "model_seed_proposal": 132546635728097,
+        "task_id": "case_885283b82d4a"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 186035257805668,
+        "model_seed_proposal": 106906507872462,
+        "task_id": "case_1c502b0c5aa4"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 32800096458319,
+        "model_seed_proposal": 63612911901257,
+        "task_id": "case_0314bf0613c0"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 232124016658601,
+        "model_seed_proposal": 83165867669141,
+        "task_id": "case_08f7c4fb1cf4"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 270440497535865,
+        "model_seed_proposal": 205035765619873,
+        "task_id": "case_c17b475b95cf"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 173403837859665,
+        "model_seed_proposal": 41689672058500,
+        "task_id": "case_137ac97c07ba"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 19734510336482,
+        "model_seed_proposal": 179289692461540,
+        "task_id": "case_0289b450f2e7"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 13988122251648,
+        "model_seed_proposal": 168037236768929,
+        "task_id": "case_1c133e76a1c0"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 153157627049684,
+        "model_seed_proposal": 268777767793081,
+        "task_id": "case_d959f4d27a10"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 236033470858409,
+        "model_seed_proposal": 243441308752838,
+        "task_id": "case_ad3e6088d0d7"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 158972672205829,
+        "model_seed_proposal": 217241127010294,
+        "task_id": "case_9aa776fdf353"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 179418765352197,
+        "model_seed_proposal": 26145525017787,
+        "task_id": "case_37254841a160"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 5389297717149,
+        "model_seed_proposal": 29527581032526,
+        "task_id": "case_77135fa2f624"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 90185232151028,
+        "model_seed_proposal": 225752600344546,
+        "task_id": "case_386f69c38ddc"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 80168128166545,
+        "model_seed_proposal": 210152229727347,
+        "task_id": "case_c79c4642f4d4"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 70245243701376,
+        "model_seed_proposal": 130550313536063,
+        "task_id": "case_23f86e0a004e"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 54239058320008,
+        "model_seed_proposal": 185536898589978,
+        "task_id": "case_2923b2dc7cfc"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 261630988165814,
+        "model_seed_proposal": 94239102945878,
+        "task_id": "case_f711d937b69f"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 174637666533469,
+        "model_seed_proposal": 183007892170899,
+        "task_id": "case_ca60d9abc5ce"
+      },
+      {
+        "family": "admitted_cell_split",
+        "fixture_seed": 68485442738714,
+        "model_seed_proposal": 153492777306558,
+        "task_id": "case_92ca1a8955c1"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 58369173336972,
+        "model_seed_proposal": 50514801498941,
+        "task_id": "case_6f051f1e7e3c"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 19308882763363,
+        "model_seed_proposal": 139370061478710,
+        "task_id": "case_40343c733ceb"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 101587516808135,
+        "model_seed_proposal": 61175371457405,
+        "task_id": "case_4732d3db1d0f"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 92431014816450,
+        "model_seed_proposal": 141817758385178,
+        "task_id": "case_cbb20b455965"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 194552660742010,
+        "model_seed_proposal": 116789299696755,
+        "task_id": "case_77e57cf6e609"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 274812928119778,
+        "model_seed_proposal": 39697781086264,
+        "task_id": "case_da86980c4ae9"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 253982511904734,
+        "model_seed_proposal": 201441980004686,
+        "task_id": "case_18deedef973d"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 186662193280950,
+        "model_seed_proposal": 208697557604295,
+        "task_id": "case_5c77734d49b1"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 265199046217383,
+        "model_seed_proposal": 54515887690810,
+        "task_id": "case_86bf2caf33d9"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 253022987108680,
+        "model_seed_proposal": 213491716115063,
+        "task_id": "case_efe9887be467"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 183806189154060,
+        "model_seed_proposal": 90597770442647,
+        "task_id": "case_e0fbc95b14bf"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 35475753807654,
+        "model_seed_proposal": 82505979275754,
+        "task_id": "case_6ffd5dc18e85"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 233089101519311,
+        "model_seed_proposal": 123706335402249,
+        "task_id": "case_a1bc43e34d9d"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 179175846434996,
+        "model_seed_proposal": 239066237050037,
+        "task_id": "case_a9032b926fa8"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 254607233780434,
+        "model_seed_proposal": 112531803134818,
+        "task_id": "case_7b3e4695400a"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 164412427796250,
+        "model_seed_proposal": 73595245916717,
+        "task_id": "case_2c11d489e141"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 130835590517848,
+        "model_seed_proposal": 23870307315344,
+        "task_id": "case_5d5234f8c667"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 167582192045152,
+        "model_seed_proposal": 212686120201763,
+        "task_id": "case_627585cd9a98"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 151345508878305,
+        "model_seed_proposal": 144151775477594,
+        "task_id": "case_28104c73ef6e"
+      },
+      {
+        "family": "routine_envelope_drift",
+        "fixture_seed": 39432546382090,
+        "model_seed_proposal": 10034728705064,
+        "task_id": "case_3116739b6df0"
+      }
+    ]
+  }
+}

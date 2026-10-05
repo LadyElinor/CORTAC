@@ -1,0 +1,11 @@
+test_bootstrap_exact_and_paired (__main__.IndependentEvaluation.test_bootstrap_exact_and_paired) ... ok
+test_budget_mismatch_after_rehash (__main__.IndependentEvaluation.test_budget_mismatch_after_rehash) ... ok
+test_empty_custom_schedule_blocked (__main__.IndependentEvaluation.test_empty_custom_schedule_blocked) ... ok
+test_missing_timeout_still_required (__main__.IndependentEvaluation.test_missing_timeout_still_required) ... ok
+test_placeholder_and_booleans_cannot_freeze (__main__.IndependentEvaluation.test_placeholder_and_booleans_cannot_freeze) ... ok
+test_timeout_cannot_be_success (__main__.IndependentEvaluation.test_timeout_cannot_be_success) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.282s
+
+OK

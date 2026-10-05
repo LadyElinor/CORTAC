@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cortac-wac-offline"
+version = "0.1.0"
+description = "Offline assignment and governance reference tools for Warranted Agent Commonwealth 0.2"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
+  "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Repository = "https://github.com/LadyElinor/CORTAC"
+Issues = "https://github.com/LadyElinor/CORTAC/issues"
+
+[project.scripts]
+wac-offline = "wac_offline.__main__:main"
+
+[tool.setuptools]
+package-dir = {"" = "package"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["package"]
+include = ["wac_offline*"]
+
+[tool.setuptools.package-data]
+wac_offline = ["data/*.json"]

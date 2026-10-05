@@ -1,0 +1,24 @@
+{
+  "adoption_identity_established": false,
+  "original_bytes_available": false,
+  "original_charter_sha256": null,
+  "original_profile_sha256": null,
+  "scope": "complete reconstructed Library text exports only; no original-byte identity inference",
+  "source_version": "WAC v0.2",
+  "sources": [
+    {
+      "export_path": "inputs/profile.extracted.json",
+      "export_sha256": "56c4bc76286a78d32541528c5ab85e0470cec84b627f8ce6f152867a9246031a",
+      "library_file_id": "libfile_42c88c3b16a88191ab80c143c4a2850e",
+      "original_bytes_sha256": null,
+      "source_filename": "Warranted_Agent_Commonwealth_Profile_v0_2(1).json"
+    },
+    {
+      "export_path": "inputs/charter.extracted.txt",
+      "export_sha256": "eba8e2c3c8360d9d720585df094f4dd11885a65c1239c8ea7b23681311cf7dfe",
+      "library_file_id": "libfile_168981e495c88191a866b6e405115b1b",
+      "original_bytes_sha256": null,
+      "source_filename": "Warranted_Agent_Commonwealth_v0_2(1).docx"
+    }
+  ]
+}

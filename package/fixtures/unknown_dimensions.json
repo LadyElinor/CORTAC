@@ -1,0 +1,342 @@
+{
+  "appeal_horizon": 2000,
+  "appellant_ids": [
+    "p"
+  ],
+  "as_of": 1000,
+  "beneficiary_ids": [
+    "p"
+  ],
+  "case_id": "synthetic-case-001",
+  "distinct_dependencies": [],
+  "opposing_party_ids": [],
+  "prior_participant_ids": [],
+  "proposer_id": "p",
+  "records": [
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-p",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d0",
+        "model_lineage": "synthetic-model_lineage-d0",
+        "runtime": "synthetic-runtime-d0",
+        "shared_context": "synthetic-shared_context-d0"
+      },
+      "domain": "d0",
+      "domain_verified": true,
+      "id": "p",
+      "kind": "agent",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d0"
+      ],
+      "process": "synthetic-process-p",
+      "qualified_roles": [
+        "proposer"
+      ],
+      "valid_until": 999999
+    },
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-e",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d1",
+        "model_lineage": "synthetic-model_lineage-d1",
+        "runtime": null,
+        "shared_context": "synthetic-shared_context-d1"
+      },
+      "domain": "d1",
+      "domain_verified": true,
+      "id": "e",
+      "kind": "agent",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d1"
+      ],
+      "process": "synthetic-process-e",
+      "qualified_roles": [
+        "epistemic_assessor"
+      ],
+      "valid_until": 999999
+    },
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-n",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d2",
+        "model_lineage": "synthetic-model_lineage-d2",
+        "runtime": "synthetic-runtime-d2",
+        "shared_context": "synthetic-shared_context-d2"
+      },
+      "domain": "d2",
+      "domain_verified": true,
+      "id": "n",
+      "kind": "agent",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d2"
+      ],
+      "process": "synthetic-process-n",
+      "qualified_roles": [
+        "normative_assessor"
+      ],
+      "valid_until": 999999
+    },
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-c1",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d1",
+        "model_lineage": "synthetic-model_lineage-d1",
+        "runtime": "synthetic-runtime-d1",
+        "shared_context": "synthetic-shared_context-d1"
+      },
+      "domain": "d1",
+      "domain_verified": true,
+      "id": "c1",
+      "kind": "agent",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d1"
+      ],
+      "process": "synthetic-process-c1",
+      "qualified_roles": [
+        "decision_council"
+      ],
+      "valid_until": 999999
+    },
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-c2",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d2",
+        "model_lineage": "synthetic-model_lineage-d2",
+        "runtime": "synthetic-runtime-d2",
+        "shared_context": "synthetic-shared_context-d2"
+      },
+      "domain": "d2",
+      "domain_verified": true,
+      "id": "c2",
+      "kind": "agent",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d2"
+      ],
+      "process": "synthetic-process-c2",
+      "qualified_roles": [
+        "decision_council"
+      ],
+      "valid_until": 999999
+    },
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-c3",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d3",
+        "model_lineage": "synthetic-model_lineage-d3",
+        "runtime": "synthetic-runtime-d3",
+        "shared_context": "synthetic-shared_context-d3"
+      },
+      "domain": "d3",
+      "domain_verified": true,
+      "id": "c3",
+      "kind": "agent",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d3"
+      ],
+      "process": "synthetic-process-c3",
+      "qualified_roles": [
+        "decision_council"
+      ],
+      "valid_until": 999999
+    },
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-c4",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d4",
+        "model_lineage": "synthetic-model_lineage-d4",
+        "runtime": "synthetic-runtime-d4",
+        "shared_context": "synthetic-shared_context-d4"
+      },
+      "domain": "d4",
+      "domain_verified": true,
+      "id": "c4",
+      "kind": "agent",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d4"
+      ],
+      "process": "synthetic-process-c4",
+      "qualified_roles": [
+        "decision_council"
+      ],
+      "valid_until": 999999
+    },
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-a",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d3",
+        "model_lineage": "synthetic-model_lineage-d3",
+        "runtime": "synthetic-runtime-d3",
+        "shared_context": "synthetic-shared_context-d3"
+      },
+      "domain": "d3",
+      "domain_verified": true,
+      "id": "a",
+      "kind": "authorizer_service",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d3"
+      ],
+      "process": "synthetic-process-a",
+      "qualified_roles": [
+        "authorizer"
+      ],
+      "valid_until": 999999
+    },
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-x",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d4",
+        "model_lineage": "synthetic-model_lineage-d4",
+        "runtime": "synthetic-runtime-d4",
+        "shared_context": "synthetic-shared_context-d4"
+      },
+      "domain": "d4",
+      "domain_verified": true,
+      "id": "x",
+      "kind": "agent",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d4"
+      ],
+      "process": "synthetic-process-x",
+      "qualified_roles": [
+        "executor"
+      ],
+      "valid_until": 999999
+    },
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-u",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d1",
+        "model_lineage": "synthetic-model_lineage-d1",
+        "runtime": "synthetic-runtime-d1",
+        "shared_context": "synthetic-shared_context-d1"
+      },
+      "domain": "d1",
+      "domain_verified": true,
+      "id": "u",
+      "kind": "agent",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d1"
+      ],
+      "process": "synthetic-process-u",
+      "qualified_roles": [
+        "outcome_auditor"
+      ],
+      "valid_until": 999999
+    },
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-r1",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d5",
+        "model_lineage": "synthetic-model_lineage-d5",
+        "runtime": "synthetic-runtime-d5",
+        "shared_context": "synthetic-shared_context-d5"
+      },
+      "domain": "d5",
+      "domain_verified": true,
+      "id": "r1",
+      "kind": "agent",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d5"
+      ],
+      "process": "synthetic-process-r1",
+      "qualified_roles": [
+        "appeal"
+      ],
+      "valid_until": 999999
+    },
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-r2",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d6",
+        "model_lineage": "synthetic-model_lineage-d6",
+        "runtime": "synthetic-runtime-d6",
+        "shared_context": "synthetic-shared_context-d6"
+      },
+      "domain": "d6",
+      "domain_verified": true,
+      "id": "r2",
+      "kind": "agent",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d6"
+      ],
+      "process": "synthetic-process-r2",
+      "qualified_roles": [
+        "appeal"
+      ],
+      "valid_until": 999999
+    },
+    {
+      "capacity": 1,
+      "conflicts": [],
+      "credential": "synthetic-credential-r3",
+      "dependencies": {
+        "evidence_origin": "synthetic-evidence_origin-d7",
+        "model_lineage": "synthetic-model_lineage-d7",
+        "runtime": "synthetic-runtime-d7",
+        "shared_context": "synthetic-shared_context-d7"
+      },
+      "domain": "d7",
+      "domain_verified": true,
+      "id": "r3",
+      "kind": "agent",
+      "material_control_known": true,
+      "material_controllers": [
+        "synthetic-controller-d7"
+      ],
+      "process": "synthetic-process-r3",
+      "qualified_roles": [
+        "appeal"
+      ],
+      "valid_until": 999999
+    }
+  ],
+  "registered_executor_ids": [
+    "x"
+  ],
+  "required_dependencies": {
+    "epistemic_assessor": [
+      "model_lineage",
+      "runtime",
+      "shared_context",
+      "evidence_origin"
+    ]
+  },
+  "schema_version": "wac.offline_roster.v1",
+  "simulation_only": true
+}

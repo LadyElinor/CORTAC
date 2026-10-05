@@ -1,0 +1,39 @@
+WARRANTED AGENT COMMONWEALTH
+Offline implementation tranches based on design version 0.2
+4 October 2026
+
+This bundle contains two runnable Python preparation tools. It does not run AI agents, ratify a charter, issue authority, connect the repositories, or implement an actuator.
+
+1. package
+   Checks the supported v0.2 profile and searches jointly for a consequential-case roster and its independent internal appeal reserve. Produces an inert assignment witness or an explicit infeasibility/incomplete-search result. Includes exact-rational voting and cell-split arithmetic, regression tests, fixture outputs, and an unsigned founding proposal.
+
+2. evaluation
+   Prepares paired synthetic scenarios, arm definitions, an unsigned proposed run manifest, strict metrics contracts, and a fixed-seed paired-bootstrap analysis smoke test. Plans 540 main arm executions plus 80 targeted ablations, but executes none of those agent trials. Its 216 exposed examples are development material, not sealed holdouts. The 62 fabricated equal-arm rows only test analysis plumbing.
+
+GETTING STARTED
+Requires Python 3.10 or newer; no third-party packages or API keys.
+Keep package and evaluation as sibling directories after extracting the ZIP.
+
+On Windows, open a terminal in this extracted directory:
+  cd package
+  py -3 -m unittest discover -s tests -v
+  py -3 -m wac_offline assemble --profile inputs/profile.extracted.json --roster fixtures/feasible.json
+  py -3 -m wac_offline verify --profile inputs/profile.extracted.json --roster fixtures/feasible.json --certificate results/feasible.json
+  cd ../evaluation
+  py -3 -m unittest discover -s tests -v
+  py -3 readiness.py
+
+On macOS/Linux, replace py -3 with python3. See each directory's README.md for additional commands, file contracts, expected status codes, and limitations. Older Windows PowerShell can change text encoding during shell redirection; the commands above avoid that and use the supplied UTF-8 witness file.
+
+WHAT THE RESULTS ESTABLISH
+Successful assignment checks are conditional on the supplied synthetic facts. The tools cannot establish real identities, undisclosed control, genuine cognitive independence, competence, funding, or legitimate appointment. A feasible assignment is not the charter's uniform role lottery or ACTIVE readiness.
+
+The ordinary local case-plus-three-person-appeal model needs at least eight control domains when proposer and beneficiary share control, or nine when they do not. Stronger mission conditions can increase this requirement. This is a conditional staffing bound, not a safety theorem.
+
+The study-readiness and scored-analysis gates deliberately refuse real scoring. No collective-intelligence advantage, safety rate, or real-model performance has been measured.
+
+SOURCE LIMIT
+Both supplied v0.2 documents were read in full. Original downloadable file-byte transfers failed, so the bundle contains explicitly labeled text exports and their local hashes. Those hashes are not original uploaded-artifact hashes. Exact-byte signed adoption remains unsupported. Your original files have not been edited.
+
+NEXT IMPLEMENTATION GATE
+Use the tested constraints and exposed scenarios to choose one reference simulator and implement its actual state transitions and trace judge. Freeze real arm implementations, mission-specific thresholds, models, resource permissions, and fresh holdouts before any scored study. This bundle grants none of those permissions.

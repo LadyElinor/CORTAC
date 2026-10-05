@@ -1,0 +1,41 @@
+{
+  "adoption_digest": null,
+  "adoption_manifest": null,
+  "assignment_report_body_sha256": "721ad920b42f1094ce1f42dde5a544cf8eb81dcbbdd872be72ea2bedf60963be",
+  "assignment_status": "FEASIBLE",
+  "authority": "NONE",
+  "authority_status": "UNINITIALIZED_NO_EXECUTION",
+  "execution_enabled": false,
+  "format": "WAC_OFFLINE_FOUNDING_PROPOSAL_V1",
+  "genesis_receipt": null,
+  "grants": [],
+  "missing_before_any_real_adoption": [
+    "exact_original_charter_and_profile_bytes",
+    "complete_mission_manifest",
+    "legitimate_founder_and_resource_principal_choices",
+    "verified_independent_enrollment_qualification_dependencies_and_capacity",
+    "adopted_uniform_domain_selection_rules_and_procedure",
+    "external_review_route_and_funded_continuity",
+    "externally_authorized_keys_and_RFC8785_signature_implementation",
+    "reviewed_enforcement_and_applicable_acceptance_tests",
+    "independent_mode_specific_attestations"
+  ],
+  "note": "This is not an adoption payload, signature request, grant, appointment or readiness certificate.",
+  "proposal_only": true,
+  "proposed_assignment": {
+    "appeal_1": "r1",
+    "appeal_2": "r2",
+    "appeal_3": "r3",
+    "authorizer": "a",
+    "council_1": "c1",
+    "council_2": "c2",
+    "council_3": "c3",
+    "council_4": "c4",
+    "epistemic_assessor": "e",
+    "executor": "x",
+    "normative_assessor": "n",
+    "outcome_auditor": "u"
+  },
+  "ratified": false,
+  "signed": false
+}

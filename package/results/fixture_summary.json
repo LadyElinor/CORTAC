@@ -1,0 +1,44 @@
+[
+  {
+    "evidence_kind": "FEASIBLE_ASSIGNMENT",
+    "fixture": "feasible",
+    "nodes": 12,
+    "status": "FEASIBLE"
+  },
+  {
+    "evidence_kind": "NECESSARY_CONDITION_FAILURE",
+    "fixture": "clone_insufficiency",
+    "nodes": 0,
+    "status": "INFEASIBLE"
+  },
+  {
+    "evidence_kind": "EXHAUSTIVE_FINITE_SEARCH",
+    "fixture": "same_controller_appeals",
+    "nodes": 23,
+    "status": "INFEASIBLE"
+  },
+  {
+    "evidence_kind": "NECESSARY_CONDITION_FAILURE",
+    "fixture": "unknown_dimensions",
+    "nodes": 0,
+    "status": "INFEASIBLE"
+  },
+  {
+    "evidence_kind": "NECESSARY_CONDITION_FAILURE",
+    "fixture": "reviewer_shortage",
+    "nodes": 0,
+    "status": "INFEASIBLE"
+  },
+  {
+    "evidence_kind": "FEASIBLE_ASSIGNMENT",
+    "fixture": "joint_backtracking",
+    "nodes": 36,
+    "status": "FEASIBLE"
+  },
+  {
+    "evidence_kind": "BOUND_REACHED_NO_PROOF",
+    "fixture": "bounded_search",
+    "nodes": 0,
+    "status": "SEARCH_INCOMPLETE"
+  }
+]

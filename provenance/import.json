@@ -1,0 +1,18 @@
+{
+  "schema": "cortac.import.v1",
+  "prepared_at_utc": "2026-10-04",
+  "destination_repository": "https://github.com/LadyElinor/CORTAC",
+  "destination_observed_state": "empty_public_repository_main_default_branch",
+  "archive_name": "WAC_v02_Offline_Tranches(1).zip",
+  "archive_sha256": "9efdd0c679ef82f3cce35f5111d7aa1f0764962e8a572fca9efc1b38019873be",
+  "archive_member_root": "WAC_v02_Offline_Tranches",
+  "imported_file_count": 80,
+  "imported_files_changed": false,
+  "initial_bundle_inventory_sha256": "4cb4ad0b056c68bedab8fb519c70168787cc47541fec01b1a5566d2c3058f46a",
+  "initial_evaluation_inventory_sha256": "b09ae49b07017a8170d3be6579914e15e74b9dce4c7d5b246ed4cb0f4c8fbb71",
+  "scope": "Local repository packaging; imported runtime code and generated records preserved",
+  "remote_write_performed": false,
+  "license_selected": false,
+  "agent_trials": 0,
+  "source_artifact_provenance": "Inherited component text exports retain their original-byte limitations; no new artifact-identity or adoption claim"
+}

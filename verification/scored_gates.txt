@@ -1,0 +1,2 @@
+scored_readiness_exit=2
+scored_analysis_exit=2

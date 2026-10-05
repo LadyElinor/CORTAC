@@ -1,0 +1,113 @@
+{
+  "appeal_structure": {
+    "approvals_required": 2,
+    "capacity_is_declared_only": true,
+    "distinct_domains_required": 3,
+    "seats": 3
+  },
+  "assignment": null,
+  "authority": "NONE",
+  "authority_status": "UNINITIALIZED_NO_EXECUTION",
+  "candidate_counts": {
+    "appeal_1": 3,
+    "appeal_2": 3,
+    "appeal_3": 3,
+    "authorizer": 1,
+    "council_1": 4,
+    "council_2": 4,
+    "council_3": 4,
+    "council_4": 4,
+    "epistemic_assessor": 1,
+    "executor": 1,
+    "normative_assessor": 1,
+    "outcome_auditor": 1
+  },
+  "case_id": "synthetic-case-001",
+  "decision_structure": {
+    "actual_ballots_verified": false,
+    "approvals_required": 3,
+    "distinct_domains_required": 4,
+    "seats": 4
+  },
+  "diagnostics": [
+    "NODE_BUDGET_EXHAUSTED"
+  ],
+  "dynamic_rejections": {},
+  "evidence_kind": "BOUND_REACHED_NO_PROOF",
+  "execution_enabled": false,
+  "format": "WAC_OFFLINE_ASSIGNMENT_REPORT_V1",
+  "hash_scope": "exact_local_input_bytes_only_no_original_upload_or_adoption_identity_claim",
+  "input_byte_hashes": {
+    "profile_local_bytes_sha256": "56c4bc76286a78d32541528c5ab85e0470cec84b627f8ce6f152867a9246031a",
+    "roster_local_bytes_sha256": "8105a91d3d4433b4389683f88a5bb15a9fe6144831c54f29c3d50b7dd6ea629b"
+  },
+  "max_nodes": 0,
+  "nodes": 0,
+  "not_established": [
+    "real_world_independence",
+    "enrollment_or_credential_authenticity",
+    "dependency_truth_or_completeness",
+    "qualification_or_capacity_evidence",
+    "duty_or_evidence_sufficiency",
+    "external_appeal_route",
+    "review_funding",
+    "uniform_role_lottery_or_appointment",
+    "signed_adoption",
+    "ACTIVE_readiness"
+  ],
+  "profile_validation": {
+    "authority_status": "UNINITIALIZED_NO_EXECUTION",
+    "errors": [],
+    "execution_enabled": false,
+    "not_checked": [
+      "original_artifact_byte_identity",
+      "DOCX_JSON_full_correspondence",
+      "RFC8785_or_signatures",
+      "runtime_authority",
+      "mission_readiness"
+    ],
+    "scope": "exact_v0.2_baseline_structure_and_values_object_order_agnostic",
+    "status": "VALID_SUPPORTED_PROFILE"
+  },
+  "ratified": false,
+  "report_body_sha256": "6bdb6cc4b116c7d9d4647e0a39ec6e95ea391d0e2291f15ec2b785cd435a4801",
+  "report_serialization": "Python_ASCII_sorted_indented_JSON_v1_NOT_RFC8785_NOT_FOR_ADOPTION",
+  "scope": "declared_synthetic_finite_constraint_model_only",
+  "search_exhausted": false,
+  "search_method": "deterministic_lexicographic_joint_case_and_appeal_DFS_not_role_lottery",
+  "signed": false,
+  "simulation_only": true,
+  "software_version": "0.1.0",
+  "static_rejections": {
+    "appeal_1:UNQUALIFIED": 10,
+    "appeal_1:WRONG_ENTITY_KIND": 1,
+    "appeal_2:UNQUALIFIED": 10,
+    "appeal_2:WRONG_ENTITY_KIND": 1,
+    "appeal_3:UNQUALIFIED": 10,
+    "appeal_3:WRONG_ENTITY_KIND": 1,
+    "authorizer:UNQUALIFIED": 12,
+    "authorizer:WRONG_ENTITY_KIND": 12,
+    "council_1:UNQUALIFIED": 9,
+    "council_1:WRONG_ENTITY_KIND": 1,
+    "council_2:UNQUALIFIED": 9,
+    "council_2:WRONG_ENTITY_KIND": 1,
+    "council_3:UNQUALIFIED": 9,
+    "council_3:WRONG_ENTITY_KIND": 1,
+    "council_4:UNQUALIFIED": 9,
+    "council_4:WRONG_ENTITY_KIND": 1,
+    "epistemic_assessor:UNQUALIFIED": 12,
+    "epistemic_assessor:WRONG_ENTITY_KIND": 1,
+    "executor:UNQUALIFIED": 12,
+    "executor:UNREGISTERED_EXECUTOR": 12,
+    "executor:WRONG_ENTITY_KIND": 1,
+    "normative_assessor:UNQUALIFIED": 12,
+    "normative_assessor:WRONG_ENTITY_KIND": 1,
+    "outcome_auditor:UNQUALIFIED": 12,
+    "outcome_auditor:WRONG_ENTITY_KIND": 1
+  },
+  "status": "SEARCH_INCOMPLETE",
+  "supported_additions": [
+    "conservative_material_overlap_exclusion_for_assessors",
+    "pairwise_material_control_disjoint_appeal_panel"
+  ]
+}

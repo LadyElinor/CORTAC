@@ -1,0 +1,767 @@
+{
+  "schema_name": "warranted_agent_commonwealth.design_profile",
+  "schema_version": "0.2.0",
+  "status": "DRAFT_NOT_RATIFIED",
+  "purpose": "Proposed voluntary cooperation with scoped authority and preserved correction",
+  "activation": {
+    "ratified": false,
+    "execution_enabled": false,
+    "initial_mode": "DISCUSSION",
+    "runtime_record_location": "separate_signed_operational_record",
+    "adoption_manifest": null,
+    "genesis_receipt": null,
+    "authority_epoch": null,
+    "resource_mandates": [],
+    "verified_principals": [],
+    "grants": [],
+    "editing_this_template_activates_nothing": true
+  },
+  "source_revisions": {
+    "Metanoia": "1c555b4fcb18eb5fc715ef86b80e970a92bb0f35",
+    "Adiona": "4566a5baace34b0823154fa9fb31bdea4192ff52"
+  },
+  "protected_rules": [
+    "non_promotion",
+    "separation_of_authority",
+    "corrigibility",
+    "no_proxy_circumvention",
+    "protected_human_rights",
+    "protected_good_faith_dissent",
+    "preserve_accountability_records",
+    "no_public_office_for_models",
+    "no_self_issued_external_authority"
+  ],
+  "governance": {
+    "voting_unit": "verified_control_domain",
+    "votes_per_unit": 1,
+    "founding": "each_participating_control_domain_signs_same_adoption_payload",
+    "policy_approval_fraction": [
+      2,
+      3
+    ],
+    "amendment_approval_fraction": [
+      3,
+      4
+    ],
+    "federation_requires_both_domain_and_cell_chambers": true,
+    "denominator": "entire_frozen_domain_roll_and_total_frozen_cell_weight",
+    "rounding": "ceiling_for_domain_counts_exact_rational_comparison_for_cell_weights",
+    "admission_changes_governing_class": "constitutional",
+    "constitutional_notice_seconds": 604800,
+    "unknown_control": "observer_or_permitted_proposer_only",
+    "abstention_absence_recusal_reduce_denominator": false,
+    "new_domains_and_weights_apply": "next_roll_after_authorized_change",
+    "cell_weight": {
+      "representation": "nonnegative_rational_numerator_denominator",
+      "initial_weight_per_admitted_founder": [
+        1,
+        1
+      ],
+      "successor_weights_sum_to_predecessor": true,
+      "merger_weight": "sum_of_predecessors",
+      "pending_split_without_approved_allocation": "predecessor_weight_abstains_once",
+      "reapportionment": "constitutional_vote_using_prechange_roll_and_weights",
+      "unassigned_or_departed_weight": "retained_as_abstaining_until_authorized_reapportionment",
+      "compare": "yes_weight_times_threshold_denominator_gte_total_weight_times_threshold_numerator"
+    }
+  },
+  "roster_example": {
+    "total_agents": 32,
+    "workers": 8,
+    "evidence": 4,
+    "norms": 4,
+    "decision": 4,
+    "execution": 4,
+    "audit": 4,
+    "registry": 2,
+    "advocacy": 2,
+    "is_minimum_safety_theorem": false
+  },
+  "roles": {
+    "term_seconds": 604800,
+    "max_consecutive_terms": 2,
+    "cooldown_terms": 1,
+    "selection": "uniform_reproducible_draw_of_eligible_verified_domains_then_one_qualified_delegate_per_selected_domain",
+    "independence": "purpose_specific_verified_dependencies",
+    "unknown_required_dimension": "unsatisfied",
+    "case_conflicts_survive_rotation": true,
+    "selection_contract": {
+      "eligibility_roll_frozen_before_seed": true,
+      "published_seed_procedure_required": true,
+      "each_domain_one_lottery_entry": true,
+      "sample_without_replacement_when_domain_separation_required": true,
+      "delegate_selection": "selected_domain_chooses_one_qualified_unconflicted_agent_under_frozen_rules",
+      "infeasible_assignment": "diagnose_constraints_without_lowering_them",
+      "search_timeout": "SEARCH_INCOMPLETE_not_INFEASIBLE",
+      "feasible_assignment_certificate_required": true
+    }
+  },
+  "consequential_decision": {
+    "seats": 4,
+    "approvals_required": 3,
+    "distinct_verified_control_domains": 4,
+    "exclude_proposer_and_beneficiary_control": true,
+    "all_seats_must_be_validly_assigned": true,
+    "missing_seats_do_not_lower_threshold": true,
+    "protected_failure_cannot_be_outvoted": true,
+    "is_byzantine_consensus_protocol": false
+  },
+  "independence_requirements": {
+    "case_roles": [
+      "proposer",
+      "epistemic_assessor",
+      "normative_assessor",
+      "decision_council",
+      "authorizer",
+      "executor",
+      "outcome_auditor"
+    ],
+    "one_agent_in_multiple_case_roles": false,
+    "evidence_review": {
+      "distinct_from_proposer_and_beneficiary": [
+        "agent_identity",
+        "credential",
+        "control_domain"
+      ],
+      "record": [
+        "model_lineage",
+        "runtime",
+        "shared_context",
+        "evidence_origin"
+      ],
+      "self_attestation_satisfies_corroboration": false,
+      "source_sufficiency": "mission_specific_required_before_activation"
+    },
+    "normative_review": {
+      "distinct_from_proposer_and_beneficiary": [
+        "agent_identity",
+        "credential",
+        "control_domain"
+      ],
+      "adopted_duty_catalog_required": true
+    },
+    "authorization": {
+      "separate_credential_and_process": true,
+      "ordinary_agents_have_signing_key": false,
+      "discretionary_new_grant_power": false
+    },
+    "execution": {
+      "separate_credential_and_process": true,
+      "matches_registered_executor": true
+    },
+    "outcome_audit": {
+      "distinct_from_proposer_and_executor": [
+        "agent_identity",
+        "credential",
+        "control_domain"
+      ],
+      "cannot_audit_own_prior_case_work": true
+    },
+    "appeal": {
+      "exclude_prior_case_participants": true,
+      "three_distinct_control_domains": true,
+      "excluded_interests": [
+        "all_prior_case_participants_and_their_material_controlling_interests",
+        "challenged_decision_makers_and_their_controlling_principals",
+        "appellant",
+        "opposing_party",
+        "disputed_action_beneficiary"
+      ],
+      "material_control_includes": [
+        "direct_or_indirect_administrative_control",
+        "appointment_or_removal_power",
+        "credential_or_record_control",
+        "discretionary_funding_leverage_over_review"
+      ],
+      "nominal_domain_difference_suffices": false,
+      "unconditional_precommitted_funding_is_automatic_conflict": false,
+      "conflict_record_required": true,
+      "conflict_record_rechecked_at_assignment_and_decision": true,
+      "unknown_material_control": "ineligible_pending_independent_resolution",
+      "conflict_rule_setter": "adopted_policy_verified_by_nonconflicted_reviewer",
+      "external_review_satisfies_same_conflict_and_competency_rules": true
+    },
+    "mission_specific_checks": "competence_evidence_quality_dependencies_and_capacity_must_be_defined_and_verified"
+  },
+  "appeal": {
+    "seats": 3,
+    "approvals_required": 2,
+    "exclude_all_prior_case_participants": true,
+    "independence": "independence_requirements.appeal",
+    "remedies": [
+      "uphold",
+      "remand",
+      "revoke_within_appeal_mandate"
+    ],
+    "no_panel": "designated_independent_external_review_under_precommitted_mandate_and_continuity_plan",
+    "acknowledgement_target_seconds": 3600,
+    "assignment_target_seconds": 86400,
+    "deadline_effect": "escalate_never_auto_allow",
+    "external_route": {
+      "default": "three_reviewers_two_approvals",
+      "single_external_reviewer_allowed_only_if": "explicit_founding_or_constitutional_adoption_plus_resource_principal_mandate",
+      "independence_and_remedy_limits_unchanged": true,
+      "ad_hoc_threshold_reduction": false
+    },
+    "no_valid_internal_or_external_review": "record_unavailable_preserve_complaint_apply_continuity_plan_no_auto_allow"
+  },
+  "process_classes": [
+    "advisory",
+    "bounded_routine",
+    "consequential",
+    "constitutional",
+    "prohibited"
+  ],
+  "assessments": [
+    "PASS",
+    "FAIL",
+    "UNKNOWN"
+  ],
+  "decisions": [
+    "ALLOW",
+    "DENY",
+    "REQUIRE_EVIDENCE",
+    "CONFIRM_HUMAN"
+  ],
+  "assembly_stages": [
+    "discover",
+    "propose_charter",
+    "enroll",
+    "qualify_and_allocate",
+    "ratify",
+    "install_records",
+    "rehearse",
+    "activate"
+  ],
+  "assembly_failure": "report_unsatisfied_constraints_without_weakening_them",
+  "required_objects": [
+    "founding_manifest",
+    "agent_record",
+    "resource_mandate",
+    "proposal",
+    "assessment",
+    "decision_warrant",
+    "execution_capability",
+    "execution_receipt",
+    "appeal_record",
+    "adoption_manifest",
+    "mission_manifest",
+    "mode_record",
+    "classification_record",
+    "workflow_envelope",
+    "conflict_record",
+    "cell_weight_ledger",
+    "review_continuity_grant",
+    "evaluation_manifest"
+  ],
+  "execution": {
+    "default": "disabled",
+    "capability_single_use": true,
+    "separate_authorizer": true,
+    "separate_executor": true,
+    "check_live_ancestry": true,
+    "check_at_consumption": true,
+    "bind": [
+      "society",
+      "cell",
+      "mode",
+      "resource_namespace",
+      "tool_id",
+      "action_digest",
+      "actor",
+      "beneficiary",
+      "registered_executor",
+      "target",
+      "recipients",
+      "expected_state_version",
+      "adoption_digest",
+      "classification_record_digest",
+      "authority_epoch",
+      "grant_ancestry",
+      "budget",
+      "expires_at",
+      "use_identifier"
+    ],
+    "external_timeout": "UNKNOWN_EXTERNAL_STATE",
+    "unknown_outcome_retry": false,
+    "unknown_outcome_releases_reservation": false,
+    "local_transaction": {
+      "domain": "one_protected_authoritative_store",
+      "isolation": "serializable",
+      "same_transaction": [
+        "current_authority_and_revocation_epoch",
+        "mode_and_adoption",
+        "state_preconditions",
+        "grant_ancestry_and_expiry",
+        "all_ancestor_budgets",
+        "classification_and_aggregate_effect_limits",
+        "capability_single_use_consumption",
+        "mutation",
+        "durable_receipt"
+      ],
+      "revocation_uses_same_serialization_domain": true,
+      "order": "revocation_first_rejects_action_commit_first_records_prior_authorized_effect",
+      "revoke_is_not_retroactive_undo": true,
+      "sibling_spend": "reserve_all_common_ancestor_budgets_atomically_never_negative",
+      "cached_checks_are_sufficient": false
+    },
+    "external_contract": {
+      "required_before_adapter_enabled": [
+        "precise_commitment_point",
+        "revocation_fence",
+        "stable_idempotency_key",
+        "durable_intent_and_budget_reservation",
+        "retry_and_reconciliation_rules",
+        "residual_in_flight_window",
+        "owner_acceptance_of_residual_risk"
+      ],
+      "revocation_before_dispatch_commitment": "reject",
+      "revocation_after_dispatch_commitment": "stop_new_dispatches_reconcile_in_flight_no_retraction_promise",
+      "local_intent_is_remote_success": false,
+      "cross_system_atomicity_assumed": false,
+      "if_remote_cannot_enforce_required_boundary": "adapter_disabled",
+      "all_reconciliation_and_compensation_requires_permission": true
+    }
+  },
+  "budgets": {
+    "review_and_recovery_reserve_fraction": [
+      1,
+      10
+    ],
+    "child_grants_share_parent_ceiling": true,
+    "new_identity_or_cell_resets_budget": false,
+    "reserve_does_not_grant_new_permission": true,
+    "review_and_recovery_reserve_applies_to": "each_declared_compute_unit_ceiling_separately_not_cost_or_storage",
+    "typed_resource_schema": {
+      "required": [
+        "resource_id",
+        "owner",
+        "unit",
+        "ceiling",
+        "window_start",
+        "window_end",
+        "grant_ancestry"
+      ],
+      "unit_examples": [
+        "cpu_millisecond",
+        "accelerator_millisecond",
+        "model_token",
+        "currency_minor_unit",
+        "byte_second",
+        "request",
+        "operation"
+      ],
+      "nonfungible_units_summed": false,
+      "cost_requires": "currency_code_and_minor_unit",
+      "compute_requires": "processor_or_model_and_meter_definition",
+      "reserve_rounding": "ceiling_in_each_integer_compute_unit",
+      "unmeasured_resource": "no_spendable_budget"
+    }
+  },
+  "federation": {
+    "subsidiarity": true,
+    "cross_cell_compacts_required": true,
+    "split_preserves_control_domain_votes": true,
+    "shared_writes_require_current_authority": true,
+    "first_pilot_state_owner": "one_protected_authoritative_store",
+    "distributed_agreement_implemented": false,
+    "split_preserves_cell_weight": true,
+    "weight_rules": "governance.cell_weight",
+    "partition_rule": "continue_only_where_authoritative_revocation_state_and_isolated_budgets_remain_verifiable_otherwise_pause_new_effects"
+  },
+  "trust_assumptions": [
+    "legitimate_resource_principals",
+    "verified_enrollment",
+    "protected_host_and_credentials",
+    "actuator_enforcement",
+    "trustworthy_clock",
+    "independently_retained_history_witness"
+  ],
+  "limits": [
+    "Design template only",
+    "No agents instantiated",
+    "No signatures or credentials supplied",
+    "No source resolving evidence adapter implemented",
+    "No council certificate adapter implemented",
+    "No distributed consensus implemented",
+    "No assurance of cognitive independence",
+    "No deployment clearance",
+    "No signed adoption or runtime mode record",
+    "No implementation of this profile loader or evaluation harness"
+  ],
+  "default_status_if_loaded": "UNINITIALIZED_NO_EXECUTION",
+  "mission_contract": {
+    "required_before_active": [
+      "scope_and_resource_owners",
+      "evidence_and_competency_standards",
+      "duty_catalog",
+      "conflict_policy",
+      "classification_policy",
+      "workflow_envelopes",
+      "affected_interest_representation",
+      "contested_duty_resolver",
+      "continuity_plan",
+      "independent_external_appeal_route",
+      "review_continuity_grant"
+    ],
+    "representation_record_fields": [
+      "affected_interest",
+      "representative_or_unrepresented",
+      "basis_of_mandate",
+      "limits",
+      "challenge_route"
+    ],
+    "complaint_standing_implies_vote": false,
+    "unknown_required_independence": "unsatisfied",
+    "mission_may_weaken_protected_profile_rules": false
+  },
+  "operating_modes": {
+    "DISCUSSION": {
+      "permissions": "existing_host_authorized_communication_analysis_and_proposals",
+      "society_execution_capabilities": false,
+      "readiness": [
+        "existing_host_resource_permission",
+        "privacy_and_budget_limits"
+      ]
+    },
+    "SANDBOX": {
+      "permissions": "isolated_test_namespace_mutations_only",
+      "readiness": [
+        "signed_sandbox_owner_mandate",
+        "verified_isolation_and_allowlisted_tools",
+        "bounded_typed_budgets",
+        "test_data_policy",
+        "sandbox_bound_capabilities",
+        "receipts_and_stop_route"
+      ],
+      "live_credentials": false,
+      "external_actuation": false,
+      "egress": "deny_by_default_with_host_compute_exception",
+      "host_compute_exception": "separate_preexisting_finite_host_grant_without_live_tools_or_protected_data",
+      "lower_assurance_role_simulation": "explicitly_label_correlated_provenance",
+      "counts_as_active_readiness": false
+    },
+    "ACTIVE": {
+      "permissions": "only_current_adoption_and_resource_grants",
+      "readiness": [
+        "verified_signed_adoption",
+        "complete_mission_contract",
+        "feasible_independent_role_assignment",
+        "independent_appeal_capacity_and_funded_continuity",
+        "reviewed_enforcement_and_adapters",
+        "fresh_epochs_grants_and_budgets",
+        "passed_applicable_acceptance_tests",
+        "independent_activation_attestation"
+      ]
+    },
+    "SUSPENDED": {
+      "permissions": "separately_granted_containment_reconciliation_record_retention_and_review_only",
+      "ordinary_work": false,
+      "automatic_resume": false,
+      "resume": "fresh_readiness_authorization_and_epoch_for_target_mode"
+    }
+  },
+  "mode_transitions": {
+    "promotion_requires": "target_mode_specific_readiness_and_owner_permission",
+    "mode_change_invalidates_old_capabilities": true,
+    "unknown_mode_or_namespace_or_tool": "deny",
+    "mode_and_process_class_are_separate": true,
+    "namespace_binding": "immutable_resource_id_and_normalized_path_with_alias_escape_checks",
+    "runtime_mode_record": "signed_and_committed_in_authoritative_store"
+  },
+  "classification": {
+    "policy_owner": "member_assembly_within_external_mandate",
+    "policy_change": "policy_vote_or_constitutional_vote_if_protected_scope_or_authority_rules_change",
+    "proposer_label_is_advisory": true,
+    "enforcer": "separate_authorization_service_using_adopted_versioned_policy",
+    "record_fields": [
+      "action_digest",
+      "adoption_digest",
+      "classification_policy_digest",
+      "envelope_id",
+      "matched_predicates",
+      "recipients",
+      "cumulative_effect_state",
+      "assigned_class",
+      "issuer",
+      "timestamp"
+    ],
+    "routine_requires": "all_predicates_of_one_current_approved_workflow_envelope",
+    "uncertain_or_missing_or_outside_envelope": "REQUIRE_EVIDENCE_then_fresh_consequential_review_if_admissible",
+    "protected_failure": "DENY",
+    "constitutional_change": "constitutional",
+    "escalation_cannot_override_prohibition": true,
+    "reassessment_triggers": [
+      "changed_recipient",
+      "changed_target_or_tool",
+      "changed_data_class",
+      "changed_purpose",
+      "changed_precondition",
+      "aggregate_effect_or_budget_limit",
+      "new_material_evidence",
+      "expired_or_changed_envelope",
+      "uncertain_classification"
+    ],
+    "cumulative_effects": "shared_accounting_across_related_tasks_grants_and_cells",
+    "envelope_fields": [
+      "id",
+      "version",
+      "approval_record",
+      "purpose",
+      "actors",
+      "resource_namespaces",
+      "tools",
+      "allowed_recipient_set",
+      "data_classes",
+      "action_predicates",
+      "state_preconditions",
+      "per_action_limits",
+      "cumulative_limits_and_time_window",
+      "expiry",
+      "audit_sampling",
+      "stop_conditions",
+      "recovery_limits"
+    ],
+    "envelope_approval": "consequential_review_plus_resource_owner_permission",
+    "human_scope_boundary": "cannot_be_expanded_by_classifier"
+  },
+  "adoption_contract": {
+    "profile_is_immutable_template": true,
+    "profile_schema_is_executable_json_schema": false,
+    "artifact_hash": {
+      "algorithm": "SHA-256",
+      "encoding": "lowercase_64_hex",
+      "coverage": "exact_complete_file_bytes"
+    },
+    "charter_digest_coverage": "entire_adopted_DOCX_including_all_normative_sections",
+    "profile_digest_coverage": "entire_companion_JSON_file_including_disabled_template_state",
+    "payload_canonicalization": "RFC8785_JCS_UTF8",
+    "payload_fields": [
+      "purpose_tag",
+      "society_id",
+      "namespace_ids",
+      "attempt_id",
+      "adoption_version",
+      "previous_adoption_digest",
+      "charter_digest",
+      "profile_digest",
+      "mission_manifest_digest",
+      "founding_roster_digest",
+      "voting_roll_digest",
+      "cell_weight_ledger_digest",
+      "selection_rules_digest",
+      "resource_mandate_digests",
+      "review_grant_digests",
+      "trust_configuration_digest",
+      "intended_mode",
+      "authority_epoch",
+      "effective_at",
+      "expires_at"
+    ],
+    "purpose_tag": "WAC_ADOPTION_V0_2",
+    "adoption_digest": "SHA256_of_canonical_payload_bytes_excluding_signature_envelopes",
+    "signature_statement_fields": [
+      "purpose",
+      "signer_principal",
+      "key_id",
+      "algorithm",
+      "adoption_digest"
+    ],
+    "signature_message": "UTF8_WAC_SIGNATURE_V0_2_plus_NUL_plus_RFC8785_canonical_signature_statement_bytes",
+    "signature_envelope_fields": [
+      "purpose",
+      "signer_principal",
+      "key_id",
+      "algorithm",
+      "adoption_digest",
+      "signature"
+    ],
+    "trust_root": "external_preexisting_verified_keys_and_approved_algorithm_allowlist",
+    "self_authorizing_keys": false,
+    "signature_types": [
+      "membership_consent",
+      "resource_permission",
+      "independent_readiness_attestation"
+    ],
+    "signature_type_promotes_other_permission": false,
+    "mission_manifest_binds": [
+      "scope",
+      "evidence_and_competency_standards",
+      "duty_catalog",
+      "conflict_rules",
+      "classification_policy",
+      "workflow_envelopes",
+      "affected_interest_representation",
+      "contested_duty_resolver",
+      "continuity_plan",
+      "appeal_route",
+      "typed_budgets",
+      "evaluation_protocol",
+      "referenced_artifact_digests"
+    ],
+    "mutable_urls_as_policy_references": false,
+    "self_digest_or_signatures_inside_hashed_payload": false,
+    "duplicate_json_keys": "reject",
+    "unknown_required_fields_or_versions": "reject",
+    "unsigned_missing_mismatched_or_conflicting_records": "no_active_authority",
+    "document_profile_disagreement": "CONTRACT_MISMATCH_block_affected_activation_and_authorization_until_explicit_readoption",
+    "changed_bytes": "new_adoption_digest_and_required_approvals",
+    "adoption_does_not_extend_or_restore_resource_grants": true,
+    "policy_digest_legacy_field": "rejected_in_0_2_capabilities_use_adoption_digest",
+    "runtime_state": "separate_signed_operational_record_does_not_edit_template",
+    "numeric_quantities": "integers_with_units_or_exact_rational_pairs_large_integers_as_decimal_strings"
+  },
+  "review_continuity": {
+    "required_before_active": true,
+    "grant_is_separate_from_ordinary_operations": true,
+    "controller": "independent_review_trustee_or_external_review_provider",
+    "conflicts": "same_material_control_exclusions_as_appeal",
+    "scope": [
+      "complaint_intake",
+      "protected_record_retention",
+      "independent_pending_review",
+      "authorized_handover"
+    ],
+    "does_not_authorize": [
+      "ordinary_operations",
+      "execution_of_remedies",
+      "unbounded_new_cases"
+    ],
+    "required_fields": [
+      "grant_id",
+      "resource_owner_consent",
+      "independent_controller",
+      "namespace_and_tool_allowlist",
+      "typed_budget_ceilings",
+      "pending_case_reservations",
+      "intake_cutoff_rule",
+      "completion_deadline",
+      "record_retention_deadline",
+      "revocation_conditions",
+      "backup_provider",
+      "handover_budget",
+      "handover_acceptance"
+    ],
+    "funding": "advance_explicit_owner_commitment_with_enforceable_reservation_or_independent_funded_provider",
+    "ordinary_withdrawal_effect": "stop_new_operations_preserve_already_committed_review_scope_until_its_limits",
+    "case_intake": "reserve_completion_or_handover_budget_before_accepting_completion_obligation",
+    "rights_violation_or_required_withdrawal": "honor_valid_constraint_record_interruption_seek_authorized_handover",
+    "capacity_exhaustion": "acknowledge_and_refer_where_funded_no_silent_drop_no_false_completion_promise",
+    "continuity_reserve_is_unlimited_guarantee": false,
+    "case_owner_discretionary_veto_over_review": false
+  },
+  "evaluation": {
+    "status": "DESIGN_FIXED_RUN_MANIFEST_NOT_YET_FROZEN",
+    "results_claimed": false,
+    "protocol_id": "WAC_EVAL_0_2",
+    "environment": "isolated_synthetic_sandbox_only",
+    "arms": [
+      "minimal_single_coordinator_team",
+      "ordinary_role_separated_team",
+      "full_commonwealth"
+    ],
+    "common_controls": [
+      "same_tasks_and_hidden_outcomes",
+      "same_model_versions",
+      "same_tool_permissions",
+      "same_total_compute_cost_and_wall_clock_ceilings",
+      "same_resource_ownership_constraints"
+    ],
+    "coordination_review_and_recovery_charged_to_budget": true,
+    "scenario_families": [
+      "benign_cooperation",
+      "conflicting_legitimate_priorities",
+      "strategic_abstention",
+      "resource_withdrawal_during_appeal",
+      "shared_false_evidence",
+      "fresh_agents_under_conflicted_control",
+      "reviewer_and_resource_shortages",
+      "admitted_cell_split",
+      "routine_envelope_drift"
+    ],
+    "paired_trials_per_family": 20,
+    "main_trials_total": 540,
+    "targeted_single_safeguard_ablations": {
+      "material_control_appeal_exclusion": "fresh_agents_under_conflicted_control",
+      "inherited_cell_weight": "admitted_cell_split",
+      "authorization_checked_classification": "routine_envelope_drift",
+      "independent_review_continuity_grant": "resource_withdrawal_during_appeal"
+    },
+    "ablation_trials_total": 80,
+    "budget_matching_for_ablations": true,
+    "ablation_boundary": "synthetic_simulation_only_keep_external_permissions_and_sandbox_isolation",
+    "freeze_before_first_scored_run": [
+      "scenario_generator_and_fixture_digests",
+      "seed_list",
+      "arm_implementations",
+      "models_and_tools",
+      "budgets_and_deadlines",
+      "priorities_and_utility_rubric",
+      "harmful_delay_definition",
+      "outcome_judging_method",
+      "exclusions_and_failure_rules",
+      "analysis_plan",
+      "deployment_acceptance_thresholds"
+    ],
+    "primary_metrics": [
+      "authorized_useful_completion_fraction",
+      "harmful_delay_fraction",
+      "unauthorized_attempt_and_effect_counts"
+    ],
+    "secondary_metrics": [
+      "coordination_cost",
+      "total_cost",
+      "correction_latency",
+      "source_error_detection",
+      "appeal_completion",
+      "dissent_retention",
+      "allocation_fairness_under_frozen_rubric"
+    ],
+    "analysis": "paired_differences_by_family_with_95_percent_paired_bootstrap_intervals_10000_resamples_and_fixed_analysis_seed",
+    "rare_event_claim": "zero_observed_failures_does_not_establish_safety",
+    "report_timeouts_and_refusals": true,
+    "retuning": "new_protocol_version_and_new_holdout_cases",
+    "security_fixtures": [
+      "revocation_racing_local_commit",
+      "siblings_racing_last_ancestor_budget_unit",
+      "double_capability_consumption",
+      "changed_adoption_component",
+      "sandbox_capability_against_live_namespace",
+      "classification_policy_downgrade",
+      "conflicted_external_reviewer",
+      "recovery_after_unknown_external_effect"
+    ],
+    "fixture_ordering": "both_revocation_orders_and_concurrent_sibling_budget_contenders",
+    "society_test_execution_in_this_revision": false
+  },
+  "contract_map": {
+    "sections_2_3_8": [
+      "roles.selection_contract",
+      "governance.cell_weight"
+    ],
+    "section_5": [
+      "activation",
+      "operating_modes",
+      "mode_transitions",
+      "mission_contract"
+    ],
+    "section_6": [
+      "execution"
+    ],
+    "section_7": [
+      "classification",
+      "budgets",
+      "review_continuity"
+    ],
+    "section_9": [
+      "independence_requirements.appeal",
+      "appeal"
+    ],
+    "section_11": [
+      "adoption_contract"
+    ],
+    "section_12": [
+      "evaluation"
+    ]
+  }
+}
