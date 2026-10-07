@@ -1,0 +1,26 @@
+Independent review: CORTAC scripted mechanism sandbox
+Reviewed 7 October 2026
+
+VERDICT
+Suitable for release as a narrow scripted mechanism rehearsal. It is not a model-backed trial, an implementation of the full CORTAC runtime, or evidence that organizational separation or five-function governance improves real agent performance. No blocking implementation discrepancy remains in the inspected measures.
+
+CHECKS PERFORMED
+Reviewed the protocol and runner before freeze, compared consequential-council and appeal requirements with the pinned 0.2.1 source, and independently ran the initial 12 planted tests. A completion-time labeling defect was corrected before freeze and an additional regression test added. After scoring, independently checked all freeze digests and all 22,400 raw episodes across 2,800 paired environments: trace-cost conservation and ceilings, state/effect correctness, completion versus episode-end ticks, centralized/full equality, and owner-unauthorized effects. Raw SHA-256 matches 7cc2d7c8a4164e080a33957751c63e643b0b21ffe58c25bafc6ea49fde25dd9d.
+
+PIVOTAL RESULTS RECOMPUTED
+At budget 30 on benign tasks with independent 20% injected faults, full produced wrong effects in 1/50 cases versus 11/50 for minimal, but completed 37/50 versus 49/50. Full abstained in 13/50. Under fully shared faults, both completed 38/50 and produced wrong effects in 12/50, while full used 12 units versus minimal 8. These differences follow a prescribed bit-flip error model; they are not estimated LLM error rates.
+At zero faults, full recovery on conflict, withdrawal and target-drift cases changed from 0/50 completions at budget 12 to 50/50 at budget 30. Minimal completed 50/50 at both budgets. The cost schedule requires 16 units for full recovery including audit versus 10 for minimal. This demonstrates the selected cost schedule's threshold, not measured real-world coordination overhead. Full could not recover in the two-reviewer shortage case even at budget 30 because it requires three valid panel members.
+Centralized full and distributed-labeled full are identical on every trace and measure. This is an explicit negative control showing that the simulator does not identify benefits of organizational topology.
+
+INTERPRETATION LIMITS
+1. Error independence is an injected assumption. Separate role labels, control declarations and repeated deterministic checks do not establish real epistemic independence.
+2. Conflict exclusion, continuity and classification ablations exercise coded policy branches. A recorded violation or preserved-review outcome largely follows their definitions; it is not empirical evidence that these mechanisms work against strategic agents.
+3. Owner-revocation cases stop at the earlier norms check. Zero unauthorized attempts/effects therefore gives no adversarial gateway-bypass, credential-isolation, revocation-race or distributed-security assurance.
+4. Completion credits an owner-permitted correct state; it can coexist with a subsequent audit timeout or with an internal-policy violation in an ablation. The separate fields must remain visible rather than presenting completion alone as full compliance.
+5. Recovery cases begin with a pre-existing wrong value. Final-wrong-state rates include failure to repair that state, whereas wrong-effect rates count newly created bad effects. Neither should substitute for the other.
+6. Compute and time are abstract serial work units. Python runtime is only simulator runtime; no model latency, tokens or monetary efficiency were measured.
+7. Seven hand-designed templates and hash-derived fault tapes form a finite scripted census. Paired descriptive contrasts are appropriate; there is no basis here for real-task population confidence claims. Aggregate mixtures are arbitrary and should not determine a universal winner.
+8. The stronger minimal baseline has the same observations, permission constraints, evidence method, conflict checks, protected review, classification and audit. It is not deliberately deprived of safeguards, but its one-reviewer/council policy necessarily differs from full's institutional staffing rules.
+
+NEXT WARRANTED TEST
+Use the frozen simulator as a regression fixture and hypothesis generator. A genuine comparative agent study needs a metered fixed-version inference runner, independently specified tasks and ground truth, identical available evidence and total budgets, both organization-matched and policy-matched controls, real source/control dependency measurements, and explicitly separate safety, abstention, completion and recovery outcomes. The present results do not establish deployment readiness or justify choosing full over minimal in general.

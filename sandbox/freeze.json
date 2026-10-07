@@ -1,0 +1,13 @@
+{
+  "status": "FROZEN_BEFORE_MAIN_RUN",
+  "utc": "2026-10-07T16:29:56.054394+00:00",
+  "pre_run_review": "Separate reviewer examined protocol and code; completion-tick metric corrected before freeze; 13 planted controls pass.",
+  "sha256": {
+    "runner.py": "0c889465767ff17167439baf8cb22160f3ea92d363d1b80af48033d00a06be10",
+    "protocol.md": "9ac6f51dbdbea357faf2399cbd2402bfa2492cc2dfe9c23444a3487aada21810",
+    "test_runner.py": "2bd4f98fe82f701a384b273e2358056709436dfdde3402e88c557a149413fd17",
+    "source_reference/profile.extracted.json": "56c4bc76286a78d32541528c5ab85e0470cec84b627f8ce6f152867a9246031a",
+    "source_reference/arm_definitions.json": "f87954318d240281f9f64255f53a566147255ef6ae42853d11f8bde107ed5aa5",
+    "source_reference/provenance.json": "f06362f2f331f56e0974ab4f88216e01e011e00c987db6f65b03dcdea6a01709"
+  }
+}

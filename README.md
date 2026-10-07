@@ -2,7 +2,7 @@
 
 CORTAC currently implements an **offline reference model**, with two constraint encodings, exact governance arithmetic, and a reproducible domain-first lottery simulator. It does not implement a confederation of agents. “Confederation of Recursive Teleological Agentic Constructs” names the proposed project, not an existing capability.
 
-**Software 0.2.1; Warranted Agent Commonwealth design 0.2.** All controller declarations are supplied and unverified. Every assignment status says `SYNTHETIC`; the profile remains unratified and execution-disabled. No agents, credentials, grants, signatures, appointments, or scored governance study are produced.
+**Software 0.2.1; Warranted Agent Commonwealth design 0.2.** All controller declarations are supplied and unverified. Every assignment status says `SYNTHETIC`; the profile remains unratified and execution-disabled. No agents, credentials, grants, signatures, appointments, or model-backed scored governance study are produced.
 
 ## Run the checks
 
@@ -33,6 +33,12 @@ Assignment statuses are `SYNTHETICALLY_SATISFIED`, `SYNTHETICALLY_INFEASIBLE`, a
 
 The lottery draws uniformly over each current eligible **domain** under its frozen nominee map. Each domain supplies one nominee per role; copies do not add lottery entries. Draws preserve the domain exclusions for council and appeal seats. The simulator records the first dead end and never retries it automatically. Its user-chosen seed, frozen file, and nominations have no authenticated real-world chronology. A complete draw does not appoint anyone. See the [selection contract](docs/LOTTERY.md).
 
+## Completed scripted mechanism sandbox
+
+A [frozen, reproducible sandbox](sandbox/README.md) ran 22,400 scripted episodes with zero model calls. The same-policy centralized and full arms match exactly. Additional checks trade off modeled wrong effects, abstention, cost and staffing under specified fault assumptions; common-mode faults remove the apparent redundancy gain. This does not identify a decentralization or real-agent advantage.
+
+The [claims and evidence gates](docs/EVIDENCE_GATES.md) distinguish five authority functions from council seats, preserve lean routine standing-warrant lanes and consequential safeguards, and specify the model-backed validation needed before stronger claims. The frozen runtime profile is unchanged.
+
 ## What remains research plumbing
 
 The evaluation directory contains **exposed development fixtures and fabricated smoke rows**. Its example counts, proposed arm slots, and bootstrap iterations measure the size of that plumbing, not empirical evidence. Most examples vary one structural template. Its intervals are marginal, without multiplicity control; they cannot support a governance-advantage claim. There is no real scored runner, sealed holdout, validated judge, or independently controlled participant trial.
@@ -55,7 +61,8 @@ An ordinary readiness check can exit 0 while reporting `SOURCE_GATED_NO_SCORED_R
 | `package/wac_offline/lottery.py` | Frozen nominations, domain draws, trace, explicit dead ends |
 | `package/tests/test_revision.py` | Differential cases, injected faults, lottery and CLI contracts |
 | `package/results_v2/` | Current synthetic examples |
-| `evaluation/` | Preserved, blocked study scaffold |
+| `evaluation/` | Preserved, blocked model-study scaffold |
+| `sandbox/` | Frozen scripted mechanism experiment, controls and replay hashes |
 | `provenance/` | Initial import identity and revision record |
 
 The [tool contract](package/README.md) describes the declared model. [0.2.1 repair notes](docs/REVISION_0_2_1.md) cover portable fixture bytes, strict nested certificate claims, and bundle upload instructions; [0.2.0 revision notes](docs/REVISION_0_2_0.md) describe the preceding feature revision. `package/results_v2/` retains the compatible 0.2.0 examples. The initial `START_HERE.txt`, `package/results/`, `verification/*results*`, and `docs/verification.json` are historical 0.1.0 records. New code intentionally changes some imported files; current inventories reflect that development. The original inventory is retained at `provenance/initial_BUNDLE_SHA256SUMS`.

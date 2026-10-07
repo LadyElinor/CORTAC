@@ -110,6 +110,8 @@ def main():
     if all(item["passed"] for item in checks):
         cases = [
             ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 89}),
+            ("sandbox_controls", ["-m", "unittest", "discover", "-s", "sandbox", "-p", "test_runner.py", "-v"], "", {"minimum_tests": 13}),
+            ("sandbox_replay", ["sandbox/verify_replay.py"], "", {}),
             ("evaluation", ["-m", "unittest", "discover", "-s", "tests", "-v"], "evaluation", {"minimum_tests": 52}),
             ("assignment_adversarial", ["verification/assignment_adversarial.py"], "", {"minimum_tests": 11}),
             ("evaluation_adversarial", ["verification/evaluation_adversarial.py"], "", {"minimum_tests": 6}),

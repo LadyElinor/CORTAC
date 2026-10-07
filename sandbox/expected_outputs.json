@@ -1,0 +1,14 @@
+{
+  "scope": "Frozen scripted simulation; no model calls or deployment assurance",
+  "episodes": 22400,
+  "paired_environments": 2800,
+  "normalization": "CRLF to LF only; CSV rows also use LF for hash comparison",
+  "sha256": {
+    "raw.jsonl": "7cc2d7c8a4164e080a33957751c63e643b0b21ffe58c25bafc6ea49fde25dd9d",
+    "aggregate.json": "4b3dd6e9ce2c19c16b03c15c469b578515c15a55f3c714c877269a7579769ee1",
+    "aggregate.csv": "bf30005e67e173df7c768b135caa1b86b9eb9cf6a121eafe84c92b28808e6cb2",
+    "stratified.json": "57559a29e974f6f2a0a84e1325c8dacbb8a99a94002af9e8a7b2edf0013b86e8",
+    "stratified.csv": "73883525308c9419df66a6b1431c069f3dcd5e8921b7230ddb7fcc8f0e9584f9",
+    "paired_full_minus_minimal.json": "d70b6fc65a50f2e5c053869940694e5ae8630f33d1a0cde101cc2eaee5a70a0d"
+  }
+}
