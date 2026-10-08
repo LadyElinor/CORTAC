@@ -92,14 +92,14 @@
     "status": "VALID_SUPPORTED_PROFILE"
   },
   "ratified": false,
-  "report_body_sha256": "2350943c81cbcd3714c35f0a734cfa087f1ee29c206c66c3a81f3ad0be1060c2",
+  "report_body_sha256": "ddcf113e5e0ecda995c7dc91a0251efd05d085fee27aa788b2c83e3efbb03ece",
   "report_serialization": "Python_ASCII_sorted_indented_JSON_v1_NOT_RFC8785_NOT_FOR_ADOPTION",
   "scope": "declared_synthetic_finite_constraint_model_only",
   "search_exhausted": false,
   "search_method": "two_bounded_encodings_lexical_DFS_and_MRV_forward_checking_not_role_lottery",
   "signed": false,
   "simulation_only": true,
-  "software_version": "0.2.0",
+  "software_version": "0.2.2",
   "static_rejections": {
     "appeal_1:UNQUALIFIED": 10,
     "appeal_1:WRONG_ENTITY_KIND": 1,
@@ -130,6 +130,8 @@
   "status": "SYNTHETICALLY_SATISFIED",
   "supported_additions": [
     "conservative_material_overlap_exclusion_for_assessors",
-    "pairwise_material_control_disjoint_appeal_panel"
+    "pairwise_material_control_disjoint_appeal_panel",
+    "pairwise_material_control_disjoint_council",
+    "auditor_proposer_executor_material_control_separation"
   ]
 }

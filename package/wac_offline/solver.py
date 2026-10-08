@@ -177,6 +177,8 @@ def _conflicts(role, rec, assigned, roster, records):
         council = [a for r, a in selected if r.startswith('council_')]
         if any(rec['domain'] == a['domain'] for a in council):
             reasons.append('COUNCIL_DOMAIN_REUSE')
+        if any(_overlap(rec, a) for a in council):
+            reasons.append('COUNCIL_MATERIAL_CONTROL_REUSE')
     # Service and executor credentials/processes must differ from every case role,
     # not only whichever roles happened to be visited earlier in the DFS.
     for other_role, other in [('proposer', proposer)] + selected:
@@ -187,7 +189,7 @@ def _conflicts(role, rec, assigned, roster, records):
         if rec['id'] in roster['prior_participant_ids']:
             reasons.append('AUDITOR_PRIOR_CASE_WORK')
         for party in [proposer] + [a for r, a in selected if r == 'executor']:
-            if any(rec[k] == party[k] for k in ('id', 'credential', 'domain')):
+            if any(rec[k] == party[k] for k in ('id', 'credential', 'domain')) or _overlap(rec, party):
                 reasons.append('AUDITOR_PROPOSER_EXECUTOR_CONFLICT')
     if role in APPEAL_ROLES:
         excluded_ids = {roster['proposer_id'], *roster['prior_participant_ids'],
@@ -278,7 +280,9 @@ def solve(roster, max_nodes=100000):
         'static_rejections': dict(sorted(static.items())),
         'max_nodes': max_nodes,
         'supported_additions': ['conservative_material_overlap_exclusion_for_assessors',
-                                'pairwise_material_control_disjoint_appeal_panel'],
+                                'pairwise_material_control_disjoint_appeal_panel',
+                                'pairwise_material_control_disjoint_council',
+                                'auditor_proposer_executor_material_control_separation'],
     }
     necessary = _fixed_party_errors(roster, records)
     proposer = records[roster['proposer_id']]

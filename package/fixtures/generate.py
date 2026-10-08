@@ -2,6 +2,7 @@
 from copy import deepcopy
 from pathlib import Path
 import sys
+import json
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from wac_offline.io import write
 
@@ -59,6 +60,6 @@ def main():
         'cell_weights': {'a': [1,1], 'b': [1,1], 'c': [1,1], 'd': [1,1],
                          'e1': [1,3], 'e2': [1,3], 'e3': [1,3]},
         'yes_cells': ['a','b','c','d'], 'threshold': [3,4]})
-    write(ROOT / 'ballot.json', {'seat_ids': ['c1','c2','c3','c4'], 'yes_ids': ['c1','c2','c3'], 'protected_failure': False})
+    write(ROOT / 'ballot.json', {'seat_ids': ['c1','c2','c3','c4'], 'yes_ids': ['c1','c2','c3'], 'protected_failure': False, 'protected_limits': json.loads((ROOT / 'protected_limits.json').read_text(encoding='utf-8')), 'decision_record': json.loads((ROOT / 'decision_record.json').read_text(encoding='utf-8'))})
 
 if __name__ == '__main__': main()

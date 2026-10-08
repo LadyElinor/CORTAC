@@ -1,0 +1,57 @@
+{
+  "schema": "cortac.decision.record.v1",
+  "affected_parties": [
+    {
+      "id": "synthetic-affected-outsider",
+      "interests": "Access to independent review and evidence.",
+      "benefits": "Preserved independent review.",
+      "burdens": "A bounded simulated delay; no real effects.",
+      "representation": "Unrepresented outsider; the complaint route remains open."
+    }
+  ],
+  "alternatives": [
+    {
+      "option": "Keep the current synthetic policy unchanged.",
+      "less_harmful_analysis": "Avoids change risk but leaves the reported defect unresolved.",
+      "rejection_or_selection_reason": "Test fixture selects a bounded reviewed correction.",
+      "evidence_refs": [
+        "synthetic-alternatives"
+      ]
+    }
+  ],
+  "protected_limit_assessments": [
+    {
+      "limit_id": "independent-review",
+      "status": "PASS",
+      "reasons": "Supplied assertion that this change preserves independent review.",
+      "evidence_refs": [
+        "synthetic-review-assessment"
+      ]
+    }
+  ],
+  "burden_justification": "Synthetic judgment: finite delay is justified by checking the alleged defect. This is not factual or legal validation.",
+  "dissent": [
+    "Affected outsider objects to delay."
+  ],
+  "dissent_status": "RECORDED",
+  "predictions": [
+    "A reviewed correction can proceed within the supplied case deadline."
+  ],
+  "review_triggers": [
+    {
+      "condition": "New evidence of a conflict or harmful effect.",
+      "review_authority": "appeal"
+    }
+  ],
+  "remedy_plan": {
+    "authority": "Only old-rule authorized review and replacement.",
+    "resources": "Finite resources require a separate scoped resource/remedy grant.",
+    "steps": "Review the complaint, issue a bounded disposition, and recheck before activation.",
+    "evidence_refs": [
+      "synthetic-remedy-plan"
+    ]
+  },
+  "evidence_refs": [
+    "fabricated-example-not-observational-evidence"
+  ]
+}

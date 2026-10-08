@@ -69,12 +69,34 @@ Implemented checks include:
 1. Exactly one evidence assessor, one normative assessor, four council members, one separate authorizer service, one registered executor, one outcome auditor, and three fresh appeal reviewers. No case identity reuse, including the proposer.
 2. Declared qualifications, capacity, relevant expiry, required dimensions, purpose-specific dependency inequality, and explicit conflicts.
 3. Evidence and normative identity/credential/domain separation from proposer and beneficiaries. As an explicit **conservative implementation addition**, any shared material-controller identifier also disqualifies these assessors.
-4. Four distinct council domains excluding proposer/beneficiary domains and material control; all four seats remain mandatory. The separate ballot utility checks three of four approvals without shrinking the denominator and rejects a protected-failure override. It does not authenticate votes or establish evidentiary admissibility.
-5. Authorizer/executor credential and process separation from every assigned role and proposer; the authorizer is not an ordinary agent. Auditors cannot review their own earlier case work and differ in identity, credential and domain from proposer and executor.
+4. Four distinct council domains excluding proposer/beneficiary domains and material control; all four seats remain mandatory. Pairwise disjoint supplied material-controller sets within the council are an explicit **conservative implementation addition**: fresh domain labels cannot hide a shared declared material controller. The separate ballot utility checks three of four approvals without shrinking the denominator and rejects a protected-failure override. It does not authenticate votes or establish evidentiary admissibility.
+5. Authorizer/executor credential and process separation from every assigned role and proposer; the authorizer is not an ordinary agent. Auditors cannot review their own earlier case work and differ in identity, credential and domain from proposer and executor. As an explicit **conservative implementation addition**, the auditor's supplied material-controller set must also be disjoint from both the proposer's and executor's sets.
 6. Three distinct appeal domains; no prior case participants, their controlling interests, appellant, opponent or beneficiary; no unknown material control. Fresh names or domains do not erase an overlapping controller. Pairwise disjoint material-controller sets within the appeal panel are a **conservative implementation addition**.
 7. Exact rational split conservation and frozen domain/cell-weight chamber arithmetic. Abstentions, absences and missing yes votes do not shrink denominators. Duplicate votes and IDs outside frozen rolls are rejected. Ledger/roll authorization, admission, split approval, merger migration, and reapportionment procedures are not verified.
 
 The fixture's eight distinct domain labels are a conditional model witness under the declared assumptions, not a universal minimum domain count or a real independence result. Stricter mission or repository integration requirements may need more domains or different staffing.
+
+### Software 0.2.2 controller-contract migration
+
+Software 0.2.2 strengthens both independent constraint encodings and their assignment verifiers with the council and auditor exclusions above. These are role-specific checks over supplied controller sets, including controllers added alongside existing declarations; they are not a global ban on cross-role overlap or an enrollment-consistency proof. A roster can still be feasible when a conflicting candidate is unused and an independent eligible alternative exists. The frozen profile is unchanged. Controller closure remains `SUPPLIED_UNVERIFIED`, with `authority: NONE` and execution disabled.
+
+Assignment certificates must declare software version 0.2.2 and all four supported additions. Certificates from 0.2.0 or 0.2.1 require regeneration with `assemble`, then verification with `verify`, even when their original assignments remain feasible. Relabeling a legacy certificate or recomputing its hashes does not establish validity: both encodings recheck its assignment against the current roster and strengthened constraints.
+
+## Consequential records and amendment replay
+
+`ballot` requires `seat_ids`, `yes_ids`, an explicit boolean `protected_failure`,
+`protected_limits` (a supplied nonempty ID/commitment inventory), and
+`decision_record`. Missing assessments or records are invalid input. An explicit
+failure or unknown protected-limit assessment fails even with four yes votes.
+The full receipt makes reasons, affected interests, alternatives, dissent,
+review triggers and remedies reconstructable; it does not prove their truth,
+adequacy or legitimacy. See `fixtures/ballot.json` and
+[0.2.2 migration](../docs/REVISION_0_2_2.md).
+
+The separate [amendment replay](../docs/OVERSIGHT_REGISTRAR.md) requires a v2
+record contract. Its policy-preserved protected commitments, scoped review and
+resource/remedy grants remain supplied simulation data. It is not an appointment,
+capability, authentic funding commitment or live external appeal service.
 
 ## Not implemented or established
 

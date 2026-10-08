@@ -2,30 +2,36 @@
 import copy
 from concurrent.futures import ThreadPoolExecutor
 import unittest
+import json
+from pathlib import Path
 
 from wac_offline.amendments import AmendmentReplay, AmendmentError, digest, validate_record
 
 
 def fixture():
     actors = ['proposer', 'decision1', 'decision2', 'registrar', 'owner', 'appeal', 'replacement']
-    policy = {'schema': 'cortac.amendment.policy.v1', 'society_id': 'test-cell', 'attempt_id': 'sandbox-1',
+    policy = {'schema': 'cortac.amendment.policy.v2', 'society_id': 'test-cell', 'attempt_id': 'sandbox-1',
               'content': 'Synthetic exact charter and boundary configuration v1; no live authority.',
               'rules': {'actors': [{'id': a, 'domain': a} for a in actors], 'decisionmakers': ['decision1', 'decision2'],
                         'quorum': 2, 'registrars': ['registrar'], 'external_principals': ['owner'],
                         'appeal_authorities': ['appeal'], 'replacement_authorities': ['replacement'],
                         'notice_period': 10, 'challenge_period': 10, 'registrar_deadline': 100}}
+    policy['protected_limits'] = [{'id': 'independent-review', 'commitment': 'Preserve independent review of consequential amendments.'}]
+    policy['rules'].update(replacement_registrars=['substitute'], review_deadline=100, repair_deadline=100, repair_resource_limit=10, repair_resource_cost=2)
+    policy['rules']['actors'].append({'id': 'substitute', 'domain': 'substitute'})
     new = copy.deepcopy(policy)
     new['content'] = 'Synthetic exact charter and boundary configuration v2; no live authority.'
-    proposal = {'schema': 'cortac.amendment.proposal.v1', 'proposal_id': 'change-1', 'proposer': 'proposer',
+    proposal = {'schema': 'cortac.amendment.proposal.v2', 'proposal_id': 'change-1', 'proposer': 'proposer',
                 'old_policy_digest': digest('Policy', policy), 'new_policy_digest': digest('Policy', new),
                 'expected_epoch': 1, 'new_policy': new, 'submitted_at': 0, 'activate_at': 30, 'expires_at': 80}
-    approval = {'schema': 'cortac.amendment.approval.v1', 'proposal_digest': digest('Proposal', proposal),
+    approval = {'schema': 'cortac.amendment.approval.v2', 'proposal_digest': digest('Proposal', proposal),
                 'decision': 'APPROVE', 'decisionmakers': ['decision1', 'decision2'], 'external_principals': ['owner'],
                 'issued_at': 20, 'reasons': 'Synthetic fixture decision', 'evidence_refs': ['fixture-approval']}
-    procedure = {'schema': 'cortac.amendment.procedure.v1', 'proposal_digest': digest('Proposal', proposal),
+    procedure = {'schema': 'cortac.amendment.procedure.v2', 'proposal_digest': digest('Proposal', proposal),
                  'notice_at': 0, 'review_closed_at': 20, 'conflicts_cleared': True,
                  'challenge_inventory_complete': True, 'mandatory_checks_passed': True,
                  'challenges': [], 'evidence_refs': ['fixture-notice-and-conflicts']}
+    approval['decision_record'] = json.loads((Path(__file__).resolve().parents[1] / 'fixtures/decision_record.json').read_text())
     return policy, proposal, approval, procedure
 
 

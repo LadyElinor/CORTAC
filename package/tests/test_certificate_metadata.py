@@ -7,7 +7,7 @@ import sys
 import tempfile
 import unittest
 
-from wac_offline.io import read, report_hash
+from wac_offline.io import report_hash
 from wac_offline.__main__ import certificate, verify_certificate
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -90,11 +90,24 @@ class CertificateMetadataTests(unittest.TestCase):
                             (('nodes',), 0), (('candidate_counts','appeal_1'), True)]:
             with self.subTest(path=path): self.assert_rejected_cli(path, value)
 
-    def test_honest_existing_v2_report_still_valid(self):
-        old = read(ROOT/'results_v2/assignment.json')
-        self.assertEqual(old['software_version'], '0.2.0')
-        self.assertEqual(verify_certificate(PROFILE, ROSTER, old)['status'], 'SYNTHETIC_WITNESS_VALID')
+    def test_legacy_report_contract_requires_regeneration(self):
+        for version in ('0.2.0', '0.2.1'):
+            with self.subTest(version=version):
+                old = deepcopy(self.original)
+                old['software_version'] = version
+                old['supported_additions'] = [
+                    'conservative_material_overlap_exclusion_for_assessors',
+                    'pairwise_material_control_disjoint_appeal_panel']
+                result = verify_certificate(PROFILE, ROSTER, rehash(old))
+                self.assertEqual(result['status'], 'SYNTHETIC_WITNESS_INVALID')
+                self.assertIn('UNSUPPORTED_REPORT_SOFTWARE_VERSION', result['errors'])
+                self.assertIn('INVALID_REPORT_BOUNDARY:supported_additions', result['errors'])
         self.assertEqual(verify_certificate(PROFILE, ROSTER, self.original)['status'], 'SYNTHETIC_WITNESS_VALID')
+
+    def test_current_version_cannot_omit_new_controller_contract(self):
+        self.assert_rejected_cli(('supported_additions',), [
+            'conservative_material_overlap_exclusion_for_assessors',
+            'pairwise_material_control_disjoint_appeal_panel'])
 
 
 if __name__ == '__main__': unittest.main()

@@ -217,10 +217,10 @@ class GovernanceTests(unittest.TestCase):
         v=fixture('frozen_vote'); v['cell_weights']={}; v['yes_cells']=[]
         with self.assertRaises(InputError): frozen_vote(**v)
     def test_three_approvals_and_all_four_seats(self):
-        self.assertTrue(consequential_ballot(['a','b','c','d'],['a','b','c'])['structurally_passes'])
-        self.assertFalse(consequential_ballot(['a','b','c'],['a','b','c'])['structurally_passes'])
-        self.assertFalse(consequential_ballot(['a','b','c','d'],['a','b'])['structurally_passes'])
-        self.assertFalse(consequential_ballot(['a','b','c','d'],['a','b','c','d'],True)['structurally_passes'])
+        self.assertTrue(consequential_ballot(['a','b','c','d'],['a','b','c'], False, fixture('decision_record'), fixture('protected_limits'))['structurally_passes'])
+        self.assertFalse(consequential_ballot(['a','b','c'],['a','b','c'], False, fixture('decision_record'), fixture('protected_limits'))['structurally_passes'])
+        self.assertFalse(consequential_ballot(['a','b','c','d'],['a','b'], False, fixture('decision_record'), fixture('protected_limits'))['structurally_passes'])
+        self.assertFalse(consequential_ballot(['a','b','c','d'],['a','b','c','d'],True, fixture('decision_record'), fixture('protected_limits'))['structurally_passes'])
     def test_invalid_identifier_types_rejected(self):
         for seats,yes,flag in [('abcd','abc',False),(['a','b','c','d'],['a','b','c'],[]),(['','b','c','d'],['','b','c'],False)]:
             with self.assertRaises(InputError): consequential_ballot(seats,yes,flag)

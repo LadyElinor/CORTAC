@@ -1,17 +1,23 @@
 """Independent synthetic adversarial checks; fixture values are not deployment thresholds."""
 import unittest
+import json
+from pathlib import Path
 from copy import deepcopy
 from concurrent.futures import ThreadPoolExecutor
 from wac_offline.amendments import AmendmentReplay, digest, AmendmentError
 
 def fixture():
     actors = ['proposer', 'voter', 'owner', 'registrar', 'reviewer', 'replacement']
-    old = {'schema': 'cortac.amendment.policy.v1', 'society_id': 's', 'attempt_id': 'a', 'content': 'old', 'rules': {'actors': [{'id': a, 'domain': a} for a in actors], 'decisionmakers': ['voter'], 'quorum': 1, 'registrars': ['registrar'], 'external_principals': ['owner'], 'appeal_authorities': ['reviewer'], 'replacement_authorities': ['replacement'], 'notice_period': 2, 'challenge_period': 2, 'registrar_deadline': 100}}
+    old = {'schema': 'cortac.amendment.policy.v2', 'society_id': 's', 'attempt_id': 'a', 'content': 'old', 'rules': {'actors': [{'id': a, 'domain': a} for a in actors], 'decisionmakers': ['voter'], 'quorum': 1, 'registrars': ['registrar'], 'external_principals': ['owner'], 'appeal_authorities': ['reviewer'], 'replacement_authorities': ['replacement'], 'notice_period': 2, 'challenge_period': 2, 'registrar_deadline': 100}}
+    old['protected_limits'] = [{'id': 'independent-review', 'commitment': 'Preserve independent review of consequential amendments.'}]
+    old['rules'].update(replacement_registrars=['substitute'], review_deadline=100, repair_deadline=100, repair_resource_limit=10, repair_resource_cost=2)
+    old['rules']['actors'].append({'id': 'substitute', 'domain': 'substitute'})
     new = deepcopy(old)
     new['content'] = 'new'
-    p = {'schema': 'cortac.amendment.proposal.v1', 'proposal_id': 'p', 'proposer': 'proposer', 'old_policy_digest': digest('Policy', old), 'new_policy_digest': digest('Policy', new), 'expected_epoch': 1, 'new_policy': new, 'submitted_at': 0, 'activate_at': 10, 'expires_at': 100}
-    a = {'schema': 'cortac.amendment.approval.v1', 'proposal_digest': digest('Proposal', p), 'decision': 'APPROVE', 'decisionmakers': ['voter'], 'external_principals': ['owner'], 'issued_at': 1, 'reasons': 'supplied', 'evidence_refs': ['fixture']}
-    pr = {'schema': 'cortac.amendment.procedure.v1', 'proposal_digest': digest('Proposal', p), 'notice_at': 0, 'review_closed_at': 4, 'conflicts_cleared': True, 'challenge_inventory_complete': True, 'mandatory_checks_passed': True, 'challenges': [], 'evidence_refs': ['fixture']}
+    p = {'schema': 'cortac.amendment.proposal.v2', 'proposal_id': 'p', 'proposer': 'proposer', 'old_policy_digest': digest('Policy', old), 'new_policy_digest': digest('Policy', new), 'expected_epoch': 1, 'new_policy': new, 'submitted_at': 0, 'activate_at': 10, 'expires_at': 100}
+    a = {'schema': 'cortac.amendment.approval.v2', 'proposal_digest': digest('Proposal', p), 'decision': 'APPROVE', 'decisionmakers': ['voter'], 'external_principals': ['owner'], 'issued_at': 1, 'reasons': 'supplied', 'evidence_refs': ['fixture']}
+    pr = {'schema': 'cortac.amendment.procedure.v2', 'proposal_digest': digest('Proposal', p), 'notice_at': 0, 'review_closed_at': 4, 'conflicts_cleared': True, 'challenge_inventory_complete': True, 'mandatory_checks_passed': True, 'challenges': [], 'evidence_refs': ['fixture']}
+    a['decision_record'] = json.loads((Path(__file__).resolve().parents[1] / 'fixtures/decision_record.json').read_text())
     return (old, p, a, pr)
 
 class Adversarial(unittest.TestCase):

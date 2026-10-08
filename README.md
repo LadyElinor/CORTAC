@@ -2,7 +2,7 @@
 
 CORTAC currently implements an **offline reference model**, with two constraint encodings, exact governance arithmetic, and a reproducible domain-first lottery simulator. It does not implement a confederation of agents. “Confederation of Recursive Teleological Agentic Constructs” names the proposed project, not an existing capability.
 
-**Software 0.2.1; Warranted Agent Commonwealth design 0.2.** All controller declarations are supplied and unverified. Every assignment status says `SYNTHETIC`; the profile remains unratified and execution-disabled. No agents, credentials, grants, signatures, appointments, or model-backed scored governance study are produced.
+**Software 0.2.2; Warranted Agent Commonwealth design 0.2.** All controller declarations are supplied and unverified. Every assignment status says `SYNTHETIC`; the profile remains unratified and execution-disabled. No real agents, credentials, grants, signatures, appointments, or model-backed scored governance study are produced.
 
 ## Run the checks
 
@@ -43,13 +43,14 @@ The [claims and evidence gates](docs/EVIDENCE_GATES.md) distinguish five authori
 
 The [registrar design](docs/OVERSIGHT_REGISTRAR.md) and [complete amended assembly specification](docs/COMMONWEALTH_REGISTRAR_REVISION.md) place procedural amendment registration within Audit and Correction. Separate approval remains with authorized decision makers and required principals. Current rules govern their own amendment; activation binds exact old/new policy digests and a current epoch.
 
-An isolated [offline replay module](package/wac_offline/amendments.py) checks supplied records and models conditional activation with one-process locking. It is not a production registry, durable gateway, or authority grant. Its conservative subset requires external-principal approval for every change, uses epoch-wide amendment holds, and leaves institutional appeal/replacement and host-resistant enforcement unimplemented. The frozen assignment profile remains unchanged.
+An isolated [offline replay module](package/wac_offline/amendments.py) checks supplied records and models conditional activation with one-process locking. It is not a production registry, durable gateway, or authority grant. Its conservative subset requires external-principal approval for every change, uses epoch-wide amendment holds, and models bounded complaint, independent review, replacement and repair using explicit old-rule remedy/resource grants. Actual institutional enforcement and host-resistant execution remain unimplemented. The frozen assignment profile remains unchanged.
 
 ```sh
 python scripts/amendment_demo.py
+python scripts/contested_amendment_demo.py
 ```
 
-The example is fabricated; all returned authority is `NONE` and execution remains disabled. See the [record schema](package/wac_offline/data/amendment_records.schema.json) and [revision provenance](provenance/registrar_revision.json). This is a local amendment candidate atop software 0.2.1, not a production release or ratification.
+The example is fabricated; all returned authority is `NONE` and execution remains disabled. See the [record schema](package/wac_offline/data/amendment_records.schema.json) and [revision provenance](provenance/registrar_revision.json). This is a local amendment candidate atop software 0.2.2, not a production release or ratification.
 
 ## What remains research plumbing
 
@@ -77,7 +78,7 @@ An ordinary readiness check can exit 0 while reporting `SOURCE_GATED_NO_SCORED_R
 | `sandbox/` | Frozen scripted mechanism experiment, controls and replay hashes |
 | `provenance/` | Initial import identity and revision record |
 
-The [tool contract](package/README.md) describes the declared model. [0.2.1 repair notes](docs/REVISION_0_2_1.md) cover portable fixture bytes, strict nested certificate claims, and bundle upload instructions; [0.2.0 revision notes](docs/REVISION_0_2_0.md) describe the preceding feature revision. `package/results_v2/` retains the compatible 0.2.0 examples. The initial `START_HERE.txt`, `package/results/`, `verification/*results*`, and `docs/verification.json` are historical 0.1.0 records. New code intentionally changes some imported files; current inventories reflect that development. The original inventory is retained at `provenance/initial_BUNDLE_SHA256SUMS`.
+The [tool contract](package/README.md) describes the declared model. [0.2.2 safeguards and migration](docs/REVISION_0_2_2.md) cover disclosed-controller independence, required decision records and bounded offline repair. [0.2.1 repair notes](docs/REVISION_0_2_1.md) cover portable fixture bytes, strict nested certificate claims, and bundle upload instructions; [0.2.0 revision notes](docs/REVISION_0_2_0.md) describe the preceding feature revision. `package/results_v2/` contains current examples; assignment certificates were regenerated for the strengthened 0.2.2 contract. The initial `START_HERE.txt`, `package/results/`, `verification/*results*`, and `docs/verification.json` are historical 0.1.0 records. New code intentionally changes some imported files; current inventories reflect that development. The original inventory is retained at `provenance/initial_BUNDLE_SHA256SUMS`.
 
 Original JSON/DOCX identity fields remain null in the inherited provenance. Their labeled text exports have not been reclassified as authenticated originals. The profile validator still accepts one exact frozen baseline; profile evolution needs a separately versioned contract. Neither constraint encoding discovers missing controlling interests, verifies declarations, or infers cognitive independence.
 

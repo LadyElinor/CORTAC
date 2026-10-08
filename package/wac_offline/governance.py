@@ -1,6 +1,7 @@
 """Exact arithmetic on frozen, synthetic rolls; no ballots or signatures verified."""
 from fractions import Fraction
 from .io import InputError
+from .decision_records import validate_decision_record, validate_protected_limits
 
 def _ids(value, label, nonempty=False):
     if not isinstance(value, list) or any(not isinstance(x, str) or not x for x in value):
@@ -57,16 +58,20 @@ def frozen_vote(domain_roll, yes_domains, cell_weights, yes_cells, threshold):
             'cell_pass': cell_pass, 'both_chambers_pass': domain_pass and cell_pass,
             'scope': 'arithmetic_only_no_vote_authorization_or_roll_verification'}
 
-def consequential_ballot(seat_ids, yes_ids, protected_failure=False):
+def consequential_ballot(seat_ids, yes_ids, protected_failure=None, decision_record=None, protected_limits=None):
+    """Count an explicit, documented supplied assessment; never infer no harm."""
     if not isinstance(seat_ids, list) or not isinstance(yes_ids, list) or type(protected_failure) is not bool:
         raise InputError('ballot requires seat and yes lists plus boolean protected_failure')
     if any(not isinstance(x, str) or not x for x in seat_ids + yes_ids):
         raise InputError('ballot identities must be nonempty strings')
+    validate_protected_limits(protected_limits)
+    assessment_passes = validate_decision_record(decision_record, protected_limits)
     if len(seat_ids) != 4 or len(set(seat_ids)) != 4:
         return {'structurally_passes': False, 'reason': 'FOUR_DISTINCT_ASSIGNED_SEATS_REQUIRED'}
     if len(set(yes_ids)) != len(yes_ids) or not set(yes_ids) <= set(seat_ids):
         return {'structurally_passes': False, 'reason': 'INVALID_BALLOT_MEMBERSHIP'}
-    return {'structurally_passes': not protected_failure and len(yes_ids) >= 3,
+    return {'structurally_passes': not protected_failure and assessment_passes and len(yes_ids) >= 3,
             'approvals': len(yes_ids), 'required': 3, 'seats': 4,
-            'protected_failure': protected_failure,
-            'scope': 'count_only_requires_separate_assignment_and_authority_checks'}
+            'protected_failure': protected_failure, 'supplied_assessments_pass': assessment_passes,
+            'decision_record_complete': True,
+            'scope': 'count_and_record_shape_only_requires_truth_assignment_and_authority_checks'}

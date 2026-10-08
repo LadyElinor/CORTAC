@@ -91,8 +91,9 @@ class ConstraintTable:
                     errors.append('ASSESSOR_PARTY_IDENTITY')
         if role in SEPARATE and (a['credential'] == p['credential'] or a['process'] == p['process']):
             errors.append('SERVICE_PROPOSER_SEPARATION')
-        if role == 'outcome_auditor' and any(a[k] == p[k] for k in ('id', 'credential', 'domain')):
-            errors.append('AUDITOR_PROPOSER_SEPARATION')
+        if role == 'outcome_auditor':
+            if any(a[k] == p[k] for k in ('id', 'credential', 'domain')) or shared_control(a, p):
+                errors.append('AUDITOR_PROPOSER_SEPARATION')
         if role in APPEAL:
             for i in self.parties:
                 b = self.records[i]
@@ -115,12 +116,15 @@ class ConstraintTable:
             errors.append('IDENTITY_REUSE')
         if clashes(a, b):
             errors.append('DECLARED_CONFLICT')
-        if left in COUNCIL and right in COUNCIL and a['domain'] == b['domain']:
-            errors.append('COUNCIL_DOMAIN_REUSE')
+        if left in COUNCIL and right in COUNCIL:
+            if a['domain'] == b['domain']:
+                errors.append('COUNCIL_DOMAIN_REUSE')
+            if shared_control(a, b):
+                errors.append('COUNCIL_MATERIAL_CONTROL_REUSE')
         if ({left, right} & SEPARATE) and (a['credential'] == b['credential'] or a['process'] == b['process']):
             errors.append('SERVICE_SEPARATION')
         if {left, right} == {'outcome_auditor', 'executor'}:
-            if any(a[k] == b[k] for k in ('id', 'credential', 'domain')):
+            if any(a[k] == b[k] for k in ('id', 'credential', 'domain')) or shared_control(a, b):
                 errors.append('AUDITOR_EXECUTOR_SEPARATION')
         if left in APPEAL and right in APPEAL:
             if a['domain'] == b['domain'] or shared_control(a, b):

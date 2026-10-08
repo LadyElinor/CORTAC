@@ -1,0 +1,16 @@
+{
+  "approvals": 3,
+  "authority": "NONE",
+  "authority_status": "UNINITIALIZED_NO_EXECUTION",
+  "controller_closure": "SUPPLIED_UNVERIFIED",
+  "decision_record_complete": true,
+  "execution_enabled": false,
+  "protected_failure": false,
+  "required": 3,
+  "scope": "declared_synthetic_finite_constraint_model_only",
+  "seats": 4,
+  "simulation_only": true,
+  "status": "SYNTHETIC_ARITHMETIC_PASSES",
+  "structurally_passes": true,
+  "supplied_assessments_pass": true
+}

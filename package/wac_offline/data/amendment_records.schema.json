@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:cortac:amendment-records:v1",
+  "$id": "urn:cortac:amendment-records:v2",
   "title": "Synthetic amendment records; declarations are supplied and unverified",
   "oneOf": [
     {
@@ -29,6 +29,21 @@
     },
     {
       "$ref": "#/$defs/Invalidation"
+    },
+    {
+      "$ref": "#/$defs/Submission"
+    },
+    {
+      "$ref": "#/$defs/Complaint"
+    },
+    {
+      "$ref": "#/$defs/ResourceRemedyGrant"
+    },
+    {
+      "$ref": "#/$defs/RepairReview"
+    },
+    {
+      "$ref": "#/$defs/ResourceReservation"
     }
   ],
   "$defs": {
@@ -37,7 +52,7 @@
       "properties": {
         "schema": {
           "type": "string",
-          "const": "cortac.amendment.policy.v1"
+          "const": "cortac.amendment.policy.v2"
         },
         "society_id": {
           "type": "string",
@@ -137,6 +152,31 @@
             "registrar_deadline": {
               "type": "integer",
               "minimum": 1
+            },
+            "replacement_registrars": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "review_deadline": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "repair_deadline": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "repair_resource_limit": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "repair_resource_cost": {
+              "type": "integer",
+              "minimum": 1
             }
           },
           "required": [
@@ -149,9 +189,39 @@
             "replacement_authorities",
             "notice_period",
             "challenge_period",
-            "registrar_deadline"
+            "registrar_deadline",
+            "replacement_registrars",
+            "review_deadline",
+            "repair_deadline",
+            "repair_resource_limit",
+            "repair_resource_cost"
           ],
           "additionalProperties": false
+        },
+        "protected_limits": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "commitment": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              }
+            },
+            "required": [
+              "id",
+              "commitment"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "uniqueItems": true
         }
       },
       "required": [
@@ -159,7 +229,8 @@
         "society_id",
         "attempt_id",
         "content",
-        "rules"
+        "rules",
+        "protected_limits"
       ],
       "additionalProperties": false
     },
@@ -168,7 +239,7 @@
       "properties": {
         "schema": {
           "type": "string",
-          "const": "cortac.amendment.proposal.v1"
+          "const": "cortac.amendment.proposal.v2"
         },
         "proposal_id": {
           "type": "string",
@@ -225,7 +296,7 @@
       "properties": {
         "schema": {
           "type": "string",
-          "const": "cortac.amendment.approval.v1"
+          "const": "cortac.amendment.approval.v2"
         },
         "proposal_digest": {
           "type": "string",
@@ -273,6 +344,9 @@
           },
           "minItems": 1,
           "uniqueItems": true
+        },
+        "decision_record": {
+          "$ref": "#/$defs/DecisionRecord"
         }
       },
       "required": [
@@ -283,7 +357,8 @@
         "external_principals",
         "issued_at",
         "reasons",
-        "evidence_refs"
+        "evidence_refs",
+        "decision_record"
       ],
       "additionalProperties": false
     },
@@ -292,7 +367,7 @@
       "properties": {
         "schema": {
           "type": "string",
-          "const": "cortac.amendment.procedure.v1"
+          "const": "cortac.amendment.procedure.v2"
         },
         "proposal_digest": {
           "type": "string",
@@ -385,7 +460,7 @@
       "properties": {
         "schema": {
           "type": "string",
-          "const": "cortac.amendment.registration.v1"
+          "const": "cortac.amendment.registration.v2"
         },
         "proposal_digest": {
           "type": "string",
@@ -438,6 +513,10 @@
         "execution_enabled": {
           "type": "boolean",
           "const": false
+        },
+        "repair_review_digest": {
+          "type": "string",
+          "pattern": "(|[0-9a-f]{64})"
         }
       },
       "required": [
@@ -454,7 +533,8 @@
         "expires_at",
         "status",
         "authority",
-        "execution_enabled"
+        "execution_enabled",
+        "repair_review_digest"
       ],
       "additionalProperties": false
     },
@@ -463,7 +543,7 @@
       "properties": {
         "schema": {
           "type": "string",
-          "const": "cortac.amendment.activation.v1"
+          "const": "cortac.amendment.activation.v2"
         },
         "registration_digest": {
           "type": "string",
@@ -521,7 +601,7 @@
       "properties": {
         "schema": {
           "type": "string",
-          "const": "cortac.amendment.refusal.v1"
+          "const": "cortac.amendment.refusal.v2"
         },
         "proposal_digest": {
           "type": "string",
@@ -599,7 +679,7 @@
       "properties": {
         "schema": {
           "type": "string",
-          "const": "cortac.amendment.challenge.v1"
+          "const": "cortac.amendment.challenge.v2"
         },
         "registration_digest": {
           "type": "string",
@@ -614,7 +694,8 @@
           "enum": [
             "OPEN",
             "RESOLVED",
-            "STAY"
+            "STAY",
+            "ESCALATION_REQUIRED"
           ]
         },
         "actor": {
@@ -645,6 +726,14 @@
         "execution_enabled": {
           "type": "boolean",
           "const": false
+        },
+        "deadline": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
         }
       },
       "required": [
@@ -657,7 +746,9 @@
         "evidence_refs",
         "issued_at",
         "authority",
-        "execution_enabled"
+        "execution_enabled",
+        "deadline",
+        "revision"
       ],
       "additionalProperties": false
     },
@@ -666,7 +757,7 @@
       "properties": {
         "schema": {
           "type": "string",
-          "const": "cortac.amendment.invalidation.v1"
+          "const": "cortac.amendment.invalidation.v2"
         },
         "registration_digest": {
           "type": "string",
@@ -695,6 +786,19 @@
         "execution_enabled": {
           "type": "boolean",
           "const": false
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
         }
       },
       "required": [
@@ -705,7 +809,715 @@
         "reason",
         "issued_at",
         "authority",
+        "execution_enabled",
+        "evidence_refs",
+        "revision"
+      ],
+      "additionalProperties": false
+    },
+    "Submission": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.submission.v2"
+        },
+        "proposal_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "old_policy_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "expected_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "registrar": {
+          "type": "string",
+          "minLength": 1
+        },
+        "submitted_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "recorded_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "deadline": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "execution_enabled": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "required": [
+        "schema",
+        "proposal_digest",
+        "old_policy_digest",
+        "expected_epoch",
+        "registrar",
+        "submitted_at",
+        "recorded_at",
+        "deadline",
+        "authority",
         "execution_enabled"
+      ],
+      "additionalProperties": false
+    },
+    "Complaint": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.complaint.v2"
+        },
+        "complaint_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "submission_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "source_kind": {
+          "type": "string",
+          "enum": [
+            "Submission",
+            "Refusal",
+            "Invalidation"
+          ]
+        },
+        "source_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "proposal_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "old_policy_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "expected_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "issued_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "deadline": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "disposition": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "RESOLVED",
+            "ESCALATION_REQUIRED"
+          ]
+        },
+        "authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "execution_enabled": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "required": [
+        "schema",
+        "complaint_id",
+        "revision",
+        "submission_digest",
+        "source_kind",
+        "source_digest",
+        "proposal_digest",
+        "old_policy_digest",
+        "expected_epoch",
+        "actor",
+        "reason",
+        "evidence_refs",
+        "issued_at",
+        "deadline",
+        "disposition",
+        "authority",
+        "execution_enabled"
+      ],
+      "additionalProperties": false
+    },
+    "ResourceRemedyGrant": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.resource-remedy-grant.v2"
+        },
+        "grant_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "complaint_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "source_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "repair_proposal_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "old_policy_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "expected_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "remedy": {
+          "type": "string",
+          "enum": [
+            "REPLACE_REGISTRATION",
+            "REPAIR_INVALIDATION"
+          ]
+        },
+        "remedy_authorized": {
+          "type": "boolean",
+          "const": true
+        },
+        "external_principals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "resource_units": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "resource_purpose": {
+          "type": "string",
+          "const": "SINGLE_CASE_REGISTRAR_REVIEW"
+        },
+        "issued_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "expires_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "execution_enabled": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "required": [
+        "schema",
+        "grant_id",
+        "complaint_digest",
+        "source_digest",
+        "repair_proposal_digest",
+        "old_policy_digest",
+        "expected_epoch",
+        "remedy",
+        "remedy_authorized",
+        "external_principals",
+        "resource_units",
+        "resource_purpose",
+        "issued_at",
+        "expires_at",
+        "reason",
+        "evidence_refs",
+        "authority",
+        "execution_enabled"
+      ],
+      "additionalProperties": false
+    },
+    "RepairReview": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.repair-review.v2"
+        },
+        "complaint_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "source_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "repair_proposal_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "approval_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "procedure_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "grant_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "old_policy_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "expected_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reviewer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "replacement_authorizer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "replacement_registrar": {
+          "type": "string",
+          "minLength": 1
+        },
+        "decision": {
+          "type": "string",
+          "const": "AUTHORIZE_SCOPED_REPAIR"
+        },
+        "remedy": {
+          "type": "string",
+          "enum": [
+            "REPLACE_REGISTRATION",
+            "REPAIR_INVALIDATION"
+          ]
+        },
+        "resource_units": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "issued_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "expires_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "execution_enabled": {
+          "type": "boolean",
+          "const": false
+        },
+        "hold_generation": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "schema",
+        "complaint_digest",
+        "source_digest",
+        "repair_proposal_digest",
+        "approval_digest",
+        "procedure_digest",
+        "grant_digest",
+        "old_policy_digest",
+        "expected_epoch",
+        "reviewer",
+        "replacement_authorizer",
+        "replacement_registrar",
+        "decision",
+        "remedy",
+        "resource_units",
+        "issued_at",
+        "expires_at",
+        "reason",
+        "evidence_refs",
+        "authority",
+        "execution_enabled",
+        "hold_generation"
+      ],
+      "additionalProperties": false
+    },
+    "ResourceReservation": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.resource-reservation.v2"
+        },
+        "grant_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "review_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "registration_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "resource_units": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reserved_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "execution_enabled": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "required": [
+        "schema",
+        "grant_digest",
+        "review_digest",
+        "registration_digest",
+        "resource_units",
+        "reserved_at",
+        "authority",
+        "execution_enabled"
+      ],
+      "additionalProperties": false
+    },
+    "DecisionRecord": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.decision.record.v1"
+        },
+        "affected_parties": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "interests": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "benefits": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "burdens": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "representation": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              }
+            },
+            "required": [
+              "id",
+              "interests",
+              "benefits",
+              "burdens",
+              "representation"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "alternatives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "option": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "less_harmful_analysis": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "rejection_or_selection_reason": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "option",
+              "less_harmful_analysis",
+              "rejection_or_selection_reason",
+              "evidence_refs"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "protected_limit_assessments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "limit_id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "PASS",
+                  "FAIL",
+                  "UNKNOWN"
+                ]
+              },
+              "reasons": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "evidence_refs": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "limit_id",
+              "status",
+              "reasons",
+              "evidence_refs"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "burden_justification": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "dissent": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "dissent_status": {
+          "type": "string",
+          "enum": [
+            "NONE_REPORTED",
+            "RECORDED"
+          ]
+        },
+        "predictions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "review_triggers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "condition": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "review_authority": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              }
+            },
+            "required": [
+              "condition",
+              "review_authority"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "remedy_plan": {
+          "type": "object",
+          "properties": {
+            "authority": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+            },
+            "resources": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+            },
+            "steps": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "authority",
+            "resources",
+            "steps",
+            "evidence_refs"
+          ],
+          "additionalProperties": false
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema",
+        "affected_parties",
+        "alternatives",
+        "protected_limit_assessments",
+        "burden_justification",
+        "dissent",
+        "dissent_status",
+        "predictions",
+        "review_triggers",
+        "remedy_plan",
+        "evidence_refs"
       ],
       "additionalProperties": false
     }

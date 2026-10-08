@@ -106,7 +106,9 @@ def _metadata_errors(cert, validation, roster):
         'appeal_structure': {'seats': 3, 'distinct_domains_required': 3,
                             'approvals_required': 2, 'capacity_is_declared_only': True},
         'supported_additions': ['conservative_material_overlap_exclusion_for_assessors',
-                               'pairwise_material_control_disjoint_appeal_panel'],
+                               'pairwise_material_control_disjoint_appeal_panel',
+                               'pairwise_material_control_disjoint_council',
+                               'auditor_proposer_executor_material_control_separation'],
         'diagnostics': [], 'search_exhausted': False}
     dynamic = {'software_version', 'assignment', 'crosscheck', 'candidate_counts',
                'static_rejections', 'dynamic_rejections', 'nodes', 'max_nodes',
@@ -117,7 +119,7 @@ def _metadata_errors(cert, validation, roster):
     for key, value in expected.items():
         if not _same_json(cert.get(key), value):
             errors.append('INVALID_REPORT_BOUNDARY:' + key)
-    if type(cert.get('software_version')) is not str or cert['software_version'] not in ('0.2.0', '0.2.1'):
+    if type(cert.get('software_version')) is not str or cert['software_version'] != '0.2.2':
         errors.append('UNSUPPORTED_REPORT_SOFTWARE_VERSION')
 
     def nonnegative_integer(value):

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cortac-wac-offline"
-version = "0.2.1"
+version = "0.2.2"
 description = "Offline assignment and governance reference tools for Warranted Agent Commonwealth 0.2"
 readme = "README.md"
 license = { file = "LICENSE" }
