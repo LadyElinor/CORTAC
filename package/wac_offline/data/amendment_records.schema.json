@@ -1,0 +1,713 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortac:amendment-records:v1",
+  "title": "Synthetic amendment records; declarations are supplied and unverified",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/Policy"
+    },
+    {
+      "$ref": "#/$defs/Proposal"
+    },
+    {
+      "$ref": "#/$defs/Approval"
+    },
+    {
+      "$ref": "#/$defs/Procedure"
+    },
+    {
+      "$ref": "#/$defs/Registration"
+    },
+    {
+      "$ref": "#/$defs/Activation"
+    },
+    {
+      "$ref": "#/$defs/Refusal"
+    },
+    {
+      "$ref": "#/$defs/ChallengeUpdate"
+    },
+    {
+      "$ref": "#/$defs/Invalidation"
+    }
+  ],
+  "$defs": {
+    "Policy": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.policy.v1"
+        },
+        "society_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "attempt_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rules": {
+          "type": "object",
+          "properties": {
+            "actors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "domain": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "id",
+                  "domain"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "decisionmakers": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "quorum": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "registrars": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "external_principals": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "appeal_authorities": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "replacement_authorities": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "notice_period": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "challenge_period": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "registrar_deadline": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "actors",
+            "decisionmakers",
+            "quorum",
+            "registrars",
+            "external_principals",
+            "appeal_authorities",
+            "replacement_authorities",
+            "notice_period",
+            "challenge_period",
+            "registrar_deadline"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema",
+        "society_id",
+        "attempt_id",
+        "content",
+        "rules"
+      ],
+      "additionalProperties": false
+    },
+    "Proposal": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.proposal.v1"
+        },
+        "proposal_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "proposer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "old_policy_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "new_policy_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "expected_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "new_policy": {
+          "$ref": "#/$defs/Policy"
+        },
+        "submitted_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "activate_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "expires_at": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "schema",
+        "proposal_id",
+        "proposer",
+        "old_policy_digest",
+        "new_policy_digest",
+        "expected_epoch",
+        "new_policy",
+        "submitted_at",
+        "activate_at",
+        "expires_at"
+      ],
+      "additionalProperties": false
+    },
+    "Approval": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.approval.v1"
+        },
+        "proposal_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "decision": {
+          "type": "string",
+          "enum": [
+            "APPROVE",
+            "DENY",
+            "HOLD"
+          ]
+        },
+        "decisionmakers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "external_principals": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "issued_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reasons": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema",
+        "proposal_digest",
+        "decision",
+        "decisionmakers",
+        "external_principals",
+        "issued_at",
+        "reasons",
+        "evidence_refs"
+      ],
+      "additionalProperties": false
+    },
+    "Procedure": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.procedure.v1"
+        },
+        "proposal_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "notice_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "review_closed_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "conflicts_cleared": {
+          "type": "boolean"
+        },
+        "challenge_inventory_complete": {
+          "type": "boolean"
+        },
+        "mandatory_checks_passed": {
+          "type": "boolean"
+        },
+        "challenges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "disposition": {
+                "type": "string",
+                "enum": [
+                  "OPEN",
+                  "RESOLVED",
+                  "STAY"
+                ]
+              },
+              "reviewer": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_ref": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "id",
+              "disposition",
+              "reviewer",
+              "reason",
+              "evidence_ref"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "schema",
+        "proposal_digest",
+        "notice_at",
+        "review_closed_at",
+        "conflicts_cleared",
+        "challenge_inventory_complete",
+        "mandatory_checks_passed",
+        "challenges",
+        "evidence_refs"
+      ],
+      "additionalProperties": false
+    },
+    "Registration": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.registration.v1"
+        },
+        "proposal_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "approval_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "procedure_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "registrar": {
+          "type": "string",
+          "minLength": 1
+        },
+        "registered_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "old_policy_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "new_policy_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "expected_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "activate_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "expires_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "type": "string",
+          "const": "SYNTHETICALLY_REGISTERED"
+        },
+        "authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "execution_enabled": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "required": [
+        "schema",
+        "proposal_digest",
+        "approval_digest",
+        "procedure_digest",
+        "registrar",
+        "registered_at",
+        "old_policy_digest",
+        "new_policy_digest",
+        "expected_epoch",
+        "activate_at",
+        "expires_at",
+        "status",
+        "authority",
+        "execution_enabled"
+      ],
+      "additionalProperties": false
+    },
+    "Activation": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.activation.v1"
+        },
+        "registration_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "old_policy_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "new_policy_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "old_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "new_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "activated_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "status": {
+          "type": "string",
+          "const": "SYNTHETICALLY_ACTIVATED"
+        },
+        "authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "execution_enabled": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "required": [
+        "schema",
+        "registration_digest",
+        "old_policy_digest",
+        "new_policy_digest",
+        "old_epoch",
+        "new_epoch",
+        "activated_at",
+        "status",
+        "authority",
+        "execution_enabled"
+      ],
+      "additionalProperties": false
+    },
+    "Refusal": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.refusal.v1"
+        },
+        "proposal_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "registrar": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "issued_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "deadline": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "appeal_authorities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "replacement_authorities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "execution_enabled": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "required": [
+        "schema",
+        "proposal_digest",
+        "registrar",
+        "reason",
+        "evidence_refs",
+        "issued_at",
+        "deadline",
+        "appeal_authorities",
+        "replacement_authorities",
+        "authority",
+        "execution_enabled"
+      ],
+      "additionalProperties": false
+    },
+    "ChallengeUpdate": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.challenge.v1"
+        },
+        "registration_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "challenge_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "disposition": {
+          "type": "string",
+          "enum": [
+            "OPEN",
+            "RESOLVED",
+            "STAY"
+          ]
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "issued_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "execution_enabled": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "required": [
+        "schema",
+        "registration_digest",
+        "challenge_id",
+        "disposition",
+        "actor",
+        "reason",
+        "evidence_refs",
+        "issued_at",
+        "authority",
+        "execution_enabled"
+      ],
+      "additionalProperties": false
+    },
+    "Invalidation": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.amendment.invalidation.v1"
+        },
+        "registration_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "old_policy_digest": {
+          "type": "string",
+          "pattern": "[0-9a-f]{64}"
+        },
+        "expected_epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issued_at": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "authority": {
+          "type": "string",
+          "const": "NONE"
+        },
+        "execution_enabled": {
+          "type": "boolean",
+          "const": false
+        }
+      },
+      "required": [
+        "schema",
+        "registration_digest",
+        "old_policy_digest",
+        "expected_epoch",
+        "reason",
+        "issued_at",
+        "authority",
+        "execution_enabled"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

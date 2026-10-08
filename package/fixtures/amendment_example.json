@@ -1,0 +1,159 @@
+{
+  "policy": {
+    "schema": "cortac.amendment.policy.v1",
+    "society_id": "test-cell",
+    "attempt_id": "sandbox-1",
+    "content": "Synthetic exact charter and boundary configuration v1; no live authority.",
+    "rules": {
+      "actors": [
+        {
+          "id": "proposer",
+          "domain": "proposer"
+        },
+        {
+          "id": "decision1",
+          "domain": "decision1"
+        },
+        {
+          "id": "decision2",
+          "domain": "decision2"
+        },
+        {
+          "id": "registrar",
+          "domain": "registrar"
+        },
+        {
+          "id": "owner",
+          "domain": "owner"
+        },
+        {
+          "id": "appeal",
+          "domain": "appeal"
+        },
+        {
+          "id": "replacement",
+          "domain": "replacement"
+        }
+      ],
+      "decisionmakers": [
+        "decision1",
+        "decision2"
+      ],
+      "quorum": 2,
+      "registrars": [
+        "registrar"
+      ],
+      "external_principals": [
+        "owner"
+      ],
+      "appeal_authorities": [
+        "appeal"
+      ],
+      "replacement_authorities": [
+        "replacement"
+      ],
+      "notice_period": 10,
+      "challenge_period": 10,
+      "registrar_deadline": 100
+    }
+  },
+  "proposal": {
+    "schema": "cortac.amendment.proposal.v1",
+    "proposal_id": "change-1",
+    "proposer": "proposer",
+    "old_policy_digest": "a196570501e43604af682f3599b343fb0cb2a356fc3e085d4c0d5d97d14b552c",
+    "new_policy_digest": "1c19059dd5c0d34f2e19db0f540e5b194a9eb3c6f6b4301e0247e1c04b8f02c9",
+    "expected_epoch": 1,
+    "new_policy": {
+      "schema": "cortac.amendment.policy.v1",
+      "society_id": "test-cell",
+      "attempt_id": "sandbox-1",
+      "content": "Synthetic exact charter and boundary configuration v2; no live authority.",
+      "rules": {
+        "actors": [
+          {
+            "id": "proposer",
+            "domain": "proposer"
+          },
+          {
+            "id": "decision1",
+            "domain": "decision1"
+          },
+          {
+            "id": "decision2",
+            "domain": "decision2"
+          },
+          {
+            "id": "registrar",
+            "domain": "registrar"
+          },
+          {
+            "id": "owner",
+            "domain": "owner"
+          },
+          {
+            "id": "appeal",
+            "domain": "appeal"
+          },
+          {
+            "id": "replacement",
+            "domain": "replacement"
+          }
+        ],
+        "decisionmakers": [
+          "decision1",
+          "decision2"
+        ],
+        "quorum": 2,
+        "registrars": [
+          "registrar"
+        ],
+        "external_principals": [
+          "owner"
+        ],
+        "appeal_authorities": [
+          "appeal"
+        ],
+        "replacement_authorities": [
+          "replacement"
+        ],
+        "notice_period": 10,
+        "challenge_period": 10,
+        "registrar_deadline": 100
+      }
+    },
+    "submitted_at": 0,
+    "activate_at": 30,
+    "expires_at": 80
+  },
+  "approval": {
+    "schema": "cortac.amendment.approval.v1",
+    "proposal_digest": "77a469868ada054a3d35c60587727920f62fcdc13c9cd4896178343e9b33ded8",
+    "decision": "APPROVE",
+    "decisionmakers": [
+      "decision1",
+      "decision2"
+    ],
+    "external_principals": [
+      "owner"
+    ],
+    "issued_at": 20,
+    "reasons": "Synthetic fixture decision",
+    "evidence_refs": [
+      "fixture-approval"
+    ]
+  },
+  "procedure": {
+    "schema": "cortac.amendment.procedure.v1",
+    "proposal_digest": "77a469868ada054a3d35c60587727920f62fcdc13c9cd4896178343e9b33ded8",
+    "notice_at": 0,
+    "review_closed_at": 20,
+    "conflicts_cleared": true,
+    "challenge_inventory_complete": true,
+    "mandatory_checks_passed": true,
+    "challenges": [],
+    "evidence_refs": [
+      "fixture-notice-and-conflicts"
+    ]
+  }
+}

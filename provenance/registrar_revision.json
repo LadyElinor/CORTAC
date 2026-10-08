@@ -1,0 +1,16 @@
+{
+  "schema": "cortac.registrar_revision.v1",
+  "base_commit": "a279dcbd5357aca130958afd08dbbf6b4edc3685",
+  "base_repository": "https://github.com/LadyElinor/CORTAC",
+  "base_verified_utc": "2026-10-08T02:44:53Z",
+  "source": {
+    "name": "Pasted text.md",
+    "bytes": 53645,
+    "lines": 641,
+    "sha256": "2a374df6d3ae9a7e5580e3aea142647aaa1c013f72cff7c76233ba7de5acb2e1",
+    "preserved_at": "provenance/commonwealth_supplied.md",
+    "origin": "User-supplied assembly specification, 2026-10-08; content read completely",
+    "reconstruction": "Library full-text read; exact reported byte count retained, no trailing newline"
+  },
+  "revision_scope": "Additive registrar specification and isolated offline synthetic model. Frozen assignment profile, evaluation fixtures and sandbox protocol unchanged. No publication or production authorization."
+}

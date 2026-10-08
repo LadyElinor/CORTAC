@@ -39,6 +39,18 @@ A [frozen, reproducible sandbox](sandbox/README.md) ran 22,400 scripted episodes
 
 The [claims and evidence gates](docs/EVIDENCE_GATES.md) distinguish five authority functions from council seats, preserve lean routine standing-warrant lanes and consequential safeguards, and specify the model-backed validation needed before stronger claims. The frozen runtime profile is unchanged.
 
+## Oversight Registrar amendment candidate
+
+The [registrar design](docs/OVERSIGHT_REGISTRAR.md) and [complete amended assembly specification](docs/COMMONWEALTH_REGISTRAR_REVISION.md) place procedural amendment registration within Audit and Correction. Separate approval remains with authorized decision makers and required principals. Current rules govern their own amendment; activation binds exact old/new policy digests and a current epoch.
+
+An isolated [offline replay module](package/wac_offline/amendments.py) checks supplied records and models conditional activation with one-process locking. It is not a production registry, durable gateway, or authority grant. Its conservative subset requires external-principal approval for every change, uses epoch-wide amendment holds, and leaves institutional appeal/replacement and host-resistant enforcement unimplemented. The frozen assignment profile remains unchanged.
+
+```sh
+python scripts/amendment_demo.py
+```
+
+The example is fabricated; all returned authority is `NONE` and execution remains disabled. See the [record schema](package/wac_offline/data/amendment_records.schema.json) and [revision provenance](provenance/registrar_revision.json). This is a local amendment candidate atop software 0.2.1, not a production release or ratification.
+
 ## What remains research plumbing
 
 The evaluation directory contains **exposed development fixtures and fabricated smoke rows**. Its example counts, proposed arm slots, and bootstrap iterations measure the size of that plumbing, not empirical evidence. Most examples vary one structural template. Its intervals are marginal, without multiplicity control; they cannot support a governance-advantage claim. There is no real scored runner, sealed holdout, validated judge, or independently controlled participant trial.

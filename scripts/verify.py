@@ -109,7 +109,9 @@ def main():
     # Do not run code after a failed delivered-integrity gate.
     if all(item["passed"] for item in checks):
         cases = [
-            ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 89}),
+            ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 141}),
+            ("registrar_source", ["scripts/check_registrar_source.py"], "", {"json_checks": {"insertion_only_revision": True}}),
+            ("amendment_demo", ["scripts/amendment_demo.py"], "", {"json_checks": {"authority": "NONE", "execution_enabled": False, "old_authority_is_current": False}}),
             ("sandbox_controls", ["-m", "unittest", "discover", "-s", "sandbox", "-p", "test_runner.py", "-v"], "", {"minimum_tests": 13}),
             ("sandbox_replay", ["sandbox/verify_replay.py"], "", {}),
             ("evaluation", ["-m", "unittest", "discover", "-s", "tests", "-v"], "evaluation", {"minimum_tests": 52}),
