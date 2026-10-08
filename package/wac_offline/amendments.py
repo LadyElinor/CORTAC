@@ -199,8 +199,10 @@ class AmendmentReplay:
             reviewer = challenge['reviewer']
             if reviewer not in rules['appeal_authorities']:
                 raise AmendmentError('unauthorized challenge reviewer')
-            if domains[reviewer] in {domains[x] for x in [registrar, proposal['proposer']] + approvers}:
-                raise AmendmentError('conflicted challenge reviewer')
+            involved = {domains[x] for x in [registrar, proposal['proposer']] + approvers}
+            involved |= self._history_domains.get(basis, set())
+            if domains[reviewer] in involved:
+                raise AmendmentError('historically conflicted challenge reviewer')
         return pd
 
     def _basis(self):

@@ -306,6 +306,26 @@ class AmendmentTests(unittest.TestCase):
         with self.assertRaises(AmendmentError):
             self.model.challenge(alternate, 'open1', 'RESOLVED', 'registrar', 'Self clearance', ['fixture'], 22)
 
+    def test_supplied_procedure_review_preserves_same_proposal_conflict_history(self):
+        self.policy['rules']['registrars'].append('substitute')
+        self.policy['rules']['appeal_authorities'].append('registrar')
+        self.model = AmendmentReplay(self.policy)
+        self.proposal['old_policy_digest'] = digest('Policy', self.policy)
+        self.bind()
+        self.register()
+        self.procedure['challenges'] = [{'id': 'same-proposal-case', 'disposition': 'RESOLVED',
+                                        'reviewer': 'registrar', 'reason': 'Supplied claim of self-review',
+                                        'evidence_ref': 'supplied-review'}]
+        before = self.model.events()
+        with self.assertRaisesRegex(AmendmentError, 'historically conflicted challenge reviewer'):
+            self.model.register(self.proposal, self.approval, self.procedure, 'substitute', 21)
+        self.assertEqual(self.model.events(), before)
+        self.assertEqual(self.model.state()['epoch'], 1)
+        # A genuinely separate declared old-rule reviewer remains usable.
+        self.procedure['challenges'][0]['reviewer'] = 'appeal'
+        cert = self.model.register(self.proposal, self.approval, self.procedure, 'substitute', 21)
+        self.assertEqual(self.model.activate(cert, 30)['new_epoch'], 2)
+
     def test_regressing_clock_rejected(self):
         cert = self.register()
         with self.assertRaises(AmendmentError): self.model.activate(cert, 19)
