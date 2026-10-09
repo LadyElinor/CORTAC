@@ -57,6 +57,22 @@ authority, authentication, production isolation or cross-project compatibility.
 python scripts/runner_integration.py
 ```
 
+## Proposed OPR 1 record extension
+
+The [proposed Open Inquiry Protective Action and Independent Review amendment](docs/OPR1_PROPOSED.md)
+preserves its [exact source snapshot](provenance/opr1_source.md) and is not adopted.
+The optional [OPR record v1 module](docs/OPR1_RECORDS_V1.md) checks closed supplied
+record shapes, linkage and bounded arithmetic without performing actions. Its
+[19-case requirements map](docs/OPR1_REQUIREMENTS.md) distinguishes those checks
+from unimplemented semantic and institutional obligations. A complete structural
+report establishes no factual truth, real independence, authenticated authority,
+full OPR conformance or permission to restrict anyone. Existing protected
+commitments, historical scenarios and software/profile versions are unchanged.
+
+```sh
+python scripts/opr_integration.py
+```
+
 ## Oversight Registrar amendment candidate
 
 The [registrar design](docs/OVERSIGHT_REGISTRAR.md) and [complete amended assembly specification](docs/COMMONWEALTH_REGISTRAR_REVISION.md) place procedural amendment registration within Audit and Correction. Separate approval remains with authorized decision makers and required principals. Current rules govern their own amendment; activation binds exact old/new policy digests and a current epoch.

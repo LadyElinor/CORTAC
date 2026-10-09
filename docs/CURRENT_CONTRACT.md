@@ -23,6 +23,10 @@ is indexed separately below.
   linkage and actual scratch-database effects; no external execution or real authority.
 - [Opt-in bounded complaint triage](COMPLAINT_TRIAGE.md): separate complaint state,
   declared-controller fact-finding and isolated review/audit reserves.
+- [OPR 1 proposed amendment](OPR1_PROPOSED.md), [requirements map](OPR1_REQUIREMENTS.md), and
+  [opt-in supplied-record contract](OPR1_RECORDS_V1.md): a separately versioned
+  proposed extension with structural snapshot inspection only; no adoption,
+  semantic acceptance, full OPR conformance, or authority to restrict anyone.
 - [Evidence gates](EVIDENCE_GATES.md): warranted scripted-sandbox interpretations
   and requirements for stronger claims.
 - [Current synthetic examples](../package/results_v2/): examples rather than a

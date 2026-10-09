@@ -1,0 +1,13 @@
+{
+  "published_commit": "c182c04cd241ed34ae67336571653faa14fa230b",
+  "published_url": "https://github.com/LadyElinor/CORTAC/commit/c182c04cd241ed34ae67336571653faa14fa230b",
+  "source_method": "GitHub connector read-only fetch_file at exact commit; locally available bytes reused only after SHA256 match",
+  "manifest_covered_files": 163,
+  "all_manifest_hashes_matched": true,
+  "original_git_history_present": false,
+  "local_reconstruction_commit": "15fb0993019b7150e7956324676bc9f0691e058c",
+  "scope": "Reconstruction of published manifest-covered file bytes plus the fetched manifest. Original Git ancestry, file modes and remote tree completeness are not authenticated by this inventory.",
+  "triage_canonical_sha256": "9462a117a753f118b64de52edb17ff9092a60bb8bbb7143b04d60ccba993fccc",
+  "baseline_tests": 383,
+  "baseline_verification_stages": 19
+}
