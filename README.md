@@ -57,6 +57,16 @@ authority, authentication, production isolation or cross-project compatibility.
 python scripts/runner_integration.py
 ```
 
+## Proposed OPS1 operating supplement
+
+The [OPS1 proposal](docs/OPS1_PROPOSED.md) operationalizes disputed-fact handling,
+reviewer independence, policy consultation, shadow outcome assessment, comparable
+cases and remedy follow-through. Its [requirements/status map](docs/OPS1_REQUIREMENTS.md)
+and [opt-in offline contracts](docs/OPS1_OFFLINE_V1.md) distinguish human processes
+from bounded supplied-trace checks. No adoption, factual truth, actual independence,
+verified remedy effectiveness or empirical superiority is established. Existing
+contracts and external-effect defaults are unchanged.
+
 ## Proposed OPR 1 record extension
 
 The [proposed Open Inquiry Protective Action and Independent Review amendment](docs/OPR1_PROPOSED.md)

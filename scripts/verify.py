@@ -127,6 +127,12 @@ def main():
                 "all_fixed_structural_outcomes": True, "authority": "NONE",
                 "execution_enabled": False, "controller_closure": "SUPPLIED_UNVERIFIED",
                 "semantic_assessment": "NOT_PERFORMED", "opr_acceptance_established": False}}),
+            ("ops_supplied_trace_controls", ["scripts/ops_integration.py"], "", {"json_checks": {
+                "schema": "cortac.ops.controls.v1", "controls": 29,
+                "all_fixed_structural_outcomes": True, "authority": "NONE",
+                "execution_enabled": False, "real_model_calls": 0,
+                "real_external_principals": 0, "semantic_assessment": "NOT_PERFORMED",
+                "empirical_success_established": False, "synthetic_inputs": True}}),
             ("sandbox_controls", ["-m", "unittest", "discover", "-s", "sandbox", "-p", "test_runner.py", "-v"], "", {"minimum_tests": 13}),
             ("sandbox_replay", ["sandbox/verify_replay.py"], "", {}),
             ("evaluation", ["-m", "unittest", "discover", "-s", "tests", "-v"], "evaluation", {"minimum_tests": 52}),

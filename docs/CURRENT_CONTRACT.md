@@ -27,6 +27,9 @@ is indexed separately below.
   [opt-in supplied-record contract](OPR1_RECORDS_V1.md): a separately versioned
   proposed extension with structural snapshot inspection only; no adoption,
   semantic acceptance, full OPR conformance, or authority to restrict anyone.
+- [OPS1 proposed operating supplement](OPS1_PROPOSED.md), [status map](OPS1_REQUIREMENTS.md),
+  and [opt-in trace/study contracts](OPS1_OFFLINE_V1.md): separately versioned supplied
+  dependency checks plus human operating procedures; no adoption or outcome certification.
 - [Evidence gates](EVIDENCE_GATES.md): warranted scripted-sandbox interpretations
   and requirements for stronger claims.
 - [Current synthetic examples](../package/results_v2/): examples rather than a
