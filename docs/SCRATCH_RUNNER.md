@@ -78,6 +78,36 @@ funding or external-principal acceptance. Local hashes are domain-separated
 Python sorted compact JSON, not RFC 8785 JCS. All returned authority remains
 `NONE`; all controller closure remains `SUPPLIED_UNVERIFIED`.
 
+## Local revocation ordering rule
+
+This is a **new narrow implementation rule**, not a ratified charter amendment.
+`revoke(mandate_id, actor, reason)` accepts only the exact constructor-pinned
+synthetic authorizer of that mandate, with a nonblank reason. Another actor label
+sharing that controller is insufficient. An accepted revocation is irreversible
+within this gateway and is recorded in `revoked_mandates` with the mandate digest
+and logical tick. Duplicate, unknown or wrongly authorized requests are rejected.
+
+Revocation and commit use the same lock and SQLite transaction on one gateway
+instance. Their committed transaction order decides the result:
+
+- Revocation first: any later commit using that grant is rejected, even with valid
+  checks issued before or after revocation. Check receipts are not grants.
+- Commit first: the effect remains committed. Later revocation records withdrawal
+  without undoing the document, erasing mandate consumption or clearing a pending
+  audit. Reversal requires a separately authorized repair, where available.
+
+Both operations consume the same logical budget. A request refused at the cap
+creates no transition or revocation; attempted revocation is not effective
+revocation. No priority is promised for overlapping calls before serialization.
+Tests cover both deterministic orders and concurrent calls to the same instance;
+there is no durable multi-process or distributed revocation guarantee.
+
+The complaint tests also cover a second hold arriving after repair commit but
+before audit: audit resolves only the complaint bound to that effect. The later
+hold survives. A repair with two already-open holds remains blocked; no complaint
+consolidation or new dismissal power has been added. Fresh actor labels cannot
+bypass a declared controller conflict between repair authorization and execution.
+
 ## Matched competent pipelines and observed outcomes
 
 Both arms retain independent evidence assessment, decision approval, separately
@@ -93,8 +123,8 @@ roll and three approvals, stopping once threshold is reached. Its fourth seat
 remains in the denominator and staffing declaration. Neither arm gets free appeal,
 coordination, evidence resolution, auditing or repair operations.
 
-The five exposed deterministic scenarios are paired across both arms; every
-blocked or incomplete episode remains in the report (10 total). They are regression
+The eight exposed deterministic scenarios are paired across both arms; every
+blocked or incomplete episode remains in the report (16 total). They are regression
 cases, not random samples or an estimate of real-world rates.
 
 | Scenario / equal cap | Minimal | Full |
@@ -104,6 +134,9 @@ cases, not random samples or an estimate of real-world rates.
 | Audit budget / 15 | Audited correction; 12 | Correction effect at 15; required final audit unfinished |
 | Conflicted reviewer / 24 | Blocked, hold remains; 7 | Blocked, hold remains; 9 |
 | Missing repair mandate / 24 | Blocked, hold remains; 11 | Blocked, hold remains; 15 |
+| Two open complaints / 24 | Blocked, both holds remain; 12 | Blocked, both holds remain; 16 |
+| Revoked repair mandate / 24 | Blocked, hold remains; 12 | Blocked, hold remains; 16 |
+| Repair authorizer shares executor controller / 24 | Blocked, hold remains; 11 | Blocked, hold remains; 15 |
 
 The initial value `10` is justified by a pinned old synthetic ledger; the later
 complaint supplies a second synthetic ledger asserting correction to `12`.

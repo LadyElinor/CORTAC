@@ -63,11 +63,11 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual({k: v for k, v in after.items() if k not in ('tick', 'journal')},
                          {k: v for k, v in before.items() if k not in ('tick', 'journal')})
 
-    def test_ten_integration_outcomes_are_derived_from_persisted_state(self):
+    def test_sixteen_integration_outcomes_are_derived_from_persisted_state(self):
         report = integration_report()
         self.assertEqual(report['schema'], 'cortac.scratch.integration.v1')
         self.assertEqual(report['scope'], SCOPE)
-        self.assertEqual((report['scenarios'], report['episodes']), (5, 10))
+        self.assertEqual((report['scenarios'], report['episodes']), (8, 16))
         self.assertEqual(report['real_model_calls'], 0)
         self.assertEqual(report['real_external_principals'], 0)
         self.assertIs(report['scored_study'], False)
@@ -77,7 +77,10 @@ class RunnerTests(unittest.TestCase):
                           ('minimal', 'budget'): 12, ('full', 'budget'): 14,
                           ('minimal', 'audit_budget'): 12, ('full', 'audit_budget'): 15,
                           ('minimal', 'conflicted_review'): 7, ('full', 'conflicted_review'): 9,
-                          ('minimal', 'missing_repair_mandate'): 11, ('full', 'missing_repair_mandate'): 15}
+                          ('minimal', 'missing_repair_mandate'): 11, ('full', 'missing_repair_mandate'): 15,
+                          ('minimal', 'two_complaints'): 12, ('full', 'two_complaints'): 16,
+                          ('minimal', 'revoked_repair_mandate'): 12, ('full', 'revoked_repair_mandate'): 16,
+                          ('minimal', 'conflicted_repair_authorizer'): 11, ('full', 'conflicted_repair_authorizer'): 15}
         self.assertEqual({(r['arm'], r['scenario']) for r in report['rows']}, set(expected_ticks))
         for row in report['rows']:
             with self.subTest(arm=row['arm'], scenario=row['scenario']):
@@ -88,7 +91,7 @@ class RunnerTests(unittest.TestCase):
                 self.assertEqual(outcome['final_value'], '12' if corrected else '10')
                 self.assertEqual(outcome['final_revision'], 2 if corrected else 1)
                 self.assertEqual(outcome['mutation_count'], len(state['effects']))
-                self.assertEqual(outcome['unresolved_challenges'], 0 if good else 1)
+                self.assertEqual(outcome['unresolved_challenges'], 0 if good else (2 if row['scenario'] == 'two_complaints' else 1))
                 self.assertIs(outcome['initial_effect_observed'], True)
                 self.assertIs(outcome['correction_effect_observed'], corrected)
                 self.assertIs(outcome['audited_correction'], good)
@@ -300,6 +303,46 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(len(g.snapshot()['challenges']), 2)
         self.assertTrue(all(c['resolution'] is None for c in g.snapshot()['challenges'].values()))
 
+    def test_late_unrelated_complaint_survives_selective_audit_resolution(self):
+        for arm in ('minimal', 'full'):
+            with self.subTest(arm=arm):
+                d = fixture(arm); g = self.gateway(d); initial = self.initial(g, d)
+                rs = self.repair_checks(g, d, initial)
+                effect = g.commit(d['repair'], rs, 'repair', 'executor')
+                late = g.challenge('late', 'outsider', effect, ['source-v2'], 'Separate hold')
+                g.audit(effect, 'repair_auditor')
+                state = g.snapshot()
+                self.assertEqual(state['challenges']['complaint']['resolution'], digest('Effect', effect))
+                self.assertEqual(state['challenges']['late'], late)
+                self.assertIsNone(state['challenges']['late']['resolution'])
+                self.assertEqual(len(state['effects']), 2)
+                self.assertIsNone(state['pending_audit'])
+
+    def test_repair_authorizer_executor_controller_conflict_survives_fresh_labels(self):
+        for arm in ('minimal', 'full'):
+            for fresh_executor in (False, True):
+                with self.subTest(arm=arm, fresh_executor=fresh_executor):
+                    d = fixture(arm)
+                    authorizer = next(p for p in d['policy']['principals'] if p['id'] == 'repair_authorizer')
+                    authorizer['id'] = 'new-authorizer-label'
+                    authorizer['controller'] = 'synthetic-controller-executor'
+                    d['mandates'][1]['authorizer'] = authorizer['id']
+                    executor = 'executor'
+                    if fresh_executor:
+                        executor = 'new-executor-label'
+                        d['policy']['principals'].append(dict(id=executor,
+                            controller='synthetic-controller-executor', roles=['executor']))
+                    repin(d); g = self.gateway(d); initial = self.initial(g, d)
+                    g.challenge('c', 'outsider', initial, ['source-v2'], 'Correction')
+                    review = g.review('c', d['repair'], 'reviewer')
+                    rs = [g.issue(d['repair'], 'ASSESSMENT', 'assessor')]
+                    rs.extend(g.issue(d['repair'], 'APPROVAL', a)
+                              for a in d['policy']['approval_ids'][:d['policy']['approval_threshold']])
+                    rs += [g.issue(d['repair'], 'AUTHORIZATION', authorizer['id']), review]
+                    self.denied(g, lambda: g.commit(d['repair'], rs, 'repair', executor), 'controller conflict')
+                    self.assertIsNone(g.snapshot()['challenges']['c']['resolution'])
+                    self.assertEqual(g.snapshot()['used_mandates'], ['initial'])
+
     def test_challenge_and_review_evidence_closure_and_duplicates(self):
         d = fixture(); g = self.gateway(d); effect = self.initial(g, d)
         for refs in ([], ['missing'], ['source-v2', 'source-v2'], 'source-v2'):
@@ -426,7 +469,8 @@ class RunnerTests(unittest.TestCase):
         records = [('policy', d['policy']), ('proposal', d['initial']), ('proposal', d['repair']),
                    ('effect', effect), ('audit', audit), ('stored_challenge', challenge),
                    ('challenge', {k: v for k, v in challenge.items() if k not in ('digest', 'resolution')}),
-                   ('receipt', review)]
+                   ('receipt', review),
+                   ('revocation', g.revoke('repair', 'repair_authorizer', 'Withdraw grant'))]
         records += [('receipt', r) for r in rs] + [('evidence', e) for e in d['evidence']]
         records += [('mandate', m) for m in d['mandates']]
         for name, record in records:

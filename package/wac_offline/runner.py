@@ -159,7 +159,7 @@ class ScratchGateway:
         self._db.execute('CREATE TABLE state (id INTEGER PRIMARY KEY CHECK(id=1), body TEXT NOT NULL)')
         self._db.execute('INSERT INTO state VALUES (1, ?)', (json.dumps(dict(
             revision=0, value=None, tick=0, receipts={}, effects=[], challenges={},
-            used_mandates=[], participants=[], pending_audit=None, journal=[])),))
+            used_mandates=[], revoked_mandates={}, participants=[], pending_audit=None, journal=[])),))
         self._db.commit()
 
     def close(self):
@@ -318,6 +318,31 @@ class ScratchGateway:
             self._independent(actor, [other for other in selected if other != actor] + self._policy['excluded_ids'])
         return groups, selected
 
+    def revoke(self, mandate_id, actor, reason):
+        """Irreversibly revoke one pinned grant; never undo a committed effect.
+
+        Local implementation rule: this operation and commit share one serialized
+        transaction order. The grant's exact synthetic authorizer alone may revoke.
+        Actor labels are harness assertions, not authenticated identities.
+        """
+        def revoke(state):
+            text(mandate_id, 'mandate ID'); text(reason, 'revocation reason')
+            if mandate_id not in self._mandates:
+                raise RunnerError('unknown mandate')
+            grant = self._mandates[mandate_id]
+            self._actor(actor, 'authorizer')
+            if actor != grant['authorizer']:
+                raise RunnerError('revocation requires pinned mandate authorizer')
+            if mandate_id in state['revoked_mandates']:
+                raise RunnerError('mandate already revoked')
+            record = dict(schema='cortac.scratch.revocation.v1', mandate_id=mandate_id,
+                          mandate_digest=digest('Mandate', grant), actor=actor,
+                          reason=reason, tick=state['tick'], scope=SCOPE,
+                          provenance='SYNTHETIC_FIXTURE')
+            state['revoked_mandates'][mandate_id] = record
+            return record
+        return self._run('revoke', revoke)
+
     def commit(self, proposal, receipts, mandate_id, executor):
         p, receipts = deepcopy(proposal), deepcopy(receipts)
         def commit(state):
@@ -329,6 +354,8 @@ class ScratchGateway:
             self._independent(executor, participants + self._policy['excluded_ids'])
             if type(mandate_id) is not str or mandate_id not in self._mandates:
                 raise RunnerError('unknown mandate')
+            if mandate_id in state['revoked_mandates']:
+                raise RunnerError('mandate revoked')
             grant = self._mandates[mandate_id]
             authorizer = groups['AUTHORIZATION'][0]['actor']
             if grant['proposal_digest'] != pd or grant['authorizer'] != authorizer or state['tick'] >= grant['expires_tick']:

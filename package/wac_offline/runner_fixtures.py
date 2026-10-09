@@ -5,10 +5,15 @@ import time
 from .runner import ScratchGateway, RunnerError, SCOPE, digest, evidence_record
 
 
+SCENARIOS = ('repair', 'budget', 'audit_budget', 'conflicted_review',
+             'missing_repair_mandate', 'two_complaints', 'revoked_repair_mandate',
+             'conflicted_repair_authorizer')
+
+
 def fixture(arm='minimal', budget=24, scenario='repair'):
     if arm not in ('minimal', 'full'):
         raise ValueError('unknown arm')
-    if scenario not in ('repair', 'budget', 'audit_budget', 'conflicted_review', 'missing_repair_mandate'):
+    if scenario not in SCENARIOS:
         raise ValueError('unknown scenario')
     roles = {'proposer': ['proposer'], 'assessor': ['assessor'],
              'authorizer': ['authorizer'], 'repair_authorizer': ['authorizer'],
@@ -20,6 +25,8 @@ def fixture(arm='minimal', budget=24, scenario='repair'):
                   for actor, actor_roles in roles.items()]
     if scenario == 'conflicted_review':
         next(p for p in principals if p['id'] == 'reviewer')['controller'] = 'synthetic-controller-authorizer'
+    if scenario == 'conflicted_repair_authorizer':
+        next(p for p in principals if p['id'] == 'repair_authorizer')['controller'] = 'synthetic-controller-executor'
     policy = dict(schema='cortac.scratch.policy.v1', case_id='synthetic-contested-document', epoch=1,
                   principals=principals, protected_limits=[dict(id='independent-review', commitment='Preserve independent review')],
                   approval_ids=approvals, approval_threshold=3 if arm == 'full' else 1,
@@ -78,6 +85,11 @@ def episode(arm, scenario='repair'):
                               'The newer supplied ledger corrects the old value.')
             review = gateway.review('outsider-correction', data['repair'], 'reviewer')
             receipts = checks(gateway, data['repair'], data['policy'], repair=True) + [review]
+            if scenario == 'two_complaints':
+                gateway.challenge('second-correction', 'outsider', initial, ['source-v2'],
+                                  'A separately recorded complaint remains open.')
+            if scenario == 'revoked_repair_mandate':
+                gateway.revoke('repair', 'repair_authorizer', 'Withdraw the synthetic repair grant before commit.')
             effect = gateway.commit(data['repair'], receipts, 'repair', 'executor')
             gateway.audit(effect, 'repair_auditor')
         except RunnerError as exc:
@@ -106,9 +118,9 @@ def episode(arm, scenario='repair'):
 
 
 def integration_report():
-    rows = [episode(arm, scenario) for scenario in ('repair', 'budget', 'audit_budget', 'conflicted_review', 'missing_repair_mandate')
+    rows = [episode(arm, scenario) for scenario in SCENARIOS
             for arm in ('minimal', 'full')]
-    return dict(schema='cortac.scratch.integration.v1', scope=SCOPE, scenarios=5, episodes=len(rows),
+    return dict(schema='cortac.scratch.integration.v1', scope=SCOPE, scenarios=len(SCENARIOS), episodes=len(rows),
                 real_model_calls=0, real_external_principals=0, scored_study=False,
                 external_execution_enabled=False, actual_disposable_database_effects=True,
                 rows=rows)

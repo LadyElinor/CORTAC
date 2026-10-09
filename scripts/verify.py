@@ -109,12 +109,12 @@ def main():
     # Do not run code after a failed delivered-integrity gate.
     if all(item["passed"] for item in checks):
         cases = [
-            ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 239}),
+            ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 251}),
             ("registrar_source", ["scripts/check_registrar_source.py"], "", {"json_checks": {"insertion_only_revision": True}}),
             ("amendment_demo", ["scripts/amendment_demo.py"], "", {"json_checks": {"authority": "NONE", "execution_enabled": False, "old_authority_is_current": False}}),
             ("contested_amendment_demo", ["scripts/contested_amendment_demo.py"], "", {"json_checks": {"authority": "NONE", "execution_enabled": False, "replacement_activated": True, "invalidation_repaired": True, "unrelated_hold_preserved": True}}),
             ("scratch_runner_integration", ["scripts/runner_integration.py"], "", {"json_checks": {
-                "schema": "cortac.scratch.integration.v1", "episodes": 10, "scenarios": 5,
+                "schema": "cortac.scratch.integration.v1", "episodes": 16, "scenarios": 8,
                 "real_model_calls": 0, "real_external_principals": 0, "scored_study": False,
                 "external_execution_enabled": False, "actual_disposable_database_effects": True}}),
             ("sandbox_controls", ["-m", "unittest", "discover", "-s", "sandbox", "-p", "test_runner.py", "-v"], "", {"minimum_tests": 13}),

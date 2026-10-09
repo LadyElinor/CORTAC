@@ -9,6 +9,14 @@ Keep changes scoped to the offline tools and their documented contracts. Design 
 5. Test an installed wheel outside the checkout when changing packaging or packaged data.
 6. Include the command, observed result, and limitations in the pull request. A passing CI job does not establish branch protection or study authorization.
 
+## Reporting correctness failures
+
+A solver/checker disagreement (CLI exit 5) is one bug signal, not the only one.
+Two encodings can share a mistake. Report an invalid accepted witness, a valid
+roster incorrectly rejected, or an unauthorized scratch effect even when no
+encoding disagreement occurs. Include the exact inputs, command and observed
+versus expected result; preserve failing evidence rather than refreshing it away.
+
 ## Integrity and generated files
 
 `BUNDLE_SHA256SUMS` covers the current bytes at the original component paths. Its initial values are preserved separately. `evaluation/SHA256SUMS` retains the unchanged evaluation inventory. `REPOSITORY_SHA256SUMS`, when present in a release archive, additionally covers the prepared repository. They detect changed bytes; they are not signatures.

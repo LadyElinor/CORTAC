@@ -999,6 +999,57 @@
         "provenance"
       ],
       "additionalProperties": false
+    },
+    "revocation": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "const": "cortac.scratch.revocation.v1"
+        },
+        "mandate_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "mandate_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "tick": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "scope": {
+          "type": "string",
+          "const": "SYNTHETIC_SCRATCH_ONLY"
+        },
+        "provenance": {
+          "type": "string",
+          "const": "SYNTHETIC_FIXTURE"
+        }
+      },
+      "required": [
+        "schema",
+        "mandate_id",
+        "mandate_digest",
+        "actor",
+        "reason",
+        "tick",
+        "scope",
+        "provenance"
+      ],
+      "additionalProperties": false
     }
   },
   "anyOf": [
@@ -1028,6 +1079,9 @@
     },
     {
       "$ref": "#/$defs/audit"
+    },
+    {
+      "$ref": "#/$defs/revocation"
     }
   ]
 }
