@@ -21,6 +21,8 @@ is indexed separately below.
   an operational registry or authority grant.
 - [Disposable runner integration](SCRATCH_RUNNER.md): strict evidence/mandate/receipt
   linkage and actual scratch-database effects; no external execution or real authority.
+- [Opt-in bounded complaint triage](COMPLAINT_TRIAGE.md): separate complaint state,
+  declared-controller fact-finding and isolated review/audit reserves.
 - [Evidence gates](EVIDENCE_GATES.md): warranted scripted-sandbox interpretations
   and requirements for stronger claims.
 - [Current synthetic examples](../package/results_v2/): examples rather than a
