@@ -49,7 +49,7 @@ checks exact simulated mandates and issued receipts, and actually changes a
 new disposable SQLite document. Ten exposed integration cases exercise outsider
 challenge, independent repair, conflicts, missing mandates, and insufficient
 budgets against a smaller same-safeguard pipeline. Both arms complete under a
-24-operation cap (minimal 12, full 16); the full arm cannot finish under tighter
+24-operation cap (minimal 12, council-expanded 16); the council-expanded arm cannot finish under tighter
 caps. These are local integration checks, with zero model calls and no external
 authority, authentication, production isolation or cross-project compatibility.
 

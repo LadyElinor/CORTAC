@@ -83,7 +83,12 @@ Python sorted compact JSON, not RFC 8785 JCS. All returned authority remains
 Both arms retain independent evidence assessment, decision approval, separately
 mediated authorization and execution, declared-controller exclusions, exact
 provenance, outsider challenge, independently authorized repair and post-effect
-audit. The minimal arm uses one independent approver. Full uses a frozen four-seat
+audit. The minimal arm uses one independent approver. `full` is the arm key
+for this **council-expanded narrow runner**, not a complete Commonwealth role
+or staffing implementation: it does not add the charter's distinct normative
+assessor, three-person appeal panel or whole-society operating protocol. This
+comparison isolates approval redundancy within the shared runner safeguards.
+The council-expanded arm uses a frozen four-seat
 roll and three approvals, stopping once threshold is reached. Its fourth seat
 remains in the denominator and staffing declaration. Neither arm gets free appeal,
 coordination, evidence resolution, auditing or repair operations.
