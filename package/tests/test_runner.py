@@ -1,5 +1,6 @@
 """Disposable SQLite integration regressions; no authenticated-principal claims."""
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
 from copy import deepcopy
 import json
 from pathlib import Path
@@ -31,7 +32,9 @@ def repin(data):
 class RunnerTests(unittest.TestCase):
     def gateway(self, data=None):
         data = fixture() if data is None else data
-        return self.enterContext(ScratchGateway(data['policy'], data['evidence'], data['mandates']))
+        gateway = ScratchGateway(data['policy'], data['evidence'], data['mandates'])
+        self.addCleanup(gateway.close)  # Compatible with Python 3.10.
+        return gateway
 
     def initial(self, gateway, data, audit=True):
         effect = gateway.commit(data['initial'], checks(gateway, data['initial'], data['policy']),
@@ -329,7 +332,7 @@ class RunnerTests(unittest.TestCase):
             directory = Path(g._temporary.name)
             database = directory / 'effects.sqlite'
             self.assertTrue(database.is_file())
-            with sqlite3.connect(str(database)) as observer:
+            with closing(sqlite3.connect(str(database))) as observer:
                 before = json.loads(observer.execute('SELECT body FROM state WHERE id=1').fetchone()[0])
                 self.assertEqual((before['revision'], before['value']), (0, None))
                 effect = self.initial(g, d)
