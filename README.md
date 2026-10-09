@@ -1,8 +1,11 @@
 # CORTAC: synthetic governance constraint tools
 
-CORTAC currently implements an **offline reference model**, with two constraint encodings, exact governance arithmetic, and a reproducible domain-first lottery simulator. It does not implement a confederation of agents. “Confederation of Recursive Teleological Agentic Constructs” names the proposed project, not an existing capability.
+CORTAC currently implements an **offline reference model** and an optional
+[disposable scratch runner](docs/SCRATCH_RUNNER.md), with two constraint encodings, exact governance arithmetic, and a reproducible domain-first lottery simulator. It does not implement a confederation of agents. “Confederation of Recursive Teleological Agentic Constructs” names the proposed project, not an existing capability.
 
 **Software 0.2.2; Warranted Agent Commonwealth design 0.2.** All controller declarations are supplied and unverified. Every assignment status says `SYNTHETIC`; the profile remains unratified and execution-disabled. No real agents, credentials, grants, signatures, appointments, or model-backed scored governance study are produced.
+
+See the [current contract and historical-record index](docs/CURRENT_CONTRACT.md) before interpreting versioned examples or saved verification reports.
 
 ## Run the checks
 
@@ -39,6 +42,21 @@ A [frozen, reproducible sandbox](sandbox/README.md) ran 22,400 scripted episodes
 
 The [claims and evidence gates](docs/EVIDENCE_GATES.md) distinguish five authority functions from council seats, preserve lean routine standing-warrant lanes and consequential safeguards, and specify the model-backed validation needed before stronger claims. The frozen runtime profile is unchanged.
 
+## Unreleased evidence-bound scratch integration
+
+The [scratch runner](docs/SCRATCH_RUNNER.md) resolves immutable synthetic evidence,
+checks exact simulated mandates and issued receipts, and actually changes a
+new disposable SQLite document. Ten exposed integration cases exercise outsider
+challenge, independent repair, conflicts, missing mandates, and insufficient
+budgets against a smaller same-safeguard pipeline. Both arms complete under a
+24-operation cap (minimal 12, full 16); the full arm cannot finish under tighter
+caps. These are local integration checks, with zero model calls and no external
+authority, authentication, production isolation or cross-project compatibility.
+
+```sh
+python scripts/runner_integration.py
+```
+
 ## Oversight Registrar amendment candidate
 
 The [registrar design](docs/OVERSIGHT_REGISTRAR.md) and [complete amended assembly specification](docs/COMMONWEALTH_REGISTRAR_REVISION.md) place procedural amendment registration within Audit and Correction. Separate approval remains with authorized decision makers and required principals. Current rules govern their own amendment; activation binds exact old/new policy digests and a current epoch.
@@ -54,7 +72,7 @@ The example is fabricated; all returned authority is `NONE` and execution remain
 
 ## What remains research plumbing
 
-The evaluation directory contains **exposed development fixtures and fabricated smoke rows**. Its example counts, proposed arm slots, and bootstrap iterations measure the size of that plumbing, not empirical evidence. Most examples vary one structural template. Its intervals are marginal, without multiplicity control; they cannot support a governance-advantage claim. There is no real scored runner, sealed holdout, validated judge, or independently controlled participant trial.
+The evaluation directory contains **exposed development fixtures and fabricated smoke rows**. Its unchanged historical counts are 216 exposed task examples, 620 proposed arm slots (540 main plus 80 ablation), 62 fabricated smoke rows, and 10,000 bootstrap resamples. These are scaffold and analysis sizes, not current regression-test counts, executed agent trials, or empirical evidence. Most examples vary one structural template. Its intervals are marginal, without multiplicity control; they cannot support a governance-advantage claim. There is no real scored runner, sealed holdout, validated judge, or independently controlled participant trial.
 
 Both commands deliberately refuse with exit 2:
 
@@ -82,7 +100,7 @@ The [tool contract](package/README.md) describes the declared model. [0.2.2 safe
 
 Original JSON/DOCX identity fields remain null in the inherited provenance. Their labeled text exports have not been reclassified as authenticated originals. The profile validator still accepts one exact frozen baseline; profile evolution needs a separately versioned contract. Neither constraint encoding discovers missing controlling interests, verifies declarations, or infers cognitive independence.
 
-[Metanoia](https://github.com/LadyElinor/Metanoia) and [Adiona](https://github.com/LadyElinor/Adiona) inform the design; this repository has no adapters or compatibility claim for them. All tools remain offline. Optional `python -m pip install .` installs the `wac-offline` CLI and profile data; installation may fetch the setuptools build dependency.
+[Metanoia](https://github.com/LadyElinor/Metanoia) and [Adiona](https://github.com/LadyElinor/Adiona) inform the design; this repository has no adapters or compatibility claim for them. All tools remain offline; the optional runner performs actual, disposable local SQLite effects only. Optional `python -m pip install .` installs the `wac-offline` CLI and profile data; installation may fetch the setuptools build dependency.
 
 ## Development
 

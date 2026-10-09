@@ -1,6 +1,10 @@
-# WAC design 0.2 offline reference tools (software 0.2.1)
+# WAC design 0.2 offline reference tools (software 0.2.2)
 
-**Unsigned design experiments. Authority: NONE. Runtime status: UNINITIALIZED_NO_EXECUTION.**
+**Unsigned design experiments. Authority: NONE. Existing CLI runtime status: UNINITIALIZED_NO_EXECUTION.**
+
+The optional unreleased [scratch runner](../docs/SCRATCH_RUNNER.md) performs actual
+disposable SQLite effects under synthetic test-harness mandates. External execution
+remains disabled; this does not activate the frozen profile or existing CLI.
 
 This standard-library Python package checks a narrow, declared synthetic constraint model derived from the supplied Warranted Agent Commonwealth v0.2 profile and charter. It searches for one feasible case assignment **together with a three-person appeal reserve**, or reports a demonstrated model constraint failure or an incomplete bounded search. It does not create agents, sign anything, install a loader, appoint officials, grant permissions, or make network calls.
 
@@ -32,9 +36,9 @@ All commands print JSON. Exit 0 means a positive supported synthetic result; 2 m
 
 The primary engine uses lexical DFS with joint case and appeal assignment and conditional panel symmetry reduction. The second engine uses independently written unary/binary constraints, minimum-remaining-values ordering, and forward checking without that symmetry reduction. They share input-shape validation, not eligibility/conflict code. Each gets the requested node budget. A checked witness can settle satisfiability even when the other search ran out of nodes. Both must conclude infeasibility for a negative CLI report. The program is still a bounded reference tool; neither input preprocessing nor wall time is bounded by candidate-expansion counts.
 
-The direct `solver.solve` and `reference.solve_reference` APIs report their own conclusions. The CLI `assemble` combines them. Standalone search results are not V2 certificates. See [0.2.0 revision notes](../docs/REVISION_0_2_0.md) and [0.2.1 repair notes](../docs/REVISION_0_2_1.md).
+The direct `solver.solve` and `reference.solve_reference` APIs report their own conclusions. The CLI `assemble` combines them. Standalone search results are not V2 certificates. See the [current contract index](../docs/CURRENT_CONTRACT.md) and [0.2.2 migration notes](../docs/REVISION_0_2_2.md); the [0.2.0 revision notes](../docs/REVISION_0_2_0.md) and [0.2.1 repair notes](../docs/REVISION_0_2_1.md) describe earlier revisions.
 
-Certificate verification accepts the closed V2 field contract emitted by software 0.2.0 and 0.2.1. It checks exact types and values for all scope-bearing fields, including nested audit, ballot, appeal-capacity and profile-validation claims. Missing or unknown fields are rejected. Search counters are type-checked and checked for internal consistency; they are unauthenticated diagnostic telemetry, not proof that a search was performed. Verification rechecks the assignment, but does not replay the searches or authenticate the claimed software version.
+Certificate verification accepts the closed V2 field contract for software 0.2.2, including all four supported additions. V2 names the certificate format, not acceptance of every earlier software version: certificates from software 0.2.0 and 0.2.1 must be regenerated, as described below. It checks exact types and values for all scope-bearing fields, including nested audit, ballot, appeal-capacity and profile-validation claims. Missing or unknown fields are rejected. Search counters are type-checked and checked for internal consistency; they are unauthenticated diagnostic telemetry, not proof that a search was performed. Verification rechecks the assignment, but does not replay the searches or authenticate the claimed software version.
 
 Search choices do not count as a charter lottery or an appointment. The separate [lottery simulator](../docs/LOTTERY.md) draws domains under a frozen nominee policy, uses recorded test randomness, and reports the first dead end without retries. It establishes no real principal consent, seed chronology, or authority.
 
@@ -116,6 +120,6 @@ Each report binds the exact *local input bytes it actually used*, including whit
 
 ## Reproducible outcomes
 
-`results/fixture_summary.json` records regenerated outcomes. Tests include feasible staffing, clone insufficiency, fresh-name/same-controller appeal rejection, missing dependency data, reviewer shortage, registration, malformed inputs, frozen denominators, exact rational thirds, joint backtracking, and bounded search. They also cover the two QA edge cases: unknown excluded-party domains and concrete-seat dependency rules that narrow only one panel seat.
+`results/`, including `results/fixture_summary.json`, preserves historical software 0.1.0 outcomes; it is not a current test receipt. `results_v2/` contains the current synthetic examples, with assignment certificates regenerated for the 0.2.2 contract. Run the current tests to obtain a new regression result. Tests include feasible staffing, clone insufficiency, fresh-name/same-controller appeal rejection, missing dependency data, reviewer shortage, registration, malformed inputs, frozen denominators, exact rational thirds, joint backtracking, and bounded search. They also cover the two QA edge cases: unknown excluded-party domains and concrete-seat dependency rules that narrow only one panel seat.
 
 These are implementation regression results, not the 540+80-trial WAC society evaluation and not empirical evidence of usefulness, safety, or deployment readiness.

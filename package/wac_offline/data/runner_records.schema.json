@@ -1,0 +1,1033 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:cortac:scratch:records:v1",
+  "title": "Synthetic disposable scratch runner records",
+  "description": "Structural schema only. Runtime separately resolves evidence and checks issued receipts, mandates, role conflicts, chronology and state. No authentication or external authority.",
+  "$defs": {
+    "policy": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "cortac.scratch.policy.v1",
+          "type": "string"
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "principals": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "controller": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "roles": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "affected_party",
+                    "approver",
+                    "assessor",
+                    "auditor",
+                    "authorizer",
+                    "executor",
+                    "proposer",
+                    "reviewer"
+                  ]
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "id",
+              "controller",
+              "roles"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "protected_limits": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "commitment": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              }
+            },
+            "required": [
+              "id",
+              "commitment"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "approval_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "approval_threshold": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "excluded_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+          },
+          "minItems": 0,
+          "uniqueItems": true
+        },
+        "operation_budget": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "schema",
+        "case_id",
+        "epoch",
+        "principals",
+        "protected_limits",
+        "approval_ids",
+        "approval_threshold",
+        "excluded_ids",
+        "operation_budget"
+      ],
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "cortac.scratch.evidence.v1",
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "origin": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "content": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "content_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "provenance": {
+          "const": "SYNTHETIC_FIXTURE",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema",
+        "id",
+        "origin",
+        "content",
+        "content_digest",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "proposal": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "cortac.scratch.proposal.v1",
+          "type": "string"
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "policy_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expected_revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "COMMIT",
+            "REPAIR"
+          ]
+        },
+        "target": {
+          "const": "scratch_document",
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "proposer": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "digest": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            },
+            "required": [
+              "id",
+              "digest"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "decision_source": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "decision_record": {
+          "type": "object",
+          "properties": {
+            "schema": {
+              "type": "string",
+              "const": "cortac.decision.record.v1"
+            },
+            "affected_parties": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  },
+                  "interests": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  },
+                  "benefits": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  },
+                  "burdens": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  },
+                  "representation": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  }
+                },
+                "required": [
+                  "id",
+                  "interests",
+                  "benefits",
+                  "burdens",
+                  "representation"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "alternatives": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "option": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  },
+                  "less_harmful_analysis": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  },
+                  "rejection_or_selection_reason": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  },
+                  "evidence_refs": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
+                  }
+                },
+                "required": [
+                  "option",
+                  "less_harmful_analysis",
+                  "rejection_or_selection_reason",
+                  "evidence_refs"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "protected_limit_assessments": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "limit_id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "PASS",
+                      "FAIL",
+                      "UNKNOWN"
+                    ]
+                  },
+                  "reasons": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  },
+                  "evidence_refs": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
+                  }
+                },
+                "required": [
+                  "limit_id",
+                  "status",
+                  "reasons",
+                  "evidence_refs"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "burden_justification": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+            },
+            "dissent": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "minItems": 0,
+              "uniqueItems": true
+            },
+            "dissent_status": {
+              "type": "string",
+              "enum": [
+                "NONE_REPORTED",
+                "RECORDED"
+              ]
+            },
+            "predictions": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "review_triggers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "condition": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  },
+                  "review_authority": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  }
+                },
+                "required": [
+                  "condition",
+                  "review_authority"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "remedy_plan": {
+              "type": "object",
+              "properties": {
+                "authority": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                },
+                "resources": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                },
+                "steps": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                },
+                "evidence_refs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "authority",
+                "resources",
+                "steps",
+                "evidence_refs"
+              ],
+              "additionalProperties": false
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "schema",
+            "affected_parties",
+            "alternatives",
+            "protected_limit_assessments",
+            "burden_justification",
+            "dissent",
+            "dissent_status",
+            "predictions",
+            "review_triggers",
+            "remedy_plan",
+            "evidence_refs"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "schema",
+        "case_id",
+        "policy_digest",
+        "epoch",
+        "expected_revision",
+        "operation",
+        "target",
+        "value",
+        "proposer",
+        "evidence",
+        "decision_source",
+        "decision_record"
+      ],
+      "additionalProperties": false
+    },
+    "mandate": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "cortac.scratch.mandate.v1",
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "policy_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "proposal_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "authorizer": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "expires_tick": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_uses": {
+          "type": "integer",
+          "const": 1
+        },
+        "scope": {
+          "const": "SYNTHETIC_SCRATCH_ONLY",
+          "type": "string"
+        },
+        "provenance": {
+          "const": "SYNTHETIC_FIXTURE",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema",
+        "id",
+        "case_id",
+        "policy_digest",
+        "proposal_digest",
+        "authorizer",
+        "expires_tick",
+        "max_uses",
+        "scope",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "receipt": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "cortac.scratch.receipt.v1",
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "proposal_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "policy_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "epoch": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expected_revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "operation": {
+          "type": "string",
+          "enum": [
+            "COMMIT",
+            "REPAIR"
+          ]
+        },
+        "evidence_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "ASSESSMENT",
+            "APPROVAL",
+            "AUTHORIZATION",
+            "REVIEW"
+          ]
+        },
+        "actor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "challenge_digest": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "const": "NONE",
+              "type": "string"
+            }
+          ]
+        },
+        "result": {
+          "const": "PASS",
+          "type": "string"
+        },
+        "scope": {
+          "const": "SYNTHETIC_SCRATCH_ONLY",
+          "type": "string"
+        },
+        "provenance": {
+          "const": "SYNTHETIC_FIXTURE",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema",
+        "id",
+        "case_id",
+        "proposal_digest",
+        "policy_digest",
+        "epoch",
+        "expected_revision",
+        "operation",
+        "evidence_digest",
+        "kind",
+        "actor",
+        "challenge_digest",
+        "result",
+        "scope",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "effect": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "cortac.scratch.effect.v1",
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "policy_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "proposal_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "mandate_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "receipt_digests": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "before_revision": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "after_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "before_value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "after_value": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "executor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "repair_challenge_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scope": {
+          "const": "SYNTHETIC_SCRATCH_ONLY",
+          "type": "string"
+        },
+        "provenance": {
+          "const": "SYNTHETIC_FIXTURE",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema",
+        "id",
+        "case_id",
+        "policy_digest",
+        "proposal_digest",
+        "mandate_digest",
+        "receipt_digests",
+        "before_revision",
+        "after_revision",
+        "before_value",
+        "after_value",
+        "executor",
+        "repair_challenge_id",
+        "scope",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "challenge": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "cortac.scratch.challenge.v1",
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "claimant": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "effect_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "digest": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            },
+            "required": [
+              "id",
+              "digest"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "scope": {
+          "const": "SYNTHETIC_SCRATCH_ONLY",
+          "type": "string"
+        },
+        "provenance": {
+          "const": "SYNTHETIC_FIXTURE",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema",
+        "id",
+        "claimant",
+        "case_id",
+        "effect_digest",
+        "evidence",
+        "reason",
+        "scope",
+        "provenance"
+      ],
+      "additionalProperties": false
+    },
+    "stored_challenge": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "cortac.scratch.challenge.v1",
+          "type": "string"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "claimant": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "case_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "effect_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+              },
+              "digest": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{64}$"
+              }
+            },
+            "required": [
+              "id",
+              "digest"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "scope": {
+          "const": "SYNTHETIC_SCRATCH_ONLY",
+          "type": "string"
+        },
+        "provenance": {
+          "const": "SYNTHETIC_FIXTURE",
+          "type": "string"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "resolution": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema",
+        "id",
+        "claimant",
+        "case_id",
+        "effect_digest",
+        "evidence",
+        "reason",
+        "scope",
+        "provenance",
+        "digest",
+        "resolution"
+      ],
+      "additionalProperties": false
+    },
+    "audit": {
+      "type": "object",
+      "properties": {
+        "schema": {
+          "const": "cortac.scratch.audit.v1",
+          "type": "string"
+        },
+        "effect_digest": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "observed_value": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "observed_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "auditor": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[\\s\\S]*\\S[\\s\\S]*"
+        },
+        "result": {
+          "const": "MATCHED_SCRATCH_STATE",
+          "type": "string"
+        },
+        "scope": {
+          "const": "SYNTHETIC_SCRATCH_ONLY",
+          "type": "string"
+        },
+        "provenance": {
+          "const": "SYNTHETIC_FIXTURE",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema",
+        "effect_digest",
+        "observed_value",
+        "observed_revision",
+        "auditor",
+        "result",
+        "scope",
+        "provenance"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "anyOf": [
+    {
+      "$ref": "#/$defs/policy"
+    },
+    {
+      "$ref": "#/$defs/evidence"
+    },
+    {
+      "$ref": "#/$defs/proposal"
+    },
+    {
+      "$ref": "#/$defs/mandate"
+    },
+    {
+      "$ref": "#/$defs/receipt"
+    },
+    {
+      "$ref": "#/$defs/effect"
+    },
+    {
+      "$ref": "#/$defs/challenge"
+    },
+    {
+      "$ref": "#/$defs/stored_challenge"
+    },
+    {
+      "$ref": "#/$defs/audit"
+    }
+  ]
+}
