@@ -67,6 +67,10 @@ from bounded supplied-trace checks. No adoption, factual truth, actual independe
 verified remedy effectiveness or empirical superiority is established. Existing
 contracts and external-effect defaults are unchanged.
 
+The separately versioned [remedy trace v2](docs/OPS1_OFFLINE_V2.md) adds explicit
+retry, observation, audit and reassessment links plus supplied authorization
+references. It preserves v1 and does not resolve complaints or grant authority.
+
 ## Proposed OPR 1 record extension
 
 The [proposed Open Inquiry Protective Action and Independent Review amendment](docs/OPR1_PROPOSED.md)

@@ -117,3 +117,18 @@ These SHA-256 values identify the files at the combined run. They are byte ident
 - The inspectors perform no adjudication, restriction, hearing, consultation, appointment, payment, grant, restoration, external communication, or remedy.
 - No independent outcome study has been run and no improvement in real institutional outcomes is asserted.
 - Verified primary design references and their limited relevance appear in [OPS1_PROPOSED](OPS1_PROPOSED.md#design-sources-and-limits). Their publication does not confer CORTAC authority or validate this adaptation.
+
+## Separately versioned remedy representation candidate (16 October 2026)
+
+The opt-in [v2 contract](OPS1_OFFLINE_V2.md) extends the structural subset of
+OPS-R06 and OPS-R13–15 with explicit retries, additional observations, repeated
+audits, linked reassessments and scoped supplied authorization references.
+Refusal and compulsory paths do not fabricate acceptance. Exact injury versions,
+current attempt/audit scope and unresolved injury blockers remain visible.
+The original v1 limits and October 9 test receipt above remain historical facts.
+
+This is not a closure gateway, amendment, operational procedure adoption,
+appointment mechanism or evidence resolver. Changed dependency histories,
+formal partial-objective closure and complaint/appeal lifecycle integration remain
+outside the new profile. [The delivery receipt](OPS1_V2_DELIVERY.md) records fresh
+local checks and limits; no institutional or empirical outcome is established.
