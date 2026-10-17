@@ -30,6 +30,9 @@ is indexed separately below.
 - [OPS1 proposed operating supplement](OPS1_PROPOSED.md), [status map](OPS1_REQUIREMENTS.md),
   and [opt-in trace/study contracts](OPS1_OFFLINE_V1.md): separately versioned supplied
   dependency checks plus human operating procedures; no adoption or outcome certification.
+- [Vanguard decision-review integration](VANGUARD_OFFLINE_V1.md): opt-in supplied
+  packet inspection, role instructions, pilot examples and explicit OPS1 v1 handoff;
+  no deployed agents, semantic adjudication or external-action authority.
 - [Evidence gates](EVIDENCE_GATES.md): warranted scripted-sandbox interpretations
   and requirements for stronger claims.
 - [Current synthetic examples](../package/results_v2/): examples rather than a

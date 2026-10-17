@@ -57,6 +57,20 @@ authority, authentication, production isolation or cross-project compatibility.
 python scripts/runner_integration.py
 ```
 
+## Vanguard decision review integration
+
+[Vanguard](docs/VANGUARD_OFFLINE_V1.md) adds an opt-in decision-review packet
+checker, seven role instructions, a historical worked packet and two fictional
+controls. Source/claim versions, review bindings and unresolved issues are checked
+locally; an explicit adapter links a retained concern to a separately supplied
+OPS1 v1 remedy trace. A consistent packet establishes no factual truth or authority.
+No agents, monitoring or external actions are deployed.
+
+```sh
+python scripts/vanguard_review.py vanguard/examples/jpmorgan-madoff-retrospective.json
+python scripts/vanguard_integration.py
+```
+
 ## Proposed OPS1 operating supplement
 
 The [OPS1 proposal](docs/OPS1_PROPOSED.md) operationalizes disputed-fact handling,

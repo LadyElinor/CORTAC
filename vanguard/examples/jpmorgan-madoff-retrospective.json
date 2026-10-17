@@ -1,0 +1,231 @@
+{
+  "packet": {
+    "schema": "cortac.vanguard.review.v1",
+    "binding": {
+      "case_id": "jpmorgan-madoff-2014-retrospective",
+      "policy_digest": "e01d8d52bec61553344bd1199153ead0371b61cf2965697a0e9d365eacb8f8d5",
+      "version": 1,
+      "predecessor_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "context_digest": "5ae3bde5bdd9cc695c3e81cfaaf1c70ff6df7563f99d024258a3cf11363baaba",
+    "record": {
+      "mode": "RETROSPECTIVE",
+      "decision": {
+        "title": "Escalation of Madoff concerns to U.S. AML personnel in autumn 2008",
+        "authority": "JPMorgan business, legal, compliance and U.S. AML functions described by FinCEN",
+        "jurisdiction": "United States and United Kingdom; retrospective civil enforcement record",
+        "objective": "Manage investment exposure and meet reporting obligations",
+        "status": "Historical conduct addressed in FinCEN Matter 2014-1; no assertion about current systems",
+        "occurred": {
+          "earliest": "2008-09-01",
+          "latest": "2008-12-11"
+        }
+      },
+      "sources": [
+        {
+          "id": "admission",
+          "version": 1,
+          "origin_group": "fincen-2014-1",
+          "url": "https://www.fincen.gov/system/files/enforcement_action/2020-05-21/JPMorgan_ASSESSMENT_01072014_0.pdf",
+          "locator": "Printed page 1, introduction and footnote 2",
+          "passage": "JPMorgan makes the admissions as stated above and elsewhere in this document solely in connection with the resolution of this civil proceeding and for purposes of the imposition of the civil penalty set forth herein.",
+          "available": {
+            "earliest": "2014-01-07",
+            "latest": "2014-01-07"
+          },
+          "artifact_digest": "c2241c55240ef8f16a2129f6542dca2690ad6f370114a9f86603fa203e3f26a4"
+        },
+        {
+          "id": "reporting",
+          "version": 1,
+          "origin_group": "fincen-2014-1",
+          "url": "https://www.fincen.gov/system/files/enforcement_action/2020-05-21/JPMorgan_ASSESSMENT_01072014_0.pdf",
+          "locator": "Printed page 7, paragraph beginning JPMorgan failed",
+          "passage": "JPMorgan failed to file any SARs in the United States related to the Madoff transactions until after Madoff’s arrest in December 2008.",
+          "available": {
+            "earliest": "2014-01-07",
+            "latest": "2014-01-07"
+          },
+          "artifact_digest": "c2241c55240ef8f16a2129f6542dca2690ad6f370114a9f86603fa203e3f26a4"
+        },
+        {
+          "id": "counter",
+          "version": 1,
+          "origin_group": "fincen-2014-1",
+          "url": "https://www.fincen.gov/system/files/enforcement_action/2020-05-21/JPMorgan_ASSESSMENT_01072014_0.pdf",
+          "locator": "Printed page 6, paragraph beginning In the Fall of 2008",
+          "passage": "In the Fall of 2008, JPMorgan took steps to protect its own business interests based on the information it learned regarding BLM’s conduct in the due diligence reviews and based on a broader business strategy to reduce JPMorgan’s overall risk exposure to hedge funds.",
+          "available": {
+            "earliest": "2014-01-07",
+            "latest": "2014-01-07"
+          },
+          "artifact_digest": "c2241c55240ef8f16a2129f6542dca2690ad6f370114a9f86603fa203e3f26a4"
+        }
+      ],
+      "claims": [
+        {
+          "id": "reporting-failure",
+          "version": 1,
+          "subject": "JPMorgan institutional reporting process",
+          "identity": "RESOLVED_REPORTED",
+          "kind": "OFFICIAL_FINDING",
+          "text": "FinCEN recorded that U.S. SAR filing followed the arrest; admissions apply to this civil resolution.",
+          "source_ids": [
+            "reporting",
+            "admission"
+          ],
+          "objections": []
+        },
+        {
+          "id": "scope-of-inference",
+          "version": 1,
+          "subject": "JPMorgan investment risk reduction",
+          "identity": "RESOLVED_REPORTED",
+          "kind": "RECORD_CONTENT",
+          "text": "The assessment identifies both concerns about Madoff and a broader hedge-fund risk reduction strategy.",
+          "source_ids": [
+            "counter"
+          ],
+          "objections": []
+        }
+      ],
+      "analysis": {
+        "concern": "How should material fraud concerns reach the accountable domestic reporting function?",
+        "harm_criterion": "A control gap that prevents timely assessment of reportable suspicious activity.",
+        "affected_groups": "Customers, investors and the integrity of enforcement reporting.",
+        "benefits": "Legitimate risk reduction protects the institution; confidentiality protects customers.",
+        "alternatives": "Documented cross-business escalation with review; local-only handling; excessive indiscriminate escalation.",
+        "chronology": "Autumn 2008 risk reduction; UK reports on October 29 and November 19; U.S. filing after December 11 arrest. Evidence is the later 2014 assessment, printed pages 6-7.",
+        "counterargument": "UK reporting and broader risk reduction limit inference about motives and each employee’s knowledge. They do not negate the admitted U.S. reporting failure.",
+        "remedy": "Evaluate a route with a named accountable recipient, receipt confirmation, recorded disposition, disagreement handling and independent testing.",
+        "intervention_costs": "Confidentiality risk, review burden and false alarms require proportionate access and escalation rules.",
+        "outcome_measure": "On future authorized fictional tests, measure owner receipt and evidenced disposition; separately observe actual outcomes if later authorized.",
+        "discriminating_test": "A contemporaneous evidenced referral to the accountable U.S. function would narrow the routing hypothesis. Actual control operation needs separate records.",
+        "limitations": "Retrospective worked packet authored during integration, not a historical early-warning success. Reviews below are placeholders, not independent agent or human attestations. Event dates are a broad autumn-to-arrest interval. No claim about current controls or every employee’s knowledge.",
+        "correction_route": "Amend the claim/source versions, preserve the earlier record, and obtain fresh review of every affected packet."
+      },
+      "disposition": "RETAIN_CONCERN",
+      "disposition_reason": "Retain the narrow historical control failure; do not generalize to an ongoing allegation.",
+      "draft": {
+        "kind": "INTERNAL_REVIEW",
+        "audience": "Unassigned internal pilot reviewer; no external recipient",
+        "text": "For an authorized control review, identify the policy, accountable recipient, receipt and disposition records, and testing of cross-business fraud escalation. Examine contrary evidence and confidentiality requirements. This is a design question based on historical findings, not a claim about present systems or a request to disclose confidential customer reports publicly."
+      }
+    },
+    "reviews": [
+      {
+        "role": "SCOUT",
+        "principal": "scout",
+        "record_digest": "3b9d57e07b9c1868d1b09f6ab5fd5f012b8c149a627426795f123fb5921f8981",
+        "assessment": "Worked-example placeholder for SCOUT. No independent model or human review was performed; see analysis and ROLE_PROMPTS.md."
+      },
+      {
+        "role": "ARCHIVIST",
+        "principal": "archivist",
+        "record_digest": "3b9d57e07b9c1868d1b09f6ab5fd5f012b8c149a627426795f123fb5921f8981",
+        "assessment": "Worked-example placeholder for ARCHIVIST. No independent model or human review was performed; see analysis and ROLE_PROMPTS.md."
+      },
+      {
+        "role": "IMPACT_ANALYST",
+        "principal": "impact_analyst",
+        "record_digest": "3b9d57e07b9c1868d1b09f6ab5fd5f012b8c149a627426795f123fb5921f8981",
+        "assessment": "Worked-example placeholder for IMPACT_ANALYST. No independent model or human review was performed; see analysis and ROLE_PROMPTS.md."
+      },
+      {
+        "role": "COUNTERARGUMENT_REVIEWER",
+        "principal": "counterargument_reviewer",
+        "record_digest": "3b9d57e07b9c1868d1b09f6ab5fd5f012b8c149a627426795f123fb5921f8981",
+        "assessment": "Worked-example placeholder for COUNTERARGUMENT_REVIEWER. No independent model or human review was performed; see analysis and ROLE_PROMPTS.md."
+      },
+      {
+        "role": "REMEDY_DESIGNER",
+        "principal": "remedy_designer",
+        "record_digest": "3b9d57e07b9c1868d1b09f6ab5fd5f012b8c149a627426795f123fb5921f8981",
+        "assessment": "Worked-example placeholder for REMEDY_DESIGNER. No independent model or human review was performed; see analysis and ROLE_PROMPTS.md."
+      },
+      {
+        "role": "CHALLENGE_DRAFTER",
+        "principal": "challenge_drafter",
+        "record_digest": "3b9d57e07b9c1868d1b09f6ab5fd5f012b8c149a627426795f123fb5921f8981",
+        "assessment": "Worked-example placeholder for CHALLENGE_DRAFTER. No independent model or human review was performed; see analysis and ROLE_PROMPTS.md."
+      },
+      {
+        "role": "AUDIT_REVIEWER",
+        "principal": "audit_reviewer",
+        "record_digest": "3b9d57e07b9c1868d1b09f6ab5fd5f012b8c149a627426795f123fb5921f8981",
+        "assessment": "Worked-example placeholder for AUDIT_REVIEWER. No independent model or human review was performed; see analysis and ROLE_PROMPTS.md."
+      }
+    ]
+  },
+  "context": {
+    "schema": "cortac.vanguard.context.v1",
+    "expected": {
+      "case_id": "jpmorgan-madoff-2014-retrospective",
+      "policy_digest": "e01d8d52bec61553344bd1199153ead0371b61cf2965697a0e9d365eacb8f8d5",
+      "version": 1,
+      "predecessor_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "now": "2026-10-17",
+    "source_cutoff": "2014-01-07",
+    "sources": [
+      {
+        "id": "admission",
+        "version": 1,
+        "digest": "2beda872fac232c14669ada2bc857a17a1c6dd2e9235c00a1a4837a0404449a1"
+      },
+      {
+        "id": "reporting",
+        "version": 1,
+        "digest": "40a8ed8cd2b6d7e9becb11f5fc80c93d8db297bb85a6d84ebd30cbb252aebaf1"
+      },
+      {
+        "id": "counter",
+        "version": 1,
+        "digest": "1a44706ebc01b860a1ff0990b6de464b66f8957e54287b414b702ff61b4e97fb"
+      }
+    ],
+    "claims": [
+      {
+        "id": "reporting-failure",
+        "version": 1,
+        "digest": "c58c8e2840bd581214b962a7cf82c4c0a2985620083425fabdc37354d2639dd5"
+      },
+      {
+        "id": "scope-of-inference",
+        "version": 1,
+        "digest": "b3f9572df3fd5e09268bd169ab95b7978c98bef28c406186088dd77d628f3ad2"
+      }
+    ],
+    "principals": [
+      {
+        "id": "scout",
+        "controller": "fabricated-scout"
+      },
+      {
+        "id": "archivist",
+        "controller": "fabricated-archivist"
+      },
+      {
+        "id": "impact_analyst",
+        "controller": "fabricated-impact_analyst"
+      },
+      {
+        "id": "counterargument_reviewer",
+        "controller": "fabricated-counterargument_reviewer"
+      },
+      {
+        "id": "remedy_designer",
+        "controller": "fabricated-remedy_designer"
+      },
+      {
+        "id": "challenge_drafter",
+        "controller": "fabricated-challenge_drafter"
+      },
+      {
+        "id": "audit_reviewer",
+        "controller": "fabricated-audit_reviewer"
+      }
+    ],
+    "party_ids": []
+  }
+}
