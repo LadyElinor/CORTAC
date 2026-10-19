@@ -120,6 +120,19 @@ def add_grant(data, identifier, action, actor, *, versions=None, item=None,
     return grant
 
 
+def repin_triage(data):
+    """Rebind deliberate fixture role/proposal changes before construction."""
+    repin(data)
+    for item in data['triage_config']['work_items']:
+        item['proposal_digest'] = digest('Proposal', data[item['id']])
+    for grant in data['grants']:
+        grant['policy_digest'] = digest('Policy', data['policy'])
+        grant['triage_digest'] = digest('TriageConfig', data['triage_config'])
+        if grant['work_item_id'] is not None:
+            grant['proposal_digest'] = digest('Proposal', data[grant['work_item_id']])
+    return data
+
+
 def without_accounting(state):
     """Select effects/holds/authority; attempted work may remain metered."""
     return {key: deepcopy(state[key]) for key in (
@@ -127,6 +140,7 @@ def without_accounting(state):
         'pending_audit', 'participants', 'receipts', 'challenges',
         'complaints', 'used_grants', 'revoked_grants', 'review_records',
         'factfinding_records', 'audit_records', 'work_item_effects', 'activity_participants',
+        'nonreview_participants',
     ) if key in state}
 
 
@@ -773,6 +787,90 @@ class TriageTests(unittest.TestCase):
         self.denied(gateway, lambda: gateway.commit(data['repair'], receipts, 'repair', 'executor', 'repair'))
         self.assert_open(gateway, 'c1', 'c2')
         self.assertEqual(gateway.snapshot()['used_mandates'], ['initial'])
+
+    def test_review_support_authorizer_conflict_fails_in_both_receipt_orders(self):
+        for review_first in (False, True):
+            for alias in (False, True):
+                with self.subTest(review_first=review_first, controller_alias=alias):
+                    data = triage_fixture(('c1',))
+                    authorizer = 'repair_authorizer'
+                    if alias:
+                        authorizer = 'repair-authorizer-alias'
+                        data['policy']['principals'].append(dict(id=authorizer,
+                            controller='synthetic-controller-repair_authorizer', roles=['authorizer']))
+                    next(g for g in data['grants'] if g['id'] == 'review-all')['authorizer'] = authorizer
+                    data, gateway, _ = self.prepared(repin_triage(data))
+                    if review_first:
+                        review = gateway.review(['c1'], data['repair'], 'reviewer', 'review-all')
+                        receipts = checks(gateway, data['repair'], data['policy'], repair=True) + [review]
+                        operation = lambda: gateway.commit(data['repair'], receipts, 'repair', 'executor', 'repair')
+                        charged = 'repair'
+                    else:
+                        checks(gateway, data['repair'], data['policy'], repair=True)
+                        operation = lambda: gateway.review(['c1'], data['repair'], 'reviewer', 'review-all')
+                        charged = 'ordinary'
+                    before, after = self.denied(gateway, operation, 'declared controller conflict')
+                    self.assertEqual(after['budgets'][charged]['used'], before['budgets'][charged]['used'] + 1)
+                    self.assertEqual({k: v for k, v in after['budgets'].items() if k != charged},
+                                     {k: v for k, v in before['budgets'].items() if k != charged})
+                    self.assertEqual((after['revision'], after['value']), (1, '10'))
+                    self.assertEqual(after['used_mandates'], ['initial'])
+                    self.assert_open(gateway, 'c1')
+
+    def test_review_support_authorizer_cannot_be_the_current_repair_executor(self):
+        data = triage_fixture(('c1',))
+        next(p for p in data['policy']['principals'] if p['id'] == 'support_authorizer')['roles'].append('executor')
+        next(w for w in data['triage_config']['work_items'] if w['id'] == 'repair')['executor'] = 'support_authorizer'
+        data, gateway, _ = self.prepared(repin_triage(data))
+        receipts = self.repair_receipts(gateway, data)
+        before, after = self.denied(gateway, lambda: gateway.commit(
+            data['repair'], receipts, 'repair', 'support_authorizer', 'repair'), 'declared controller conflict')
+        self.assertEqual(after['budgets']['review:c1'], before['budgets']['review:c1'])
+        self.assertEqual(after['budgets']['audit:repair'], before['budgets']['audit:repair'])
+        self.assertEqual((after['revision'], after['value']), (1, '10'))
+        self.assert_open(gateway, 'c1')
+
+    def test_reviewer_nonreview_participation_fails_in_both_activity_orders(self):
+        for activity in ('assessment', 'proposal', 'mandate_revocation', 'grant_revocation'):
+            for review_first in (False, True):
+                with self.subTest(activity=activity, review_first=review_first):
+                    data = triage_fixture(('c1',))
+                    role = {'assessment': 'assessor', 'proposal': 'proposer',
+                            'mandate_revocation': 'authorizer', 'grant_revocation': 'authorizer'}[activity]
+                    next(p for p in data['policy']['principals'] if p['id'] == 'reviewer')['roles'].append(role)
+                    repin_triage(data)
+                    if activity == 'mandate_revocation':
+                        data['mandates'].append(dict(data['mandates'][1], id='unused-reviewer-mandate', authorizer='reviewer'))
+                    elif activity == 'grant_revocation':
+                        add_grant(data, 'unused-reviewer-grant', 'REVIEW', 'second_reviewer',
+                                  versions={'c1': 0}, item='repair', authorizer='reviewer')
+                    data, gateway, _ = self.prepared(data)
+                    if review_first:
+                        review = gateway.review(['c1'], data['repair'], 'reviewer', 'review-all')
+                        self.assertNotIn('reviewer', gateway.snapshot()['nonreview_participants'])
+                    if activity == 'assessment':
+                        gateway.issue(data['repair'], 'ASSESSMENT', 'reviewer')
+                    elif activity == 'proposal':
+                        proposal = dict(data['repair'], proposer='reviewer')
+                        gateway.issue(proposal, 'ASSESSMENT', 'assessor')
+                    elif activity == 'mandate_revocation':
+                        gateway.revoke('unused-reviewer-mandate', 'reviewer', 'Withdraw unused mandate')
+                    else:
+                        gateway.revoke_grant('unused-reviewer-grant', 'reviewer', 'Withdraw unused grant')
+                    self.assertIn('reviewer', gateway.snapshot()['nonreview_participants'])
+                    if review_first:
+                        receipts = checks(gateway, data['repair'], data['policy'], repair=True) + [review]
+                        operation = lambda: gateway.commit(data['repair'], receipts, 'repair', 'executor', 'repair')
+                        charged = 'repair'
+                    else:
+                        operation = lambda: gateway.review(['c1'], data['repair'], 'reviewer', 'review-all')
+                        charged = 'ordinary'
+                    before, after = self.denied(gateway, operation, 'declared controller conflict')
+                    self.assertEqual(after['budgets'][charged]['used'], before['budgets'][charged]['used'] + 1)
+                    self.assertEqual({k: v for k, v in after['budgets'].items() if k != charged},
+                                     {k: v for k, v in before['budgets'].items() if k != charged})
+                    self.assertEqual((after['revision'], after['value']), (1, '10'))
+                    self.assert_open(gateway, 'c1')
 
     def test_ordinary_budget_exhaustion_and_duplicate_spam_cannot_block_known_complaint_intake(self):
         data = triage_fixture(('c1', 'duplicate', 'c2'), ordinary=4)
