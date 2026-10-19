@@ -108,7 +108,7 @@ class TriageGateway(ScratchGateway):
                          complaints={}, budgets=deepcopy(self._budget_limits),
                          incomplete=[], used_grants=[], revoked_grants={},
                          factfinding_records=[], review_records={}, audit_records=[],
-                         activity_participants=[], work_item_effects={})
+                         activity_participants=[], nonreview_participants=[], work_item_effects={})
             with self._db:
                 self._db.execute('UPDATE state SET body=? WHERE id=1', (json.dumps(state),))
         except Exception:
@@ -299,8 +299,13 @@ class TriageGateway(ScratchGateway):
     def _history(self, state):
         return sorted(set(state['participants'] + state['activity_participants']))
 
-    def _remember(self, state, actors):
+    def _remember(self, state, actors, *, review_only=False):
         state['activity_participants'] = sorted(set(state['activity_participants'] + actors))
+        if not review_only:
+            # A review receipt's own history entry is compatible with its later
+            # use, but subsequent assessment, proposal, revocation, or other
+            # participation by that reviewer is not. Keep those facts distinct.
+            state['nonreview_participants'] = sorted(set(state['nonreview_participants'] + actors))
 
     def _grant(self, state, identifier, action, actor, consume=True):
         text(identifier, 'grant ID')
@@ -557,7 +562,7 @@ class TriageGateway(ScratchGateway):
                 bindings=bindings, actor=actor, receipt_digest=digest('Receipt', receipt))
             for identifier in ids:
                 state['complaints'][identifier]['appeal_status'] = 'REVIEWED_PENDING_REPAIR'
-            state['used_grants'].append(grant_id); self._remember(state, [actor])
+            state['used_grants'].append(grant_id); self._remember(state, [actor], review_only=True)
             return receipt
         def select(g, state):
             if [b['id'] for b in g['complaints']] != ids or g['proposal_digest'] != digest('Proposal', p):
@@ -606,6 +611,9 @@ class TriageGateway(ScratchGateway):
                 review_grant = self._grant(state, rr['grant_id'], 'REVIEW', review['actor'], consume=False)
                 if rr['grant_digest'] != digest('TriageGrant', review_grant) or rr['grant_id'] not in state['used_grants']:
                     raise RunnerError('review grant binding mismatch')
+                self._support_independence(state, review_grant, ids)
+                self._independent(review_grant['authorizer'], participants + [executor])
+                self._independent(review['actor'], state['nonreview_participants'])
                 others = [a for a in self._history(state) + participants if a != review['actor']] + [executor]
                 self._review_independence(state, review['actor'], ids, others)
                 self._independent(authorizer, state['participants'])

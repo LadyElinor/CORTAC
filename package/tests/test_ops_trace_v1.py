@@ -112,6 +112,22 @@ class TraceTests(unittest.TestCase):
         self.c['evidence'][3]['observed_at'] = 9
         self.reject()
 
+    def test_resolution_cannot_predate_objection_evidence(self):
+        next(e for e in self.c['evidence'] if e['id'] == 'counter')['observed_at'] = 9
+        self.t['findings'][0]['resolutions'][0]['evidence_ids'] = ['reason']
+        with self.assertRaisesRegex(TraceError, 'evidence postdates use'):
+            self.inspect()
+
+    def test_resolution_at_objection_evidence_tick_is_consistent(self):
+        next(e for e in self.c['evidence'] if e['id'] == 'counter')['observed_at'] = 8
+        self.t['findings'][0]['resolutions'][0]['evidence_ids'] = ['reason']
+        self.assertEqual(self.inspect()['status'], 'SUPPLIED_TRACE_CONSISTENT')
+
+    def test_unresolved_status_can_predate_later_objection_evidence(self):
+        next(e for e in self.c['evidence'] if e['id'] == 'counter')['observed_at'] = 9
+        self.t['findings'][0]['resolutions'][0].update(state='UNRESOLVED', evidence_ids=['reason'])
+        self.assertIn('MATERIAL_OBJECTION_UNRESOLVED', self.inspect()['blockers'])
+
     def test_independence_before_finding(self):
         self.t['independence']['checked_at'] = 11
         self.reject()
@@ -140,6 +156,17 @@ class TraceTests(unittest.TestCase):
         self.t['remedy']['affected_account'].update(status='UNAVAILABLE', evidence_ids=[])
         report = self.inspect()
         self.assertIn('REMEDY_DELIVERY_TRACE_INCOMPLETE', report['blockers'])
+
+    def test_genesis_sentinel_is_reserved_for_every_event(self):
+        for position in range(len(self.t['remedy']['events'])):
+            with self.subTest(position=position):
+                self.t, self.c = fixture()
+                events = self.t['remedy']['events']
+                events[position]['id'] = 'NONE'
+                if position + 1 < len(events):
+                    events[position + 1]['previous_id'] = 'NONE'
+                with self.assertRaisesRegex(TraceError, 'reserved remedy event identity'):
+                    self.inspect()
 
     def test_overdue_escalation(self):
         self.t['remedy']['residuals'][0]['state'] = 'REFERRED'
