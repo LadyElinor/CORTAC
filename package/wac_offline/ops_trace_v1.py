@@ -217,6 +217,10 @@ def inspect_trace(trace, context):
             if resolution['version'] != objection['version']:
                 raise TraceError('objection version mismatch')
             available(resolution['evidence_ids'], resolution['resolved_at'])
+            if resolution['state'] == 'RESOLUTION_REPORTED':
+                # Separate support cannot resolve counterevidence that was not
+                # yet available. An unresolved status makes no such claim.
+                available(objection['evidence_ids'], resolution['resolved_at'], 'COUNTER')
             if not set(resolution['evidence_ids']) <= set(linked):
                 raise TraceError('unlinked resolution support')
             if resolution['resolved_at'] > at:
@@ -298,6 +302,8 @@ def inspect_trace(trace, context):
         raise TraceError('remedy evidence requirements mismatch')
     events = remedy['events']
     _index(events)
+    if any(event['id'] == 'NONE' for event in events):
+        raise TraceError('reserved remedy event identity')
     if [e['stage'] for e in events] != list(STAGES[:len(events)]):
         raise TraceError('remedy stage dependency mismatch')
     previous, last_at = 'NONE', max(f['decided_at'] for f in findings.values())

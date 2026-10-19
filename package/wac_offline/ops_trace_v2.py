@@ -241,6 +241,10 @@ def inspect_trace(trace, context):
             if resolution['version'] != objection['version']:
                 raise TraceError('objection version mismatch')
             available(resolution['evidence_ids'], resolution['resolved_at'])
+            if resolution['state'] == 'RESOLUTION_REPORTED':
+                # Separate support cannot resolve counterevidence that was not
+                # yet available. An unresolved status makes no such claim.
+                available(objection['evidence_ids'], resolution['resolved_at'], 'COUNTER')
             if not set(resolution['evidence_ids']) <= set(linked):
                 raise TraceError('unlinked resolution support')
             if resolution['resolved_at'] > at:

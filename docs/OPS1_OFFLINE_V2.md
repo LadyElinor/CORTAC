@@ -22,6 +22,11 @@ future common fixes must be reviewed for both versions. Bounds remain 256 items
 per list, 8,192 characters per text, 1 MiB per canonical input and integer ticks
 in [0, 2^63−1]. Unknown fields and boolean/float ticks reject. Inputs are copied.
 
+A reported objection resolution requires all of that objection's counterevidence
+to be available by the resolution tick, including counterevidence omitted from
+the resolution's separate support references. An unresolved status can predate
+later counterevidence because it makes no resolution claim.
+
 ## Explicit transitions and causal links
 
 The initial state is START. Only the following edges are allowed:

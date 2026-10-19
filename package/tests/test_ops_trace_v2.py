@@ -66,6 +66,22 @@ class RemedyV2Tests(unittest.TestCase):
             self.assertEqual(r[key], 'NOT_ESTABLISHED')
         self.assertEqual(r['evidence_status'], 'REFERENCES_ONLY')
 
+    def test_resolution_cannot_predate_objection_evidence(self):
+        next(e for e in self.c['evidence'] if e['id'] == 'counter')['observed_at'] = 9
+        self.t['findings'][0]['resolutions'][0]['evidence_ids'] = ['reason']
+        with self.assertRaisesRegex(TraceError, 'evidence postdates use'):
+            self.inspect()
+
+    def test_resolution_at_objection_evidence_tick_is_consistent(self):
+        next(e for e in self.c['evidence'] if e['id'] == 'counter')['observed_at'] = 8
+        self.t['findings'][0]['resolutions'][0]['evidence_ids'] = ['reason']
+        self.assertEqual(self.inspect()['status'], 'SUPPLIED_TRACE_CONSISTENT')
+
+    def test_unresolved_status_can_predate_later_objection_evidence(self):
+        next(e for e in self.c['evidence'] if e['id'] == 'counter')['observed_at'] = 9
+        self.t['findings'][0]['resolutions'][0].update(state='UNRESOLVED', evidence_ids=['reason'])
+        self.assertIn('MATERIAL_OBJECTION_UNRESOLVED', self.inspect()['blockers'])
+
     def test_v1_unchanged_and_versions_not_interchangeable(self):
         t, c = fixture_v1()
         self.assertEqual(inspect_v1(t, c)['status'], 'SUPPLIED_TRACE_CONSISTENT')

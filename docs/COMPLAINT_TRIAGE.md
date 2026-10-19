@@ -90,7 +90,12 @@ exact bytes were supplied when the gateway was constructed. It binds policy,
 configuration, epoch, expected revision, exclusive logical expiry, action, actor,
 authorizer, complaint versions, work item/proposal where applicable, and a pinned
 finding where applicable. Grants are single-use; review authorization is rechecked
-at repair commit. An emitted receipt never substitutes for a grant.
+at repair commit, including the support authorizer's current independence from
+recorded activity, current repair participants and the bound claimants. The reviewer's own review receipt is
+exempted from its history check; later assessment, proposal, authorization,
+revocation or other non-review participation is not. The disposable state keeps
+`nonreview_participants` separately so issuing a review first cannot hide a later
+conflicting role. An emitted receipt never substitutes for a grant.
 
 Public operations are `lodge`, `appeal`, `factfind`, `review`, `commit`, `audit`,
 `revoke_grant`, inherited exact-mandate `revoke`, `issue`, and `snapshot`. The
