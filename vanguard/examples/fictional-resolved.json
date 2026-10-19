@@ -1,0 +1,177 @@
+{
+  "packet": {
+    "schema": "cortac.vanguard.review.v1",
+    "binding": {
+      "case_id": "vanguard-fictional-resolved",
+      "policy_digest": "5bc71521fe0fec579ec785b7888775b889caee1c5d1dc7f441bbc92ee52d02a2",
+      "version": 1,
+      "predecessor_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "context_digest": "d54cdc01d4574debbe638b6e4ef678462bcfd749b7914cdb0fd90f31a32dbc20",
+    "record": {
+      "mode": "SYNTHETIC",
+      "decision": {
+        "title": "Disposition of a fictional warning",
+        "authority": "Fictional operations owner",
+        "jurisdiction": "Synthetic exercise",
+        "objective": "Keep service available",
+        "status": "Historical fictional decision",
+        "occurred": {
+          "earliest": "2020-01-02",
+          "latest": "2020-01-02"
+        }
+      },
+      "sources": [
+        {
+          "id": "log",
+          "version": 1,
+          "origin_group": "synthetic-log",
+          "url": "urn:synthetic:log",
+          "locator": "Invented event log, entries 1-3",
+          "passage": "Warning received; owner examined evidence; documented correction verified.",
+          "available": {
+            "earliest": "2020-01-03",
+            "latest": "2020-01-03"
+          },
+          "artifact_digest": "82941aadb7b2a0747bfe3f2a416165539e9b6eb616f63b7ccf07cb6b6e1f353d"
+        }
+      ],
+      "claims": [
+        {
+          "id": "warning",
+          "version": 1,
+          "subject": "Fictional service",
+          "identity": "RESOLVED_REPORTED",
+          "kind": "RECORD_CONTENT",
+          "text": "Warning received; owner examined evidence; documented correction verified.",
+          "source_ids": [
+            "log"
+          ],
+          "objections": []
+        }
+      ],
+      "analysis": {
+        "concern": "Was a material fictional warning given a reasoned disposition?",
+        "harm_criterion": "A missed warning permits a preventable interruption of the fictional service.",
+        "affected_groups": "Fictional service users and staff.",
+        "benefits": "Timely processing preserves service.",
+        "alternatives": "Assign an owner and investigate; retain current routing only with supporting evidence.",
+        "chronology": "January 1 warning; January 2 decision; January 3 log available.",
+        "counterargument": "The warning might be erroneous or already addressed; inspect the disposition record.",
+        "remedy": "Require a named owner, receipt, reasoned disposition and later outcome review.",
+        "intervention_costs": "Review time, delay and false alarms can themselves harm service.",
+        "outcome_measure": "Fraction of synthetic material warnings with evidenced dispositions.",
+        "discriminating_test": "A documented assessment and successful correction would weaken the concern.",
+        "limitations": "All events, evidence, reviewers and declared controllers are fabricated.",
+        "correction_route": "Amend the case and obtain fresh reviews of its full record."
+      },
+      "disposition": "CLOSE_CONCERN",
+      "disposition_reason": "The supplied log supports closure.",
+      "draft": {
+        "kind": "NO_CHALLENGE",
+        "audience": "Fictional internal reviewer",
+        "text": "Close the fictional concern with the documented rationale."
+      }
+    },
+    "reviews": [
+      {
+        "role": "SCOUT",
+        "principal": "scout",
+        "record_digest": "fc50706ea9904c45709640486ae1a8a72cca12c5a5a86aac08fb89b3a2e4ab35",
+        "assessment": "Fabricated role output: inspect the supplied record; no independent review occurred."
+      },
+      {
+        "role": "ARCHIVIST",
+        "principal": "archivist",
+        "record_digest": "fc50706ea9904c45709640486ae1a8a72cca12c5a5a86aac08fb89b3a2e4ab35",
+        "assessment": "Fabricated role output: inspect the supplied record; no independent review occurred."
+      },
+      {
+        "role": "IMPACT_ANALYST",
+        "principal": "impact_analyst",
+        "record_digest": "fc50706ea9904c45709640486ae1a8a72cca12c5a5a86aac08fb89b3a2e4ab35",
+        "assessment": "Fabricated role output: inspect the supplied record; no independent review occurred."
+      },
+      {
+        "role": "COUNTERARGUMENT_REVIEWER",
+        "principal": "counterargument_reviewer",
+        "record_digest": "fc50706ea9904c45709640486ae1a8a72cca12c5a5a86aac08fb89b3a2e4ab35",
+        "assessment": "Fabricated role output: inspect the supplied record; no independent review occurred."
+      },
+      {
+        "role": "REMEDY_DESIGNER",
+        "principal": "remedy_designer",
+        "record_digest": "fc50706ea9904c45709640486ae1a8a72cca12c5a5a86aac08fb89b3a2e4ab35",
+        "assessment": "Fabricated role output: inspect the supplied record; no independent review occurred."
+      },
+      {
+        "role": "CHALLENGE_DRAFTER",
+        "principal": "challenge_drafter",
+        "record_digest": "fc50706ea9904c45709640486ae1a8a72cca12c5a5a86aac08fb89b3a2e4ab35",
+        "assessment": "Fabricated role output: inspect the supplied record; no independent review occurred."
+      },
+      {
+        "role": "AUDIT_REVIEWER",
+        "principal": "audit_reviewer",
+        "record_digest": "fc50706ea9904c45709640486ae1a8a72cca12c5a5a86aac08fb89b3a2e4ab35",
+        "assessment": "Fabricated role output: inspect the supplied record; no independent review occurred."
+      }
+    ]
+  },
+  "context": {
+    "schema": "cortac.vanguard.context.v1",
+    "expected": {
+      "case_id": "vanguard-fictional-resolved",
+      "policy_digest": "5bc71521fe0fec579ec785b7888775b889caee1c5d1dc7f441bbc92ee52d02a2",
+      "version": 1,
+      "predecessor_digest": "0000000000000000000000000000000000000000000000000000000000000000"
+    },
+    "now": "2020-01-04",
+    "source_cutoff": "2020-01-03",
+    "sources": [
+      {
+        "id": "log",
+        "version": 1,
+        "digest": "f2b835577c3dbbf15a17c05f0d0bca990498e3ef05d190df002c05bc6baf20b9"
+      }
+    ],
+    "claims": [
+      {
+        "id": "warning",
+        "version": 1,
+        "digest": "c28c8a8a5f76970b655dc1bd3ade8259822a6b7be088f3ace5cb2d1e4af136de"
+      }
+    ],
+    "principals": [
+      {
+        "id": "scout",
+        "controller": "fabricated-scout"
+      },
+      {
+        "id": "archivist",
+        "controller": "fabricated-archivist"
+      },
+      {
+        "id": "impact_analyst",
+        "controller": "fabricated-impact_analyst"
+      },
+      {
+        "id": "counterargument_reviewer",
+        "controller": "fabricated-counterargument_reviewer"
+      },
+      {
+        "id": "remedy_designer",
+        "controller": "fabricated-remedy_designer"
+      },
+      {
+        "id": "challenge_drafter",
+        "controller": "fabricated-challenge_drafter"
+      },
+      {
+        "id": "audit_reviewer",
+        "controller": "fabricated-audit_reviewer"
+      }
+    ],
+    "party_ids": []
+  }
+}

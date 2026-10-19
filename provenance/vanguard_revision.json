@@ -1,0 +1,18 @@
+{
+  "schema": "cortac.vanguard.provenance.v1",
+  "source_title": "Vanguard Decision Review Fleet Draft Charter",
+  "source_version": "Page sequence 0, created 2026-10-17",
+  "export_path": "vanguard/CHARTER_SOURCE.md",
+  "export_sha256": "e01d8d52bec61553344bd1199153ead0371b61cf2965697a0e9d365eacb8f8d5",
+  "export_method": "Page title followed by markdown blocks in source order; no account metadata included.",
+  "original_artifact_sha256": null,
+  "scope": "Text export of an unratified draft, not an authorization or deployed system.",
+  "historical_example": {
+    "url": "https://www.fincen.gov/system/files/enforcement_action/2020-05-21/JPMorgan_ASSESSMENT_01072014_0.pdf",
+    "sha256": "c2241c55240ef8f16a2129f6542dca2690ad6f370114a9f86603fa203e3f26a4",
+    "bytes": 190556,
+    "retrieved_on": "2026-10-17",
+    "locators": "Printed pp. 1, 6-7",
+    "passage_normalization": "PDF line wraps and whitespace collapsed; no PDF artifact committed."
+  }
+}
