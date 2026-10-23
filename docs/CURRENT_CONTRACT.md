@@ -33,6 +33,10 @@ is indexed separately below.
 - [Vanguard decision-review integration](VANGUARD_OFFLINE_V1.md): opt-in supplied
   packet inspection, role instructions, pilot examples and explicit OPS1 v1 handoff;
   no deployed agents, semantic adjudication or external-action authority.
+- [Optional Vanguard pinned provenance](VANGUARD_PROVENANCE_V1.md): separately
+  versioned comparisons to externally pinned source descriptors and local artifact
+  bytes, with optional frozen review-input commitments and an additive OPS1 handoff;
+  pin custody, authentication, factual truth and independence remain unestablished.
 - [Evidence gates](EVIDENCE_GATES.md): warranted scripted-sandbox interpretations
   and requirements for stronger claims.
 - [Current synthetic examples](../package/results_v2/): examples rather than a
