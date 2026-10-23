@@ -1,0 +1,37 @@
+{
+  "binding": {
+    "case_id": "vanguard-fictional-failure",
+    "policy_digest": "5bc71521fe0fec579ec785b7888775b889caee1c5d1dc7f441bbc92ee52d02a2",
+    "predecessor_digest": "0000000000000000000000000000000000000000000000000000000000000000",
+    "version": 1
+  },
+  "established_on": "2020-01-04",
+  "id": "synthetic-inventory",
+  "review_input_commitment": [
+    {
+      "context_digest": "446f237825365d0ce7b130d52b771a54012b896ba12290a1df5c6e47020e11af",
+      "record_digest": "cf81024d784aa3306c7fb78d0ec1ba9ea58832e419b2f373eed1a25fdbb48dd6"
+    }
+  ],
+  "schema": "cortac.vanguard.source_inventory.v1",
+  "source_cutoff": "2020-01-03",
+  "sources": [
+    {
+      "artifact_digest": "2e4dc78d99f20985258be20ba2540f5e4e889d4981d0c5bb6798d300ddaf58a6",
+      "available": {
+        "earliest": "2020-01-03",
+        "latest": "2020-01-03"
+      },
+      "digest": "a3fa423932d9c808d59957636f93e570ccee5046ec97734addef7233f237415e",
+      "id": "log",
+      "origin_group": "synthetic-log",
+      "provenance_refs": [
+        "urn:synthetic:custody:log"
+      ],
+      "valid_until": "2020-01-31",
+      "version": 1
+    }
+  ],
+  "valid_until": "2020-01-31",
+  "version": 1
+}
