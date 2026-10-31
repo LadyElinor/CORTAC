@@ -1,0 +1,11 @@
+{
+  "schema": "cortac.commonwealth.source_context.v1",
+  "packet_digest": "7a7939dd7d8b41cae729f49bf143d2ccb976a32104aaf92f98c34815df15ed4d",
+  "locator": "https://github.com/LadyElinor/unfinished-commonwealth/blob/5d268390abca2ba69061c2f667161c0316b12802/examples/authority-review-packet.json",
+  "version": "5d268390abca2ba69061c2f667161c0316b12802",
+  "origin_group": "LadyElinor/unfinished-commonwealth:synthetic-example",
+  "event_interval": null,
+  "publication_interval": null,
+  "scope": "SYNTHETIC",
+  "original_artifact_digest": null
+}

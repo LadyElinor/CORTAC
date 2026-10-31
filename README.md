@@ -71,6 +71,22 @@ python scripts/vanguard_review.py vanguard/examples/jpmorgan-madoff-retrospectiv
 python scripts/vanguard_integration.py
 ```
 
+[Commonwealth A1 intake v1](docs/COMMONWEALTH_INTAKE_V1.md) preserves the
+Terra-compatible A1 input without manufacturing Vanguard evidence or reviewers.
+It can bind an intake to a separately supplied Vanguard packet and context for
+read-only structural inspection. Even a consistent target leaves the pair
+incomplete: the relationship, evidence, mandate and actual review remain
+unverified. The exact 23-field crosswalk and unresolved requirements are documented.
+
+```sh
+python scripts/commonwealth_intake.py intake vanguard/commonwealth/terra-a1-packet.json --source-context vanguard/commonwealth/source-context.json
+python scripts/commonwealth_integration.py
+```
+
+The intake command deliberately exits **3** (evidence still required). The control
+runner exits 0 only when its exposed structural expectations match. Neither grants
+authority or enables external execution; the Vanguard charter remains unratified.
+
 ## Proposed OPS1 operating supplement
 
 The [OPS1 proposal](docs/OPS1_PROPOSED.md) operationalizes disputed-fact handling,

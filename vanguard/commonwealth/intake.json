@@ -1,0 +1,72 @@
+{
+  "adapter_version": "commonwealth-vanguard-intake-1.0.0",
+  "authority": "NONE",
+  "controller_closure": "SUPPLIED_UNVERIFIED",
+  "execution_enabled": false,
+  "missing_answers": [],
+  "original_artifact_verification": "NOT_PERFORMED",
+  "packet_digest": "7a7939dd7d8b41cae729f49bf143d2ccb976a32104aaf92f98c34815df15ed4d",
+  "provenance_gaps": [
+    "SOURCE_CONTEXT_MISSING:event_interval",
+    "SOURCE_CONTEXT_MISSING:publication_interval",
+    "SOURCE_CONTEXT_MISSING:original_artifact_digest"
+  ],
+  "schema": "cortac.commonwealth.intake.v1",
+  "semantic_assessment": "NOT_PERFORMED",
+  "source_authentication": "NOT_PERFORMED",
+  "source_context": {
+    "event_interval": null,
+    "locator": "https://github.com/LadyElinor/unfinished-commonwealth/blob/5d268390abca2ba69061c2f667161c0316b12802/examples/authority-review-packet.json",
+    "origin_group": "LadyElinor/unfinished-commonwealth:synthetic-example",
+    "original_artifact_digest": null,
+    "packet_digest": "7a7939dd7d8b41cae729f49bf143d2ccb976a32104aaf92f98c34815df15ed4d",
+    "publication_interval": null,
+    "schema": "cortac.commonwealth.source_context.v1",
+    "scope": "SYNTHETIC",
+    "version": "5d268390abca2ba69061c2f667161c0316b12802"
+  },
+  "source_context_digest": "b8ea470ce0526bc02acd2332cdfd2d67da67e7248c24813acd1a4f787be2c168",
+  "source_packet": {
+    "answers": {
+      "action": "Prepare one configuration-file candidate; do not deploy.",
+      "affected_people": "Workspace owner; service users if a later deployment occurs.",
+      "analyst_language": "This complete fixture demonstrates form coverage only. It provides no genuine authority.",
+      "assessment": "A bounded service failure was observed.",
+      "authority_basis": "Synthetic task contract, paths and acceptance checks; candidate preparation only.",
+      "authority_status": "supported by cited instrument",
+      "case": "Synthetic: temporary repair of a local service",
+      "counterevidence": "A restart may suffice; inspect the failed check before changing configuration.",
+      "decision_maker": "Local workspace operator",
+      "dissent": "Agent may halt; operator reviews objections and seeks an independent reviewer before consequential deployment.",
+      "expiry": "One-use warrant, maximum 15 minutes; fresh review on renewal.",
+      "legitimacy": "not applicable",
+      "proposer": "Assigned repair agent",
+      "public_language": "Synthetic fixture: no public political statement.",
+      "representation": "The owner delegates local candidate preparation. No broader public representation is claimed.",
+      "reversal": "Revoke unused warrant; discard candidate; original repository remains unchanged.",
+      "reviewer": "Synthetic reviewer; 2026-10-30; independence not established by this fixture.",
+      "scope": "One listed file; no external writes, deployments or permission changes.",
+      "source_record": "Synthetic incident log; not evidence about any real organization.",
+      "source_status": "primary record reviewed",
+      "stage": "proposal",
+      "trigger": "Operator confirms the recorded check failure; a passing fresh observation defeats the premise.",
+      "working_language": "Synthetic task proposal: prepare a repair candidate if failure persists."
+    },
+    "schema": "warranted-authority-review-1"
+  },
+  "status": "INTAKE_REQUIRES_EVIDENCE",
+  "unsupported_vanguard_requirements": [
+    "CASE_POLICY_AND_PREDECESSOR_ANCHORS",
+    "DECISION_SCOPE_AND_UNCERTAIN_DATES",
+    "SOURCE_INVENTORY_AND_ORIGINAL_ARTIFACTS",
+    "CLAIM_INVENTORY_AND_IDENTITIES",
+    "SOURCE_LINKED_OBJECTIONS_AND_DISPOSITIONS",
+    "REASONED_ANALYSIS_AND_ALTERNATIVES",
+    "SEPARATELY_AUTHORED_DISPOSITION_AND_INTERNAL_DRAFT",
+    "CURRENT_RECORD_ROLE_REVIEWS",
+    "PRINCIPALS_CONTROLLERS_AND_CONFLICTS",
+    "MANDATE_SCOPE_EXPIRY_AND_REVOCATION",
+    "AFFECTED_POPULATION_AND_REPRESENTATION",
+    "SOURCE_AUTHENTICITY_AND_INVENTORY_COMPLETENESS"
+  ]
+}
