@@ -1,0 +1,50 @@
+name: Commonwealth A1 intake interoperability
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  interoperability:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: '3.11'
+          - os: ubuntu-latest
+            python: '3.12'
+          - os: windows-latest
+            python: '3.12'
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Check out pinned Commonwealth A1 reference
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          repository: LadyElinor/unfinished-commonwealth
+          ref: 5d268390abca2ba69061c2f667161c0316b12802
+          path: .local/commonwealth-reference
+          persist-credentials: false
+      - name: Compare actual A1 and adapter input contracts
+        run: python scripts/commonwealth_integration.py --commonwealth-checkout .local/commonwealth-reference
+      - name: Install package
+        run: python -m pip install --no-deps .
+      - name: Check installed adapter away from source
+        shell: bash
+        run: |
+          cd "$RUNNER_TEMP"
+          python -c 'from wac_offline.commonwealth_intake_v1 import build_intake; r = build_intake({"schema": "warranted-authority-review-1", "answers": {}}); assert r["authority"] == "NONE" and r["execution_enabled"] is False and r["status"] == "INTAKE_REQUIRES_EVIDENCE"'

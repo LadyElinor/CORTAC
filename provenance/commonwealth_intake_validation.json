@@ -1,0 +1,61 @@
+{
+  "authority": "NONE",
+  "checks": [
+    {
+      "command": "python scripts/verify.py --report .local/commonwealth-verification.json",
+      "exit_code": 0,
+      "passed": true,
+      "stages": 23,
+      "tests": 622
+    },
+    {
+      "a1_controls": 58,
+      "a1_reference_commit": "5d268390abca2ba69061c2f667161c0316b12802",
+      "command": "python scripts/commonwealth_integration.py --commonwealth-checkout ../unfinished-commonwealth",
+      "exit_code": 0,
+      "passed": true,
+      "vanguard_controls": 20
+    },
+    {
+      "command": "python scripts/verify.py",
+      "exit_code": 0,
+      "passed": true,
+      "repository": "LadyElinor/unfinished-commonwealth",
+      "tests": 403
+    },
+    {
+      "command": "python -m pip wheel --no-deps --no-build-isolation . --wheel-dir .local/wheel",
+      "exit_code": 0,
+      "passed": true
+    },
+    {
+      "command": "Fresh venv install --no-index --no-deps; installed module intake/pair and CLI, plus Vanguard controls from outside the checkout",
+      "exit_code": 0,
+      "passed": true,
+      "valid_intake_cli_exit": 3,
+      "vanguard_controls": 20
+    }
+  ],
+  "controller_closure": "SUPPLIED_UNVERIFIED",
+  "execution_enabled": false,
+  "git": {
+    "dirty": true,
+    "revision": "4a83d80c39d20438daedb5fbbce61720a4c921e2"
+  },
+  "governance_approval": "NOT_ESTABLISHED",
+  "hosted_ci_observed_in_this_receipt": false,
+  "platform": "Linux",
+  "python_version": "3.12.14",
+  "runtime_and_control_sha256": {
+    "package/tests/test_commonwealth_intake_v1.py": "a2d8aa2cb6ef847b68c316813c52c9e9bdd0784c064d4f71c88b5a4c8cfef6a0",
+    "package/wac_offline/commonwealth_intake_v1.py": "885bfe093401bf1af45a705a5b340a0dbc3f21d27e3bf56f5d74f0f6c125484b",
+    "scripts/commonwealth_intake.py": "2db4485c0fa26a172f3cd5a76f06d25149f93fa1fa420cc58dfe67952ae627f0",
+    "scripts/commonwealth_integration.py": "8647ee18dbd0c28423167fae9d814f2e76997623923f61ac6891ca2ca61788db",
+    "vanguard/commonwealth/intake.json": "66a2b6bbb1b771cfd3845ede50f33db2b5db2bc4c033ff8dc0f982333a7f3524",
+    "vanguard/commonwealth/source-context.json": "a8c20ef78c12f55ee195db838c8eeabd65fb0f5f53f51555902ccf4a891b4bcb",
+    "vanguard/commonwealth/terra-a1-packet.json": "3f6f7f1e768df736c0b5842eb582da9c2240b0cc0a9eff532a2a09ddd090e0f1"
+  },
+  "schema": "cortac.commonwealth.validation.v1",
+  "scope": "LOCAL_EXPOSED_STRUCTURAL_CONTROLS_ONLY",
+  "timestamp_utc": "2026-10-31T21:04:07.407279+00:00"
+}

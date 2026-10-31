@@ -1,0 +1,29 @@
+{
+  "schema": "cortac.commonwealth.provenance.v1",
+  "commonwealth_repository": "https://github.com/LadyElinor/unfinished-commonwealth",
+  "commonwealth_commit": "5d268390abca2ba69061c2f667161c0316b12802",
+  "a1_version": "authority-1.0.0",
+  "a1_schema": "warranted-authority-review-1",
+  "commonwealth_files": {
+    "commonwealth/authority_v1/records.py": "7796a2ffa76706f2fbb949b3f29c4d84d8efd19d99efbd88c22fa314eb0c1f3a",
+    "commonwealth/authority_v1/__init__.py": "d28f951efdf8e749917b84f157c16864300f59135bd77f7f4eb829a26f206c4e",
+    "examples/authority-review-packet.json": "3f6f7f1e768df736c0b5842eb582da9c2240b0cc0a9eff532a2a09ddd090e0f1",
+    "docs/AUTHORITY_V1.md": "9fdf2d07447e5e9568dc7dc098384a0d9f747b27d9cff791ac58e23366bf7039",
+    "docs/INTEGRATION.md": "6a7002836bb1dc6e2f19517f6b8928a4dc31d1094512a8837d3b8d6e94bd276f",
+    "LICENSE": "43b80c7131e90841ba14da091fa14959efe59f65fa6c9f0a9031dca7be782369"
+  },
+  "terra_export_commit_as_reported_by_a1": "754028746ba877e8bb7641183a6577b6dc5559df",
+  "terra_directly_retrieved": false,
+  "cortac_base_commit": "4a83d80c39d20438daedb5fbbce61720a4c921e2",
+  "vanguard_files": {
+    "package/wac_offline/vanguard_review_v1.py": "27e1a84fd923aee04fee51f598c469c027c9b653ef01f8d9e16b266865808d7b",
+    "package/wac_offline/vanguard_fixtures_v1.py": "b94572e871b59be9a3589c87540a53cebd1c0976bab880908efb957a10c67d10",
+    "package/wac_offline/ops_trace_v1.py": "a3bde5d592b4856781d260b6e7bb2d9f16c704036856e7bbfbc8e7d727457b36",
+    "docs/VANGUARD_OFFLINE_V1.md": "d5f49a272bfd6cceb27299f77e529d6954e040b0cd5d89a6c4d7d4b059f41dd7"
+  },
+  "copied_fixture": "vanguard/commonwealth/terra-a1-packet.json",
+  "fixture_original_path": "examples/authority-review-packet.json",
+  "license_notice": "vanguard/commonwealth/LICENSE",
+  "scope": "SYNTHETIC_EXPOSED_DEVELOPMENT_CONTROLS",
+  "limit": "File digests establish retrieved byte identity, not source truth, authentic reviewers, valid mandates or independent evidence."
+}
