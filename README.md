@@ -87,6 +87,14 @@ The intake command deliberately exits **3** (evidence still required). The contr
 runner exits 0 only when its exposed structural expectations match. Neither grants
 authority or enables external execution; the Vanguard charter remains unratified.
 
+## Proposed Relay warning supplement
+
+[Relay warning review v1](docs/RELAY_WARNING_V1.md) separately records warning
+delivery, cross-compartment review, protective proposals and person-specific
+attribution evidence gaps. It never determines culpability or verifies actual
+repair; every result remains review-required with authority NONE and execution
+disabled. Prior OPS1 and Vanguard contracts are unchanged.
+
 ## Proposed OPS1 operating supplement
 
 The [OPS1 proposal](docs/OPS1_PROPOSED.md) operationalizes disputed-fact handling,
