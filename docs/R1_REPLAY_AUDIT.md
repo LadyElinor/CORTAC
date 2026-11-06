@@ -32,3 +32,39 @@ or extra fields, nested numeric aliases, malformed event arrays, manifest scope,
 and coherent historical freshness variants. A coherent freshness claim may pass
 structural validation without becoming verified. Stop after this contract repair,
 regressions and CI; no additional execution or governance powers are introduced.
+
+## Retained result and checking contract
+
+All four declared checks passed: 11 new regression tests, the full 689-test
+suite with zero skips, and both original historical replays. The repeated CLI
+controls now accept the unchanged report and refuse all five contradictions.
+The original task and repair artifacts remain byte-for-byte unchanged.
+
+The [audit receipt](../provenance/r1_replay_audit/manifest.json) retains the task's
+12 events, original installed-validator pin, candidate commit, observations,
+and shared-controller UNKNOWN review. Its `design_commit` identifies the original
+R1 profile design; the follow-up's specific scope is the task recorded in genesis.
+The candidate was checked before these publication records were added. As before,
+supplementary verification-report hashes are separate observations, not part of
+the process-output receipt or independent custody.
+
+| Claimed check | Concrete counterexample | Remaining assumption |
+| --- | --- | --- |
+| Complete report agrees with journal projection | Changed evidence/parent/outcome fields or missing/extra fields | Shared runtime projection and checker can share defects |
+| JSON types remain distinct | Float event count, boolean exit code, numeric success flag | Standard JSON encoding, not semantic authentication |
+| Authority remains unpromoted | Changed execution, independence, authenticity or scope fields | Operator can rewrite code, journal and report together |
+| Exported input has a supported shape | Nonobject events, noninteger sequences, invalid manifest fields | Supported local artifact format only |
+| Historical freshness is not promoted | Coherent true/false/null freshness variants remain structurally admissible | Replay cannot establish the truth of a past observation |
+
+`report_projection_valid: true` means the complete report is structurally
+consistent. `historical_freshness_verified: false` remains explicit. Comparing
+current repository bytes, authenticating external custody, or judging the truth
+of review prose requires separate evidence. Replay grants no approval.
+
+```sh
+python scripts/check_repository_self_application.py --evidence provenance/r1_replay_audit
+```
+
+This uses the current R1 reducer, not an independent implementation. The recorded
+installed validator remains pinned to the pre-edit build. CI replays all three
+retained tasks without rerunning their candidate commands.
