@@ -10,6 +10,11 @@ See the [current contract and historical-record index](docs/CURRENT_CONTRACT.md)
 
 ## S1 agent lifecycle scaffold
 
+The optional [R1 repository-task lifecycle](docs/REPOSITORY_TASK_V1.md) binds scoped
+repository proposals to observed bytes, predeclared local checks and advisory
+review. Shared control stays explicit; passing checks or supplied assessments
+never establishes independent review or merge authority.
+
 The optional [S2 assignment coordinator](docs/ASSIGNMENT_SCHEDULER_V1.md) composes
 up to 16 fresh S1 assignments with controller rotation, separate decision/review
 dispatch budgets, durable reservations and deadline checks. Unknown submissions

@@ -7,6 +7,10 @@ is indexed separately below.
 
 ## Current reading order
 
+- [R1 repository tasks](REPOSITORY_TASK_V1.md): scoped candidate-byte binding,
+  explicit local test-process receipts and evidence-bound advisory review;
+  separate from AP1/S2, with no merge authority or verified independence.
+
 - [S2 assignment coordinator](ASSIGNMENT_SCHEDULER_V1.md): bounded controller
   rotation over S1 journals, two dispatch budgets, deadlines and uncertainty-aware
   holds. Reservations are historical local records, never capabilities.
