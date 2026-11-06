@@ -1,5 +1,6 @@
 """Lifecycle counterexamples: local consistency is not evidence authenticity."""
 from copy import deepcopy
+from contextlib import closing
 import hashlib
 import json
 from pathlib import Path
@@ -113,10 +114,10 @@ class ScaffoldTests(unittest.TestCase):
 
     def test_journal_tampering_and_repaired_hash_semantics(self):
         self.propose()
-        with sqlite3.connect(self.j.path) as db:
+        with closing(sqlite3.connect(self.j.path)) as db, db:
             db.execute("UPDATE events SET hash=? WHERE seq=3", ('0'*64,))
         with self.assertRaises(ValueError): self.j.report()
-        with sqlite3.connect(self.j.path) as db:
+        with closing(sqlite3.connect(self.j.path)) as db, db:
             n,k,raw,prev,_ = db.execute('SELECT * FROM events WHERE seq=3').fetchone()
             body = json.loads(raw); body['reply']['brief_id'] = '0'*64
             h = digest(dict(seq=n,kind=k,body=body,previous=prev))
