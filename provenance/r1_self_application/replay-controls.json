@@ -1,0 +1,17 @@
+[
+  {
+    "control": "hash",
+    "exit": 2,
+    "reason": "RETAINED_R1_REPLAY_REFUSED: journal chain mismatch"
+  },
+  {
+    "control": "semantic",
+    "exit": 2,
+    "reason": "RETAINED_R1_REPLAY_REFUSED: no matching pending check"
+  },
+  {
+    "control": "candidate",
+    "exit": 2,
+    "reason": "RETAINED_R1_REPLAY_REFUSED: historical candidate bytes"
+  }
+]

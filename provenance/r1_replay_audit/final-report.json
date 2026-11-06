@@ -1,0 +1,183 @@
+{
+  "version": "cortac.repository-task.v1",
+  "scope": "LOCAL_RESEARCH_ONLY",
+  "authority": "NONE",
+  "external_execution_enabled": false,
+  "independent_review_established": false,
+  "controller_closure": "SUPPLIED_UNVERIFIED",
+  "task_id": "r1-replay-report-audit",
+  "journal_head": "ff9c7324b92dc1b805d5abc1d08adb7042e0aac0dd7d81b19afda51df4c9901a",
+  "events": 12,
+  "decision": "PROPOSE",
+  "candidate_digest": "8f55e3d4ca3658adac7fa6332feab64601a31d8494ede45d853312de7517d0ef",
+  "candidate_current": true,
+  "evidence_digest": "cb172e7e7e23f198f0e9e6d902e0179ab1db6668e8969d82e3c9e8d71a1b5d6a",
+  "checks": {
+    "report-regressions": {
+      "after": "8f55e3d4ca3658adac7fa6332feab64601a31d8494ede45d853312de7517d0ef",
+      "before": "8f55e3d4ca3658adac7fa6332feab64601a31d8494ede45d853312de7517d0ef",
+      "elapsed_ns": 316104312,
+      "id": "report-regressions",
+      "process": {
+        "exit_code": 0,
+        "status": "EXITED",
+        "stderr": {
+          "bytes": 1846,
+          "sha256": "4f475a878e8f298c381429135fdb3faa38e3ba6a0fa65fc14286fde8f41423e3"
+        },
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "outcome": "PASS"
+    },
+    "full-no-skips": {
+      "after": "8f55e3d4ca3658adac7fa6332feab64601a31d8494ede45d853312de7517d0ef",
+      "before": "8f55e3d4ca3658adac7fa6332feab64601a31d8494ede45d853312de7517d0ef",
+      "elapsed_ns": 17683609057,
+      "id": "full-no-skips",
+      "process": {
+        "exit_code": 0,
+        "status": "EXITED",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 555,
+          "sha256": "134aecb224d9000a4e835ef240f80bc3b364999cc8c4e7345568194252dae446"
+        }
+      },
+      "outcome": "PASS"
+    },
+    "historical-replay": {
+      "after": "8f55e3d4ca3658adac7fa6332feab64601a31d8494ede45d853312de7517d0ef",
+      "before": "8f55e3d4ca3658adac7fa6332feab64601a31d8494ede45d853312de7517d0ef",
+      "elapsed_ns": 1070124554,
+      "id": "historical-replay",
+      "process": {
+        "exit_code": 0,
+        "status": "EXITED",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 362,
+          "sha256": "13d4a5d1baef42d7687d02df62717c9a42e71002c7f4fdc352382a038bbbe1b9"
+        }
+      },
+      "outcome": "PASS"
+    },
+    "repair-replay": {
+      "after": "8f55e3d4ca3658adac7fa6332feab64601a31d8494ede45d853312de7517d0ef",
+      "before": "8f55e3d4ca3658adac7fa6332feab64601a31d8494ede45d853312de7517d0ef",
+      "elapsed_ns": 1216674711,
+      "id": "repair-replay",
+      "process": {
+        "exit_code": 0,
+        "status": "EXITED",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 362,
+          "sha256": "13d4a5d1baef42d7687d02df62717c9a42e71002c7f4fdc352382a038bbbe1b9"
+        }
+      },
+      "outcome": "PASS"
+    }
+  },
+  "pending_check": null,
+  "evidence_refs": {
+    "task": "f346098f088a08f3d042b4c25fa78d3ec4734f415fcf1c73c870fd25323e5440",
+    "candidate": "8f55e3d4ca3658adac7fa6332feab64601a31d8494ede45d853312de7517d0ef",
+    "check:report-regressions": "7697f8d474dc1a83422ef6072b19f4d8df2cd63eddab7015bf5981e882a6c44a",
+    "check:full-no-skips": "712f50c67c695ca87f362093bcb738d3fe6ffec702471ea4dd9890c7f014b8e4",
+    "check:historical-replay": "83c9b899c822c3879a8d57513dbf8e3e2b18b22c10b18c1f17ec6a07d704f753",
+    "check:repair-replay": "0d12797353c3bd3ec0268e7b21a2da9abacd47f5b18b08ab1b1b68b4636334cf"
+  },
+  "local_checks_passed": true,
+  "review": {
+    "candidate_digest": "8f55e3d4ca3658adac7fa6332feab64601a31d8494ede45d853312de7517d0ef",
+    "evidence_digest": "cb172e7e7e23f198f0e9e6d902e0179ab1db6668e8969d82e3c9e8d71a1b5d6a",
+    "record": {
+      "affected_parties": [
+        {
+          "benefits": "Contradictory scope, evidence, parents and outcomes are refused.",
+          "burdens": "Stricter report and manifest contracts.",
+          "id": "maintainers",
+          "interests": "Saved reports consistent with their retained history.",
+          "representation": "Single assistant/operator; no independent reviewer participated."
+        }
+      ],
+      "alternatives": [
+        {
+          "evidence_refs": [
+            "task",
+            "candidate",
+            "check:report-regressions",
+            "check:full-no-skips",
+            "check:historical-replay",
+            "check:repair-replay"
+          ],
+          "less_harmful_analysis": "Avoids a refactor but retains five reproduced contradictions.",
+          "option": "Keep partial report comparison.",
+          "rejection_or_selection_reason": "Selected full deterministic projection with strict JSON types after baseline probes."
+        }
+      ],
+      "burden_justification": "Bounded checker correction without new execution authority; original records remain unchanged.",
+      "dissent": [
+        "Shared control is not independent review."
+      ],
+      "dissent_status": "RECORDED",
+      "evidence_refs": [
+        "task",
+        "candidate",
+        "check:report-regressions",
+        "check:full-no-skips",
+        "check:historical-replay",
+        "check:repair-replay"
+      ],
+      "predictions": [
+        "The five baseline contradictions fail; original receipts and coherent but unauthenticated freshness variants remain structurally valid."
+      ],
+      "protected_limit_assessments": [
+        {
+          "evidence_refs": [
+            "task"
+          ],
+          "limit_id": "independent-review",
+          "reasons": "One supplied operator; independence is unestablished.",
+          "status": "UNKNOWN"
+        }
+      ],
+      "remedy_plan": {
+        "authority": "No authority granted by this record.",
+        "evidence_refs": [
+          "task"
+        ],
+        "resources": "Local development work.",
+        "steps": "Retain the audit and failed baseline; use a separate scoped task for another demonstrated defect."
+      },
+      "review_triggers": [
+        {
+          "condition": "Bytes or evidence changes.",
+          "review_authority": "Ordinary maintainer."
+        }
+      ],
+      "schema": "cortac.decision.record.v1"
+    },
+    "reviewer": "reviewer",
+    "supplied_assessments_pass": false
+  },
+  "review_applicable": true,
+  "declared_control": "SHARED",
+  "approval_granted": false,
+  "local_effects": "JOURNAL_AND_EXPLICIT_TEST_PROCESSES",
+  "parent_receipt": null,
+  "parent_authenticity": false,
+  "source_authenticity": false
+}

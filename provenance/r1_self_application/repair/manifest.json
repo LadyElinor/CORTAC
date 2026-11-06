@@ -1,0 +1,20 @@
+{
+  "schema": "cortac.r1.self-application.v1",
+  "design_commit": "6023eba25a628ee1d5489401ca2ad7486ddaf377",
+  "base_commit": "8c308a6624bc2275161b2954cf8ab7be22c666cf",
+  "validator_commit": "0fcd6e92975cacc415b143791138086fe0cbb536",
+  "candidate_commit": "8275b99332b5aee23943d6e27b02c92ac36912ea",
+  "candidate_tree": "3e8891c22012814cb5a8ee98d72a4dc977768e84",
+  "task_id": "r1-journal-path-repair",
+  "scope": "LOCAL_RESEARCH_ONLY",
+  "authority": "NONE",
+  "independent_review_established": false,
+  "files": {
+    "baseline.json": "d7c6fbd0ee597f0f27b40c0650bdb0fcbdb6a6bad8996d436911bcf0c84a8929",
+    "final-report.json": "7bc193ded680dfc28851652eb0d163620f8003196ac9301c4c7e04f352396a54",
+    "journal.json": "9328c7dd2dc5a8a91bc685f6ab2fecf18da1e21366262d6dd6a4ace84d255955",
+    "preflight.json": "234a08c0e667b53b5f9b6d5eb7f75b657948365af52c3b84ba2e4f9f09519c70",
+    "validator.json": "8be714687eb816507673b87b3ff9f6e2acd9b32c779ef8f063b9bce6224870f5",
+    "verification.json": "50c864d68d84b54053ef96e9459a3e0ebba83b47e76b78e58b00d5e1ace9dd25"
+  }
+}

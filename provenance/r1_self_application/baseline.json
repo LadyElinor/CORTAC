@@ -1,0 +1,20 @@
+{
+  "name": "all_skipped_probe",
+  "command": [
+    "python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "/tmp/tmpy4m7n52b",
+    "-v"
+  ],
+  "cwd": ".",
+  "exit_code": 0,
+  "expected_exit_code": 0,
+  "tests_run": 1,
+  "passed": true,
+  "errors": [],
+  "stdout": "",
+  "stderr": "test_body (test_skipped.Skipped.test_body) ... skipped 'deliberately unavailable'\n\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK (skipped=1)\n"
+}

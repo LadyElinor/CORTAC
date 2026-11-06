@@ -1,0 +1,11 @@
+{
+  "schema": "cortac.r1.repair-preflight.v1",
+  "commit": "8c308a6624bc2275161b2954cf8ab7be22c666cf",
+  "run_url": "https://github.com/LadyElinor/CORTAC/actions/runs/42267648034",
+  "job_id": 128063637246,
+  "platform": "Windows Python 3.12",
+  "conclusion": "failure",
+  "excerpt": "\nFAIL: test_journal_must_not_be_observed_as_candidate_source (test_repository_task_v1.RepositoryTaskTests.test_journal_must_not_be_observed_as_candidate_source)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\a\\CORTAC\\CORTAC\\package\\tests\\test_repository_task_v1.py\", line 217, in test_journal_must_not_be_observed_as_candidate_source\n    with self.assertRaises(ValueError): Task.create(self.root/'task.sqlite', self.root, self.spec)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ValueError not raised\n\n----------------------------------------------------------------------\nRan 593 tests in 86.322s\n\nFAILED (failures=1)\n",
+  "diagnosis": "Journal parent paths were not resolved before containment checks. A symlink-parent alias also reproduced the bypass on Linux. Short/long Windows path aliasing is the inferred explanation for that CI failure, pending repaired CI.",
+  "retention": "Failure excerpt from the completed GitHub job. Full logs remain on that run; no claim of independent review."
+}

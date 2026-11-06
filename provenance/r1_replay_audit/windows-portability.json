@@ -1,0 +1,12 @@
+{
+  "schema": "cortac.r1.portability-failure.v1",
+  "commit": "c7e10d04155b6f4c0fe0b07feb7eaed4f4c264b5",
+  "run_url": "https://github.com/LadyElinor/CORTAC/actions/runs/42288807652",
+  "job_id": 128136543925,
+  "platform": "Windows Python 3.12",
+  "result": "ERROR",
+  "excerpt": "\nERROR: setUpClass (test_repository_replay_contract.RetainedReportTests)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"D:\\a\\CORTAC\\CORTAC\\package\\tests\\test_repository_replay_contract.py\", line 22, in setUpClass\n    cls.state, cls.head, cls.count = replay.replay_rows(cls.rows)\n                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"D:\\a\\CORTAC\\CORTAC\\scripts\\check_repository_self_application.py\", line 53, in replay_rows\n    return Task._read(db)\n           ^^^^^^^^^^^^^^\n  File \"D:\\a\\CORTAC\\CORTAC\\package\\wac_offline\\repository_task_v1\\journal.py\", line 208, in _read\n    s = initial(data)\n        ^^^^^^^^^^^^^\n  File \"D:\\a\\CORTAC\\CORTAC\\package\\wac_offline\\repository_task_v1\\journal.py\", line 24, in initial\n    raise ValueError('absolute custodian root required')\nValueError: absolute custodian root required\n\n----------------------------------------------------------------------\nRan 596 tests in 102.373s\n\nFAILED (errors=1)\n",
+  "diagnosis": "Archived POSIX root rejected by host-native Windows Path.is_absolute during offline replay.",
+  "repair": "Accept either absolute serialized grammar; require native absolute paths before live observation.",
+  "scope": "Same-project CI observation; no independent review."
+}

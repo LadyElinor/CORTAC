@@ -1,0 +1,603 @@
+{
+  "schema": "cortac.repository_verification.v2",
+  "timestamp_utc": "2026-11-06T18:05:17.693863+00:00",
+  "python_version": "3.12.14",
+  "platform": "Linux",
+  "git": {
+    "revision": "0fcd6e92975cacc415b143791138086fe0cbb536",
+    "dirty": true
+  },
+  "passed": true,
+  "tests_run": 675,
+  "tests_not_skipped": 675,
+  "skips": 0,
+  "coverage_observed_stages": 5,
+  "require_no_skips": true,
+  "checks": [
+    {
+      "name": "BUNDLE_SHA256SUMS",
+      "passed": true,
+      "files_checked": 84,
+      "errors": []
+    },
+    {
+      "name": "evaluation/SHA256SUMS",
+      "passed": true,
+      "files_checked": 28,
+      "errors": []
+    },
+    {
+      "name": "REPOSITORY_SHA256SUMS",
+      "passed": true,
+      "files_checked": 228,
+      "errors": []
+    },
+    {
+      "name": "offline",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "package",
+      "expected_exit_code": 0,
+      "tests_run": 593,
+      "coverage": {
+        "errors": [],
+        "expected_failures": [],
+        "failures": [],
+        "schema": "cortac.unittest.receipt.v1",
+        "skipped": [],
+        "skipped_started": 0,
+        "successful": true,
+        "tests_not_skipped": 593,
+        "tests_run": 593,
+        "unexpected_successes": []
+      },
+      "test_runner": "scripts/test_receipts.py",
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr_receipt": {
+        "size": 76857,
+        "sha256": "d9be523393e3ee44273ae9a9772ab18fe28ab1727348d5963341acfd7b3da604"
+      }
+    },
+    {
+      "name": "repository_task_demo",
+      "command": [
+        "python",
+        "-m",
+        "wac_offline.repository_task_v1.demo"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 320,
+        "sha256": "cd40856015502525ac52ada459a7671a7d20141e8522c36d5f381619940ec58c"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scheduler_decision_demo",
+      "command": [
+        "python",
+        "-m",
+        "wac_offline.scheduler_v1.demo"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 299,
+        "sha256": "772d12184dd1519ab477871dcfcb2caf42cfaf15dde65d165ffe379390cb9f1b"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scaffold_decision_demo",
+      "command": [
+        "python",
+        "-m",
+        "wac_offline.scaffold_v1.demo"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 650,
+        "sha256": "d93a96941190369dac47e061a0979dcf79e11fafd3239f234e4be3bdc51936ab"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "registrar_source",
+      "command": [
+        "python",
+        "scripts/check_registrar_source.py"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 163,
+        "sha256": "dc6b9d12dc202475ba73d0a941c40f3c9fc9cb6bfafbca2f042b9b9b587c1d22"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "amendment_demo",
+      "command": [
+        "python",
+        "scripts/amendment_demo.py"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 1896,
+        "sha256": "151c40df38dc1dcbd380ebec46ed1e8f8db88f164d005f45c56d9cb88fdb427e"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "contested_amendment_demo",
+      "command": [
+        "python",
+        "scripts/contested_amendment_demo.py"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 28358,
+        "sha256": "1c67bc32a9b1c8a5f62d86b5bdcd6898eb47a1003f636f521a04dd651e22f4b1"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scratch_runner_integration",
+      "command": [
+        "python",
+        "scripts/runner_integration.py"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 375591,
+        "sha256": "10bd2e61f5d75279e73415158aa6bf69cadac23685a54bf430bd65959031a5df"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "bounded_complaint_triage",
+      "command": [
+        "python",
+        "scripts/triage_integration.py"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 577052,
+        "sha256": "5cbb391d59a8ea2a9f017a7ca2b4d98cfb466201e859be49bc33e4cdad3b8674"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "opr_structural_controls",
+      "command": [
+        "python",
+        "scripts/opr_integration.py"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 12062,
+        "sha256": "29f1372a78f3924fe98776083f7d32b354392fff6f46ac1c4680fb63bf15241d"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "ops_supplied_trace_controls",
+      "command": [
+        "python",
+        "scripts/ops_integration.py"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 4746,
+        "sha256": "2d616ff42c25df027643247f49abb5121b4aa7dbef56b2f5d8a6dc248f8d22c3"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "sandbox_controls",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "sandbox",
+        "-p",
+        "test_runner.py",
+        "-v"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": 13,
+      "coverage": {
+        "errors": [],
+        "expected_failures": [],
+        "failures": [],
+        "schema": "cortac.unittest.receipt.v1",
+        "skipped": [],
+        "skipped_started": 0,
+        "successful": true,
+        "tests_not_skipped": 13,
+        "tests_run": 13,
+        "unexpected_successes": []
+      },
+      "test_runner": "scripts/test_receipts.py",
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr_receipt": {
+        "size": 1131,
+        "sha256": "b84dc7571d14ef4ff46daa08752cfdab1a3a7e4c2763d1c91d247b6480af1f75"
+      }
+    },
+    {
+      "name": "sandbox_replay",
+      "command": [
+        "python",
+        "sandbox/verify_replay.py"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 342,
+        "sha256": "15a82e5ca1551cc9be4689c7ea8a8f1b2444999d79b1166ba9f3a6190d2bc668"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "evaluation",
+      "command": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "cwd": "evaluation",
+      "expected_exit_code": 0,
+      "tests_run": 52,
+      "coverage": {
+        "errors": [],
+        "expected_failures": [],
+        "failures": [],
+        "schema": "cortac.unittest.receipt.v1",
+        "skipped": [],
+        "skipped_started": 0,
+        "successful": true,
+        "tests_not_skipped": 52,
+        "tests_run": 52,
+        "unexpected_successes": []
+      },
+      "test_runner": "scripts/test_receipts.py",
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr_receipt": {
+        "size": 5062,
+        "sha256": "cfcce581406fa28383275b9d126d33cf152733ade34cc18a2e80582573f796bd"
+      }
+    },
+    {
+      "name": "assignment_adversarial",
+      "command": [
+        "python",
+        "verification/assignment_adversarial.py"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": 11,
+      "coverage": {
+        "errors": [],
+        "expected_failures": [],
+        "failures": [],
+        "schema": "cortac.unittest.receipt.v1",
+        "skipped": [],
+        "skipped_started": 0,
+        "successful": true,
+        "tests_not_skipped": 11,
+        "tests_run": 11,
+        "unexpected_successes": []
+      },
+      "test_runner": "scripts/test_receipts.py",
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr_receipt": {
+        "size": 1173,
+        "sha256": "2a015f49c2ed4805211bc19ddd4dae0239e299c95db7109b52833dd8c7f8d51b"
+      }
+    },
+    {
+      "name": "evaluation_adversarial",
+      "command": [
+        "python",
+        "verification/evaluation_adversarial.py"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": 6,
+      "coverage": {
+        "errors": [],
+        "expected_failures": [],
+        "failures": [],
+        "schema": "cortac.unittest.receipt.v1",
+        "skipped": [],
+        "skipped_started": 0,
+        "successful": true,
+        "tests_not_skipped": 6,
+        "tests_run": 6,
+        "unexpected_successes": []
+      },
+      "test_runner": "scripts/test_receipts.py",
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr_receipt": {
+        "size": 846,
+        "sha256": "918e19212866c3878ae0071f6b503a61ac0b770f775e40df6c38792ca73214a7"
+      }
+    },
+    {
+      "name": "witness",
+      "command": [
+        "python",
+        "scripts/wac.py",
+        "verify",
+        "--profile",
+        "package/inputs/profile.extracted.json",
+        "--roster",
+        "package/fixtures/feasible.json",
+        "--certificate",
+        "package/results_v2/assignment.json"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 433,
+        "sha256": "dba6b1b9f05176d5ed5ab94f2bbc2a98ca6025e8d6549593885cce5b87a8609f"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "lottery",
+      "command": [
+        "python",
+        "scripts/wac.py",
+        "lottery",
+        "--profile",
+        "package/inputs/profile.extracted.json",
+        "--roster",
+        "package/fixtures/feasible.json",
+        "--roll",
+        "package/results_v2/lottery_roll.json",
+        "--seed",
+        "0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 4886,
+        "sha256": "bf1288d57f28ec9e84d0d5543d6c821c3e971126d963d3759c397279e39d1ba2"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "readiness",
+      "command": [
+        "python",
+        "evaluation/readiness.py"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 0,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 0,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 2362,
+        "sha256": "14cab0a398fa17fbfeeeecf87aaa66812aa97d23ce5ba945fcc65c8bf682f364"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scored_readiness_refusal",
+      "command": [
+        "python",
+        "evaluation/readiness.py",
+        "--require-scored-ready"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 2,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 2,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 2362,
+        "sha256": "14cab0a398fa17fbfeeeecf87aaa66812aa97d23ce5ba945fcc65c8bf682f364"
+      },
+      "stderr_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scored_analysis_refusal",
+      "command": [
+        "python",
+        "evaluation/analyze.py",
+        "--mode",
+        "scored"
+      ],
+      "cwd": ".",
+      "expected_exit_code": 2,
+      "tests_run": null,
+      "coverage": null,
+      "exit_code": 2,
+      "passed": true,
+      "errors": [],
+      "stdout_receipt": {
+        "size": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr_receipt": {
+        "size": 81,
+        "sha256": "12abc33d0155aa388c79c6a5710404a2774207224d587bccdd769f12c809ec2d"
+      }
+    }
+  ],
+  "real_model_calls": 0,
+  "agent_trials": 0,
+  "github_actions_run_verified": false,
+  "scope": "Local repository software checks only; no authority or study-readiness claim",
+  "full_report_sha256": "ae4a07e502b258350e296d96a273f5b68cfcfdc547fd60915f1473c445db56f5",
+  "retention": "Structured outcomes and output digests; full console streams omitted."
+}

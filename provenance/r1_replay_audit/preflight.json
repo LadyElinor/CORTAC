@@ -1,0 +1,56 @@
+{
+  "base_commit": "ef4062cd878d12288f5f55dad5a225d88c8ba6a1",
+  "cases": [
+    {
+      "case": "unchanged",
+      "field": null,
+      "value": null,
+      "exit": 0,
+      "stdout": "{\"authority\":\"NONE\",\"checks_executed\":0,\"current_head_freshness_claim\":false,\"historical_freshness_verified\":false,\"historical_source_match\":true,\"independent_review_established\":false,\"journal_events\":8,\"local_checks_recorded_pass\":true,\"replay_validator_matches_historical\":false,\"report_projection_valid\":true,\"schema\":\"cortac.r1.self-application-replay.v1\"}",
+      "stderr": ""
+    },
+    {
+      "case": "external-execution",
+      "field": "external_execution_enabled",
+      "value": true,
+      "exit": 2,
+      "stdout": "",
+      "stderr": "RETAINED_R1_REPLAY_REFUSED: report differs from journal projection"
+    },
+    {
+      "case": "wrong-evidence",
+      "field": "evidence_digest",
+      "value": "0000000000000000000000000000000000000000000000000000000000000000",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "RETAINED_R1_REPLAY_REFUSED: report differs from journal projection"
+    },
+    {
+      "case": "wrong-parent",
+      "field": "parent_receipt",
+      "value": "1111111111111111111111111111111111111111111111111111111111111111",
+      "exit": 2,
+      "stdout": "",
+      "stderr": "RETAINED_R1_REPLAY_REFUSED: report differs from journal projection"
+    },
+    {
+      "case": "lost-outcome",
+      "field": "local_checks_passed",
+      "value": false,
+      "exit": 2,
+      "stdout": "",
+      "stderr": "RETAINED_R1_REPLAY_REFUSED: report differs from journal projection"
+    },
+    {
+      "case": "numeric-event-count",
+      "field": "events",
+      "value": 8.0,
+      "exit": 2,
+      "stdout": "",
+      "stderr": "RETAINED_R1_REPLAY_REFUSED: report differs from journal projection"
+    }
+  ],
+  "checker_candidate_commit": "641dec001bde0c14079c76388cd2152c57fa0bc0",
+  "scope": "LOCAL_RESEARCH_ONLY",
+  "observation": "Post-repair repetition of the exposed baseline controls; no independent review or holdout."
+}

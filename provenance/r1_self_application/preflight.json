@@ -1,0 +1,29 @@
+{
+  "schema": "cortac.r1.preflight-observations.v1",
+  "first_full_run": {
+    "passed": false,
+    "tests_run": 657,
+    "report_sha256": "a9462f39c529ccc9de3b25fdcc39a74a79b42d65763d9e6dd41280410ec375c3",
+    "failures": [
+      {
+        "stage": "offline",
+        "errors": [
+          "exit 1; expected 0"
+        ],
+        "stderr_sha256": "1b51bb2612900c4bc8f066c01a6f3eb06d7c5c360075a6a5f7baeaeee8960777",
+        "excerpt": "_commit_not_only_receipt_issuance) ... ok\ntest_review_grant_replay_and_cross_work_item_use_are_rejected (test_triage.TriageTests.test_review_grant_replay_and_cross_work_item_use_are_rejected) ... ok\ntest_review_reserve_does_not_authorize_or_fund_repair (test_triage.TriageTests.test_review_reserve_does_not_authorize_or_fund_repair) ... ok\ntest_review_support_authorizer_cannot_be_the_current_repair_executor (test_triage.TriageTests.test_review_support_authorizer_cannot_be_the_current_repair_executor) ... ok\ntest_review_support_authorizer_conflict_fails_in_both_receipt_orders (test_triage.TriageTests.test_review_support_authorizer_conflict_fails_in_both_receipt_orders) ... ok\ntest_reviewer_nonreview_participation_fails_in_both_activity_orders (test_triage.TriageTests.test_reviewer_nonreview_participation_fails_in_both_activity_orders) ... ok\ntest_revocation_after_review_receipt_blocks_later_repair (test_triage.TriageTests.test_revocation_after_review_receipt_blocks_later_repair) ... ok\ntest_revoked_audit_grant_cannot_erase_already_committed_effect (test_triage.TriageTests.test_revoked_audit_grant_cannot_erase_already_committed_effect) ... ok\ntest_revoked_repair_mandate_blocks_effect_despite_review_reserve (test_triage.TriageTests.test_revoked_repair_mandate_blocks_effect_despite_review_reserve) ... ok\ntest_sqlite_audit_failure_rolls_back_all_complaint_resolutions (test_triage.TriageTests.test_sqlite_audit_failure_rolls_back_all_complaint_resolutions) ... ok\ntest_sqlite_commit_failure_rolls_back_funds_grants_effect_and_journal (test_triage.TriageTests.test_sqlite_commit_failure_rolls_back_funds_grants_effect_and_journal) ... ok\ntest_supplied_factfinding_can_route_review_but_does_not_authenticate (test_triage.TriageTests.test_supplied_factfinding_can_route_review_but_does_not_authenticate) ... ok\ntest_unissued_review_receipt_is_not_a_self_issued_grant (test_triage.TriageTests.test_unissued_review_receipt_is_not_a_self_issued_grant) ... ok\ntest_unknown_claimant_without_evidence_stays_visibly_unresolved (test_triage.TriageTests.test_unknown_claimant_without_evidence_stays_visibly_unresolved) ... ok\ntest_unpinned_complaint_and_changed_pinned_lodgement_fail_closed (test_triage.TriageTests.test_unpinned_complaint_and_changed_pinned_lodgement_fail_closed) ... ok\ntest_all_sixteen_legacy_episodes_are_unchanged (test_triage_compatibility.LegacyTriageCompatibility.test_all_sixteen_legacy_episodes_are_unchanged) ... ok\n\n======================================================================\nFAIL: test_published_baseline_bytes_except_reviewed_integration_files (test_opr_preservation.OPRPreservationTests.test_published_baseline_bytes_except_reviewed_integration_files)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/workspace/scratch/0b88e7700837/cortac-agent/package/tests/test_opr_preservation.py\", line 25, in test_published_baseline_bytes_except_reviewed_integration_files\n    self.assertEqual(hashlib.sha256((ROOT / name).read_bytes()).hexdigest(), expected, name)\nAssertionError: '98d1e918c501232ff851ffc99ba335e942a60e0aaa90ab260cd79b678c564064' != '3e1f02d8625a99def0bd316367ed1590c85d7ab6984cd36248529e95bc3c5060'\n- 98d1e918c501232ff851ffc99ba335e942a60e0aaa90ab260cd79b678c564064\n+ 3e1f02d8625a99def0bd316367ed1590c85d7ab6984cd36248529e95bc3c5060\n : .github/workflows/ci.yml\n\n----------------------------------------------------------------------\nRan 575 tests in 10.533s\n\nFAILED (failures=1)\n"
+      }
+    ]
+  },
+  "corrected_full_run": {
+    "passed": true,
+    "tests_run": 657,
+    "stages": 24,
+    "report_sha256": "c435ccef9d39319dc341f75a44e6026c4f99268c4bde226e4d756c156258fa5f"
+  },
+  "repairs": [
+    "Restored the preserved historical CI workflow; added a separate R1 workflow.",
+    "Corrected a test double that intercepted Git subprocess calls while testing Windows native exit codes."
+  ],
+  "retention": "Condensed contemporaneous observations with output digests. These are not full run logs, independently attested receipts, or a preregistered study."
+}

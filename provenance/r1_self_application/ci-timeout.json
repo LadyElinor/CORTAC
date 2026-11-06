@@ -1,0 +1,15 @@
+{
+  "schema": "cortac.r1.ci-timeout-observation.v1",
+  "commit": "8275b99332b5aee23943d6e27b02c92ac36912ea",
+  "run_url": "https://github.com/LadyElinor/CORTAC/actions/runs/42268407011",
+  "job_id": 128066291572,
+  "stage": "offline",
+  "platform": "Windows Python 3.12",
+  "timeout_seconds": 120,
+  "passed": false,
+  "tests_run": null,
+  "coverage": null,
+  "other_observed_tests": 82,
+  "repair": "Declare 240 seconds for the larger offline stage and retain partial timeout output; keep unknown coverage and no automatic retry.",
+  "scope": "Same-project CI observation; not an independent review."
+}

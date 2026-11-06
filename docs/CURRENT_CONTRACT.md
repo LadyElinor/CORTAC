@@ -7,6 +7,15 @@ is indexed separately below.
 
 ## Current reading order
 
+- [R1 retained-report audit](R1_REPLAY_AUDIT.md): complete report projection,
+  strict JSON types, and an explicit boundary around historical freshness claims.
+- [R1 self-application and verification v2](R1_SELF_APPLICATION.md): retained
+  maintenance/repair tasks, actual unittest coverage receipts, and explicit
+  shared control with UNKNOWN independent review.
+- [R1 repository tasks](REPOSITORY_TASK_V1.md): scoped candidate-byte binding,
+  explicit local test-process receipts and evidence-bound advisory review;
+  separate from AP1/S2, with no merge authority or verified independence.
+
 - [S2 assignment coordinator](ASSIGNMENT_SCHEDULER_V1.md): bounded controller
   rotation over S1 journals, two dispatch budgets, deadlines and uncertainty-aware
   holds. Reservations are historical local records, never capabilities.

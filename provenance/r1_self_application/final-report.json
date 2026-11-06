@@ -1,0 +1,138 @@
+{
+  "version": "cortac.repository-task.v1",
+  "scope": "LOCAL_RESEARCH_ONLY",
+  "authority": "NONE",
+  "external_execution_enabled": false,
+  "independent_review_established": false,
+  "controller_closure": "SUPPLIED_UNVERIFIED",
+  "task_id": "r1-self-verifier-coverage",
+  "journal_head": "f6060f775dd49eebbd06e3898f4fffde62c966c97bdbbe722727b1edaad8a0a5",
+  "events": 8,
+  "decision": "PROPOSE",
+  "candidate_digest": "1968dda6dc61f2ea99e147aa56df07c35464ccf1b2da7033b991c7b36c996930",
+  "candidate_current": true,
+  "evidence_digest": "091b29fa6e14052aa4658857bc970eb8b07e51f9c6545fad54cc4a7eb747aed6",
+  "checks": {
+    "coverage-regressions": {
+      "after": "1968dda6dc61f2ea99e147aa56df07c35464ccf1b2da7033b991c7b36c996930",
+      "before": "1968dda6dc61f2ea99e147aa56df07c35464ccf1b2da7033b991c7b36c996930",
+      "elapsed_ns": 1824322504,
+      "id": "coverage-regressions",
+      "process": {
+        "exit_code": 0,
+        "status": "EXITED",
+        "stderr": {
+          "bytes": 2551,
+          "sha256": "4fbcdb748cff79c38bb8468ff3d5d01878bdcfe12a33a727f01b190858f48d2d"
+        },
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "outcome": "PASS"
+    },
+    "full-no-skips": {
+      "after": "1968dda6dc61f2ea99e147aa56df07c35464ccf1b2da7033b991c7b36c996930",
+      "before": "1968dda6dc61f2ea99e147aa56df07c35464ccf1b2da7033b991c7b36c996930",
+      "elapsed_ns": 18029144013,
+      "id": "full-no-skips",
+      "process": {
+        "exit_code": 0,
+        "status": "EXITED",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 555,
+          "sha256": "a793ccfad6dca0907146fe01cdee8756331554945b3400854d5ff039763d1e35"
+        }
+      },
+      "outcome": "PASS"
+    }
+  },
+  "pending_check": null,
+  "evidence_refs": {
+    "task": "884855bb7269f7242dc26fc9abb49aca86cfe47f9556ead8d7d5528c80584402",
+    "candidate": "1968dda6dc61f2ea99e147aa56df07c35464ccf1b2da7033b991c7b36c996930",
+    "check:coverage-regressions": "f17a3af03210300967388da580eb5fdfb7f886888d39f4bb4fa7df1b4db4eae6",
+    "check:full-no-skips": "017cecfab0b632e18a2206a34945e669edb87854aef8b4c67e14999548e5c4e2"
+  },
+  "local_checks_passed": true,
+  "review": {
+    "candidate_digest": "1968dda6dc61f2ea99e147aa56df07c35464ccf1b2da7033b991c7b36c996930",
+    "evidence_digest": "091b29fa6e14052aa4658857bc970eb8b07e51f9c6545fad54cc4a7eb747aed6",
+    "record": {
+      "affected_parties": [
+        {
+          "benefits": "Skipped or absent testing cannot silently count as complete validation.",
+          "burdens": "A new local helper and explicit partial-coverage reporting.",
+          "id": "maintainers",
+          "interests": "Accurate coverage claims and preserved governance contracts.",
+          "representation": "One assistant/operator; no independent representative participated."
+        }
+      ],
+      "alternatives": [
+        {
+          "evidence_refs": [
+            "candidate",
+            "check:coverage-regressions",
+            "check:full-no-skips"
+          ],
+          "less_harmful_analysis": "Avoids changing the runner but preserves the demonstrated all-skipped false success.",
+          "option": "Keep console-count verification.",
+          "rejection_or_selection_reason": "Selected real unittest receipts after the baseline reproduced the gap."
+        }
+      ],
+      "burden_justification": "Bounded repository maintenance; no new governance or merge authority. Optional mixed skips remain explicit rather than silently broadening execution.",
+      "dissent": [
+        "Shared control is not independent review."
+      ],
+      "dissent_status": "RECORDED",
+      "evidence_refs": [
+        "task",
+        "candidate",
+        "check:coverage-regressions",
+        "check:full-no-skips"
+      ],
+      "predictions": [
+        "Empty and wholly skipped suites fail; strict full coverage requires no skips."
+      ],
+      "protected_limit_assessments": [
+        {
+          "evidence_refs": [
+            "task"
+          ],
+          "limit_id": "independent-review",
+          "reasons": "One supplied operator; independence is unestablished.",
+          "status": "UNKNOWN"
+        }
+      ],
+      "remedy_plan": {
+        "authority": "No authority granted by this record.",
+        "evidence_refs": [
+          "task"
+        ],
+        "resources": "Local development work.",
+        "steps": "Retain this receipt; a demonstrated counterexample requires a new scoped task and ordinary maintainer review."
+      },
+      "review_triggers": [
+        {
+          "condition": "Bytes or evidence changes.",
+          "review_authority": "Ordinary maintainer."
+        }
+      ],
+      "schema": "cortac.decision.record.v1"
+    },
+    "reviewer": "reviewer",
+    "supplied_assessments_pass": false
+  },
+  "review_applicable": true,
+  "declared_control": "SHARED",
+  "approval_granted": false,
+  "local_effects": "JOURNAL_AND_EXPLICIT_TEST_PROCESSES",
+  "parent_receipt": null,
+  "parent_authenticity": false,
+  "source_authenticity": false
+}

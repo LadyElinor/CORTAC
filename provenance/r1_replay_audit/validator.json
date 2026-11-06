@@ -1,0 +1,13 @@
+{
+  "base_commit": "ef4062cd878d12288f5f55dad5a225d88c8ba6a1",
+  "scope": "SAME_HOST_INSTALLED_COPY",
+  "files": {
+    "__init__.py": "e57b55255d383987031f630803394beae22f60c1dc7d3c9b38e879f930368596",
+    "__main__.py": "e2699128944b6d231552c6fea1ffd4630e39710b68dfa71ea3ed76ce4f001468",
+    "checks.py": "54b0ce19f086aac905bbb572f8189614a45f5a16b8c9d09fe6d6c4cd36dea04e",
+    "contract.py": "cab631ef20e2f3456dd1ea513ec3f96f7f9608066873970109df0ca542f1f96e",
+    "demo.py": "67942027b908d30e3326954eac4c2d091cc6c718bb21e4a997777238c72d4660",
+    "journal.py": "acd266e074402af196b383fb11812f0f7829017a74c30c9dc24b4afac56e1ca5",
+    "repository.py": "f3a4dfd8954e72f705c1a3b0ab8e04380e9c740fef62dc4676648d9c94c7cce8"
+  }
+}
