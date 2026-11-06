@@ -3,8 +3,10 @@ import copy
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
 import unittest
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location('r1_retained_replay', ROOT/'scripts/check_repository_self_application.py')
@@ -120,6 +122,28 @@ class RetainedReportTests(unittest.TestCase):
             for name, sha in manifest['files'].items():
                 with self.subTest(folder=folder.name, name=name):
                     self.assertEqual(hashlib.sha256((folder/name).read_bytes()).hexdigest(), sha)
+
+    def test_serialized_roots_accept_both_absolute_path_grammars(self):
+        from wac_offline.repository_task_v1.journal import initial
+        for root in ('/archived/repository', 'C:\\archived\\repository'):
+            genesis = copy.deepcopy(self.rows[0]['body']); genesis['root'] = root
+            with self.subTest(root=root): self.assertEqual(initial(genesis)['genesis']['root'], root)
+        for root in ('', 'relative/path', 'C:relative', '\\drive-relative', None):
+            genesis = copy.deepcopy(self.rows[0]['body']); genesis['root'] = root
+            with self.subTest(root=root), self.assertRaises(ValueError): initial(genesis)
+
+    def test_live_observation_refuses_relative_paths_before_git(self):
+        with mock.patch.object(replay.repository, 'git') as git:
+            with self.assertRaises(ValueError): replay.repository.observe(Path('relative'))
+            git.assert_not_called()
+
+    def test_foreign_non_native_root_cannot_execute_a_live_observation(self):
+        from wac_offline.repository_task_v1.checks import observe
+        foreign = Path('/archived/repository') if os.name == 'nt' else Path('C:\\archived\\repository')
+        self.assertFalse(foreign.is_absolute())
+        with mock.patch.object(replay.repository, 'git') as git:
+            self.assertIsNone(observe(foreign, ()))
+            git.assert_not_called()
 
     def test_report_nonobjects_are_clean_refusals(self):
         for report in (None, [], 'report', 1, True):

@@ -76,7 +76,7 @@ def base_inventory(root, commit):
 
 
 def observe(root, retained_paths=()):
-    if root.is_symlink() or not root.is_dir():
+    if not root.is_absolute() or root.is_symlink() or not root.is_dir():
         raise ValueError('repository unavailable or replaced by link')
     # Removing a base file from the index and ignoring it must not hide its bytes.
     names = sorted(set(retained_paths) | set(n.decode('utf-8') for n in git(root, 'ls-files', '--cached', '--others', '--exclude-standard', '-z').split(b'\0') if n))

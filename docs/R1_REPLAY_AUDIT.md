@@ -68,3 +68,19 @@ python scripts/check_repository_self_application.py --evidence provenance/r1_rep
 This uses the current R1 reducer, not an independent implementation. The recorded
 installed validator remains pinned to the pre-edit build. CI replays all three
 retained tasks without rerunning their candidate commands.
+
+## Cross-platform replay repair
+
+The first Windows CI run of this follow-up failed before its new test class
+could run: the archived Linux root was checked with Windows `Path.is_absolute()`.
+[The failure is retained](../provenance/r1_replay_audit/windows-portability.json).
+This was an offline serialization defect, not a failed candidate check in the
+already completed R1 task above; that task's receipt and candidate remain unchanged.
+
+The subsequent CI repair recognizes absolute POSIX and Windows path grammars in
+serialized journal genesis. Live repository observation still requires a native
+absolute path before any Git or filesystem traversal. A foreign non-native root
+therefore yields unavailable evidence and cannot become a relative lookup on the
+replay host. Three additional regressions cover both grammars, relative roots,
+and the live-observation boundary. This repair is outside the earlier recorded
+candidate; final CI checks the updated branch.

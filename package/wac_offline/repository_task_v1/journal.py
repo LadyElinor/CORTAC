@@ -3,7 +3,7 @@ from contextlib import closing
 from copy import deepcopy
 import hashlib
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 import sqlite3
 import subprocess
 from . import VERSION, SCOPE
@@ -20,7 +20,10 @@ def initial(g):
     exact(g, ('version', 'root', 'task', 'base', *SCOPE))
     if g['version'] != VERSION or any(type(g[k]) is not type(v) or g[k] != v for k, v in SCOPE.items()):
         raise ValueError('scope/version mismatch')
-    if type(g['root']) is not str or not Path(g['root']).is_absolute():
+    # A serialized journal may be replayed on a different operating system.
+    # Live filesystem observation separately requires a native absolute path.
+    if (type(g['root']) is not str
+            or not (PurePosixPath(g['root']).is_absolute() or PureWindowsPath(g['root']).is_absolute())):
         raise ValueError('absolute custodian root required')
     contract.task(g['task']); repository.validate_inventory(g['base'])
     return dict(genesis=deepcopy(g), started=False, decision=None, proposal=None, checks={}, pending=None, review=None)
