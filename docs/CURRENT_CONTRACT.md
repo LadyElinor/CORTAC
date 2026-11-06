@@ -7,6 +7,9 @@ is indexed separately below.
 
 ## Current reading order
 
+- [S1 agent lifecycle scaffold](AGENT_SCAFFOLD_V1.md): separately versioned AP1.1
+  decision recording, optional pinned C2 transport, durable recovery and advisory
+  CORTAC review; proposal-only and no new execution authority.
 - [Package contract](../package/README.md): supported profile, roster, assignment,
   arithmetic and output boundaries. Assignment certificates use the V2 format,
   but the current verifier requires software 0.2.2 and all four supported
