@@ -1,0 +1,20 @@
+{
+  "schema": "cortac.r1.self-application.v1",
+  "design_commit": "6023eba25a628ee1d5489401ca2ad7486ddaf377",
+  "base_commit": "0fcd6e92975cacc415b143791138086fe0cbb536",
+  "candidate_commit": "8c308a6624bc2275161b2954cf8ab7be22c666cf",
+  "candidate_tree": "5b1e6fa64c2ca5891bad04ba47c0c3b563143b3e",
+  "task_id": "r1-self-verifier-coverage",
+  "scope": "LOCAL_RESEARCH_ONLY",
+  "authority": "NONE",
+  "independent_review_established": false,
+  "files": {
+    "baseline.json": "653b4fc06d95cb1392d8119a73ef0de26cb3a7f2c6043d6a7dd6b73075e9c702",
+    "final-report.json": "d7d940bfa11fa093eef86d9839bd4dce4a37a86971576e0e74a7a14502057130",
+    "journal.json": "5498a3db3d58a083522964fe39b5fc27f451b2f667e1429532f927e73dc7b9d9",
+    "preflight.json": "97fd642826e5d7cad85fa4b503fd4dd9234125e8ed768f20909989066bf9e548",
+    "validator.json": "8be714687eb816507673b87b3ff9f6e2acd9b32c779ef8f063b9bce6224870f5",
+    "verification.json": "d4c573b17b43711a0b2fbd6903a249e2c96406c153666c693fd721c54eb5b6cf"
+  },
+  "validator_commit": "0fcd6e92975cacc415b143791138086fe0cbb536"
+}

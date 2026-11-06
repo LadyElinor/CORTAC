@@ -7,6 +7,9 @@ is indexed separately below.
 
 ## Current reading order
 
+- [R1 self-application and verification v2](R1_SELF_APPLICATION.md): retained
+  maintenance/repair tasks, actual unittest coverage receipts, and explicit
+  shared control with UNKNOWN independent review.
 - [R1 repository tasks](REPOSITORY_TASK_V1.md): scoped candidate-byte binding,
   explicit local test-process receipts and evidence-bound advisory review;
   separate from AP1/S2, with no merge authority or verified independence.

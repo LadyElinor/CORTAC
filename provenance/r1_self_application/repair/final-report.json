@@ -1,0 +1,138 @@
+{
+  "version": "cortac.repository-task.v1",
+  "scope": "LOCAL_RESEARCH_ONLY",
+  "authority": "NONE",
+  "external_execution_enabled": false,
+  "independent_review_established": false,
+  "controller_closure": "SUPPLIED_UNVERIFIED",
+  "task_id": "r1-journal-path-repair",
+  "journal_head": "fd7d85fc8217e32f317274504b3dd707e6b9f1075bc5d7401c2256d42cfd3975",
+  "events": 8,
+  "decision": "PROPOSE",
+  "candidate_digest": "49ddcc1fa3e88529b4f7b3a6d994e8b2c6a26a7f1ec928e82633f8903d67bcca",
+  "candidate_current": true,
+  "evidence_digest": "99424b54c4c02f46ffecdba91acae3e2aabb7ad5f812148d8f381175758124ed",
+  "checks": {
+    "path-regressions": {
+      "after": "49ddcc1fa3e88529b4f7b3a6d994e8b2c6a26a7f1ec928e82633f8903d67bcca",
+      "before": "49ddcc1fa3e88529b4f7b3a6d994e8b2c6a26a7f1ec928e82633f8903d67bcca",
+      "elapsed_ns": 3076739600,
+      "id": "path-regressions",
+      "process": {
+        "exit_code": 0,
+        "status": "EXITED",
+        "stderr": {
+          "bytes": 4973,
+          "sha256": "128bfe8df6a5dbf9f67f00b5e36c35c29ccaf91d54a6e0224b882de6dc287ad8"
+        },
+        "stdout": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "outcome": "PASS"
+    },
+    "full-no-skips": {
+      "after": "49ddcc1fa3e88529b4f7b3a6d994e8b2c6a26a7f1ec928e82633f8903d67bcca",
+      "before": "49ddcc1fa3e88529b4f7b3a6d994e8b2c6a26a7f1ec928e82633f8903d67bcca",
+      "elapsed_ns": 17482697904,
+      "id": "full-no-skips",
+      "process": {
+        "exit_code": 0,
+        "status": "EXITED",
+        "stderr": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout": {
+          "bytes": 555,
+          "sha256": "475e963d810537ab157098671a952e949dd73691f1e4b92fe302bdc33ddb0c40"
+        }
+      },
+      "outcome": "PASS"
+    }
+  },
+  "pending_check": null,
+  "evidence_refs": {
+    "task": "91657b379c78304b9804d684d7c9767afe329e313b63976484d32fd00aef1760",
+    "candidate": "49ddcc1fa3e88529b4f7b3a6d994e8b2c6a26a7f1ec928e82633f8903d67bcca",
+    "check:path-regressions": "701565d2fd089da0cb2a1646f2a6f26be8f1a1d817d69f311781d80adfc067dc",
+    "check:full-no-skips": "b5c59d3b320105dfda60c3c78b5de6c5e314bb7d659b3eb15431a1e0c090ecf6"
+  },
+  "local_checks_passed": true,
+  "review": {
+    "candidate_digest": "49ddcc1fa3e88529b4f7b3a6d994e8b2c6a26a7f1ec928e82633f8903d67bcca",
+    "evidence_digest": "99424b54c4c02f46ffecdba91acae3e2aabb7ad5f812148d8f381175758124ed",
+    "record": {
+      "affected_parties": [
+        {
+          "benefits": "Journal bytes remain outside the admitted candidate inventory.",
+          "burdens": "Canonical parent-path resolution; leaf symlinks remain refused.",
+          "id": "maintainers",
+          "interests": "Journal/source separation across path aliases.",
+          "representation": "One assistant/operator; no independent representative participated."
+        }
+      ],
+      "alternatives": [
+        {
+          "evidence_refs": [
+            "candidate",
+            "check:path-regressions",
+            "check:full-no-skips"
+          ],
+          "less_harmful_analysis": "Avoids a constructor change but preserves the demonstrated parent-alias bypass.",
+          "option": "Keep lexical parent containment.",
+          "rejection_or_selection_reason": "Selected canonical parent resolution after a symlink-parent control reproduced the bypass."
+        }
+      ],
+      "burden_justification": "Bounded repository maintenance; no new governance or merge authority. The previous verification repair and receipt remain unchanged.",
+      "dissent": [
+        "Shared control is not independent review."
+      ],
+      "dissent_status": "RECORDED",
+      "evidence_refs": [
+        "task",
+        "candidate",
+        "check:path-regressions",
+        "check:full-no-skips"
+      ],
+      "predictions": [
+        "A journal parent alias cannot evade repository containment, and leaf symlinks remain refused."
+      ],
+      "protected_limit_assessments": [
+        {
+          "evidence_refs": [
+            "task"
+          ],
+          "limit_id": "independent-review",
+          "reasons": "One supplied operator; independence is unestablished.",
+          "status": "UNKNOWN"
+        }
+      ],
+      "remedy_plan": {
+        "authority": "No authority granted by this record.",
+        "evidence_refs": [
+          "task"
+        ],
+        "resources": "Local development work.",
+        "steps": "Retain this receipt; a demonstrated counterexample requires a new scoped task and ordinary maintainer review."
+      },
+      "review_triggers": [
+        {
+          "condition": "Bytes or evidence changes.",
+          "review_authority": "Ordinary maintainer."
+        }
+      ],
+      "schema": "cortac.decision.record.v1"
+    },
+    "reviewer": "reviewer",
+    "supplied_assessments_pass": false
+  },
+  "review_applicable": true,
+  "declared_control": "SHARED",
+  "approval_granted": false,
+  "local_effects": "JOURNAL_AND_EXPLICIT_TEST_PROCESSES",
+  "parent_receipt": "1afbecfb6e7b077f58968d99dece680138bce244b163957febe7c41b6ff43bad",
+  "parent_authenticity": false,
+  "source_authenticity": false
+}

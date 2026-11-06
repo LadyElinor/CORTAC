@@ -1,0 +1,10 @@
+{
+  "dot_parent_control": {
+    "parent_alias_bypass_reproduced": false,
+    "error": "journal inside repository must be ignored"
+  },
+  "symlink_parent_control": {
+    "symlink_parent_alias_bypass_reproduced": true,
+    "journal_created_inside_repository": true
+  }
+}

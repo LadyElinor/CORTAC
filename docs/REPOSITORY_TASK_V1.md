@@ -3,7 +3,8 @@
 R1 (`cortac.repository-task.v1`) is a separate, opt-in local custodian lifecycle.
 It accepts a repository maintenance task without turning it into an AP1 arithmetic
 proposal. S1/S2 remain unchanged; S2 does **not** schedule R1 tasks.
-The [design](REPOSITORY_TASK_V1_DESIGN.md) bounds this tranche and its self-application.
+The [design](REPOSITORY_TASK_V1_DESIGN.md) bounds this tranche and its
+[retained self-application](R1_SELF_APPLICATION.md).
 
 The host declares the base commit, exact allowed paths, proposer/reviewer labels,
 protected limits and Python check commands. A participant supplies one JSON
@@ -104,7 +105,9 @@ subprocess inherits the host's environment and permissions. Do not give untruste
 candidate tests secrets or production access; R1 itself supplies no sandbox.
 Git symlinks, submodules, unmerged entries and unsafe paths are refused. On Windows,
 executable mode is taken from Git's index; Unix observations use the file mode.
-The journal must be outside the repository or under an ignored path.
+The journal must be outside the repository or under an ignored path. Parent
+paths are resolved before containment checks, including directory aliases; the
+journal filename itself remains subject to symlink refusal.
 
 For self-application, run the validator from a separately installed frozen build
 and run candidate checks explicitly. That separates source locations; it does not
