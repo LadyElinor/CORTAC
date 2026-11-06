@@ -11,6 +11,9 @@ import platform
 import re
 import subprocess
 import sys
+import tempfile
+
+from test_receipts import validate_receipt
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -50,41 +53,57 @@ def checksum_inventory(relative: str) -> dict:
     return {"name": relative, "passed": not errors, "files_checked": checked, "errors": errors}
 
 
-def run_step(name, args, cwd, *, expected_exit=0, json_checks=None, minimum_tests=None):
+def run_step(name, args, cwd, *, expected_exit=0, json_checks=None, minimum_tests=None,
+             require_no_skips=False):
     env = os.environ.copy()
     env["PYTHONPATH"] = str(ROOT / "package")
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     env["PYTHONUTF8"] = "1"
     env["WAC_QA_PACKAGE"] = str(ROOT / "package")
     env["WAC_QA_EVAL"] = str(ROOT / "evaluation")
-    command = [sys.executable, *args]
-    try:
-        run = subprocess.run(command, cwd=ROOT / cwd, env=env, capture_output=True,
-                             text=True, encoding="utf-8", timeout=120)
-        errors = []
-        if run.returncode != expected_exit:
-            errors.append(f"exit {run.returncode}; expected {expected_exit}")
-        count = None
+    observed = dict(name=name, command=["python", *args], cwd=cwd or ".",
+                    expected_exit_code=expected_exit, tests_run=None, coverage=None)
+    with tempfile.TemporaryDirectory(prefix="cortac-test-receipt-") as temporary:
+        receipt = Path(temporary) / "result.json"
+        command = [sys.executable, *args]
         if minimum_tests is not None:
-            match = re.search(r"Ran (\d+) tests? in", run.stderr)
-            count = int(match.group(1)) if match else 0
-            if count < minimum_tests:
-                errors.append(f"only {count} tests discovered; expected at least {minimum_tests}")
-        if json_checks:
-            try:
-                result = json.loads(run.stdout)
-                for key, expected in json_checks.items():
-                    if type(result.get(key)) is not type(expected) or result[key] != expected:
-                        errors.append(f"unexpected JSON field: {key}")
-            except (ValueError, TypeError) as exc:
-                errors.append("invalid JSON output: " + str(exc))
-        return {"name": name, "command": ["python", *args], "cwd": cwd or ".",
-                "exit_code": run.returncode, "expected_exit_code": expected_exit,
-                "tests_run": count, "passed": not errors, "errors": errors,
-                "stdout": run.stdout, "stderr": run.stderr}
-    except (OSError, subprocess.TimeoutExpired) as exc:
-        return {"name": name, "command": ["python", *args], "cwd": cwd or ".",
-                "passed": False, "tests_run": 0, "errors": [str(exc)]}
+            command = [sys.executable, str(ROOT / "scripts/test_receipts.py"),
+                       "--receipt", str(receipt), "--", *args]
+            observed["test_runner"] = "scripts/test_receipts.py"
+        try:
+            run = subprocess.run(command, cwd=ROOT / cwd, env=env, capture_output=True,
+                                 text=True, encoding="utf-8", timeout=120)
+            errors = []
+            if run.returncode != expected_exit:
+                errors.append(f"exit {run.returncode}; expected {expected_exit}")
+            if minimum_tests is not None:
+                try:
+                    coverage = validate_receipt(json.loads(receipt.read_text(encoding="utf-8")))
+                    observed["coverage"] = coverage
+                    observed["tests_run"] = coverage["tests_run"]
+                    if coverage["tests_run"] < minimum_tests:
+                        errors.append(f"only {coverage['tests_run']} tests started; expected at least {minimum_tests}")
+                    if coverage["tests_not_skipped"] == 0:
+                        errors.append("no started test cases without a whole-case skip")
+                    if not coverage["successful"]:
+                        errors.append("unittest result unsuccessful")
+                    if require_no_skips and coverage["skipped"]:
+                        errors.append("strict coverage requires no skips")
+                except (OSError, ValueError, TypeError) as exc:
+                    errors.append("missing or invalid test receipt: " + str(exc))
+            if json_checks:
+                try:
+                    result = json.loads(run.stdout)
+                    for key, expected in json_checks.items():
+                        if type(result.get(key)) is not type(expected) or result[key] != expected:
+                            errors.append(f"unexpected JSON field: {key}")
+                except (ValueError, TypeError) as exc:
+                    errors.append("invalid JSON output: " + str(exc))
+            return dict(observed, exit_code=run.returncode, passed=not errors, errors=errors,
+                        stdout=run.stdout, stderr=run.stderr)
+        except (OSError, subprocess.TimeoutExpired) as exc:
+            # No completed receipt: unknown coverage, never fabricated zero work.
+            return dict(observed, passed=False, errors=[str(exc)])
 
 
 def git_state():
@@ -102,6 +121,7 @@ def git_state():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report", type=Path, help="Optional JSON report; .local/ is ignored by Git")
+    parser.add_argument("--require-no-skips", action="store_true", help="Fail any test stage with skipped cases, fixtures, or subtests")
     args = parser.parse_args()
     checks = [checksum_inventory("BUNDLE_SHA256SUMS"), checksum_inventory("evaluation/SHA256SUMS")]
     if (ROOT / "REPOSITORY_SHA256SUMS").exists():
@@ -162,7 +182,7 @@ def main():
             ("scored_analysis_refusal", ["evaluation/analyze.py", "--mode", "scored"], "", {"expected_exit": 2}),
         ]
         for name, command, cwd, kwargs in cases:
-            item = run_step(name, command, cwd, **kwargs)
+            item = run_step(name, command, cwd, require_no_skips=args.require_no_skips, **kwargs)
             # An argparse/usage error must not masquerade as the scored gate.
             if name == "scored_analysis_refusal" and "SOURCE_GATED" not in item.get("stderr", "") + item.get("stdout", ""):
                 item["passed"] = False
@@ -170,15 +190,19 @@ def main():
             checks.append(item)
             print(("PASS" if item["passed"] else "FAIL") + " " + name, flush=True)
     passed = all(item["passed"] for item in checks)
-    report = {"schema": "cortac.repository_verification.v1", "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+    report = {"schema": "cortac.repository_verification.v2", "timestamp_utc": datetime.now(timezone.utc).isoformat(),
               "python_version": platform.python_version(), "platform": platform.system(),
               "git": git_state(), "passed": passed, "tests_run": sum(item.get("tests_run") or 0 for item in checks),
+              "tests_not_skipped": sum((item.get("coverage") or {}).get("tests_not_skipped", 0) for item in checks),
+              "skips": sum(len((item.get("coverage") or {}).get("skipped", [])) for item in checks),
+              "coverage_observed_stages": sum(item.get("coverage") is not None for item in checks),
+              "require_no_skips": args.require_no_skips,
               "checks": checks, "real_model_calls": 0, "agent_trials": 0, "github_actions_run_verified": False,
               "scope": "Local repository software checks only; no authority or study-readiness claim"}
     if args.report:
         args.report.parent.mkdir(parents=True, exist_ok=True)
         args.report.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"{'PASS' if passed else 'FAIL'}: {report['tests_run']} tests; {len(checks)} verification stages")
+    print(f"{'PASS' if passed else 'FAIL'}: {report['tests_run']} tests; {report['skips']} skips; {len(checks)} verification stages")
     if not passed:
         for item in checks:
             if not item["passed"]:
