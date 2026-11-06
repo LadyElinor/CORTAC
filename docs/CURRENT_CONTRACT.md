@@ -7,6 +7,9 @@ is indexed separately below.
 
 ## Current reading order
 
+- [S2 assignment coordinator](ASSIGNMENT_SCHEDULER_V1.md): bounded controller
+  rotation over S1 journals, two dispatch budgets, deadlines and uncertainty-aware
+  holds. Reservations are historical local records, never capabilities.
 - [S1 agent lifecycle scaffold](AGENT_SCAFFOLD_V1.md): separately versioned AP1.1
   decision recording, optional pinned C2 transport, durable recovery and advisory
   CORTAC review; proposal-only and no new execution authority.

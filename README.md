@@ -10,6 +10,13 @@ See the [current contract and historical-record index](docs/CURRENT_CONTRACT.md)
 
 ## S1 agent lifecycle scaffold
 
+The optional [S2 assignment coordinator](docs/ASSIGNMENT_SCHEDULER_V1.md) composes
+up to 16 fresh S1 assignments with controller rotation, separate decision/review
+dispatch budgets, durable reservations and deadline checks. Unknown submissions
+hold their workshop instance; unrelated instances can progress. It never runs
+agents, submits proposals or grants execution authority. Try the offline hand case
+with `PYTHONPATH=package python -m wac_offline.scheduler_v1.demo`.
+
 The separately versioned [S1 scaffold](docs/AGENT_SCAFFOLD_V1.md) adds a durable
 single-assignment agent lifecycle: a credential-free AP1.1 brief, one conforming
 decision or explicit failure, optional Commonwealth C2 proposal transport,
