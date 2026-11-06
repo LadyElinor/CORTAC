@@ -137,7 +137,10 @@ def advance(state, kind, data):
 
 class Task:
     def __init__(self, path):
-        self.path = Path(path).absolute()
+        # Canonicalize parent aliases (including Windows short paths), while
+        # retaining the leaf itself so _connect still refuses a symlink journal.
+        target = Path(path).absolute()
+        self.path = target.parent.resolve(strict=True) / target.name
 
     def _connect(self):
         if self.path.is_symlink():

@@ -220,6 +220,25 @@ class RepositoryTaskTests(unittest.TestCase):
         task = Task.create(self.root/'.local/task.sqlite', self.root, self.spec)
         self.assertEqual(task.report()['decision'], 'NOT_STARTED')
 
+    def test_journal_parent_alias_cannot_evade_source_exclusion(self):
+        alias = self.parent/'repository-alias'
+        try:
+            alias.symlink_to(self.root, target_is_directory=True)
+        except (OSError, NotImplementedError):
+            self.skipTest('directory symlinks unavailable')
+        with self.assertRaises(ValueError): Task.create(alias/'task.sqlite', self.root, self.spec)
+        self.assertFalse((self.root/'task.sqlite').exists())
+
+    def test_journal_leaf_symlink_still_refused(self):
+        task = Task.create(self.path, self.root, self.spec)
+        alias = self.parent/'journal-alias.sqlite'
+        try:
+            alias.symlink_to(self.path)
+        except (OSError, NotImplementedError):
+            self.skipTest('file symlinks unavailable')
+        with self.assertRaises(ValueError): Task(alias).report()
+        self.assertEqual(task.report()['decision'], 'NOT_STARTED')
+
     def test_working_symlink_refused(self):
         outside = self.parent/'outside'; outside.write_text('outside', encoding='utf-8')
         (self.root/'value.txt').unlink()
