@@ -16,6 +16,8 @@ review. Shared control stays explicit; passing checks or supplied assessments
 never establishes independent review or merge authority.
 A [bounded self-application](docs/R1_SELF_APPLICATION.md) used R1 to fix skipped-test
 coverage accounting and a journal path-alias defect, retaining both tasks and failures.
+A [retained-report audit](docs/R1_REPLAY_AUDIT.md) checks every projected report field
+and keeps historical source freshness explicitly unverified.
 
 The optional [S2 assignment coordinator](docs/ASSIGNMENT_SCHEDULER_V1.md) composes
 up to 16 fresh S1 assignments with controller rotation, separate decision/review

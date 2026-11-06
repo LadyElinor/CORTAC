@@ -135,6 +135,28 @@ def advance(state, kind, data):
     return s
 
 
+def project_report(s, head, n, current=None):
+    """Project verified journal state; current is a separate host observation.
+
+    Replay can check a supplied observation's shape and its consequences, but
+    cannot establish that it was true when reported or is true now.
+    """
+    if current is not None and type(current) is not bool:
+        raise ValueError('source freshness must be bool or null')
+    t = s['genesis']['task']
+    d = s['decision']
+    decision = ('PENDING' if s['started'] else 'NOT_STARTED') if d is None else ('INVALID' if d['response'] is None else d['response']['choice'].upper())
+    return dict(version=VERSION, **SCOPE, task_id=t['id'], journal_head=head, events=n,
+                decision=decision, candidate_digest=digest(s['proposal']) if s['proposal'] else None,
+                candidate_current=current, evidence_digest=evidence(s), checks=s['checks'], pending_check=s['pending'],
+                evidence_refs=references(s),
+                local_checks_passed=len(s['checks']) == len(t['checks']) and all(c and c['outcome']=='PASS' for c in s['checks'].values()),
+                review=s['review'], review_applicable=bool(current and s['review']),
+                declared_control='SHARED' if t['proposer_controller']==t['reviewer_controller'] else 'DIFFERENT_UNVERIFIED',
+                approval_granted=False, local_effects='JOURNAL_AND_EXPLICIT_TEST_PROCESSES',
+                parent_receipt=t['parent_receipt'], parent_authenticity=False, source_authenticity=False)
+
+
 class Task:
     def __init__(self, path):
         # Canonicalize parent aliases (including Windows short paths), while
@@ -242,21 +264,11 @@ class Task:
         return self.append('review', packet)
 
     def report(self, refresh=False):
-        s, head, n = self.snapshot(); t = s['genesis']['task']
+        s, head, n = self.snapshot()
         current = None
         if refresh and s['proposal'] is not None:
             try:
                 current = repository.observe(Path(s['genesis']['root']), s['genesis']['base']) == s['proposal']
             except (ValueError, OSError, UnicodeError, subprocess.SubprocessError):
                 current = None
-        d = s['decision']
-        decision = ('PENDING' if s['started'] else 'NOT_STARTED') if d is None else ('INVALID' if d['response'] is None else d['response']['choice'].upper())
-        return dict(version=VERSION, **SCOPE, task_id=t['id'], journal_head=head, events=n,
-                    decision=decision, candidate_digest=digest(s['proposal']) if s['proposal'] else None,
-                    candidate_current=current, evidence_digest=evidence(s), checks=s['checks'], pending_check=s['pending'],
-                    evidence_refs=references(s),
-                    local_checks_passed=len(s['checks']) == len(t['checks']) and all(c and c['outcome']=='PASS' for c in s['checks'].values()),
-                    review=s['review'], review_applicable=bool(current and s['review']),
-                    declared_control='SHARED' if t['proposer_controller']==t['reviewer_controller'] else 'DIFFERENT_UNVERIFIED',
-                    approval_granted=False, local_effects='JOURNAL_AND_EXPLICIT_TEST_PROCESSES',
-                    parent_receipt=t['parent_receipt'], parent_authenticity=False, source_authenticity=False)
+        return project_report(s, head, n, current)

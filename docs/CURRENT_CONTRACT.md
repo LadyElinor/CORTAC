@@ -7,6 +7,8 @@ is indexed separately below.
 
 ## Current reading order
 
+- [R1 retained-report audit](R1_REPLAY_AUDIT.md): complete report projection,
+  strict JSON types, and an explicit boundary around historical freshness claims.
 - [R1 self-application and verification v2](R1_SELF_APPLICATION.md): retained
   maintenance/repair tasks, actual unittest coverage receipts, and explicit
   shared control with UNKNOWN independent review.
