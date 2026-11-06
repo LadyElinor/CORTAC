@@ -1,11 +1,33 @@
 # CORTAC: synthetic governance constraint tools
 
-CORTAC currently implements an **offline reference model** and an optional
-[disposable scratch runner](docs/SCRATCH_RUNNER.md), with two constraint encodings, exact governance arithmetic, and a reproducible domain-first lottery simulator. It does not implement a confederation of agents. “Confederation of Recursive Teleological Agentic Constructs” names the proposed project, not an existing capability.
+CORTAC currently implements an **offline reference model**, an optional
+[disposable scratch runner](docs/SCRATCH_RUNNER.md), and an opt-in
+[agent lifecycle scaffold](docs/AGENT_SCAFFOLD_V1.md), with two constraint encodings, exact governance arithmetic, and a reproducible domain-first lottery simulator. It does not implement a confederation of agents. “Confederation of Recursive Teleological Agentic Constructs” names the proposed project, not an existing capability.
 
-**Software 0.2.2; Warranted Agent Commonwealth design 0.2.** All controller declarations are supplied and unverified. Every assignment status says `SYNTHETIC`; the profile remains unratified and execution-disabled. No real agents, credentials, grants, signatures, appointments, or model-backed scored governance study are produced.
+**Software 0.2.2; Warranted Agent Commonwealth design 0.2.** All controller declarations are supplied and unverified. Every assignment status says `SYNTHETIC`; the profile remains unratified and execution-disabled. The assignment tools produce no real credentials, grants, signatures or appointments. S1 coordinates separately supplied local participant credentials; no model-backed scored governance study is produced.
 
 See the [current contract and historical-record index](docs/CURRENT_CONTRACT.md) before interpreting versioned examples or saved verification reports.
+
+## S1 agent lifecycle scaffold
+
+The separately versioned [S1 scaffold](docs/AGENT_SCAFFOLD_V1.md) adds a durable
+single-assignment agent lifecycle: a credential-free AP1.1 brief, one conforming
+decision or explicit failure, optional Commonwealth C2 proposal transport,
+original-intent recovery, and a separately attributed CORTAC advisory review.
+Agent decisions, transport observations and host authority remain separate.
+The host alone owns its journal, review and execution gates. S1 offers no keeper
+command or execution grant. A small deterministic agent and seven offline
+conformance cases run without external dependencies:
+
+```sh
+PYTHONPATH=package python -m wac_offline.scaffold_v1.demo
+```
+
+After installing CORTAC, omit `PYTHONPATH=package`. The file-based interface also
+admits separately run agents; it does not launch, sandbox or authenticate them.
+The optional pinned integration uses real B1.1 loopback transport and a separately
+installed C2 client, with temporary local test credentials. It does not establish
+operator independence, model efficacy, multi-agent scheduling or production readiness.
 
 ## Run the checks
 
@@ -126,7 +148,7 @@ The [tool contract](package/README.md) describes the declared model. [0.2.2 safe
 
 Original JSON/DOCX identity fields remain null in the inherited provenance. Their labeled text exports have not been reclassified as authenticated originals. The profile validator still accepts one exact frozen baseline; profile evolution needs a separately versioned contract. Neither constraint encoding discovers missing controlling interests, verifies declarations, or infers cognitive independence.
 
-[Metanoia](https://github.com/LadyElinor/Metanoia) and [Adiona](https://github.com/LadyElinor/Adiona) inform the design; this repository has no adapters or compatibility claim for them. All tools remain offline; the optional runner performs actual, disposable local SQLite effects only. Optional `python -m pip install .` installs the `wac-offline` CLI and profile data; installation may fetch the setuptools build dependency.
+[Metanoia](https://github.com/LadyElinor/Metanoia) and [Adiona](https://github.com/LadyElinor/Adiona) inform the design; this repository has no adapters or compatibility claim for them. The reference tools remain offline; the optional runner performs actual, disposable local SQLite effects only. S1's separately invoked C2 bridge makes proposal-only requests on literal loopback. Optional `python -m pip install .` installs the `wac-offline` CLI and profile data; installation may fetch the setuptools build dependency.
 
 ## Development
 

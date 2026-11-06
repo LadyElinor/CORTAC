@@ -109,7 +109,10 @@ def main():
     # Do not run code after a failed delivered-integrity gate.
     if all(item["passed"] for item in checks):
         cases = [
-            ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 372}),
+            ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 398}),
+            ("scaffold_decision_demo", ["-m", "wac_offline.scaffold_v1.demo"], "", {"json_checks": {
+                "schema": "cortac.scaffold.demo.v1", "authority": "NONE", "execution_enabled": False,
+                "real_model_calls": 0, "network_calls": 0, "scored_study": False}}),
             ("registrar_source", ["scripts/check_registrar_source.py"], "", {"json_checks": {"insertion_only_revision": True}}),
             ("amendment_demo", ["scripts/amendment_demo.py"], "", {"json_checks": {"authority": "NONE", "execution_enabled": False, "old_authority_is_current": False}}),
             ("contested_amendment_demo", ["scripts/contested_amendment_demo.py"], "", {"json_checks": {"authority": "NONE", "execution_enabled": False, "replacement_activated": True, "invalidation_repaired": True, "unrelated_hold_preserved": True}}),

@@ -1,0 +1,14 @@
+{
+  "schema": "cortac.scaffold.sources.v1",
+  "repository": "https://github.com/LadyElinor/unfinished-commonwealth",
+  "commit": "3688dcdfa70b27531c8f0d3bd315a88736c87655",
+  "license": "MIT",
+  "files": {
+    "examples/agent_profile_v1/adapter.py": "c234ebbe24ff51f714e677e63b7420b1e3eb9cf512f7e2b9e7d810525b0a0938",
+    "client_dist/src/commonwealth_client_v2/store.py": "566d124285875c47d92e58adb4a20995c8bda004b78f9b5f3f9c5c8dbbca941f",
+    "client_dist/src/commonwealth_client_v2/wire.py": "784d24da7be807b0cd63a65636ac7b55d8156a8d8727319dd2fb85719a153167",
+    "client_dist/src/commonwealth_client_v2/transport.py": "9c76c8efbeb6bf735f831b19f20643b00839302a959a292fe8573fc2d79e029b"
+  },
+  "ported": "AP1 projection and decision functions only; C2 remains separately installed",
+  "authority": "NONE"
+}
