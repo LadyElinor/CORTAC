@@ -54,7 +54,7 @@ def checksum_inventory(relative: str) -> dict:
 
 
 def run_step(name, args, cwd, *, expected_exit=0, json_checks=None, minimum_tests=None,
-             require_no_skips=False):
+             require_no_skips=False, timeout_seconds=120):
     env = os.environ.copy()
     env["PYTHONPATH"] = str(ROOT / "package")
     env["PYTHONDONTWRITEBYTECODE"] = "1"
@@ -62,7 +62,7 @@ def run_step(name, args, cwd, *, expected_exit=0, json_checks=None, minimum_test
     env["WAC_QA_PACKAGE"] = str(ROOT / "package")
     env["WAC_QA_EVAL"] = str(ROOT / "evaluation")
     observed = dict(name=name, command=["python", *args], cwd=cwd or ".",
-                    expected_exit_code=expected_exit, tests_run=None, coverage=None)
+                    expected_exit_code=expected_exit, timeout_seconds=timeout_seconds, tests_run=None, coverage=None)
     with tempfile.TemporaryDirectory(prefix="cortac-test-receipt-") as temporary:
         receipt = Path(temporary) / "result.json"
         command = [sys.executable, *args]
@@ -72,7 +72,7 @@ def run_step(name, args, cwd, *, expected_exit=0, json_checks=None, minimum_test
             observed["test_runner"] = "scripts/test_receipts.py"
         try:
             run = subprocess.run(command, cwd=ROOT / cwd, env=env, capture_output=True,
-                                 text=True, encoding="utf-8", timeout=120)
+                                 text=True, encoding="utf-8", timeout=timeout_seconds)
             errors = []
             if run.returncode != expected_exit:
                 errors.append(f"exit {run.returncode}; expected {expected_exit}")
@@ -103,7 +103,13 @@ def run_step(name, args, cwd, *, expected_exit=0, json_checks=None, minimum_test
                         stdout=run.stdout, stderr=run.stderr)
         except (OSError, subprocess.TimeoutExpired) as exc:
             # No completed receipt: unknown coverage, never fabricated zero work.
-            return dict(observed, passed=False, errors=[str(exc)])
+            def partial(value):
+                if isinstance(value, bytes):
+                    return value.decode("utf-8", errors="replace")
+                return value or ""
+            return dict(observed, passed=False, errors=[str(exc)],
+                        stdout=partial(getattr(exc, "stdout", None)),
+                        stderr=partial(getattr(exc, "stderr", None)))
 
 
 def git_state():
@@ -129,7 +135,7 @@ def main():
     # Do not run code after a failed delivered-integrity gate.
     if all(item["passed"] for item in checks):
         cases = [
-            ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 458}),
+            ("offline", ["-m", "unittest", "discover", "-s", "tests", "-v"], "package", {"minimum_tests": 458, "timeout_seconds": 240}),
             ("repository_task_demo", ["-m", "wac_offline.repository_task_v1.demo"], "", {"json_checks": {
                 "schema": "cortac.repository-task-demo.v1", "authority": "NONE", "external_execution_enabled": False,
                 "local_checks_passed": True, "supplied_assessments_pass": False,
@@ -196,6 +202,7 @@ def main():
               "tests_not_skipped": sum((item.get("coverage") or {}).get("tests_not_skipped", 0) for item in checks),
               "skips": sum(len((item.get("coverage") or {}).get("skipped", [])) for item in checks),
               "coverage_observed_stages": sum(item.get("coverage") is not None for item in checks),
+              "coverage_unknown_stages": [item["name"] for item in checks if "test_runner" in item and item.get("coverage") is None],
               "require_no_skips": args.require_no_skips,
               "checks": checks, "real_model_calls": 0, "agent_trials": 0, "github_actions_run_verified": False,
               "scope": "Local repository software checks only; no authority or study-readiness claim"}

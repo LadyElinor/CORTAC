@@ -163,6 +163,18 @@ class VerifierCoverageTests(unittest.TestCase):
         self.assertIsNone(r['tests_run'])
         self.assertIsNone(r['coverage'])
 
+    def test_declared_timeout_retains_partial_output_without_inventing_counts(self):
+        error = subprocess.TimeoutExpired('fixture', 240, output=b'partial output', stderr=b'last started case')
+        with mock.patch.object(verify.subprocess, 'run', side_effect=error) as run:
+            r = verify.run_step('timeout', ['-m', 'unittest', 'discover'], '', minimum_tests=1, timeout_seconds=240)
+        self.assertEqual(run.call_args.kwargs['timeout'], 240)
+        self.assertEqual(r['timeout_seconds'], 240)
+        self.assertEqual(r['stdout'], 'partial output')
+        self.assertEqual(r['stderr'], 'last started case')
+        self.assertFalse(r['passed'])
+        self.assertIsNone(r['tests_run'])
+        self.assertIsNone(r['coverage'])
+
     def test_expected_refusal_non_test_stage_unchanged(self):
         r = verify.run_step('refusal', ['-c', "import json,sys; print(json.dumps({'ready':False}));sys.exit(2)"], '', expected_exit=2, json_checks={'ready': False})
         self.assertTrue(r['passed'])

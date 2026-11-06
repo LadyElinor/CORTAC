@@ -33,6 +33,14 @@ source. This is version separation under one OS owner, not independent custody.
 The repair task refers to its predecessor's report digest; it does not erase the
 old result, transfer authority, or establish causal efficacy of the scaffold.
 
+A subsequent [Windows run of the path repair](https://github.com/LadyElinor/CORTAC/actions/runs/42268407011)
+reached the verifier's 120-second offline-stage limit. It correctly reported
+unknown coverage, not a pass; that run does not establish Windows conformance.
+As a separate CI maintenance adjustment after the two recorded tasks, the larger
+offline suite now has an explicit 240-second ceiling, and timeout diagnostics
+retain partial output without inferring test counts. R1's individual task-check
+limit remains 120 seconds. The original task receipts and their counts are unchanged.
+
 ## Verification coverage contract
 
 `scripts/verify.py` now emits `cortac.repository_verification.v2`. Historical
@@ -60,7 +68,7 @@ python scripts/verify.py --require-no-skips --report .local/verification.json
 Expected failures remain visible under unittest semantics. Setup errors, ordinary
 failures and unexpected successes fail the stage. Non-test JSON/refusal checks
 keep their existing contracts. Summed counts cover observed stages only; inspect
-`coverage_observed_stages` and per-stage receipts when a stage is interrupted.
+`coverage_observed_stages`, `coverage_unknown_stages`, and per-stage receipts when a stage is interrupted.
 Test code and the operator share the host and can tamper with the helper or its
 results. Structured accounting is not cryptographic attestation or a sandbox.
 
