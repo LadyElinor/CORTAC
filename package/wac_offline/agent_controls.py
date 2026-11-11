@@ -3,7 +3,7 @@
 from copy import deepcopy
 import json
 
-from .runner import RunnerError, ScratchGateway, digest
+from .runner import RunnerError, ScratchGateway, digest, evidence_record
 from .runner_fixtures import fixture
 
 
@@ -59,16 +59,42 @@ class AgentControlGateway(ScratchGateway):
             return record[1]
         return self._run('reader_call', read)
 
-    def _apply_scratch_effect(self, state, effect):
-        command = json.loads(effect['after_value'])
-        allowed = {digest('Command', c) for c in command_pair(self._profile)}
-        if digest('Command', command) not in allowed:
-            raise RunnerError('command outside simulation profile')
-        super()._apply_scratch_effect(state, effect)
-        state['simulated_commands'] = [*state.get('simulated_commands', []), command]
-        if self._fail_effect:
-            # Fail AFTER staging both changes to exercise transaction rollback.
-            raise RunnerError('synthetic command sink failed')
+    def _run(self, action, operation):
+        if action != 'commit':
+            return super()._run(action, operation)
+
+        def commit_and_queue(state):
+            # The original operation checks authority and stages its effect on the
+            # transaction's working copy. Publish both changes together on success.
+            effect = operation(state)
+            command = json.loads(effect['after_value'])
+            allowed = {digest('Command', c) for c in command_pair(self._profile)}
+            if digest('Command', command) not in allowed:
+                raise RunnerError('command outside simulation profile')
+            state.setdefault('simulated_commands', []).append(command)
+            if self._fail_effect:
+                raise RunnerError('synthetic command sink failed')
+            return effect
+        return super()._run(action, commit_and_queue)
+
+
+def command_fixture(profile, values):
+    data = fixture()
+    policy = data['policy']
+    policy['case_id'] = 'agent-control-' + profile
+    policy_digest = digest('Policy', policy)
+    for index, (name, value) in enumerate(zip(('initial', 'repair'), values)):
+        old = data['evidence'][index]
+        source = evidence_record(old['id'], old['origin'], value)
+        data['evidence'][index] = source
+        data[name].update(case_id=policy['case_id'], policy_digest=policy_digest, value=value,
+                          evidence=[dict(id=source['id'], digest=digest('Evidence', source))])
+    # Pin a single mandate to the first candidate before delivering the ticket.
+    grant = data['mandates'][0]
+    grant.update(case_id=policy['case_id'], policy_digest=policy_digest,
+                 proposal_digest=digest('Proposal', data['initial']))
+    data['mandates'] = [grant]
+    return data
 
 
 def episode(profile, case):
@@ -76,12 +102,9 @@ def episode(profile, case):
         raise ValueError('unknown case')
     approved, other = command_pair(profile)
     values = [json.dumps(c, sort_keys=True, separators=(',', ':')) for c in (approved, other)]
-    data = fixture(case_id='agent-control-' + profile, initial_value=values[0],
-                   corrected_value=values[1])
+    data = command_fixture(profile, values)
     primary = data['initial']
     alternative = dict(data['repair'], operation='COMMIT', expected_revision=0)
-    # Remove the legacy repair grant. All episodes have exactly one possible mandate.
-    data['mandates'] = data['mandates'][:1]
     if case == 'expired':
         data['mandates'][0]['expires_tick'] = 5  # read + three receipts + commit
     command = other if case in ('changed_after_approval', 'other_command_reviewed') else approved

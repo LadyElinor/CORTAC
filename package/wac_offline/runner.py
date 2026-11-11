@@ -343,11 +343,6 @@ class ScratchGateway:
             return record
         return self._run('revoke', revoke)
 
-    def _apply_scratch_effect(self, state, effect):
-        """Set the disposable value inside the journal transaction."""
-        state['revision'] = effect['after_revision']
-        state['value'] = effect['after_value']
-
     def commit(self, proposal, receipts, mandate_id, executor):
         p, receipts = deepcopy(proposal), deepcopy(receipts)
         def commit(state):
@@ -385,7 +380,7 @@ class ScratchGateway:
                           before_revision=state['revision'], after_revision=state['revision'] + 1,
                           before_value=state['value'], after_value=p['value'], executor=executor,
                           repair_challenge_id=resolved_id, scope=SCOPE, provenance='SYNTHETIC_FIXTURE')
-            self._apply_scratch_effect(state, effect)
+            state['revision'] += 1; state['value'] = p['value']
             state['used_mandates'].append(mandate_id); state['effects'].append(effect)
             state['participants'] = sorted(set(state['participants'] + participants + [executor]))
             state['pending_audit'] = effect['id']

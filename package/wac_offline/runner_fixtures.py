@@ -10,8 +10,7 @@ SCENARIOS = ('repair', 'budget', 'audit_budget', 'conflicted_review',
              'conflicted_repair_authorizer')
 
 
-def fixture(arm='minimal', budget=24, scenario='repair', *,
-            case_id='synthetic-contested-document', initial_value='10', corrected_value='12'):
+def fixture(arm='minimal', budget=24, scenario='repair'):
     if arm not in ('minimal', 'full'):
         raise ValueError('unknown arm')
     if scenario not in SCENARIOS:
@@ -28,12 +27,12 @@ def fixture(arm='minimal', budget=24, scenario='repair', *,
         next(p for p in principals if p['id'] == 'reviewer')['controller'] = 'synthetic-controller-authorizer'
     if scenario == 'conflicted_repair_authorizer':
         next(p for p in principals if p['id'] == 'repair_authorizer')['controller'] = 'synthetic-controller-executor'
-    policy = dict(schema='cortac.scratch.policy.v1', case_id=case_id, epoch=1,
+    policy = dict(schema='cortac.scratch.policy.v1', case_id='synthetic-contested-document', epoch=1,
                   principals=principals, protected_limits=[dict(id='independent-review', commitment='Preserve independent review')],
                   approval_ids=approvals, approval_threshold=3 if arm == 'full' else 1,
                   excluded_ids=['outsider'], operation_budget=14 if scenario == 'budget' else (15 if scenario == 'audit_budget' else budget))
-    evidence = [evidence_record('source-v1', 'synthetic-owner-ledger-v1', initial_value),
-                evidence_record('source-v2', 'synthetic-owner-ledger-correction', corrected_value)]
+    evidence = [evidence_record('source-v1', 'synthetic-owner-ledger-v1', '10'),
+                evidence_record('source-v2', 'synthetic-owner-ledger-correction', '12')]
     def proposal(revision, source):
         decision = dict(schema='cortac.decision.record.v1',
             affected_parties=[dict(id='outsider', interests='Correct fixture document', benefits='Correction',
