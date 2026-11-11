@@ -61,3 +61,27 @@ class AgentControlTests(unittest.TestCase):
                 mutate(row)
                 with self.assertRaises(ValueError):
                     check(export)
+
+
+class TraceReadbackTests(unittest.TestCase):
+    def test_timeline_and_applied_geometry(self):
+        from check_robot_payloads import WEEVIL, WEEVIL_BASELINE, check_weevil_samples
+        scenario = dict(scenario_id='fixture', duration_s=0.0034, timestep_s=0.001,
+                        slope_deg=10.0, gravity_m_s2=1.62)
+        metadata = dict(scenario_id='fixture', duration_s=0.0034, timestep_s=0.001,
+                        engine_version='fixture', elapsed_s=0.003, sampling_phase='post_step',
+                        requested_slope_deg=10, applied_slope_deg=10, applied_gravity_m_s2=[0,0,-1.62])
+        trace = dict(metadata=metadata, summary=dict(completed=True, total_steps=3),
+                     steps=[dict(step=i, time_s=(i+1)*0.001) for i in range(3)])
+        result = check_weevil_samples(trace, scenario, WEEVIL)
+        self.assertEqual((result['simulated_seconds'], result['requested_seconds']), (0.003, 0.0034))
+        self.assertFalse(check_weevil_samples(trace, scenario, WEEVIL_BASELINE)['geometry_readback_verified'])
+        for key, value in [('applied_slope_deg',25), ('sampling_phase','pre_step'),
+                           ('applied_gravity_m_s2',[0,0,-9.81]), ('elapsed_s',float('nan'))]:
+            with self.subTest(key=key), self.assertRaises(ValueError):
+                check_weevil_samples(dict(trace, metadata=dict(metadata, **{key:value})), scenario, WEEVIL)
+        for key, value in [('step',0), ('step',True), ('time_s',float('nan')), ('time_s',0.001)]:
+            damaged = deepcopy(trace)
+            damaged['steps'][1][key] = value
+            with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                check_weevil_samples(damaged, scenario, WEEVIL)
