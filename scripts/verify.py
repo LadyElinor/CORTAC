@@ -117,6 +117,8 @@ def main():
                 "schema": "cortac.scratch.integration.v1", "episodes": 16, "scenarios": 8,
                 "real_model_calls": 0, "real_external_principals": 0, "scored_study": False,
                 "external_execution_enabled": False, "actual_disposable_database_effects": True}}),
+            ("scripted_agent_controls", ["scripts/check_agent_controls.py"], "", {"json_checks": {
+                "episodes_checked": 42, "all_expected_outcomes": True, "authority": "NONE"}}),
             ("bounded_complaint_triage", ["scripts/triage_integration.py"], "", {"json_checks": {
                 "schema": "cortac.scratch.triage.integration.v1", "episodes": 15, "authority": "NONE",
                 "controller_closure": "SUPPLIED_UNVERIFIED", "real_model_calls": 0,
