@@ -57,6 +57,8 @@ authority, authentication, production isolation or cross-project compatibility.
 python scripts/runner_integration.py
 ```
 
+The [agent authorization controls](docs/AGENT_CONTROLS.md) exercise the same gateway with synthetic refund requests, Space ROS navigation goals and Lunar Weevil scenarios. Run `python scripts/check_agent_controls.py` to reconcile the 42 case records.
+
 ## Proposed OPS1 operating supplement
 
 The [OPS1 proposal](docs/OPS1_PROPOSED.md) operationalizes disputed-fact handling,
